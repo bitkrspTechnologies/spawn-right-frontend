@@ -1,6 +1,14 @@
+// "use client";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+// import AOS from "aos";
+// import "aos/dist/aos.css";
+import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
+// import { useEffect } from "react";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,12 +30,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // useEffect(() => {
+  //   AOS.init({
+  //     duration: 800,
+  //     once: true,
+  //   });
+  // }, []);
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
       >
-        {children}
+{/* 
+<div className="glow-blob glow-pink" style={{ top: "80px", left: "40px" }} data-aos="fade-in" />
+        <div className="glow-blob glow-blue" style={{ bottom: "100px", right: "60px" }} data-aos="fade-in" data-aos-offset="600" /> */}
+
+<div className="glow-overlay top-[30%] left-[50%]"></div>
+  <div className="glow-overlay top-[80%] left-[20%]"></div>
+  <div className="glow-overlay bottom-[10%] right-[30%]"></div>
+
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+
       </body>
     </html>
   );
