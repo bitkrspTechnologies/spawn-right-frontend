@@ -1,13 +1,13 @@
-// "use client";
-
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Audiowide } from "next/font/google";
 import "./globals.css";
 
 // import AOS from "aos";
 // import "aos/dist/aos.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
-// import { useEffect } from "react";
+import Navbar from "@/components/Navbar/Navbar";
+
+const audiowide = Audiowide({ weight: '400', subsets: ['latin'], display: 'swap' })
 
 
 const geistSans = Geist({
@@ -39,15 +39,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
+        className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
       >
-{/* 
-<div className="glow-blob glow-pink" style={{ top: "80px", left: "40px" }} data-aos="fade-in" />
-        <div className="glow-blob glow-blue" style={{ bottom: "100px", right: "60px" }} data-aos="fade-in" data-aos-offset="600" /> */}
-
-<div className="glow-overlay top-[30%] left-[50%]"></div>
-  <div className="glow-overlay top-[80%] left-[20%]"></div>
-  <div className="glow-overlay bottom-[10%] right-[30%]"></div>
+        <div className="glow-overlay top-[30%] left-[50%]"></div>
+        <div className="glow-overlay top-[80%] left-[20%]"></div>
+        <div className="glow-overlay bottom-[10%] right-[30%]"></div>
 
         <ThemeProvider
           attribute="class"
@@ -55,6 +51,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          
+            <Navbar />
           {children}
         </ThemeProvider>
 

@@ -1,39 +1,24 @@
+import type { Config } from 'tailwindcss';
 
-
-// import { colors as customColors } from "./src/constant/color";
-
-// const config = {
-//   theme: {
-//     extend: {
-//       backgroundImage: {
-//         bgMainColor: customColors.bgMainColor
-//       },
-//       colors: {
-//         primaryGradient : customColors.primaryGradient
-//       }
-//     }
-//   }
-// }
-
-
-// tailwind.config.ts or tailwind.config.js
-
-/** @type {import('tailwindcss').Config} */
-import { colors as customColors } from "./src/constant/color";
-
-
-const config = {
+const config: Config = {
   content: [
-    "./src/app/**/*.{ts,tsx}",
-    "./src/components/**/*.{ts,tsx}",
+    './src/app/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}',
+    "node_modules/flowbite-react/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flowbite/**/*.js",
+
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'bg-main':customColors.bgMainColor
-      },
       colors: {
-        primaryGradient : customColors.primaryGradient
+        // highlightColor: '#FF1ADF',
+
+        "highlight-color": "var(--highlight)",
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
       },
     },
   },
