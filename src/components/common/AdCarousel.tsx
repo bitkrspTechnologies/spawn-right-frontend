@@ -100,7 +100,11 @@ export default function AdCarousel() {
   return (
     <div className="flex flex-col items-center">
       {/* Ad Card */}
-      <div className="bg-[#1f1f2e] p-4 shadow-md border border-gray-800 text-white w-full max-w-xl min-h-[250px]">
+      {/* <div className="bg-[#1f1f2e] p-4 shadow-md border border-gray-800 text-white w-full max-w-xl min-h-[250px]"> */}
+      {/* <div className="bg-[#1f1f2e] p-4 shadow-md border border-gray-800 text-white w-full max-w-[500px] min-w-[300px] h-[250px] overflow-hidden"> */}
+      <div className="bg-[#1f1f2e] w-full h-[250px] p-4 shadow-md border border-gray-800 text-white overflow-hidden">
+
+
         {/* Header */}
         <div className="flex justify-between items-center border-b border-gray-600 pb-2">
           <p className="font-[roboto] text-xs text-gray-300 font-font-medium tracking-widest">ADVERTISEMENT</p>
@@ -115,8 +119,10 @@ export default function AdCarousel() {
 
         {/* Slide Content */}
         <div className="py-6 min-h-[100px] transition-all duration-500 ease-in-out">
-          <h3 className="font-[roboto] font-bold text-lg mb-2">{adSlides[activeSlide].title}</h3>
-          <p className="font-[roboto] text-[var(--adtext)] font-normal text-sm ">{adSlides[activeSlide].description}</p>
+        <h3 className="font-[roboto] font-bold text-lg mb-2 truncate">
+        {adSlides[activeSlide].title}</h3>
+        <p className="font-[roboto] text-[var(--adtext)] font-normal text-sm line-clamp-2">
+        {adSlides[activeSlide].description}</p>
         </div>
       </div>
 

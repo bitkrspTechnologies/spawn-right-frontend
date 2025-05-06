@@ -100,11 +100,7 @@ export default function MainContent() {
           <div className='flex gap-5 min-h-[200px]'>
             <AdSection />
             <AdSection />
-          </div>         
-          <div className='flex gap-5 min-h-[200px]'>
-            <AdSection />
-            <AdSection />
-          </div>   
+          </div>           
         </div>
 
         {/* Right Sidebar */}

@@ -82,6 +82,10 @@ import Button from "@/components/Button/Button";
 import React, { useEffect, useState } from "react";
 import Carousel from '@/components/common/Carousel';
 import AdSection from '@/components/common/AdSection';
+// import { GameCarousel } from "@/components/common/GameCarousel";
+import dynamic from 'next/dynamic';
+const GameCarousel = dynamic(() => import('@/components/common/GameCarousel'), { ssr: false });
+
 
 export default function Home() {
   const [selectedBtn, setSelectedBtn] = useState('bgmi');
@@ -157,9 +161,13 @@ export default function Home() {
         </div>
 
         {/* Ads Section */}
-        <div className="flex flex-wrap gap-5 min-h-[200px] mb-8 px-4">
+        <div className="flex gap-5 min-h-[200px] mb-8 px-4">
           <AdSection />
+          <AdSection />
+        </div>
 
+        <div>
+          <GameCarousel />
         </div>
       </div>
     </div>

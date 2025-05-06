@@ -73,7 +73,7 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
   icon,
   fullWidth = false,
-  selected = false, // ✅ Default false
+  selected = false, 
 }) => {
   const hasIconAndText = icon && text;
   const paddingClass = hasIconAndText ? 'py-0' : 'py-2';
