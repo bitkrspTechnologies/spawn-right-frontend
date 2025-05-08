@@ -250,3 +250,32 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+
+/* global.css or tailwind.css file */
+.swiper-pagination-bullet {
+  background-color: #7e5bef; 
+  opacity: 0.3;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  box-shadow: 0 0 8px #e879f9; /* glowing effect */
+  background-color: #e879f9;   /* pinkish purple */
+}
+
+
+/* Hide the default slider bar */
+.embla__container {
+  overflow: hidden; /* Prevents showing the scrollbar */
+}
+
+.embla__slide {
+  display: flex; /* Ensures slides are displayed correctly */
+  justify-content: center; /* Center the content */
+}
+
+/* Optional: Hide any default navigation elements if they exist */
+.embla__prev-button,
+.embla__next-button {
+  display: none; /* Hide default buttons if not needed */
+}

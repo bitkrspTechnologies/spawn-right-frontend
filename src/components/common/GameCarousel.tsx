@@ -137,30 +137,30 @@ const GameCarousel = () => {
         {/* Game Cards */}
         <div className="flex gap-2 transition-transform duration-500 ease-in-out">
           {visibleGames.map((game, i) => (
-      
-            <div
-            key={`${game.title}-${i}`}
-            className="w-[260px] h-[380px] relative group overflow-hidden rounded-xl shadow-lg"
-          >
-            {/* Game Image */}
-            <img
-              src={game.image}
-              alt={game.title}
-              className="object-cover w-full h-full rounded-xl"
-            />
-          
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300" />
-          
-            {/* WATCH NOW Button at Bottom */}
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
-  <button className="px-5 py-2 bg-pink-600/60 hover:bg-pink-600/80 text-white text-sm font-semibold rounded-md whitespace-nowrap">
-    WATCH NOW!
-  </button>
-</div>
 
-          </div>
-          
+            <div
+              key={`${game.title}-${i}`}
+              className="w-[260px] h-[380px] relative group overflow-hidden rounded-xl shadow-lg"
+            >
+              {/* Game Image */}
+              <img
+                src={game.image}
+                alt={game.title}
+                className="object-cover w-full h-full rounded-xl"
+              />
+
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300" />
+
+              {/* WATCH NOW Button at Bottom */}
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
+                <button className="px-5 py-2 bg-pink-600/60 hover:bg-pink-600/80 text-white text-sm font-semibold rounded-md whitespace-nowrap">
+                  WATCH NOW!
+                </button>
+              </div>
+
+            </div>
+
 
           ))}
         </div>
@@ -176,18 +176,17 @@ const GameCarousel = () => {
 
 
       </div>
-              {/* Carousel Indicators */}
-<div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-  {games.map((_, i) => (
-    <div
-      key={i}
-      onClick={() => setStartIndex(i)}
-      className={`h-2 w-2 rounded-full cursor-pointer transition-colors duration-300 ${
-        i === startIndex % games.length ? 'bg-white' : 'bg-gray-500'
-      }`}
-    />
-  ))}
-</div>
+      {/* Carousel Indicators */}
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+        {games.map((_, i) => (
+          <div
+            key={i}
+            onClick={() => setStartIndex(i)}
+            className={`h-2 w-2 rounded-full cursor-pointer transition-colors duration-300 ${i === startIndex % games.length ? 'bg-white' : 'bg-gray-500'
+              }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };

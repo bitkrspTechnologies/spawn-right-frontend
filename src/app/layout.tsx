@@ -6,6 +6,7 @@ import "./globals.css";
 // import "aos/dist/aos.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
 
 const audiowide = Audiowide({ weight: '400', subsets: ['latin'], display: 'swap' })
 
@@ -41,9 +42,7 @@ export default function RootLayout({
       <body
         className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
       >
-        <div className="glow-overlay top-[30%] left-[50%]"></div>
-        <div className="glow-overlay top-[80%] left-[20%]"></div>
-        <div className="glow-overlay bottom-[10%] right-[30%]"></div>
+       
 
         <ThemeProvider
           attribute="class"
@@ -51,9 +50,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+           <div className="glow-overlay top-[30%] left-[50%]"></div>
+        <div className="glow-overlay top-[80%] left-[20%]"></div>
+        <div className="glow-overlay bottom-[10%] right-[30%]"></div>
           
+        
             <Navbar />
-          {children}
+            <main className="flex-grow">{children}</main>
+            <Footer />
+        
         </ThemeProvider>
 
       </body>

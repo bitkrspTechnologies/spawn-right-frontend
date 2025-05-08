@@ -84,6 +84,11 @@ import Carousel from '@/components/common/Carousel';
 import AdSection from '@/components/common/AdSection';
 // import { GameCarousel } from "@/components/common/GameCarousel";
 import dynamic from 'next/dynamic';
+import MatchCard from "@/components/common/MatchCardInclude";
+import Footer from "@/components/Footer/Footer";
+import LiveMatches from "@/components/LiveMatches/LiveMatches";
+import TournamentBracket from "@/components/FinishedMatch/FinishedMatch";
+import DefaultSlider from "@/components/common/VedioCarousel";
 const GameCarousel = dynamic(() => import('@/components/common/GameCarousel'), { ssr: false });
 
 
@@ -162,13 +167,35 @@ export default function Home() {
 
         {/* Ads Section */}
         <div className="flex gap-5 min-h-[200px] mb-8 px-4">
-          <AdSection />
-          <AdSection />
+          {/* <AdSection />
+          <LiveMatches variant="carousel" /> */}
+            <AdSection />
+          <div className="w-1/2">
+            <LiveMatches variant="carousel" />
+          </div>
+
+        </div>
+
+        <div className="flex gap-5 min-h-[200px] mb-8 px-4">
+          {/* <LiveMatches /> */}
+          <LiveMatches variant="grid" />
+
         </div>
 
         <div>
           <GameCarousel />
         </div>
+
+
+        {/* <div>
+          <TournamentBracket />
+        </div> */}
+
+          <div className="">
+            <DefaultSlider/>
+          </div>
+
+
       </div>
     </div>
   );
