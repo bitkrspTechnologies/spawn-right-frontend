@@ -133,7 +133,6 @@
 //   }
 // ];
 
-
 // export default function LiveMatches({ variant = 'grid' }: { variant?: 'grid' | 'carousel' }) {
 //   const renderMatchCard = (match: typeof matchesData[0], index: number) => (
 //     <MatchCard
@@ -360,82 +359,86 @@
 // }
 // ===========================
 
-import MatchCard from '@/components/common/MatchCardInclude';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import MatchCard from "@/components/common/MatchCardInclude";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const matchesData = [
   {
-    matchNumber: '7th Match',
-    game: 'COD',
-    logo: '/images/cod.svg',
+    matchNumber: "7th Match",
+    game: "COD",
+    logo: "/images/cod.svg",
     team1: {
-      name: 'BAC',
+      name: "BAC",
       score: 356,
-      logo: '/images/cod.svg',
+      logo: "/images/cod.svg",
     },
     team2: {
-      name: 'SGP',
+      name: "SGP",
       score: 309,
-      logo: '/images/cod.svg',
+      logo: "/images/cod.svg",
     },
-    result: 'BAC won by 47 points',
+    result: "BAC won by 47 points",
   },
   {
-    matchNumber: '8th Match',
-    game: 'BGMI',
-    logo: '/images/bgmi.svg',
+    matchNumber: "8th Match",
+    game: "BGMI",
+    logo: "/images/bgmi.svg",
     team1: {
-      name: 'BAC',
+      name: "BAC",
       score: 356,
-      logo: '/images/bgmi.svg',
+      logo: "/images/bgmi.svg",
     },
     team2: {
-      name: 'SGP',
+      name: "SGP",
       score: 309,
-      logo: '/images/bgmi.svg',
+      logo: "/images/bgmi.svg",
     },
-    result: 'BAC won by 47 points',
+    result: "BAC won by 47 points",
   },
   {
-    matchNumber: '9th Match',
-    game: 'COD',
-    logo: '/images/cod.svg',
+    matchNumber: "9th Match",
+    game: "COD",
+    logo: "/images/cod.svg",
     team1: {
-      name: 'BAC',
+      name: "BAC",
       score: 356,
-      logo: '/images/cod.svg',
+      logo: "/images/cod.svg",
     },
     team2: {
-      name: 'SGP',
+      name: "SGP",
       score: 309,
-      logo: '/images/cod.svg',
+      logo: "/images/cod.svg",
     },
-    result: 'BAC won by 47 points',
+    result: "BAC won by 47 points",
   },
   {
-    matchNumber: '10th Match',
-    game: 'INDUS',
-    logo: '/images/indus.svg',
+    matchNumber: "10th Match",
+    game: "INDUS",
+    logo: "/images/indus.svg",
     team1: {
-      name: 'BAC',
+      name: "BAC",
       score: 356,
-      logo: '/images/indus.svg',
+      logo: "/images/indus.svg",
     },
     team2: {
-      name: 'SGP',
+      name: "SGP",
       score: 309,
-      logo: '/images/indus.svg',
+      logo: "/images/indus.svg",
     },
-    result: 'BAC won by 47 points',
+    result: "BAC won by 47 points",
   },
   // add more matches as needed
 ];
 
-export default function LiveMatches({ variant = 'grid' }: { variant?: 'grid' | 'carousel' }) {
-  const renderMatchCard = (match: typeof matchesData[0], index: number) => (
+export default function LiveMatches({
+  variant = "grid",
+}: {
+  variant?: "grid" | "carousel";
+}) {
+  const renderMatchCard = (match: (typeof matchesData)[0], index: number) => (
     <MatchCard
       key={index}
       matchNumber={match.matchNumber}
@@ -448,16 +451,30 @@ export default function LiveMatches({ variant = 'grid' }: { variant?: 'grid' | '
   );
 
   return (
-    <section className={`w-full ${variant === 'carousel' ? 'px-0 py-0' : 'px-3 py-4'}`}>
-      <div className={`flex items-center gap-3 ${variant === 'carousel' ? 'mb-2 px-3' : 'mb-6'}`}>
+    <section
+      className={`w-full ${variant === "carousel" ? "px-0 py-0" : "px-3 py-4"}`}
+    >
+      <div
+        className={`flex items-center gap-3 ${
+          variant === "carousel" ? "mb-2 px-3" : "mb-6"
+        }`}
+      >
         <span className="w-5 h-5 bg-red-500 rounded-full"></span>
-        <h2 className={`${variant === 'carousel' ? 'text-lg' : 'text-3xl'} font-bold text-white`}>Live Matches</h2>
+        <h2
+          className={`${
+            variant === "carousel" ? "text-lg" : "text-3xl"
+          } font-bold text-white`}
+        >
+          Live Matches
+        </h2>
       </div>
 
-      {variant === 'grid' ? (
+      {variant === "grid" ? (
         <div className="flex gap-6 overflow-x-auto px-4 scrollbar-hide ">
           {matchesData.map((match, index) => (
-            <div key={index} className="flex-shrink-0 w-[320px]"> {/* Fixed width to show 3 cards approx */}
+            <div key={index} className="flex-shrink-0 w-[320px]">
+              {" "}
+              {/* Fixed width to show 3 cards approx */}
               {renderMatchCard(match, index)}
             </div>
           ))}
