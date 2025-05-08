@@ -89,6 +89,7 @@ import Footer from "@/components/Footer/Footer";
 import LiveMatches from "@/components/LiveMatches/LiveMatches";
 import TournamentBracket from "@/components/FinishedMatch/FinishedMatch";
 import DefaultSlider from "@/components/common/VedioCarousel";
+import { CustomersSectionDemo } from '@/components/TrustedBy/TrustedBy'
 const GameCarousel = dynamic(() => import('@/components/common/GameCarousel'), { ssr: false });
 
 
@@ -169,7 +170,7 @@ export default function Home() {
         <div className="flex gap-5 min-h-[200px] mb-8 px-4">
           {/* <AdSection />
           <LiveMatches variant="carousel" /> */}
-            <AdSection />
+          <AdSection />
           <div className="w-1/2">
             <LiveMatches variant="carousel" />
           </div>
@@ -191,9 +192,17 @@ export default function Home() {
           <TournamentBracket />
         </div> */}
 
-          <div className="">
-            <DefaultSlider/>
-          </div>
+        <div className="">
+          <DefaultSlider />
+        </div>
+
+        <div className="px-6 mt-10 text-center">
+          <h2 className="text-xl md:text-2xl font-bold text-white">
+            We are trusted by
+          </h2>
+          <CustomersSectionDemo />
+        </div>
+
 
 
       </div>
