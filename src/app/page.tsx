@@ -89,10 +89,11 @@ import Footer from "@/components/Footer/Footer";
 import LiveMatches from "@/components/LiveMatches/LiveMatches";
 import TournamentBracket from "@/components/FinishedMatch/FinishedMatch";
 import DefaultSlider from "@/components/common/VedioCarousel";
+import { CustomersSectionDemo } from '@/components/TrustedBy/TrustedBy'
+import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
 import ProductShowcase from "@/components/ProductShowcase/ProductShowcase";
-const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
-  ssr: false,
-});
+const GameCarousel = dynamic(() => import('@/components/common/GameCarousel'), { ssr: false });
+
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -155,6 +156,9 @@ export default function Home() {
           </div>
         </div>
 
+        <div>
+          <UpcomingEventsSection />
+        </div>
         <div className="flex gap-5 min-h-[200px] mb-8 px-4">
           {/* <LiveMatches /> */}
           <LiveMatches variant="grid" />
@@ -172,8 +176,17 @@ export default function Home() {
           <DefaultSlider />
         </div>
 
+        <div className="px-6 mt-10 text-center">
+          <h2 className="text-xl md:text-2xl font-bold text-white">
+            We are trusted by
+          </h2>
+          <CustomersSectionDemo />
+        </div>
+
+
+
         <div>
-          <ProductShowcase />
+          <ProductShowcase/>
         </div>
       </div>
     </div>
