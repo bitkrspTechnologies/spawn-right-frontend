@@ -35,7 +35,7 @@ interface CustomersSectionProps {
 
 export function CustomersSection({ customers = [], className }: CustomersSectionProps) {
   return (
-    <section className={` pb-12 md:pb-28 w-full ${className ?? ""}`}>
+    <section className={` pb-4 md:pb-8 w-full ${className ?? ""}`}>
       <div className="group relative m-auto max-w-5xl px-6">
         <AnimatedGroup
           variants={{
@@ -49,7 +49,7 @@ export function CustomersSection({ customers = [], className }: CustomersSection
             },
             ...transitionVariants,
           }}
-      className="mx-auto mt-4 grid max-w-2xl grid-cols-6 items-center gap-x-12 gap-y-4 sm:gap-x-16 sm:gap-y-6"
+      className="mx-auto mt-2 grid max-w-2xl grid-cols-6 items-center gap-x-12 gap-y-4 sm:gap-x-16 sm:gap-y-6"
         >
           {customers.map((logo, index) => (
             <div key={index} className="flex">

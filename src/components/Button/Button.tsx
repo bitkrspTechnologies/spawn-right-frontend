@@ -101,7 +101,7 @@ const Button: React.FC<ButtonProps> = ({
     >
       {/* Bump Element - Only visible if selected */}
       {selected && (
-        <span className="absolute top-0 left-1/2 -translate-x-1/2 w-38 h-2 bg-gradient-to-b from-white/70 to-transparent rounded-b-md blur-sm pointer-events-none"></span>
+        <span className="absolute top-0 left-1/2 -translate-x-1/2 w-38 h-2 bg-gradient-to-b from-white/100 to-transparent rounded-b-md blur-sm pointer-events-none"></span>
       )}
 
       {icon && (
