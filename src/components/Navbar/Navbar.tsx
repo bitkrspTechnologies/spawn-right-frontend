@@ -102,7 +102,7 @@ export default function Navbar() {
           </Link>
           <Link href="/shop">
             <Button
-              text="Spawn Right"
+              text="Shop Right"
               className="hover:scale-105 transition-transform"
             />
           </Link>
@@ -110,7 +110,7 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`py-4 w-full z-50 transition-all duration-500 ease-in-out`}
+        className={`pt-1 pb-3 w-full z-50 transition-all duration-500 ease-in-out`}
       >
         <div className="flex gap-3 max-w-7xl mx-auto px-6">
           {gameButtons.map(({ key, text, icon }) => (
