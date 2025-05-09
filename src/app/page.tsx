@@ -90,6 +90,7 @@ import LiveMatches from "@/components/LiveMatches/LiveMatches";
 import TournamentBracket from "@/components/FinishedMatch/FinishedMatch";
 import DefaultSlider from "@/components/common/VedioCarousel";
 import { CustomersSectionDemo } from '@/components/TrustedBy/TrustedBy'
+import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
 const GameCarousel = dynamic(() => import('@/components/common/GameCarousel'), { ssr: false });
 
 
@@ -177,6 +178,9 @@ export default function Home() {
 
         </div>
 
+        <div>
+          <UpcomingEventsSection />
+        </div>
         <div className="flex gap-5 min-h-[200px] mb-8 px-4">
           {/* <LiveMatches /> */}
           <LiveMatches variant="grid" />
