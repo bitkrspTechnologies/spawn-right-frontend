@@ -93,6 +93,7 @@ import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
 import ProductShowcase from "@/components/ProductShowcase/ProductShowcase";
 import Navbar from "@/components/Navbar/Navbar";
+import Link from "next/link";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
 });
@@ -159,8 +160,20 @@ export default function Home() {
             <LiveMatches variant="grid" />
           </div>
           <GameCarousel />
+          <div className="m-14 mt-20">
+            <h2 className="text-xl md:text-2xl font-bold text-center text-white">
+              Shop Right
+            </h2>
+
+            <ProductShowcase />
+            <div className="mt-10 flex justify-center">
+              <Link href="/shop">
+                <Button text="Show More" className="py-4 text-base" />
+              </Link>
+            </div>
+          </div>
           <DefaultSlider />
-          <ProductShowcase />
+
           <div className="px-6 mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white">
               We are trusted by

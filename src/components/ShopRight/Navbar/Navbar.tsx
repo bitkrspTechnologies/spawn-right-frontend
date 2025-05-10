@@ -60,16 +60,10 @@ export default function Navbar() {
 
         <div className="flex items-center space-x-9 text-sm">
           <Link
-            href="/tournaments"
+            href="/about"
             className="text-[var(--highlight)] hover:text-white transition-colors duration-300 font-medium"
           >
-            Tournaments
-          </Link>
-          <Link
-            href="/leaderboard"
-            className="text-[var(--highlight)] hover:text-white transition-colors duration-300 font-medium"
-          >
-            Leaderboard
+            About
           </Link>
           <Link
             href="/"

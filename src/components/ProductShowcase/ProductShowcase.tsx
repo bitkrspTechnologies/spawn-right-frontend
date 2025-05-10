@@ -3,10 +3,7 @@
 import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { products } from "@/lib/products";
-import Button from "../Button/Button";
-import Link from "next/link";
 
 const ProductShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -29,7 +26,7 @@ const ProductShowcase = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto">
-      <div className="bg-gray-900/60 backdrop-blur-sm rounded-3xl p-6 md:p-10 shadow-2xl">
+      <div className="rounded-2xl bg-white/10 backdrop-blur-md px-8 py-5 mt-10 shadow-lg">
         <div className="relative flex items-center">
           <button
             onClick={handlePrev}
@@ -53,12 +50,6 @@ const ProductShowcase = () => {
             <ChevronRight size={24} />
           </button>
         </div>
-      </div>
-
-      <div className="mt-10 flex justify-center">
-        <Link href="/shop">
-          <Button text="Show More" className="py-4 text-base" />
-        </Link>
       </div>
     </div>
   );
