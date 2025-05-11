@@ -92,8 +92,10 @@ import DefaultSlider from "@/components/common/VedioCarousel";
 import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
 import ProductShowcase from "@/components/ProductShowcase/ProductShowcase";
+import FinishedMatch from '@/components/FinishedMatch/FinishedMatch'
 import Navbar from "@/components/Navbar/Navbar";
 import Link from "next/link";
+import JoinBanner from "@/components/common/JoinBanner";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
 });
@@ -174,12 +176,16 @@ export default function Home() {
           </div>
           <DefaultSlider />
 
+          <FinishedMatch />
+
           <div className="px-6 mt-10 text-center">
-            <h2 className="text-xl md:text-2xl font-bold text-white">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
               We are trusted by
             </h2>
             <CustomersSectionDemo />
           </div>
+
+          <JoinBanner />
         </div>
       </div>
       <Footer />

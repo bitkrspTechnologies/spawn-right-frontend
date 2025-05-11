@@ -1,26 +1,4 @@
-import React from "react";
-import { ChevronRight } from "lucide-react";
-import { AnimatedGroup } from "@/components/ui/animated-group";
-
-const transitionVariants = {
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: "blur(12px)",
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      transition: {
-        type: "spring",
-        bounce: 0.3,
-        duration: 1.5,
-      },
-    },
-  },
-};
+import React, { useEffect, useRef } from "react";
 
 export interface CustomerLogo {
   src: string;
@@ -34,36 +12,65 @@ interface CustomersSectionProps {
 }
 
 export function CustomersSection({ customers = [], className }: CustomersSectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const content = contentRef.current;
+
+    if (!container || !content || customers.length === 0) return;
+
+    // Duplicate content for infinite scroll effect
+    content.innerHTML += content.innerHTML;
+
+    let scrollPosition = 0;
+    const scrollSpeed = 0.5;
+
+    const scroll = () => {
+      scrollPosition += scrollSpeed;
+
+      if (scrollPosition >= content.scrollWidth / 2) {
+        scrollPosition = 0;
+      }
+
+      container.scrollLeft = scrollPosition;
+
+      animationRef.current = requestAnimationFrame(scroll);
+    };
+
+    animationRef.current = requestAnimationFrame(scroll);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [customers]);
+
   return (
-    <section className={` pb-4 md:pb-8 w-full ${className ?? ""}`}>
-      <div className="group relative m-auto max-w-5xl px-6">
-        <AnimatedGroup
-          variants={{
-            container: {
-              visible: {
-                transition: {
-                  staggerChildren: 0.05,
-                  delayChildren: 0.75,
-                },
-              },
-            },
-            ...transitionVariants,
-          }}
-      className="mx-auto mt-2 grid max-w-2xl grid-cols-6 items-center gap-x-12 gap-y-4 sm:gap-x-16 sm:gap-y-6"
+    <section className={`w-full overflow-hidden ${className ?? ""}`}>
+      <div
+        ref={containerRef}
+        className="w-full overflow-hidden whitespace-nowrap"
+        style={{ scrollBehavior: "auto" }}
+      >
+        <div
+          ref={contentRef}
+          className="inline-flex gap-12"
         >
           {customers.map((logo, index) => (
-            <div key={index} className="flex">
+            <div key={index} className="flex-shrink-0 px-4">
               <img
-                className="mx-auto h-20 w-auto dark:invert object-contain"
                 src={logo.src}
                 alt={logo.alt}
                 height={logo.height}
-                width="auto"
-                // style={{ filter: "brightness(0) invert(1)" }}
+                className="h-5 w-auto object-contain dark:invert"
               />
             </div>
           ))}
-        </AnimatedGroup>
+        </div>
       </div>
     </section>
   );
