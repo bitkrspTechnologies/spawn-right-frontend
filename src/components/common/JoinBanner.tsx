@@ -2,7 +2,7 @@ import React from "react";
 
 const JoinBanner = () => {
   return (
-    <div className="w-full text-center">
+    <div className="w-full text-center mt-10">
       <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold text-white ">
         Unlock Powerful Gaming Insights 🎮
       </h2>

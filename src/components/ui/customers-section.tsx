@@ -11,7 +11,10 @@ interface CustomersSectionProps {
   className?: string;
 }
 
-export function CustomersSection({ customers = [], className }: CustomersSectionProps) {
+export function CustomersSection({
+  customers = [],
+  className,
+}: CustomersSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
@@ -50,16 +53,13 @@ export function CustomersSection({ customers = [], className }: CustomersSection
   }, [customers]);
 
   return (
-    <section className={`w-full overflow-hidden ${className ?? ""}`}>
+    <section className={`w-full mt-10 overflow-hidden ${className ?? ""}`}>
       <div
         ref={containerRef}
         className="w-full overflow-hidden whitespace-nowrap"
         style={{ scrollBehavior: "auto" }}
       >
-        <div
-          ref={contentRef}
-          className="inline-flex gap-12"
-        >
+        <div ref={contentRef} className="inline-flex gap-12">
           {customers.map((logo, index) => (
             <div key={index} className="flex-shrink-0 px-4">
               <img

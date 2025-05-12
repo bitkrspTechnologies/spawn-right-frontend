@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Audiowide } from "next/font/google";
-import Footer from "@/components/Footer/Footer";
 
 const audiowide = Audiowide({
   weight: "400",

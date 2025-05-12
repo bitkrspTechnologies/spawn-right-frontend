@@ -2,20 +2,10 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Carousel from "@/components/common/Carousel";
-import AdSection from "@/components/common/AdSection";
-import dynamic from "next/dynamic";
-import LiveMatches from "@/components/LiveMatches/LiveMatches";
-import DefaultSlider from "@/components/common/VedioCarousel";
-import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
-import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
 import ProductShowcase from "@/components/ProductShowcase/ProductShowcase";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { Search, X } from "lucide-react";
-const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
-  ssr: false,
-});
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,8 +37,8 @@ export default function Home() {
           {/* Sidebar content */}
         </div>
 
-        <div className="h-full pt-16 p-5 overflow-y-auto mr-[320px] pb-10 scrollbar-hide">
-          <div className="w-full h-[200px] mt-4 px-4">
+        <div className="h-full pt-16 p-5 overflow-y-auto mr-[320px] scrollbar-hide">
+          <div className="w-full h-[100px] mt-4 px-4">
             <Image
               src="/images/ShopRightBanner.png"
               alt="ShopRight Banner"
@@ -59,7 +49,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="w-full px-10 pb-5">
+          <div className="w-full px-10 my-5">
             <div className="relative mt-2 text-gray-500 bg-white rounded-lg border border-gray-300 focus-within:border-slate-600">
               <div className="absolute inset-y-0 left-0 my-auto h-full flex items-center pl-3">
                 <select className="text-sm outline-none rounded-lg h-full bg-transparent font-medium text-gray-800">
@@ -87,7 +77,7 @@ export default function Home() {
             </div>
           </div>
 
-          <span className="px-10">
+          <span className="px-10 mt-16">
             Side-by-side comparisons of features, reviews, and pro gamer picks —
             so you always choose gear that levels up your game.
           </span>
