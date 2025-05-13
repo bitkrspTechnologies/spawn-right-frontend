@@ -11,7 +11,7 @@ import LiveMatches from "@/components/LiveMatches/LiveMatches";
 import DefaultSlider from "@/components/common/VedioCarousel";
 import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
-import ProductShowcase from "@/components/ProductShowcase/ProductShowcase";
+import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 import FinishedMatch from "@/components/FinishedMatch/FinishedMatch";
 import Navbar from "@/components/Navbar/Navbar";
 import Link from "next/link";

@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="relative h-screen w-screen overflow-hidden">
+      {/* <div className="relative w-full min-h-screen overflow-hidden">
         <div
           className={`pt-20 fixed top-0 z-30 w-full shadow-md px-4 py-3 transition-all duration-300 ${
             isScrolled ? "bg-white/10 backdrop-blur-md" : "bg-transparent"
@@ -45,7 +45,7 @@ export default function Home() {
 
         <div
           className={`min-h-[calc(100vh-64px)] pt-16 pb-20 ${
-            isMobile ? "px-4 scrollbar-hide" : "pr-[350px] pl-5"
+            isMobile ? "px-4" : "pr-[350px] pl-5"
           }`}
         >
           <div className={`w-full h-[100px] mt-4 ${isMobile ? "" : "px-6"}`}>
@@ -100,7 +100,7 @@ export default function Home() {
             <ProductShowcase />
           </div>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </>
   );
