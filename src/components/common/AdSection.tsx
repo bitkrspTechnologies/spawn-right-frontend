@@ -25,7 +25,7 @@ import AdCarousel from './AdCarousel';
 
 export default function AdSection() {
   return (
-    <div className="w-1/2 min-w-[300px] max-w-full">
+    <div className=" min-w-[300px] max-w-full">
       <AdCarousel />
     </div>
   );

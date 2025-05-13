@@ -1,15 +1,18 @@
-// Main Hero Section Carosuel 
 'use client';
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+
 
 export default function Carousel() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
 
   const slides = [
     {
-      img: '/images/carousel/carousel-1.jpg',
+      img: '/images/carousel/carousel-2.jpg',
       title: 'BGMI',
       date: 'APR 7TH - 13TH',
       info: 'ALL THE INFO',
@@ -38,6 +41,53 @@ export default function Carousel() {
     return () => clearInterval(intervalId);
   }, []);
 
+
+  if (isMobile) {
+    // 🔹 Mobile Layout
+    return (
+      <div className="w-full mt-15">
+        <div className="relative w-full h-[200px] overflow-hidden rounded-lg">
+          {slides.map((slide, idx) => (
+            <div key={idx} className={`${activeSlide === idx ? 'block' : 'hidden'} duration-700 ease-in-out`}>
+              <a href={slide.link} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={slide.img}
+                  alt={`Slide ${idx + 1}`}
+                  width={500}
+                  height={200}
+                  className="w-full h-full object-contain"
+                  priority
+                />
+              </a>
+              <div className="absolute z-20 left-3 bottom-4 w-[90%] text-white">
+                <p className="bg-white text-black px-2 py-0.5 rounded-md text-[10px] font-bold inline-block tracking-wider">
+                  {slide.date}
+                </p>
+                <h2 className="mt-1 text-lg font-semibold">
+                  {slide.title}
+                </h2>
+                <p className="mt-1 text-yellow-300 text-xs tracking-wide uppercase">
+                  {slide.info}
+                </p>
+              </div>
+
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center mt-2 space-x-2">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              className={`w-2 h-2 rounded-full ${activeSlide === i ? 'bg-pink-500' : 'bg-gray-300'}`}
+              onClick={() => setActiveSlide(i)}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full">
       {/* 🔸 Image + Content Wrapper */}
@@ -53,7 +103,7 @@ export default function Carousel() {
                 alt={`Slide ${idx + 1}`}
                 width={1920}
                 height={200}
-                objectFit="content" 
+                objectFit="content"
                 className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
               />
             </a>

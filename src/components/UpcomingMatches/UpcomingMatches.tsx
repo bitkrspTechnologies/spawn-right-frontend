@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { useMediaQuery } from 'react-responsive';
 
 const upcomingMatches = [
     {
@@ -66,6 +67,8 @@ const upcomingTournaments = [
 ];
 
 const UpcomingEventsSection = () => {
+    const isMobile = useMediaQuery({ maxWidth: 767 }); // Tailwind's sm breakpoint
+
     return (
         <div className="font-bold flex flex-col lg:flex-row gap-8 justify-center items-start py-5 px-4">
 

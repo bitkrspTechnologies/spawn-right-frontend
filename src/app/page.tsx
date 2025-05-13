@@ -91,12 +91,13 @@ import TournamentBracket from "@/components/FinishedMatch/FinishedMatch";
 import DefaultSlider from "@/components/common/VedioCarousel";
 import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
-import ProductShowcase from "@/components/ProductShowcase/ProductShowcase";
 import FinishedMatch from '@/components/FinishedMatch/FinishedMatch'
 import Navbar from "@/components/Navbar/Navbar";
 import Link from "next/link";
 import JoinBanner from "@/components/common/JoinBanner";
+import Banner from "@/components/common/Banner";
 import { useMediaQuery } from 'react-responsive';
+import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
 });
@@ -139,37 +140,41 @@ export default function Home() {
         )}
 
         {/* Scrollable Main Content */}
-        {/* <div className="h-full w-full sm:w-auto  pt-38 p-1 overflow-y-auto scrollbar-hide mx-auto pb-10 ml-0 mr-0 sm:ml-[110px] sm:mr-[110px]"> */}
-          <div className="h-full w-full pt-38 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide pb-10">
-          {/* Sticky Button Header */}
+        <div className="h-full w-full pt-38 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide pb-10">
 
-          <div className="w-full h-[150px] mt-4 px-0 sm:px-4">
-            <Image
-              src="/images/banner.svg"
-              alt="Gradient Banner"
-              width={1920}
-              height={150}
-              className="w-full object-cover rounded-xl"
-              priority
-            />
-          </div>
-          {/* <div className="-mt-12 mb-8 px-4">
+
+          {/* Banner Section Starts */}
+          <Banner />
+          {/* Banner Section Ends */}
+
+
+          {/* Hero Section Carousel Starts  */}
+          <div className="-mt-12 mb-8 px-2 sm:px-4 w-full max-w-[100vw]">
             <Carousel />
-          </div> */}
+          </div>
+          {/* Hero Section Carousel Ends  */}
 
-          {/* <div className="flex gap-5 min-h-[200px] mb-8 px-4">
-            <AdSection />
-            <div className="w-1/2">
+
+          {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
+          <div className="flex flex-col sm:flex-row gap-3 min-h-[200px] mb-8 px-2">
+            <div className="w-full sm:w-1/2">
+              <AdSection />
+            </div>
+
+            <div className="w-full sm:w-1/2">
               <LiveMatches variant="carousel" />
             </div>
-          </div> */}
+          </div>
+          {/* Ad Section Carousel  and Live Matches Carousel Ends  */}
 
-          {/* <UpcomingEventsSection /> */}
-          {/* <div className="flex gap-5 min-h-[200px] mb-8 px-4">
+
+          <UpcomingEventsSection />
+          <div className="flex gap-5 min-h-[200px] mb-8 px-4">
             <LiveMatches variant="grid" />
-          </div> */}
-          {/* <GameCarousel /> */}
-          {/* <div className="m-14 mt-20">
+          </div>
+
+          <GameCarousel />
+          <div className="m-4 mt-20">
             <h2 className="text-xl md:text-2xl font-bold text-center text-white">
               Shop Right
             </h2>
@@ -180,22 +185,22 @@ export default function Home() {
                 <Button text="Show More" className="py-4 text-base" />
               </Link>
             </div>
-          </div> */}
-          {/* <DefaultSlider /> */}
+          </div>
+          <DefaultSlider />
 
-          {/* <FinishedMatch /> */}
+          <FinishedMatch />
 
-          {/* <div className="px-6 mt-10 text-center">
+          <div className="px-6 mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
               We are trusted by
             </h2>
             <CustomersSectionDemo />
-          </div> */}
+          </div>
 
-          {/* <JoinBanner /> */}
+          <JoinBanner />
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
