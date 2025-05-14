@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
@@ -8,7 +7,7 @@ import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { Search, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 
-export default function Home() {
+export default function Shop() {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,24 +28,21 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="relative h-screen w-screen overflow-hidden">
+      <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         <div
           className={`pt-20 fixed top-0 z-30 w-full shadow-md px-4 py-3 transition-all duration-300 ${
             isScrolled ? "bg-white/10 backdrop-blur-md" : "bg-transparent"
           }`}
         ></div>
-
         {!isMobile && (
           <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
             <div className="bg-gray-400 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col"></div>
             <div className="bg-gray-400 h-[calc(50%-.3rem)] rounded-lg p-4 flex flex-col"></div>
           </div>
         )}
-
         <div
-          className={`min-h-[calc(100vh-64px)] pt-16 pb-20 ${
-            isMobile ? "px-4 scrollbar-hide" : "pr-[350px] pl-5"
-          }`}
+          className={`pt-16 pb-20 ${isMobile ? "px-4" : "pr-[350px] pl-5"}`}
+          style={{ height: "calc(100vh - 64px)" }}
         >
           <div className={`w-full h-[100px] mt-4 ${isMobile ? "" : "px-6"}`}>
             <Image

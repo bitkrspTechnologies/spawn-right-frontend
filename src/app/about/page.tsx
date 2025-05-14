@@ -2,105 +2,192 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
+import { motion } from "framer-motion";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
-import { Search, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
+import { StickyScroll } from "@/components/About/StickyScrollReveal/StickyScrollReveal";
+import TeamAccordion from "@/components/About/TeamAccordion/TeamAccordion";
 
-export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-  const [searchQuery, setSearchQuery] = useState("");
+// Animation variants
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.8 } },
+};
+
+const slideInFromLeft = {
+  hidden: { opacity: 0, x: -50 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+};
+
+const slideInFromRight = {
+  hidden: { opacity: 0, x: 50 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+};
+
+const scaleUp = {
+  hidden: { opacity: 0, scale: 0.9 },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
+
+export default function About() {
+  const [isMobile, setIsMobile] = useState(false);
+  const mobileQuery = useMediaQuery({ maxWidth: 767 });
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
+    setIsMobile(mobileQuery);
+  }, [mobileQuery]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const clearSearch = () => {
-    setSearchQuery("");
-  };
+  const content = [
+    {
+      title: "Collaborative Editing",
+      description:
+        "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+      content: (
+        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+          Collaborative Editing
+        </div>
+      ),
+    },
+    {
+      title: "Real time changes",
+      description:
+        "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+      content: (
+        <div className="flex h-full w-full items-center justify-center text-white">
+          <Image
+            src="/linear.webp"
+            width={300}
+            height={300}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Version control",
+      description:
+        "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      content: (
+        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+          Version control
+        </div>
+      ),
+    },
+    {
+      title: "Running out of content",
+      description:
+        "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      content: (
+        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+          Running out of content
+        </div>
+      ),
+    },
+  ];
 
   return (
     <>
       <Navbar />
-      {/* <div className="relative w-full min-h-screen overflow-hidden">
-        <div
-          className={`pt-20 fixed top-0 z-30 w-full shadow-md px-4 py-3 transition-all duration-300 ${
-            isScrolled ? "bg-white/10 backdrop-blur-md" : "bg-transparent"
-          }`}
-        ></div>
+      <div className="relative min-h-screen w-full text-white overflow-y-auto scrollbar-hide">
+        <main className="pt-16 pb-20 h-[calc(100vh-64px)]">
+          <motion.section
+            initial="hidden"
+            animate="show"
+            variants={fadeIn}
+            className="relative w-full flex items-center justify-center min-h-[60vh] px-4"
+          >
+            <motion.div
+              variants={container}
+              initial="hidden"
+              animate="show"
+              className="relative z-10 text-center max-w-4xl"
+            >
+              <motion.h1
+                variants={item}
+                className="text-4xl md:text-6xl font-light mb-6"
+              >
+                Crafting Digital Excellence
+              </motion.h1>
+              <motion.p
+                variants={item}
+                className="text-xl md:text-2xl text-white/90 font-light mb-8"
+              >
+                We blend innovation with purpose to create meaningful digital
+                experiences.
+              </motion.p>
+            </motion.div>
+          </motion.section>
 
-        {!isMobile && (
-          <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
-            <div className="bg-gray-400 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col"></div>
-            <div className="bg-gray-400 h-[calc(50%-.3rem)] rounded-lg p-4 flex flex-col"></div>
-          </div>
-        )}
+          {/* Mission Section */}
+          <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row gap-12 items-center">
+              <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={slideInFromLeft}
+                className="md:w-1/2"
+              >
+                <h2 className="text-3xl font-light mb-6">Our Mission</h2>
+                <p className="text-lg text-gray-400 mb-6">
+                  To empower businesses and individuals through thoughtful
+                  design and cutting-edge technology. We believe in creating
+                  solutions that are not only beautiful but also intuitive and
+                  accessible.
+                </p>
+                <p className="text-lg text-gray-400">
+                  Our approach combines human-centered design with technical
+                  excellence to deliver products that people love to use.
+                </p>
+              </motion.div>
 
-        <div
-          className={`min-h-[calc(100vh-64px)] pt-16 pb-20 ${
-            isMobile ? "px-4" : "pr-[350px] pl-5"
-          }`}
-        >
-          <div className={`w-full h-[100px] mt-4 ${isMobile ? "" : "px-6"}`}>
-            <Image
-              src="/images/ShopRightBanner.png"
-              alt="ShopRight Banner"
-              width={1920}
-              height={250}
-              className="object-cover rounded-xl w-full h-full"
-              priority
-            />
-          </div>
-
-          <div className={`w-full my-5 ${isMobile ? "" : "px-10"}`}>
-            <div className="relative mt-2 text-gray-500 bg-white rounded-lg border border-gray-300 focus-within:border-slate-600">
-              <div className="absolute inset-y-0 left-0 my-auto h-full flex items-center pl-3">
-                <select className="text-sm outline-none rounded-lg h-full bg-transparent font-medium text-gray-800">
-                  <option>Keyboard</option>
-                  <option>Gaming</option>
-                  <option>Mouse</option>
-                </select>
-                <div className="h-6 border-r mx-2"></div>
-              </div>
-              <input
-                type="text"
-                placeholder="Gaming Keyboard"
-                className="w-full pl-28 pr-10 py-2 appearance-none bg-transparent outline-none shadow-sm rounded-lg"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <div className="absolute inset-y-0 right-0 my-auto h-full flex items-center pr-3">
-                {searchQuery && (
-                  <button onClick={clearSearch} className="mr-2 text-black">
-                    <X size={18} />
-                  </button>
-                )}
-                <span className="text-black">
-                  <Search size={18} />
-                </span>
-              </div>
+              {!isMobile && (
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={slideInFromRight}
+                  className="md:w-1/2"
+                >
+                  <div className="relative aspect-video rounded-xl overflow-hidden">
+                    <Image
+                      src="/public/images/gamecarousel/apexLegends.jpg"
+                      alt="Mission Illustration"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={false}
+                    />
+                  </div>
+                </motion.div>
+              )}
             </div>
+          </section>
+          <div className="w-full py-20">
+            <StickyScroll content={content} />
           </div>
-
-          <div className={`${isMobile ? "px-2" : "px-10"} mt-8 mb-6 text-sm`}>
-            Side-by-side comparisons of features, reviews, and pro gamer picks —
-            so you always choose gear that levels up your game.
+          <div className="w-full py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <TeamAccordion />
           </div>
-
-          <div className="space-y-8">
-            <ProductShowcase />
-            <ProductShowcase />
-            <ProductShowcase />
-          </div>
-        </div>
-      </div> */}
+        </main>
+      </div>
       <Footer />
     </>
   );
