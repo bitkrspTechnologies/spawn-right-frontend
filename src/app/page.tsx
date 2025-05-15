@@ -91,12 +91,12 @@ import TournamentBracket from "@/components/FinishedMatch/FinishedMatch";
 import DefaultSlider from "@/components/common/VedioCarousel";
 import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
-import FinishedMatch from '@/components/FinishedMatch/FinishedMatch'
+import FinishedMatch from "@/components/FinishedMatch/FinishedMatch";
 import Navbar from "@/components/Navbar/Navbar";
 import Link from "next/link";
 import JoinBanner from "@/components/common/JoinBanner";
 import Banner from "@/components/common/Banner";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
@@ -120,10 +120,8 @@ export default function Home() {
       <Navbar />
       <div className="relative h-screen w-screen overflow-hidden">
         <div
-          className={`pt-20 fixed top-0 z-30 w-full shadow-md px-4 py-3 transition-all duration-300 ${isScrolled ? "bg-white/10 backdrop-blur-md" : "bg-transparent"
-            }`}
+          className={`pt-20 fixed top-0 z-30 w-full shadow-md px-4 py-3 transition-all duration-300`}
         ></div>
-
 
         {/* Fixed Left Sidebar */}
         {!isMobile && (
@@ -141,19 +139,15 @@ export default function Home() {
 
         {/* Scrollable Main Content */}
         <div className="h-full w-full pt-38 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide pb-10">
-
-
           {/* Banner Section Starts */}
           <Banner />
           {/* Banner Section Ends */}
-
 
           {/* Hero Section Carousel Starts  */}
           <div className="-mt-12 mb-8 px-2 sm:px-4 w-full max-w-[100vw]">
             <Carousel />
           </div>
           {/* Hero Section Carousel Ends  */}
-
 
           {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
           <div className="flex flex-col sm:flex-row gap-3 min-h-[200px] mb-8 px-2">
@@ -166,7 +160,6 @@ export default function Home() {
             </div>
           </div>
           {/* Ad Section Carousel  and Live Matches Carousel Ends  */}
-
 
           <UpcomingEventsSection />
           <div className="flex gap-5 min-h-[200px] mb-8 px-4">

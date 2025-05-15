@@ -55,9 +55,9 @@ export default function About() {
 
   const content = [
     {
-      title: "Collaborative Editing",
+      title: "Why We Exist",
       description:
-        "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+        "Because esports deserves better. Better coverage. Better structure. Better visibility.Spawn Right unites competitive gaming under one roof, enabling you to follow matches, track placements, and scout talent across mobile-first titles.",
       content: (
         <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
           Collaborative Editing
@@ -65,9 +65,9 @@ export default function About() {
       ),
     },
     {
-      title: "Real time changes",
+      title: "Our vision?",
       description:
-        "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+        "To be the Cricbuzz for global esports. But cooler. Faster. Built by gamers.",
       content: (
         <div className="flex h-full w-full items-center justify-center text-white">
           <Image
@@ -80,33 +80,33 @@ export default function About() {
         </div>
       ),
     },
-    {
-      title: "Version control",
-      description:
-        "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-      content: (
-        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
-          Version control
-        </div>
-      ),
-    },
-    {
-      title: "Running out of content",
-      description:
-        "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-      content: (
-        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-          Running out of content
-        </div>
-      ),
-    },
+    // {
+    //   title: "Version control",
+    //   description:
+    //     "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+    //   content: (
+    //     <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+    //       Version control
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   title: "Running out of content",
+    //   description:
+    //     "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+    //   content: (
+    //     <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+    //       Running out of content
+    //     </div>
+    //   ),
+    // },
   ];
 
   return (
     <>
       <Navbar />
       <div className="relative min-h-screen w-full text-white overflow-y-auto scrollbar-hide">
-        <main className="pt-16 pb-20 h-[calc(100vh-64px)]">
+        <main className="pt-24 pb-20 h-[calc(100vh-64px)]">
           <motion.section
             initial="hidden"
             animate="show"
@@ -123,14 +123,25 @@ export default function About() {
                 variants={item}
                 className="text-4xl md:text-6xl font-light mb-6"
               >
-                Crafting Digital Excellence
+                Built for Gamers. Backed by Data. Designed for the Future of
+                Esports.
               </motion.h1>
               <motion.p
                 variants={item}
                 className="text-xl md:text-2xl text-white/90 font-light mb-8"
               >
-                We blend innovation with purpose to create meaningful digital
-                experiences.
+                Spawn Right is on a mission to become the global command centre
+                for esports – a home for real-time updates, tournament tracking,
+                and competitive leaderboards across the biggest titles in
+                gaming.
+              </motion.p>
+              <motion.p
+                variants={item}
+                className="text-xl md:text-2xl text-white/90 font-light mb-8"
+              >
+                From BGMI to COD Mobile to Indus, we connect millions of
+                players, fans, and teams with the pulse of every match – live,
+                accurate, and effortlessly accessible.
               </motion.p>
             </motion.div>
           </motion.section>
@@ -147,14 +158,28 @@ export default function About() {
               >
                 <h2 className="text-3xl font-light mb-6">Our Mission</h2>
                 <p className="text-lg text-gray-400 mb-6">
-                  To empower businesses and individuals through thoughtful
-                  design and cutting-edge technology. We believe in creating
-                  solutions that are not only beautiful but also intuitive and
-                  accessible.
+                  Whether you're grinding the ranks or tracking your favourite
+                  team, Spawn Right delivers:
                 </p>
+                <ul className="text-lg text-gray-400 mb-6 space-y-2">
+                  <li>
+                    <strong>Live Scores</strong> that update in seconds
+                  </li>
+                  <li>
+                    <strong>Tournament Dashboards</strong> across major
+                    platforms
+                  </li>
+                  <li>
+                    <strong>Real-Time Rankings</strong> of players and squads
+                  </li>
+                  <li>
+                    <strong>Data-backed insights</strong> into every clutch,
+                    drop, and finish
+                  </li>
+                </ul>
                 <p className="text-lg text-gray-400">
-                  Our approach combines human-centered design with technical
-                  excellence to deliver products that people love to use.
+                  We're not just building a platform - we're building the{" "}
+                  <strong>operating system of competitive gaming</strong>.
                 </p>
               </motion.div>
 
