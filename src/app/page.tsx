@@ -103,17 +103,7 @@ const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
 });
 
 export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <>
@@ -125,20 +115,20 @@ export default function Home() {
 
         {/* Fixed Left Sidebar */}
         {!isMobile && (
-          <div className="w-[100px] bg-gray-400 h-[calc(100vh-260px)] fixed top-45 left-5 z-10 p-4 ">
+          <div className="w-[100px] bg-gray-400 h-[calc(100vh-180px)] fixed top-45 left-5 z-10 p-4 ">
             {/* Sidebar content */}
           </div>
         )}
 
         {/* Fixed Right Sidebar */}
         {!isMobile && (
-          <div className="w-[100px] bg-gray-400 h-[calc(100vh-260px)] fixed top-45 right-5 z-10 p-4 ">
+          <div className="w-[100px] bg-gray-400 h-[calc(100vh-180px)] fixed top-45 right-5 z-10 p-4 ">
             {/* Sidebar content */}
           </div>
         )}
 
         {/* Scrollable Main Content */}
-        <div className="h-full w-full pt-38 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide pb-10">
+        <div className="h-full w-full pt-38 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide">
           {/* Banner Section Starts */}
           <Banner />
           {/* Banner Section Ends */}
@@ -191,9 +181,9 @@ export default function Home() {
           </div>
 
           <JoinBanner />
+          <Footer />
         </div>
       </div>
-      <Footer />
     </>
   );
 }

@@ -41,7 +41,7 @@ export default function AdForLeaderBoard({
       <div className="bg-[#1f1f2e] p-4 shadow-md border border-gray-800 text-white w-full min-h-[250px]">
         {/* Header */}
         <div className="flex justify-between items-center border-b border-gray-600 pb-2">
-          <p className="font-[roboto] text-xs text-gray-300 font-medium tracking-widest">
+          <p className="text-xs text-gray-300 font-medium tracking-widest">
             ADVERTISEMENT
           </p>
           {showRemoveBtn && (

@@ -36,7 +36,7 @@ export default function Footer() {
 
         {/* Right Section */}
         <div className="flex flex-col space-y-4 text-right">
-          <Link href="#" className="font-bold">
+          <Link href="/about" className="font-bold">
             About Us
           </Link>
           <Link href="#" className="font-bold">

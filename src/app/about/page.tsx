@@ -193,7 +193,7 @@ export default function About() {
                 >
                   <div className="relative aspect-video rounded-xl overflow-hidden">
                     <Image
-                      src="/public/images/gamecarousel/apexLegends.jpg"
+                      src="/images/gamecarousel/missonImage.png"
                       alt="Mission Illustration"
                       fill
                       className="object-cover"

@@ -116,10 +116,6 @@ export const StickyScroll = ({
         </div>
       </div>
       <div
-        style={{
-          backgroundImage:
-            "https://tse2.mm.bing.net/th?id=OIP.XzAGQLQXi1mXdPBWLyYIUQAAAA&pid=Api&P=0&h=180",
-        }}
         className={cn(
           "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
           contentClassName

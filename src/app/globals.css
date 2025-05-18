@@ -79,9 +79,9 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --highlight : #FF1ADF;
-  --adtext : #B3B4D0;
-  --border-card : #D9D9D9;
+  --highlight: #FF1ADF;
+  --adtext: #B3B4D0;
+  --border-card: #D9D9D9;
   --card-bg-uc: #D9D9D91F;
 
 }
@@ -132,15 +132,15 @@
 
 /* @layer utilities {
   .bg-main { */
-    /* background: radial-gradient(circle at 30% 30%, rgba(255, 26, 223, 0.15), transparent 40%),
+/* background: radial-gradient(circle at 30% 30%, rgba(255, 26, 223, 0.15), transparent 40%),
                 radial-gradient(circle at bottom right, #171233, #010312); */
-                /* background-color: #010312;
+/* background-color: #010312;
     background: radial-gradient(circle at 0% 30%, rgba(128, 0, 128, 0.3), transparent 30%),
                 radial-gradient(circle at 90% 10%, rgba(0, 0, 255, 0.2), transparent 30%),
                 radial-gradient(circle at 60% 90%, rgba(128, 0, 128, 0.2), transparent 30%),
                 radial-gradient(circle at bottom right, #171233, #010312); */
 
-                 /* .bg-main {
+/* .bg-main {
                   background-color: #010312;
                   background-image:
                     radial-gradient(circle at 20% 30%, rgba(255, 0, 150, 0.2), transparent 30%),
@@ -148,15 +148,15 @@
                   background-repeat: no-repeat;
                   background-size: cover;
                 }  */
-  /* }
+/* }
 } */
 
 
 /* @layer utilities { */
-  /* .bg-gaming-glow {
+/* .bg-gaming-glow {
     background-color: #010312; */
-    /* background: linear-gradient(to right, #171233 11%, #7D45BD 64%, #6045BD 100%); */
-    /* position: relative;
+/* background: linear-gradient(to right, #171233 11%, #7D45BD 64%, #6045BD 100%); */
+/* position: relative;
     overflow: hidden;
   } */
 /* 
@@ -215,7 +215,8 @@
     height: 400px;
     border-radius: 50%;
     filter: blur(120px);
-    opacity: 0.5; /* Lighter glow */
+    opacity: 0.5;
+    /* Lighter glow */
     z-index: 0;
     pointer-events: none;
   }
@@ -240,7 +241,8 @@
     background: radial-gradient(circle, rgba(255, 26, 223, 0.4) 58%, transparent 70%);
     filter: blur(100px);
     z-index: 0;
-    opacity: 0.4; /* Lighter */
+    opacity: 0.4;
+    /* Lighter */
   }
 }
 
@@ -250,35 +252,44 @@
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 
 /* global.css or tailwind.css file */
 .swiper-pagination-bullet {
-  background-color: #7e5bef; 
+  background-color: #7e5bef;
   opacity: 0.3;
 }
+
 .swiper-pagination-bullet-active {
   opacity: 1;
-  box-shadow: 0 0 8px #e879f9; /* glowing effect */
-  background-color: #e879f9;   /* pinkish purple */
+  box-shadow: 0 0 8px #e879f9;
+  /* glowing effect */
+  background-color: #e879f9;
+  /* pinkish purple */
 }
 
 
 /* Hide the default slider bar */
 .embla__container {
-  overflow: hidden; /* Prevents showing the scrollbar */
+  overflow: hidden;
+  /* Prevents showing the scrollbar */
 }
 
 .embla__slide {
-  display: flex; /* Ensures slides are displayed correctly */
-  justify-content: center; /* Center the content */
+  display: flex;
+  /* Ensures slides are displayed correctly */
+  justify-content: center;
+  /* Center the content */
 }
 
 /* Optional: Hide any default navigation elements if they exist */
 .embla__prev-button,
 .embla__next-button {
-  display: none; /* Hide default buttons if not needed */
+  display: none;
+  /* Hide default buttons if not needed */
 }

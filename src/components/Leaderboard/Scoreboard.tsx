@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
+import { useMediaQuery } from "react-responsive";
 
 interface Player {
   rank: number;
@@ -97,7 +98,8 @@ const sampleData: Player[] = [
 
 const ITEMS_PER_PAGE = 6;
 
-const Scoreboard: React.FC = () => {
+const Scoreboard = () => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -129,104 +131,88 @@ const Scoreboard: React.FC = () => {
   };
 
   return (
-    <div className="p-6 text-white min-h-screen bg-transparent">
+    <div className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent`}>
       {/* Search & Filters */}
-      <div className="flex flex-wrap gap-5 mb-8 justify-start font-[roboto]">
+      <div
+        className={`flex ${
+          isMobile ? "flex-col" : "flex-wrap"
+        } gap-3 mb-6 justify-start font-[roboto]`}
+      >
         <input
           type="text"
           placeholder="Search a player by name..."
-          className="px-4 py-2 rounded-sm bg-[#1c1c3a] text-white placeholder-gray-400 border border-gray-600"
+          className="px-4 py-2 rounded-sm bg-[#1c1c3a] text-white placeholder-gray-400 border border-gray-600 w-full"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className="px-9 py-1 rounded-sm bg-[#1c1c3a] border border-gray-600">
-          * &nbsp; Region ▼
-        </button>
-        <button className="px-9 py-1 rounded-sm bg-[#1c1c3a] border border-gray-600">
-          * &nbsp; Rank ▼
-        </button>
+        <div className={`flex ${isMobile ? "flex-row" : ""} gap-3 w-full`}>
+          <button className="px-4 py-2 rounded-sm bg-[#1c1c3a] border border-gray-600 flex-1">
+            * &nbsp; Region ▼
+          </button>
+          <button className="px-4 py-2 rounded-sm bg-[#1c1c3a] border border-gray-600 flex-1">
+            * &nbsp; Rank ▼
+          </button>
+        </div>
       </div>
 
-      {/* Table Header */}
-      <div className="w-full max-w-5xl mx-auto rounded-sm overflow-hidden">
-        <div className="grid grid-cols-12 py-3 text-xs uppercase text-center text-gray-300 bg-white/10 backdrop-blur-md  mb-4">
+      {/* Table */}
+      <div className="w-full mx-auto rounded-sm overflow-hidden">
+        {/* Table Header */}
+        <div
+          className={`grid ${
+            isMobile ? "grid-cols-8" : "grid-cols-12"
+          } py-3 text-xs uppercase text-center text-gray-300 bg-white/10 backdrop-blur-md mb-4`}
+        >
           <div>Rank</div>
-          <div className="col-span-2">Player Name</div>
-          <div>Tier</div>
+          <div className={`${isMobile ? "col-span-2" : "col-span-2"}`}>
+            Player
+          </div>
+          {!isMobile && <div>Tier</div>}
           <div>WR</div>
-          <div>Avg Score</div>
+          {!isMobile && <div>Avg Score</div>}
           <div>KD</div>
-          <div>KR</div>
-          <div>Headshot</div>
+          {!isMobile && <div>KR</div>}
+          <div>HS</div>
         </div>
 
         {/* Table Rows */}
         {paginatedData.map((player) => (
           <div
             key={player.rank}
-            className="grid grid-cols-12 py-3 text-xs text-center text-gray-300 bg-white/10 backdrop-blur-md backdrop-saturate-150 mb-4"
+            className={`grid ${
+              isMobile ? "grid-cols-8" : "grid-cols-12"
+            } py-3 text-xs text-center text-gray-300 bg-white/10 backdrop-blur-md backdrop-saturate-150 mb-4`}
           >
             <div className={rankStyles(player.rank)}>
               {player.rank <= 3 ? `${player.rank}st` : player.rank}
             </div>
-            <div className="col-span-2">{player.name}</div>
-            <div>💠</div>
+            <div
+              className={`${
+                isMobile ? "col-span-2 text-left pl-2 truncate" : "col-span-2"
+              }`}
+            >
+              {player.name}
+            </div>
+            {!isMobile && <div>💠</div>}
             <div className="text-cyan-400">{player.wr}</div>
-            <div className="text-cyan-400">{player.avgScore}</div>
+            {!isMobile && (
+              <div className="text-cyan-400">{player.avgScore}</div>
+            )}
             <div className="text-green-400">{player.kd}</div>
-            <div className="text-green-400">{player.kr}</div>
-            <div>{player.headshot}</div>
+            {!isMobile && <div className="text-green-400">{player.kr}</div>}
+            <div>
+              {isMobile ? player.headshot.replace("%", "") : player.headshot}
+            </div>
           </div>
         ))}
       </div>
 
-      <div className="flex justify-center items-center mt-10">
+      <div className="flex justify-center items-center mt-6">
         <Button
           text="Show More"
-          className="hover:scale-105 transition-transform"
+          className="hover:scale-105 transition-transform px-6 py-2"
         />
       </div>
-
-      {/* Pagination */}
-      {/* <div className="flex justify-center mt-6 space-x-3 text-lg font-[roboto-serif]">
-        <button
-          onClick={() => handlePageChange(1)}
-          className="w-10 h-10 rounded-sm bg-white/10 backdrop-blur-md flex items-center justify-center"
-        >
-          &#171;
-        </button>
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-sm flex items-center justify-center"
-        >
-          &#8249;
-        </button>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <button
-            key={page}
-            onClick={() => handlePageChange(page)}
-            className={`w-10 h-10 rounded-sm flex items-center justify-center ${
-              currentPage === page
-                ? "bg-purple-600 text-white"
-                : "bg-white/10 backdrop-blur-md"
-            }`}
-          >
-            {page}
-          </button>
-        ))}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-sm flex items-center justify-center"
-        >
-          &#8250;
-        </button>
-        <button
-          onClick={() => handlePageChange(totalPages)}
-          className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-sm flex items-center justify-center"
-        >
-          &#187;
-        </button>
-      </div> */}
     </div>
   );
 };

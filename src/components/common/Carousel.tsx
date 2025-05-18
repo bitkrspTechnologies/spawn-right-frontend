@@ -1,36 +1,34 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
-
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 export default function Carousel() {
   const [activeSlide, setActiveSlide] = useState(0);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-
   const slides = [
     {
-      img: '/images/carousel/carousel-2.jpg',
-      title: 'BGMI',
-      date: 'APR 7TH - 13TH',
-      info: 'ALL THE INFO',
-      link: '/page1',
+      img: "/images/carousel/carousel-one.jpg",
+      title: "BGMI",
+      date: "APR 7TH - 13TH",
+      info: "ALL THE INFO",
+      link: "/tournaments",
     },
     {
-      img: '/images/carousel/carousel-2.jpg',
-      title: 'VALORANT',
-      date: 'APR 14TH - 20TH',
-      info: 'DETAILS HERE',
-      link: '/page2',
+      img: "/images/carousel/carousel-two.jpg",
+      title: "VALORANT",
+      date: "APR 14TH - 20TH",
+      info: "DETAILS HERE",
+      link: "/tournaments",
     },
     {
-      img: '/images/carousel/carousel-3.jpg',
-      title: 'CALL OF DUTY',
-      date: 'APR 21ST - 27TH',
-      info: 'KNOW MORE',
-      link: '/page3',
+      img: "/images/carousel/carousel-three.jpg",
+      title: "COUNTER STRIKE GO",
+      date: "APR 21ST - 27TH",
+      info: "KNOW MORE",
+      link: "/tournaments",
     },
   ];
 
@@ -41,14 +39,18 @@ export default function Carousel() {
     return () => clearInterval(intervalId);
   }, []);
 
-
   if (isMobile) {
     // 🔹 Mobile Layout
     return (
       <div className="w-full mt-15">
-        <div className="relative w-full h-[200px] overflow-hidden rounded-lg">
+        <div className="relative w-full h-[500px] overflow-hidden rounded-lg">
           {slides.map((slide, idx) => (
-            <div key={idx} className={`${activeSlide === idx ? 'block' : 'hidden'} duration-700 ease-in-out`}>
+            <div
+              key={idx}
+              className={`${
+                activeSlide === idx ? "block" : "hidden"
+              } duration-700 ease-in-out`}
+            >
               <a href={slide.link} target="_blank" rel="noopener noreferrer">
                 <Image
                   src={slide.img}
@@ -63,14 +65,11 @@ export default function Carousel() {
                 <p className="bg-white text-black px-2 py-0.5 rounded-md text-[10px] font-bold inline-block tracking-wider">
                   {slide.date}
                 </p>
-                <h2 className="mt-1 text-lg font-semibold">
-                  {slide.title}
-                </h2>
+                <h2 className="mt-1 text-lg font-semibold">{slide.title}</h2>
                 <p className="mt-1 text-yellow-300 text-xs tracking-wide uppercase">
                   {slide.info}
                 </p>
               </div>
-
             </div>
           ))}
         </div>
@@ -78,7 +77,9 @@ export default function Carousel() {
           {slides.map((_, i) => (
             <button
               key={i}
-              className={`w-2 h-2 rounded-full ${activeSlide === i ? 'bg-pink-500' : 'bg-gray-300'}`}
+              className={`w-2 h-2 rounded-full ${
+                activeSlide === i ? "bg-pink-500" : "bg-gray-300"
+              }`}
               onClick={() => setActiveSlide(i)}
               aria-label={`Slide ${i + 1}`}
             />
@@ -95,7 +96,9 @@ export default function Carousel() {
         {slides.map((slide, idx) => (
           <div
             key={idx}
-            className={`duration-700 ease-in-out ${activeSlide === idx ? 'block' : 'hidden'}`}
+            className={`duration-700 ease-in-out ${
+              activeSlide === idx ? "block" : "hidden"
+            }`}
           >
             <a href={slide.link} target="_blank" rel="noopener noreferrer">
               <Image
@@ -128,7 +131,9 @@ export default function Carousel() {
           <button
             key={i}
             type="button"
-            className={`w-3 h-3 rounded-full ${activeSlide === i ? 'bg-pink-500' : 'bg-white'} border-2 border-pink-500`}
+            className={`w-3 h-3 rounded-full ${
+              activeSlide === i ? "bg-pink-500" : "bg-white"
+            } border-2 border-pink-500`}
             aria-label={`Slide ${i + 1}`}
             onClick={() => setActiveSlide(i)}
           />

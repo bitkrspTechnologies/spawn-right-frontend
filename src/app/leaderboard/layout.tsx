@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "Your ultimate gaming platform for matches, tournaments, and more",
 };
 
-export default function RootLayout({
+export default function LeaderboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

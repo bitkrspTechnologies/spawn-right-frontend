@@ -39,7 +39,7 @@ function TeamAccordion() {
         {items.map((item, i: number) => {
           return (
             <article
-              className="group/article relative w-full rounded-xl overflow-hidden md:group-hover:[&:not(:hover)]:w-[20%] md:group-focus-within:[&:not(:focus-within):not(:hover)]:w-[20%] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.15)] before:absolute before:inset-x-0 before:bottom-0 before:h-1/3 before:bg-gradient-to-t before:from-black/50 before:transition-opacity md:before:opacity-0 md:hover:before:opacity-100 focus-within:before:opacity-100 after:opacity-0 md:group-hover:[&:not(:hover)]:after:opacity-100 md:group-focus-within:[&:not(:focus-within):not(:hover)]:after:opacity-100 after:absolute after:inset-0 after:bg-white/30 after:backdrop-blur after:rounded-lg after:transition-all focus-within:ring focus-within:ring-indigo-300"
+              className="group/article relative w-full rounded-xl overflow-hidden md:group-hover:[&:not(:hover)]:w-[20%] md:group-focus-within:[&:not(:focus-within):not(:hover)]:w-[20%] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.15)] before:absolute before:inset-x-0 before:bottom-0 before:h-1/3 before:bg-gradient-to-t before:from-black/50 before:transition-opacity md:before:opacity-0 md:hover:before:opacity-100 focus-within:before:opacity-70 after:opacity-0 md:group-hover:[&:not(:hover)]:after:opacity-70 md:group-focus-within:[&:not(:focus-within):not(:hover)]:after:opacity-70 after:absolute after:inset-0 after:bg-white/30 after:backdrop-blur after:rounded-lg after:transition-all focus-within:ring focus-within:ring-indigo-300"
               key={i}
             >
               <a
@@ -53,12 +53,21 @@ function TeamAccordion() {
                   {item?.description}
                 </span>
               </a>
-              <img
+              {/* <img
                 className="object-cover h-72 md:h-[420px]  w-full"
                 src="../../../../public/images/MobileBanner.png"
                 width="960"
                 height="480"
                 alt="Image 01"
+              /> */}
+
+              <Image
+                src="/images/gamecarousel/apexLegends.jpg"
+                alt="Product details"
+                className="object-cover h-72 md:h-[420px]  w-full"
+                priority
+                width={1920}
+                height={1000}
               />
             </article>
           );
