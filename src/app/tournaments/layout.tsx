@@ -34,24 +34,16 @@ export default function TournamentLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TopLoader />
-          <div className="glow-overlay top-[30%] left-[50%]"></div>
-          <div className="glow-overlay top-[80%] left-[20%]"></div>
-          <div className="glow-overlay bottom-[10%] right-[30%]"></div>
-          <main className="flex-grow">{children}</main>
-        </ThemeProvider>
-      </body>
-    </html>
+   
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <TopLoader />
+      <div className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}>
+        <div className="glow-overlay top-[30%] left-[50%]" />
+        <div className="glow-overlay top-[80%] left-[20%]" />
+        <div className="glow-overlay bottom-[10%] right-[30%]" />
+        <main className="flex-grow">{children}</main>
+      </div>
+    </ThemeProvider>
   );
 }
 

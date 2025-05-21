@@ -71,15 +71,14 @@
 
 "use client";
 
-import React from "react";
 import { useMediaQuery } from "react-responsive";
-
-import Button from "@/components/Button/Button";
+import React from "react";
 import GlobalLeaderboardCard from "@/components/Leaderboard/GlobalLeaderboardCard";
 import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import TournamentsTabs from "@/components/Tournaments/TournamentsTabs/TournamentsTabs";
+import DummyComponent from "@/components/Leaderboard/DummyComponent";
 
 export default function Tournaments() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -87,60 +86,70 @@ export default function Tournaments() {
   return (
     <>
       <Navbar />
-      <div className="w-full min-h-screen">
-        <div className="pt-32 px-4 pb-20">
-          {/* Ad + Leaderboard Section */}
-          {isMobile ? (
-            <div className="flex flex-col gap-4">
-              <GlobalLeaderboardCard />
-              <AdForLeaderBoard />
-              <AdForLeaderBoard />
-            </div>
-          ) : (
-            <div className="flex gap-4 items-stretch py-6">
-              <div className="flex-1 min-w-[300px] max-w-[400px]">
-                <GlobalLeaderboardCard />
+      <div className="relative h-screen w-full overflow-hidden">
+        <div className="h-full pt-32 overflow-y-auto scrollbar-hide">
+          {!isMobile ? (
+            <>
+              {/* Ad + Leaderboard Section */}
+              <div className="flex gap-4 justify-center items-stretch px-4 py-6">
+                <div className="flex-1 min-w-[300px] max-w-[400px]">
+                  <GlobalLeaderboardCard />
+                </div>
+                <div className="flex-1 min-w-[300px] max-w-[400px]">
+                  <AdForLeaderBoard />
+                </div>
+                <div className="flex-1 min-w-[300px] max-w-[400px]">
+                  <AdForLeaderBoard />
+                </div>
               </div>
-              <div className="flex-1 min-w-[300px] max-w-[400px]">
+
+              {/* Tournaments Section */}
+              <div className="flex gap-8 px-4 py-4 justify-center items-start ">
+                <div className="flex-1 flex flex-col gap-6">
+                  <TournamentsTabs />
+
+                  <div className="grid grid-cols-2 gap-6 mb-10">
+                    {[...Array(4)].map((_, index) => (
+                      <div key={index} className="w-full h-full">
+                        <DummyComponent />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Side Ad */}
+                <div className="flex-1 mt-10 min-w-[300px] max-w-[400px]">
+                  <AdForLeaderBoard />
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="px-4">
+              <GlobalLeaderboardCard />
+              <div className="mt-4">
                 <AdForLeaderBoard />
               </div>
-              <div className="flex-1 min-w-[300px] max-w-[400px]">
+              <div className="mt-4">
+                <AdForLeaderBoard />
+              </div>
+              <div className="mt-6">
+                <TournamentsTabs />
+              </div>
+              <div className="grid grid-cols-1 gap-6 my-6">
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="w-full h-full">
+                    <DummyComponent />
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4">
                 <AdForLeaderBoard />
               </div>
             </div>
           )}
-
-          {/* Main Content */}
-          <div className={`flex ${isMobile ? "flex-col" : "gap-8"} py-6`}>
-            <div className="flex-1 flex flex-col gap-6">
-              {/* Tabs */}
-              <TournamentsTabs />
-
-              {/* Grid (Responsive) */}
-              <div
-                className={`grid gap-6 ${
-                  isMobile ? "grid-cols-1" : "grid-cols-2"
-                }`}
-              >
-                <div className="w-full h-[250px]">{/* Component */}</div>
-                <div className="w-full h-[250px]">{/* Component */}</div>
-                <div className="w-full h-[250px]">{/* Component */}</div>
-                <div className="w-full h-[250px]">{/* Component */}</div>
-              </div>
-            </div>
-
-            {/* Right Ad */}
-            {!isMobile && (
-              <div className="w-[300px] h-[400px]">
-                <AdForLeaderBoard />
-              </div>
-            )}
-          </div>
-
           <Footer />
         </div>
       </div>
     </>
   );
 }
-
