@@ -52,22 +52,14 @@ const ProductShowcase = () => {
   useEffect(() => {
     if (productsInfo?.data?.data?.products) {
       setAllProducts((prev) => {
-        // Create a map to avoid duplicates
         const productMap = new Map();
-
-        // Add existing products to the map
         prev.forEach((product) => productMap.set(product.asin, product));
-
-        // Add new products (will overwrite if same asin exists)
         productsInfo.data.data.products.forEach((product) => {
           productMap.set(product.asin, product);
         });
 
-        // Convert back to array
         return Array.from(productMap.values());
       });
-
-      // Update hasMore based on whether we got products
       setHasMore(productsInfo.data.data.products.length > 0);
     }
   }, [productsInfo]);

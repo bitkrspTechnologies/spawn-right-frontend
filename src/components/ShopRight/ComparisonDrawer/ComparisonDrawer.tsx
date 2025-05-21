@@ -12,6 +12,7 @@ import {
 import { Button as ShadCnButton } from "@/components/ui/button";
 import Button from "@/components/Button/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Product {
   asin: string;
@@ -55,9 +56,7 @@ export function ComparisonDrawer({
   };
 
   const handleCompareAll = () => {
-    // Implement your comparison logic here
     console.log("Comparing products:", selectedProducts);
-    // You might want to navigate to a comparison page or show more details
   };
 
   return (
@@ -71,12 +70,17 @@ export function ComparisonDrawer({
                   Product Comparison
                 </DrawerTitle>
                 <div className="flex items-center gap-2">
-                  <Button
-                    text="COMPARE ALL"
-                    className="text-sm px-3 py-1"
-                    // disabled={selectedProducts.length < 2}
-                    onClick={handleCompareAll}
-                  />
+                  {selectedProducts.length > 0 && (
+                    <Link href={"/shop/compare-all"}>
+                      <Button
+                        text="COMPARE ALL"
+                        className="text-sm px-3 py-1"
+                        // disabled={selectedProducts.length < 2}
+                        onClick={handleCompareAll}
+                      />
+                    </Link>
+                  )}
+
                   <DrawerClose asChild>
                     <ShadCnButton
                       variant="ghost"
@@ -129,7 +133,7 @@ export function ComparisonDrawer({
                       src={product.product_photo}
                       alt={product.product_title}
                       fill
-                      className="object-contain p-2"
+                      className="object-contain"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>

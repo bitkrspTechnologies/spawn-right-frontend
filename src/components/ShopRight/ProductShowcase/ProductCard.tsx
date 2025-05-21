@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Button from "../../Button/Button";
 import { ComparisonDrawer } from "../ComparisonDrawer/ComparisonDrawer";
 import Link from "next/link";
+import { toast } from "sonner";
 
 interface Product {
   asin: string;
@@ -32,7 +33,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       localStorage.getItem("compareProducts") || "[]"
     );
     const isAlreadyAdded = existingProducts.some(
-      (p: Product) => p.asin === product.asin
+      (p) => p.asin === product.asin
     );
 
     if (!isAlreadyAdded) {
@@ -44,7 +45,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
         );
         setIsDrawerOpen(true);
       } else {
-        alert("You can compare maximum 4 products at a time");
+        toast.error("You can compare maximum 4 products at a time");
+        setIsDrawerOpen(true);
       }
     } else {
       setIsDrawerOpen(true);
@@ -58,7 +60,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         <div className="relative z-10">
           <Link href={`/shop/${product?.asin}`}>
-            <div className="relative h-66 w-full overflow-hidden rounded-lg">
+            <div className="relative h-36 w-full overflow-hidden rounded-lg">
               <Image
                 src={product?.product_photo}
                 alt={product?.product_title}

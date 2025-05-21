@@ -2,18 +2,15 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { useMediaQuery } from "react-responsive";
-import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 import Image from "next/image";
 import { Check, Star } from "lucide-react";
-import Button from "@/components/Button/Button";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import ProductReviews from "@/components/ShopRight/ProductReviews/ProductReviews";
 import Footer from "@/components/Footer/Footer";
 import { useParams } from "next/navigation";
+import ProductDetailSkeleton from "@/components/Skeleton/ProductDetailSkeleton";
 
 export default function Shop() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,15 +43,6 @@ export default function Shop() {
       fetchProductData();
     }
   }, [productId]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const nextImage = () => {
     if (!product?.product_photo) return;
@@ -114,11 +102,7 @@ export default function Shop() {
   ].filter((item) => item.value);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
-      </div>
-    );
+    return <ProductDetailSkeleton />;
   }
 
   if (error) {
@@ -163,14 +147,16 @@ export default function Shop() {
               )}
 
               <div className="relative w-full h-48 sm:h-64 md:h-96">
-                <Image
-                  src={productImages[currentImageIndex]}
-                  alt={product.product_title || "Product details"}
-                  className="w-full h-full object-contain rounded-sm"
-                  priority
-                  width={1920}
-                  height={1000}
-                />
+                <div className="w-full h-full">
+                  <Image
+                    src={productImages[currentImageIndex]}
+                    alt={product.product_title || "Product details"}
+                    className="w-full h-full object-contain rounded-md bg-black/60"
+                    priority
+                    width={1920}
+                    height={1000}
+                  />
+                </div>
 
                 <button
                   onClick={prevImage}
@@ -282,14 +268,13 @@ export default function Shop() {
                     href={product?.product_url}
                     target="_blank"
                     className={cn(
-                      "py-3 md:py-5 px-3 md:px-5 text-xs border-2 font-medium rounded-sm text-center",
+                      "py-3 md:py-5 px-3 md:px-5 text-xs border-2 font-medium rounded-sm text-center w-full",
                       "border-[#4D32AA] text-[#FF1ADF]",
                       "hover:border-[#9D0A88] transition-all"
                     )}
                   >
                     BUY NOW
                   </a>
-                  <Button text="COMPARE" className="text-xs md:text-sm" />
                 </div>
 
                 <div className="space-y-2 md:space-y-3 mt-10">

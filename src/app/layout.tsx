@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import TopLoader from "@/components/TopLoader/TopLoader";
 import ReactQueryProvider from "./providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const audiowide = Audiowide({
   weight: "400",
@@ -52,6 +53,7 @@ export default function RootLayout({
             <div className="glow-overlay top-[80%] left-[20%]"></div>
             <div className="glow-overlay bottom-[10%] right-[30%]"></div>
             <main className="flex-grow">{children}</main>
+            <Toaster />
           </ThemeProvider>
         </ReactQueryProvider>
       </body>

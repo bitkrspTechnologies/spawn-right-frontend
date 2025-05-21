@@ -49,13 +49,15 @@ export default function Navbar() {
 
       <nav className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <Image
-            src="/images/ShopRight.png"
-            alt="Logo"
-            width={200}
-            height={200}
-            className="hover:opacity-90 transition-opacity"
-          />
+          <Link href={"/shop"}>
+            <Image
+              src="/images/ShopRight.png"
+              alt="Logo"
+              width={200}
+              height={200}
+              className="hover:opacity-90 transition-opacity"
+            />
+          </Link>
         </div>
 
         <div className="flex items-center space-x-9 text-sm">
