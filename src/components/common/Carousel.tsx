@@ -8,30 +8,53 @@ export default function Carousel() {
   const [activeSlide, setActiveSlide] = useState(0);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  const slides = [
+  // const slides = [
+  //   {
+  //     img: "/images/carousel/carousel-one.jpg",
+  //     title: "BGMI",
+  //     date: "APR 7TH - 13TH",
+  //     info: "ALL THE INFO",
+  //     link: "/tournaments",
+  //   },
+  //   {
+  //     img: "/images/carousel/carousel-two.jpg",
+  //     title: "VALORANT",
+  //     date: "APR 14TH - 20TH",
+  //     info: "DETAILS HERE",
+  //     link: "/tournaments",
+  //   },
+  //   {
+  //     img: "/images/carousel/carousel-three.jpg",
+  //     title: "COUNTER STRIKE GO",
+  //     date: "APR 21ST - 27TH",
+  //     info: "KNOW MORE",
+  //     link: "/tournaments",
+  //   },
+  // ];
+
+    const slides = [
     {
       img: "/images/carousel/carousel-one.jpg",
       title: "BGMI",
-      date: "APR 7TH - 13TH",
-      info: "ALL THE INFO",
-      link: "/tournaments",
+      // date: "APR 7TH - 13TH",
+      // info: "ALL THE INFO",
+      // link: "/tournaments",
     },
     {
       img: "/images/carousel/carousel-two.jpg",
       title: "VALORANT",
-      date: "APR 14TH - 20TH",
-      info: "DETAILS HERE",
-      link: "/tournaments",
+      // date: "APR 14TH - 20TH",
+      // info: "DETAILS HERE",
+      // link: "/tournaments",
     },
     {
       img: "/images/carousel/carousel-three.jpg",
       title: "COUNTER STRIKE GO",
-      date: "APR 21ST - 27TH",
-      info: "KNOW MORE",
-      link: "/tournaments",
+      // date: "APR 21ST - 27TH",
+      // info: "KNOW MORE",
+      // link: "/tournaments",
     },
   ];
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
@@ -43,7 +66,7 @@ export default function Carousel() {
     // 🔹 Mobile Layout
     return (
       <div className="w-full mt-15">
-        <div className="relative w-full h-[500px] overflow-hidden rounded-lg">
+        <div className="relative w-full h-[150px] overflow-hidden rounded-lg">
           {slides.map((slide, idx) => (
             <div
               key={idx}
@@ -51,7 +74,7 @@ export default function Carousel() {
                 activeSlide === idx ? "block" : "hidden"
               } duration-700 ease-in-out`}
             >
-              <a href={slide.link} target="_blank" rel="noopener noreferrer">
+              {/* <a href={slide.link} target="_blank" rel="noopener noreferrer"> */}
                 <Image
                   src={slide.img}
                   alt={`Slide ${idx + 1}`}
@@ -60,15 +83,15 @@ export default function Carousel() {
                   className="w-full h-full object-contain"
                   priority
                 />
-              </a>
+              {/* </a> */}
               <div className="absolute z-20 left-3 bottom-4 w-[90%] text-white">
-                <p className="bg-white text-black px-2 py-0.5 rounded-md text-[10px] font-bold inline-block tracking-wider">
+                {/* <p className="bg-white text-black px-2 py-0.5 rounded-md text-[10px] font-bold inline-block tracking-wider">
                   {slide.date}
-                </p>
+                </p> */}
                 <h2 className="mt-1 text-lg font-semibold">{slide.title}</h2>
-                <p className="mt-1 text-yellow-300 text-xs tracking-wide uppercase">
+                {/* <p className="mt-1 text-yellow-300 text-xs tracking-wide uppercase">
                   {slide.info}
-                </p>
+                </p> */}
               </div>
             </div>
           ))}
@@ -100,7 +123,7 @@ export default function Carousel() {
               activeSlide === idx ? "block" : "hidden"
             }`}
           >
-            <a href={slide.link} target="_blank" rel="noopener noreferrer">
+            {/* <a href={slide.link} target="_blank" rel="noopener noreferrer"> */}
               <Image
                 src={slide.img}
                 alt={`Slide ${idx + 1}`}
@@ -109,17 +132,17 @@ export default function Carousel() {
                 objectFit="content"
                 className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
               />
-            </a>
+            {/* </a> */}
 
             {/* 🔹 Content that changes with slide */}
             <div className="absolute z-20 left-6 bottom-10 text-white">
-              <p className="bg-white text-black px-3 py-1 rounded-md text-sm font-bold inline-block tracking-widest">
+              {/* <p className="bg-white text-black px-3 py-1 rounded-md text-sm font-bold inline-block tracking-widest">
                 {slide.date}
-              </p>
+              </p> */}
               <h2 className="mt-2 text-2xl">{slide.title}</h2>
-              <p className="mt-2 text-yellow-300 tracking-widest uppercase">
+              {/* <p className="mt-2 text-yellow-300 tracking-widest uppercase">
                 {slide.info}
-              </p>
+              </p> */}
             </div>
           </div>
         ))}

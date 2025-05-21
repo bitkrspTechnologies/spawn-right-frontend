@@ -97,20 +97,19 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const videoData = [
   {
-    title: 'Bgmi Live Match',
     type: 'youtube',
-    src: 'https://www.youtube.com/embed/E3pJV16STvo?si=fV2eejoduBusjmVH',
+    src: 'https://www.youtube.com/embed/DWX6z4f2BTQ?si=dSiKKGEqg4rVKq1W',
   },
-  {
-    title: 'BGMI Luffy shot',
-    type: 'youtube',
-    src: 'https://www.youtube.com/embed/R-HG7__GW_g?si=yWHL02xuG2_znQeB',
-  },
-  {
-    title: 'COD Epic kill',
-    type: 'local',
-    src: '/videos/cod.mp4',
-  },
+  // {
+  //   title: 'BGMI Luffy shot',
+  //   type: 'youtube',
+  //   src: 'https://www.youtube.com/embed/R-HG7__GW_g?si=yWHL02xuG2_znQeB',
+  // },
+  // {
+  //   title: 'COD Epic kill',
+  //   type: 'local',
+  //   src: '/videos/cod.mp4',
+  // },
 ];
 
 function DefaultSlider() {
@@ -142,9 +141,9 @@ function DefaultSlider() {
                     allowFullScreen
                   />
                 )}
-                <p className="text-center text-white mt-3 sm:mt-4 text-base sm:text-lg font-roboto font-semibold">
-                  {video.title}
-                </p>
+                {/* <p className="text-center text-white mt-3 sm:mt-4 text-base sm:text-lg font-roboto font-semibold">
+                  {video.title || ''}
+                </p> */}
               </div>
             </Slider>
           ))}

@@ -157,7 +157,7 @@ export default function Home() {
           </div>
 
           <GameCarousel />
-          <div className="m-4 mt-20">
+          {/* <div className="m-4 mt-20">
             <h2 className="text-xl md:text-2xl font-bold text-center text-white">
               Shop Right
             </h2>
@@ -168,17 +168,30 @@ export default function Home() {
                 <Button text="Show More" className="py-4 text-base" />
               </Link>
             </div>
-          </div>
+          </div> */}
           <DefaultSlider />
 
-          <FinishedMatch />
+          <div>
 
-          <div className="px-6 mt-10 text-center">
+
+          </div>
+          <div className="ml-12 mt-10">
+            <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
+              Finished Matches
+            </h2>
+            {false ? (
+              <FinishedMatch />
+            ) : (
+              <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div>
+            )}
+          </div>
+
+          {/* <div className="px-6 mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
               We are trusted by
             </h2>
             <CustomersSectionDemo />
-          </div>
+          </div> */}
 
           <JoinBanner />
           <Footer />

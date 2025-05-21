@@ -20,7 +20,6 @@ if (isMobile) {
 }
 
 
-
   return (
     <div className="w-full h-[150px] mt-4 px-4">
       <Image
