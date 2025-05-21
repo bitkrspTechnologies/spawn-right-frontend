@@ -77,8 +77,6 @@ export default function Shop() {
 
           <div className="space-y-8">
             <ProductShowcase />
-            <ProductShowcase />
-            <ProductShowcase />
           </div>
         </div>
       </div>

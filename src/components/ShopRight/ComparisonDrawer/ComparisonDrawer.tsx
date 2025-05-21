@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { X } from "lucide-react";
+import { Star, X } from "lucide-react";
 import {
   Drawer,
   DrawerClose,
@@ -11,23 +11,59 @@ import {
 } from "@/components/ui/drawer";
 import { Button as ShadCnButton } from "@/components/ui/button";
 import Button from "@/components/Button/Button";
+import Image from "next/image";
+
+interface Product {
+  asin: string;
+  product_title: string;
+  brand: string;
+  product_price: string;
+  product_photo: string;
+  product_star_rating?: string;
+  product_num_ratings?: string;
+}
 
 interface ComparisonDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  selectedProducts: Product[];
 }
 
 export function ComparisonDrawer({
   open,
   onOpenChange,
-  selectedProducts = [],
 }: ComparisonDrawerProps) {
+  const [selectedProducts, setSelectedProducts] = React.useState<Product[]>([]);
+
+  React.useEffect(() => {
+    if (open) {
+      const products = JSON.parse(
+        localStorage.getItem("compareProducts") || "[]"
+      );
+      setSelectedProducts(products);
+    }
+  }, [open]);
+
+  const removeProduct = (asin: string) => {
+    const updatedProducts = selectedProducts.filter((p) => p.asin !== asin);
+    setSelectedProducts(updatedProducts);
+    localStorage.setItem("compareProducts", JSON.stringify(updatedProducts));
+  };
+
+  const clearAll = () => {
+    setSelectedProducts([]);
+    localStorage.removeItem("compareProducts");
+  };
+
+  const handleCompareAll = () => {
+    // Implement your comparison logic here
+    console.log("Comparing products:", selectedProducts);
+    // You might want to navigate to a comparison page or show more details
+  };
+
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="w-full max-w-none h-[50vh] bg-black text-white border-t border-gray-700 rounded-t-2xl">
+      <DrawerContent className="w-full max-w-none h-[60vh] bg-black text-white border-t border-gray-700 rounded-t-2xl">
         <div className="mx-auto w-full max-w-7xl h-full flex flex-col">
-          {/* Compact Header Section */}
           <div className="p-4 pb-0">
             <DrawerHeader className="flex flex-col items-start p-0">
               <div className="flex justify-between w-full items-center mb-2">
@@ -36,9 +72,10 @@ export function ComparisonDrawer({
                 </DrawerTitle>
                 <div className="flex items-center gap-2">
                   <Button
-                    text="COMPARE"
+                    text="COMPARE ALL"
                     className="text-sm px-3 py-1"
-                    disabled={selectedProducts.length < 2}
+                    // disabled={selectedProducts.length < 2}
+                    onClick={handleCompareAll}
                   />
                   <DrawerClose asChild>
                     <ShadCnButton
@@ -52,16 +89,12 @@ export function ComparisonDrawer({
                 </div>
               </div>
 
-              <div className="flex justify-between w-full items-center mb-2">
-                <div>
-                  <h3 className="text-sm font-medium">GAMING KEYBOARD</h3>
-                  <p className="text-gray-400 text-xs">(MAZOR)</p>
-                </div>
-                <div className="text-base font-bold">$200</div>
-              </div>
-
               <div className="flex justify-between w-full items-center mb-3">
-                <button className="text-purple-500 hover:text-purple-400 text-xs font-medium flex items-center">
+                <button
+                  onClick={clearAll}
+                  className="text-purple-500 hover:text-purple-400 text-xs font-medium flex items-center"
+                  disabled={selectedProducts.length === 0}
+                >
                   <X className="h-3 w-3 mr-1" />
                   CLEAR ALL
                 </button>
@@ -72,24 +105,50 @@ export function ComparisonDrawer({
             </DrawerHeader>
           </div>
 
-          {/* Optimized Product Comparison Area */}
           <div className="flex-1 overflow-y-auto px-4 pb-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {selectedProducts.map((product) => (
                 <div
-                  key={product.id}
-                  className="bg-gray-800 rounded-lg p-3 h-full flex flex-col"
+                  key={product.asin}
+                  className="bg-gray-900 rounded-lg p-3 h-full flex flex-col relative group"
                 >
-                  <div className="h-24 w-full bg-gray-700 rounded mb-2 flex-shrink-0"></div>
+                  <button
+                    onClick={() => removeProduct(product.asin)}
+                    className="absolute z-40 top-0 right-0 text-gray-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <ShadCnButton
+                      variant="ghost"
+                      size="icon"
+                      className="text-gray-400 hover:text-white h-8 w-8"
+                    >
+                      <X className="h-3 w-3" />
+                    </ShadCnButton>
+                  </button>
+                  <div className="h-32 w-full bg-gray-700 rounded mb-2 flex-shrink-0 relative overflow-hidden">
+                    <Image
+                      src={product.product_photo}
+                      alt={product.product_title}
+                      fill
+                      className="object-contain p-2"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
                   <div className="flex-grow">
                     <h4 className="font-medium text-sm line-clamp-2">
-                      {product.name}
+                      {product.product_title}
                     </h4>
                     <p className="text-gray-400 text-xs mt-1">
                       {product.brand}
                     </p>
                     <div className="mt-2 font-bold text-sm">
-                      ${product.price}
+                      {product.product_price}
+                    </div>
+                    <div className="flex items-center mt-1">
+                      <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
+                      <span className="text-xs text-gray-300">
+                        {product.product_star_rating || "N/A"} (
+                        {product.product_num_ratings || "0"})
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -99,7 +158,8 @@ export function ComparisonDrawer({
                 (_, i) => (
                   <div
                     key={`empty-${i}`}
-                    className="bg-gray-800/50 border-2 border-dashed border-gray-600 rounded-lg p-3 flex flex-col items-center justify-center min-h-[180px]"
+                    className="bg-gray-800/50 border-2 border-dashed border-gray-600 rounded-lg p-3 flex flex-col items-center justify-center min-h-[200px] hover:bg-gray-800/70 transition-colors cursor-pointer"
+                    onClick={() => onOpenChange(false)}
                   >
                     <span className="text-gray-500 text-xs">+ Add Product</span>
                   </div>

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Audiowide } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import TopLoader from "@/components/TopLoader/TopLoader";
+import ReactQueryProvider from "./providers";
 
 const audiowide = Audiowide({
   weight: "400",
@@ -39,18 +40,20 @@ export default function RootLayout({
       <body
         className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TopLoader />
-          <div className="glow-overlay top-[30%] left-[50%]"></div>
-          <div className="glow-overlay top-[80%] left-[20%]"></div>
-          <div className="glow-overlay bottom-[10%] right-[30%]"></div>
-          <main className="flex-grow">{children}</main>
-        </ThemeProvider>
+        <ReactQueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TopLoader />
+            <div className="glow-overlay top-[30%] left-[50%]"></div>
+            <div className="glow-overlay top-[80%] left-[20%]"></div>
+            <div className="glow-overlay bottom-[10%] right-[30%]"></div>
+            <main className="flex-grow">{children}</main>
+          </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

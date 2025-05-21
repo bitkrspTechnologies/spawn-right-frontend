@@ -4,9 +4,21 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Product } from "@/lib/products";
 import Button from "../../Button/Button";
 import { ComparisonDrawer } from "../ComparisonDrawer/ComparisonDrawer";
+import Link from "next/link";
+
+interface Product {
+  asin: string;
+  product_title: string;
+  brand: string;
+  product_price: string;
+  product_original_price?: string;
+  product_photo: string;
+  product_star_rating?: string;
+  product_num_ratings?: string;
+  product_url: string;
+}
 
 interface ProductCardProps {
   product: Product;
@@ -15,28 +27,53 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const handleCompareClick = () => {
+    const existingProducts = JSON.parse(
+      localStorage.getItem("compareProducts") || "[]"
+    );
+    const isAlreadyAdded = existingProducts.some(
+      (p: Product) => p.asin === product.asin
+    );
+
+    if (!isAlreadyAdded) {
+      if (existingProducts.length < 4) {
+        const updatedProducts = [...existingProducts, product];
+        localStorage.setItem(
+          "compareProducts",
+          JSON.stringify(updatedProducts)
+        );
+        setIsDrawerOpen(true);
+      } else {
+        alert("You can compare maximum 4 products at a time");
+      }
+    } else {
+      setIsDrawerOpen(true);
+    }
+  };
+
   return (
     <>
       <div className="relative h-full w-full bg-[#ffffff] rounded-lg overflow-hidden flex flex-col border border-gray-200 shadow-sm transition-transform hover:scale-[1.02] duration-300">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(125%_125%_at_50%_10%,rgba(255,255,255,0)_20%,rgba(223,171,255,1)_100%)]"></div>
 
         <div className="relative z-10">
-          {/* Image Section */}
-          <div className="relative h-40 w-full overflow-hidden rounded-lg">
-            <Image
-              src="/images/gamecarousel/valorant.jpg"
-              alt={product.name}
-              fill
-              className="object-cover p-4 rounded-lg"
-            />
-          </div>
+          <Link href={`/shop/${product?.asin}`}>
+            <div className="relative h-66 w-full overflow-hidden rounded-lg">
+              <Image
+                src={product?.product_photo}
+                alt={product?.product_title}
+                fill
+                className="object-contain p-4 rounded-lg"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+          </Link>
 
-          {/* Content Section */}
           <div className="p-4">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="text-sm font-medium text-[#402000] uppercase">
-                  {product.name}
+                <h3 className="text-sm font-medium text-[#402000] uppercase truncate">
+                  {product?.product_title}
                 </h3>
                 <p className="text-xs text-[#402000]">{product.brand}</p>
               </div>
@@ -45,37 +82,42 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <div className="flex justify-between items-center mt-2">
               <div className="mt-2">
                 <span className="text-lg font-bold text-[#402000]">
-                  ₹{product.price}
+                  {product?.product_price}
                 </span>
-                <div className="text-[#402000] text-xs px-2 py-1 rounded">
-                  {product.discount}% OFF
-                </div>
+                {product?.product_original_price && (
+                  <div className="text-[#402000] text-xs px-2 py-1 rounded line-through">
+                    {product?.product_original_price}
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col items-center mt-1">
                 <div className="flex items-center border border-[#4D32AA] p-2 px-6 rounded-sm">
                   <Star className="h-3 w-3 fill-[#402000] text-[#402000]" />
                   <span className="text-xs ml-1 font-medium text-[#402000]">
-                    {product.rating}
+                    {product?.product_star_rating || "N/A"}
                   </span>
                 </div>
                 <span className="text-xs text-[#503000] mt-1">
-                  ({product.reviews} reviews)
+                  ({product?.product_num_ratings || "0"} reviews)
                 </span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-2 mt-4">
-              <button
+              <a
+                href={product?.product_url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
-                  "py-2 text-xs border-2 font-medium rounded-sm",
+                  "py-2 text-xs border-2 font-medium rounded-sm text-center",
                   "border-[#4D32AA] text-[#FF1ADF]",
                   "hover:border-[#9D0A88] transition-all"
                 )}
               >
                 BUY NOW
-              </button>
-              <Button text="COMPARE" onClick={() => setIsDrawerOpen(true)} />
+              </a>
+              <Button text="COMPARE" onClick={handleCompareClick} />
             </div>
           </div>
         </div>

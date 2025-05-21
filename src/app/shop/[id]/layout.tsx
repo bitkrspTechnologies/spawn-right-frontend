@@ -8,7 +8,7 @@ const audiowide = Audiowide({
 });
 
 export const metadata: Metadata = {
-  title: "Yash",
+  title: "Product Detail",
   description: "Shop Smart Play Better",
 };
 
