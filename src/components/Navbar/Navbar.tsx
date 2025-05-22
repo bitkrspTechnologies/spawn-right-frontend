@@ -1,4 +1,3 @@
-
 // "use client";
 
 // import { useEffect, useState } from "react";
@@ -211,11 +210,11 @@ export default function Navbar() {
 
   const handleGameButtonClick = (key: string, hasData: boolean) => {
     setSelectedBtn(key);
-    if (hasData) {
-      router.push("/tournaments");
-    } else {
-      router.push("/commingsoon");
-    }
+    // if (hasData) {
+    //   router.push("/tournaments");
+    // } else {
+    //   router.push("/coming-soon");
+    // }
   };
 
   return (

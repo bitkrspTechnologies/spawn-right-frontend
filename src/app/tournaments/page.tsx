@@ -68,7 +68,6 @@
 //   );
 // }
 
-
 "use client";
 
 import { useMediaQuery } from "react-responsive";
@@ -104,17 +103,9 @@ export default function Tournaments() {
               </div>
 
               {/* Tournaments Section */}
-              <div className="flex gap-8 px-4 py-4 justify-center items-start ">
+              <div className="flex gap-8 px-4 py-6 justify-center items-start ">
                 <div className="flex-1 flex flex-col gap-6">
                   <TournamentsTabs />
-
-                  <div className="grid grid-cols-2 gap-6 mb-10">
-                    {[...Array(4)].map((_, index) => (
-                      <div key={index} className="w-full h-full">
-                        <DummyComponent />
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 {/* Side Ad */}
@@ -135,13 +126,7 @@ export default function Tournaments() {
               <div className="mt-6">
                 <TournamentsTabs />
               </div>
-              <div className="grid grid-cols-1 gap-6 my-6">
-                {[...Array(4)].map((_, index) => (
-                  <div key={index} className="w-full h-full">
-                    <DummyComponent />
-                  </div>
-                ))}
-              </div>
+
               <div className="mt-4">
                 <AdForLeaderBoard />
               </div>
