@@ -10,9 +10,19 @@ import { useMediaQuery } from "react-responsive";
 export default function Shop() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("4092116031");
 
   const clearSearch = () => {
     setSearchQuery("");
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+    setSearchQuery("");
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -43,10 +53,19 @@ export default function Shop() {
           <div className={`w-full my-5 ${isMobile ? "" : "px-10"}`}>
             <div className="relative mt-2 text-gray-500 bg-white rounded-lg border border-gray-300 focus-within:border-slate-600">
               <div className="absolute inset-y-0 left-0 my-auto h-full flex items-center pl-3">
-                <select className="text-sm outline-none rounded-lg h-full bg-transparent font-medium text-gray-800">
-                  <option>Keyboard</option>
-                  <option>Gaming</option>
-                  <option>Mouse</option>
+                <select
+                  className="text-sm outline-none rounded-lg h-full bg-transparent font-medium text-gray-800"
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                >
+                  <option value="4092116031">All</option>
+                  <option value="1389401031">Phone</option>
+                  <option value="1375424031">Laptop</option>
+                  <option value="1375458031">Tablet</option>
+                  <option value="1375420031">Mouse</option>
+                  <option value="1388921031">Headphones</option>
+                  <option value="1375419031">Keyboard</option>
+                  <option value="1375392031">Desktops</option>
                 </select>
                 <div className="h-6 border-r mx-2"></div>
               </div>
@@ -55,7 +74,7 @@ export default function Shop() {
                 placeholder="Gaming Keyboard"
                 className="w-full pl-28 pr-10 py-2 appearance-none bg-transparent outline-none shadow-sm rounded-lg"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
               />
               <div className="absolute inset-y-0 right-0 my-auto h-full flex items-center pr-3">
                 {searchQuery && (
@@ -76,7 +95,10 @@ export default function Shop() {
           </div>
 
           <div className="space-y-8">
-            <ProductShowcase />
+            <ProductShowcase
+              categoryId={selectedCategory}
+              searchQuery={searchQuery}
+            />
           </div>
         </div>
       </div>

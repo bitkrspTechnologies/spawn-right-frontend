@@ -1,32 +1,24 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ProductSkeleton } from "@/components/Skeleton/ProductSkeleton";
 import ProductCard from "./ProductCard";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { fetchProducts } from "@/services/Product";
 
-const ProductShowcase = () => {
+const ProductShowcase = ({ categoryId }) => {
   const [page, setPage] = useState(1);
-  const [allProducts, setAllProducts] = useState([]);
+  const [totalPages, setTotalPages] = useState(10);
   const [hasMore, setHasMore] = useState(true);
-  const loaderRef = useRef(null);
-
-  // API fetch function
-  const fetchProducts = async (page = 1) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5090/api/v1/products/get-all-shop-right-products/${page}`
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      throw error;
-    }
-  };
 
   const {
     data: productsInfo,
@@ -35,58 +27,56 @@ const ProductShowcase = () => {
     isFetching,
     error,
   } = useQuery({
-    queryKey: ["shop-right-products", page],
-    queryFn: () => fetchProducts(page),
+    queryKey: ["shop-right-products", page, categoryId],
+    queryFn: () => fetchProducts(page, categoryId),
     keepPreviousData: true,
-    staleTime: 5000, // Data stays fresh for 5 seconds
+    staleTime: 5000,
   });
 
-  // Reset products when page is reset to 1
-  useEffect(() => {
-    if (page === 1) {
-      setAllProducts([]);
-    }
-  }, [page]);
-
-  // Merge new products with existing ones
+  // Detect when we've reached the last page
   useEffect(() => {
     if (productsInfo?.data?.data?.products) {
-      setAllProducts((prev) => {
-        const productMap = new Map();
-        prev.forEach((product) => productMap.set(product.asin, product));
-        productsInfo.data.data.products.forEach((product) => {
-          productMap.set(product.asin, product);
-        });
-
-        return Array.from(productMap.values());
-      });
-      setHasMore(productsInfo.data.data.products.length > 0);
-    }
-  }, [productsInfo]);
-
-  // Infinite scroll observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const first = entries[0];
-        if (first.isIntersecting && hasMore && !isFetching) {
-          setPage((prev) => prev + 1);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const currentLoader = loaderRef.current;
-    if (currentLoader) {
-      observer.observe(currentLoader);
-    }
-
-    return () => {
-      if (currentLoader) {
-        observer.unobserve(currentLoader);
+      // If we get an empty array of products, we've reached the end
+      if (productsInfo.data.data.products.length === 0 && page > 1) {
+        setHasMore(false);
+        setTotalPages(page - 1); // Set total pages to the last valid page
       }
-    };
-  }, [hasMore, isFetching]);
+    }
+  }, [productsInfo, page]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Generate visible page numbers
+  const getVisiblePages = () => {
+    const visiblePages = [];
+    const maxVisiblePages = 5;
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        visiblePages.push(i);
+      }
+    } else {
+      let start = Math.max(1, page - 2);
+      let end = Math.min(totalPages, page + 2);
+
+      if (page <= 3) {
+        end = maxVisiblePages;
+      } else if (page >= totalPages - 2) {
+        start = totalPages - maxVisiblePages + 1;
+      }
+
+      for (let i = start; i <= end; i++) {
+        visiblePages.push(i);
+      }
+    }
+
+    return visiblePages;
+  };
 
   if (isError) {
     return (
@@ -106,7 +96,7 @@ const ProductShowcase = () => {
     <div className="w-full max-w-6xl mx-auto">
       <div className="rounded-2xl bg-white/10 backdrop-blur-md px-8 py-5 mt-10 shadow-lg">
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {allProducts.map((product) => (
+          {productsInfo?.data?.data?.products?.map((product) => (
             <ProductCard
               key={`${product.asin}-${product.product_id}`}
               product={product}
@@ -119,22 +109,68 @@ const ProductShowcase = () => {
             ))}
         </div>
 
-        {/* Infinite scroll trigger */}
-        <div ref={loaderRef} className="h-10 w-full" />
+        {/* Pagination */}
+        {!isLoading && productsInfo?.data?.data?.products?.length > 0 && (
+          <div className="mt-8">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePageChange(page - 1);
+                    }}
+                    isDisabled={page === 1}
+                  />
+                </PaginationItem>
 
-        {!hasMore && allProducts.length > 0 && (
-          <div className="text-center py-6 text-gray-400">
-            You've reached the end of products
+                {getVisiblePages().map((pageNumber) => (
+                  <PaginationItem key={pageNumber}>
+                    <PaginationLink
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePageChange(pageNumber);
+                      }}
+                      isActive={pageNumber === page}
+                    >
+                      {pageNumber}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+
+                {totalPages > 5 && page < totalPages - 2 && (
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                )}
+
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePageChange(page + 1);
+                    }}
+                    isDisabled={page === totalPages || !hasMore}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
         )}
 
-        {!hasMore && allProducts.length === 0 && !isLoading && (
-          <div className="text-center py-6 text-gray-400">
-            No products found
-          </div>
-        )}
+        {!isLoading &&
+          !isFetching &&
+          productsInfo?.data?.data?.products?.length === 0 && (
+            <div className="text-center py-6 text-gray-400">
+              {page === 1 ? "No products found" : "No more products available"}
+            </div>
+          )}
       </div>
     </div>
   );
 };
+
 export default ProductShowcase;

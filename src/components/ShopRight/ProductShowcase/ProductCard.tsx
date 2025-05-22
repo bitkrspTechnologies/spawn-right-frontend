@@ -55,8 +55,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <>
-      <div className="relative h-full w-full bg-[#ffffff] rounded-lg overflow-hidden flex flex-col border border-gray-200 shadow-sm transition-transform hover:scale-[1.02] duration-300">
-        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(125%_125%_at_50%_10%,rgba(255,255,255,0)_20%,rgba(223,171,255,1)_100%)]"></div>
+      <div className="relative h-full w-full bg-white rounded-lg overflow-hidden flex flex-col border border-gray-200 shadow-sm transition-transform hover:scale-[1.02] duration-300">
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(145%_145%_at_50%_10%,rgba(255,255,255,0)_20%,rgba(223,171,255,1)_100%)]"></div>
 
         <div className="relative z-10">
           <Link href={`/shop/${product?.asin}`}>
