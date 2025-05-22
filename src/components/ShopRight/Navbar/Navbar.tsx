@@ -4,24 +4,17 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
-// import Button from "../Button/Button";
 import React from "react";
+import InfoSidebar from "@/components/ShopRight/InfoSidebar/InfoSidebar";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -48,6 +41,7 @@ export default function Navbar() {
       />
 
       <nav className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+        {/* Logo */}
         <div className="flex items-center space-x-2">
           <Link href={"/shop"}>
             <Image
@@ -60,7 +54,8 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="flex items-center space-x-9 text-sm">
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center space-x-9 text-sm">
           <Link
             href="/about"
             className="text-[var(--highlight)] hover:text-white transition-colors duration-300 font-medium"
@@ -74,7 +69,20 @@ export default function Navbar() {
             Spawn Right
           </Link>
         </div>
+
+        {/* Hamburger Icon - Mobile Only */}
+        <div className="md:hidden">
+          <button onClick={() => setSidebarOpen(true)}>
+            <Bars3Icon className="h-7 w-7 text-white" />
+          </button>
+        </div>
       </nav>
+
+      {/* Sidebar Component */}
+      <InfoSidebar
+        visible={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
     </header>
   );
 }

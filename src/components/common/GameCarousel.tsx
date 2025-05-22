@@ -125,10 +125,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 const games = [
-  { title: "Counter Strike 2", image: "/images/gamecarousel/CounterStrike.svg" },
+  {
+    title: "Counter Strike 2",
+    image: "/images/gamecarousel/CounterStrike.svg",
+  },
   { title: "PUBG", image: "/images/gamecarousel/gamebgmi.svg" },
-  { title: "Call of Duty", image: "/images/gamecarousel/gamecod.svg" },
-  { title: "Apex Legends", image: "/images/gamecarousel/apexLegends.jpg" },
+  // { title: "Call of Duty", image: "/images/gamecarousel/gamecod.svg" },
+  // { title: "Apex Legends", image: "/images/gamecarousel/apexLegends.jpg" },
   { title: "Valorant", image: "/images/gamecarousel/valorant.jpg" },
 ];
 
