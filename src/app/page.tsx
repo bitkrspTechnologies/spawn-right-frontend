@@ -101,7 +101,6 @@ export default function Home() {
     <>
       <Navbar />
       <div className="relative h-screen w-screen overflow-hidden">
-
         {/* Fixed Left Sidebar */}
         {!isMobile && (
           <div className="w-[100px] bg-gray-400 h-[calc(100vh-180px)] fixed top-45 left-5 z-10 p-4 ">
@@ -130,7 +129,7 @@ export default function Home() {
 
           {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
           <div className="flex flex-col sm:flex-row gap-3 min-h-[200px] mb-8 px-2">
-            <div className={`${isMobile ? "mt-2":"mt-9"}  w-full sm:w-1/2`}>
+            <div className={`${isMobile ? "mt-2" : "mt-9"}  w-full sm:w-1/2`}>
               <AdSection />
             </div>
 
@@ -160,11 +159,7 @@ export default function Home() {
           </div> */}
           <DefaultSlider />
 
-          <div>
-
-
-          </div>
-          <div className="ml-12 mt-10">
+          {/* <div className="ml-12 mt-10">
             <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
               Finished Matches
             </h2>
@@ -173,7 +168,7 @@ export default function Home() {
             ) : (
               <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div>
             )}
-          </div>
+          </div> */}
 
           {/* <div className="px-6 mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
@@ -182,7 +177,10 @@ export default function Home() {
             <CustomersSectionDemo />
           </div> */}
 
-          <JoinBanner />
+          <div className="my-30">
+            <JoinBanner />
+          </div>
+
           <Footer />
         </div>
       </div>

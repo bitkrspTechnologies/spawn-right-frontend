@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -109,29 +108,33 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center space-x-9 text-sm">
-  <DropdownMenu>
+          <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none">
+              <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--highlight)] focus-visible:ring-opacity-75 rounded-md px-2 py-1">
                 Tournaments
-                  <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
               </button>
             </DropdownMenuTrigger>
-            
-            <DropdownMenuContent 
-              className="w-48 bg-[var(--background)] border border-[var(--highlight)] rounded-lg shadow-lg overflow-hidden"
-              sideOffset={5}
+
+            <DropdownMenuContent
+              className="w-56 bg-[var(--background)] border border-[var(--highlight)] rounded-md shadow-lg overflow-hidden backdrop-blur-sm bg-opacity-95"
+              sideOffset={8}
+              align="start"
             >
               {gameButtons.map((game) => (
                 <DropdownMenuItem
                   key={game.key}
-                  className="px-4 py-2 hover:bg-[var(--highlight)/10%] focus:bg-[var(--highlight)/20%] focus:text-white cursor-pointer transition-colors"
+                  className="px-4 py-2.5 hover:bg-[var(--highlight)]/20 focus:bg-[var(--highlight)]/30 focus:text-white cursor-pointer transition-colors text-sm font-medium text-[var(--highlight)] focus:outline-none first:rounded-t-md last:rounded-b-md"
                   onClick={() => handleGameButtonClick(game.key, game.hasData)}
                 >
-                  <div className="flex items-center gap-3 text-xs">
-                    <div className="w-4 h-4 flex items-center justify-center">
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 flex items-center justify-center">
                       {game.icon}
                     </div>
                     <span>{game.text}</span>
+                    {game.hasData && (
+                      <span className="ml-auto text-xs opacity-70">→</span>
+                    )}
                   </div>
                 </DropdownMenuItem>
               ))}
@@ -140,7 +143,7 @@ export default function Navbar() {
 
           <Link
             href="/leaderboard"
-            className="text-[var(--highlight)] hover:text-white transition-colors font-medium"
+            className="text-[var(--highlight)] hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-[var(--highlight)]/10"
           >
             Leaderboard
           </Link>

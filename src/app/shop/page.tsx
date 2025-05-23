@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
@@ -9,15 +9,29 @@ import { useMediaQuery } from "react-responsive";
 export default function Shop() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("4092116031");
+
+  // Debounce effect
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchQuery]);
 
   const clearSearch = () => {
     setSearchQuery("");
+    setDebouncedSearchQuery("");
   };
 
   const handleCategoryChange = (e: any) => {
     setSelectedCategory(e.target.value);
     setSearchQuery("");
+    setDebouncedSearchQuery("");
   };
 
   const handleSearchChange = (e: any) => {
@@ -82,7 +96,6 @@ export default function Shop() {
                   </svg>
                 </div>
 
-                {/* Search Input */}
                 <input
                   type="text"
                   placeholder="Search for products like 'Gaming Keyboard'..."
@@ -91,7 +104,6 @@ export default function Shop() {
                   onChange={handleSearchChange}
                 />
 
-                {/* Clear and Search Icons */}
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                   {searchQuery && (
                     <button
@@ -143,7 +155,7 @@ export default function Shop() {
           <div className="space-y-8">
             <ProductShowcase
               categoryId={selectedCategory}
-              // searchQuery={searchQuery}
+              searchQuery={debouncedSearchQuery}
             />
           </div>
         </div>

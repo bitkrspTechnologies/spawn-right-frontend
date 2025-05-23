@@ -13,9 +13,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { fetchProducts } from "@/services/Product";
+import { fetchProducts, fetchSearchedProducts } from "@/services/Product";
 
-const ProductShowcase = ({ categoryId }) => {
+const ProductShowcase = ({ categoryId, searchQuery }) => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(10);
   const [hasMore, setHasMore] = useState(true);
@@ -27,8 +27,11 @@ const ProductShowcase = ({ categoryId }) => {
     isFetching,
     error,
   } = useQuery({
-    queryKey: ["shop-right-products", page, categoryId],
-    queryFn: () => fetchProducts(page, categoryId),
+    queryKey: ["shop-right-products", page, categoryId, searchQuery],
+    queryFn: () =>
+      searchQuery
+        ? fetchSearchedProducts(page, searchQuery)
+        : fetchProducts(page, categoryId),
     keepPreviousData: true,
     staleTime: 5000,
   });
@@ -41,6 +44,11 @@ const ProductShowcase = ({ categoryId }) => {
       }
     }
   }, [productsInfo, page]);
+
+  // Reset to page 1 when search query or category changes
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery, categoryId]);
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -117,7 +125,7 @@ const ProductShowcase = ({ categoryId }) => {
                       e.preventDefault();
                       handlePageChange(page - 1);
                     }}
-                    isDisabled={page === 1}
+                  // isDisabled={page === 1}
                   />
                 </PaginationItem>
 
@@ -149,7 +157,7 @@ const ProductShowcase = ({ categoryId }) => {
                       e.preventDefault();
                       handlePageChange(page + 1);
                     }}
-                    isDisabled={page === totalPages || !hasMore}
+                  // isDisabled={page === totalPages || !hasMore}
                   />
                 </PaginationItem>
               </PaginationContent>
