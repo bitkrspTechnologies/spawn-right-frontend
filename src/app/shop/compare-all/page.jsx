@@ -8,25 +8,12 @@ import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface Product {
-  asin: string;
-  product_title: string;
-  brand: string;
-  product_price: string;
-  product_original_price?: string;
-  product_photo: string;
-  product_star_rating?: string;
-  product_num_ratings?: string;
-  product_url: string;
-  [key: string]: any;
-}
-
 export default function CompareAll() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [searchQuery, setSearchQuery] = useState("");
-  const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>({});
+  const [expandedRows, setExpandedRows] = useState({});
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [comparisonData, setComparisonData] = useState<any[]>([]);
+  const [comparisonData, setComparisonData] = useState([]);
 
   useEffect(() => {
     // Load products from localStorage when component mounts
@@ -37,16 +24,13 @@ export default function CompareAll() {
     prepareComparisonData(products);
   }, []);
 
-  const prepareComparisonData = (products: Product[]) => {
+  const prepareComparisonData = (products) => {
     if (products.length === 0) return;
-
-    // Extract all available fields from the first product
     const firstProduct = products[0];
     const allFields = Object.keys(firstProduct).filter(
       (key) => !["product_photo", "product_url"].includes(key)
     );
 
-    // Create comparison data for all fields
     const data = allFields.map((field) => ({
       feature: field
         .replace(/_/g, " ")
@@ -64,7 +48,7 @@ export default function CompareAll() {
     setComparisonData(data);
   };
 
-  const removeProduct = (asin: string) => {
+  const removeProduct = (asin) => {
     const updatedProducts = selectedProducts.filter((p) => p.asin !== asin);
     setSelectedProducts(updatedProducts);
     localStorage.setItem("compareProducts", JSON.stringify(updatedProducts));
@@ -81,7 +65,7 @@ export default function CompareAll() {
     setSearchQuery("");
   };
 
-  const toggleRow = (index: number) => {
+  const toggleRow = (index) => {
     setExpandedRows((prev) => ({
       ...prev,
       [index]: !prev[index],
@@ -114,9 +98,8 @@ export default function CompareAll() {
           </div>
 
           <div
-            className={`flex-1 overflow-y-auto px-4 pb-4 ${
-              isMobile ? "" : "px-6"
-            }`}
+            className={`flex-1 overflow-y-auto px-4 pb-4 ${isMobile ? "" : "px-6"
+              }`}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {selectedProducts.map((product) => (
@@ -183,9 +166,8 @@ export default function CompareAll() {
           {/* Comparison Table */}
           {selectedProducts.length > 0 && (
             <div
-              className={`bg-white rounded-lg overflow-hidden ${
-                isMobile ? "" : "mx-6"
-              }`}
+              className={`bg-white rounded-lg overflow-hidden ${isMobile ? "" : "mx-6"
+                }`}
             >
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -219,9 +201,8 @@ export default function CompareAll() {
                       <>
                         <tr
                           key={index}
-                          className={`${
-                            row.highlighted ? "bg-blue-50" : "bg-white"
-                          } cursor-pointer`}
+                          className={`${row.highlighted ? "bg-blue-50" : "bg-white"
+                            } cursor-pointer`}
                           onClick={() => isMobile && toggleRow(index)}
                         >
                           <td className="px-4 py-3 text-sm font-medium text-gray-900">

@@ -76,20 +76,20 @@
 
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { fetchAllTournaments } from "@/services/Tournaments";
 import TournamentSkeleton from "@/components/Skeleton/TournamentSkeleton";
 import { TournamentCard } from "@/components/common/TournamentCard";
 
-interface TournamentsTabsProps {
-  gameName?: string; // Optional prop for future game filtering
-}
 
-export default function TournamentsTabs({ gameName = "all" }: TournamentsTabsProps) {
-  const router = useRouter();
-  const [activeTab, setActiveTab] = useState<"ongoing" | "upcoming" | "completed">("ongoing");
+export default function TournamentsTabs({ gameName = "all", }) {
+  const [activeTab, setActiveTab] = useState("ongoing");
 
-  const { data: tournaments, isLoading, isError, error } = useQuery({
+  const {
+    data: tournaments,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["tournaments", activeTab, gameName],
     queryFn: () => fetchAllTournaments(activeTab),
   });
@@ -101,26 +101,27 @@ export default function TournamentsTabs({ gameName = "all" }: TournamentsTabsPro
   ];
 
   // Filter tournaments based on game name (when available)
-  const filteredTournaments = tournaments?.data?.filter((tournament: any) => {
-    // When gameName is 'all', show all tournaments
-    if (gameName === "all") return true;
+  const filteredTournaments =
+    tournaments?.data?.filter((tournament) => {
+      // When gameName is 'all', show all tournaments
+      if (gameName === "all") return true;
 
-    // Future-proof filtering when game data is available
-    // Replace 'game' with the actual field name from your API
-    return tournament.game?.toLowerCase() === gameName.toLowerCase();
-  }) || [];
+      // Future-proof filtering when game data is available
+      // Replace 'game' with the actual field name from your API
+      return tournament.game?.toLowerCase() === gameName.toLowerCase();
+    }) || [];
 
   return (
     <div className="w-full mx-auto sm:px-4 lg:px-6">
       <div className="flex justify-between bg-[#2a2a2a] rounded-t-lg overflow-hidden">
-        {tabs.map((tab) => (
+        {tabs.map((tab, i) => (
           <button
-            key={tab.key}
+            key={i}
             onClick={() => setActiveTab(tab.key)}
             className={`flex-1 text-center py-3 text-sm font-medium transition-colors
               ${activeTab === tab.key
-                ? 'text-pink-500 border-b-2 border-pink-500'
-                : 'text-gray-300 hover:text-gray-100'
+                ? "text-pink-500 border-b-2 border-pink-500"
+                : "text-gray-300 hover:text-gray-100"
               }`}
           >
             {tab.label}
@@ -131,7 +132,9 @@ export default function TournamentsTabs({ gameName = "all" }: TournamentsTabsPro
       <div className="mt-6">
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => <TournamentSkeleton key={i} />)}
+            {[...Array(3)].map((_, i) => (
+              <TournamentSkeleton key={i} />
+            ))}
           </div>
         ) : isError ? (
           <div className="text-red-500 text-center py-8">
@@ -139,16 +142,14 @@ export default function TournamentsTabs({ gameName = "all" }: TournamentsTabsPro
           </div>
         ) : filteredTournaments.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredTournaments.map((tournament: any) => (
-              <TournamentCard
-                key={tournament._id}
-                tournament={tournament}
-              />
+            {filteredTournaments.map((tournament) => (
+              <TournamentCard key={tournament._id} tournament={tournament} />
             ))}
           </div>
         ) : (
           <div className="text-center py-8 text-gray-400">
-            No {activeTab} {gameName !== "all" ? gameName : ""} tournaments found
+            No {activeTab} {gameName !== "all" ? gameName : ""} tournaments
+            found
           </div>
         )}
       </div>

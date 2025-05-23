@@ -1,15 +1,3 @@
-// export interface Product {
-//     id: string;
-//     name: string;
-//     brand: string;
-//     price: number;
-//     discount: number;
-//     rating: number;
-//     reviews: number;
-//     imageUrl: string;
-//     // Add other fields as per your API response
-// }
-
 export async function fetchProducts(page, categoryId) {
     const response = await fetch(`http://localhost:5090/api/v1/products/get-all-shop-right-products/${categoryId}/${page}`);
     if (!response.ok) {

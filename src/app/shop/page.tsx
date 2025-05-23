@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
-import { Search, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 
 export default function Shop() {
@@ -16,12 +15,12 @@ export default function Shop() {
     setSearchQuery("");
   };
 
-  const handleCategoryChange = (e) => {
+  const handleCategoryChange = (e: any) => {
     setSelectedCategory(e.target.value);
     setSearchQuery("");
   };
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: any) => {
     setSearchQuery(e.target.value);
   };
 
@@ -50,15 +49,15 @@ export default function Shop() {
             />
           </div>
 
-          <div className={`w-full my-5 ${isMobile ? "" : "px-10"}`}>
-            <div className="relative mt-2 text-gray-500 bg-white rounded-lg border border-gray-300 focus-within:border-slate-600">
-              <div className="absolute inset-y-0 left-0 my-auto h-full flex items-center pl-3">
+          <div className={`w-full my-5 ${isMobile ? "px-2" : "px-10"}`}>
+            <div className="relative">
+              <div className="relative flex items-center bg-white rounded-lg shadow-sm border border-gray-200 hover:border-slate-400 focus-within:border-slate-600 focus-within:ring-1 focus-within:ring-slate-600 transition-all duration-200">
                 <select
-                  className="text-sm outline-none rounded-lg h-full bg-transparent font-medium text-gray-800"
+                  className="pl-10 pr-8 py-2.5 text-sm bg-transparent font-medium text-gray-700 border-r border-gray-200 appearance-none focus:outline-none focus:ring-0 cursor-pointer"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                 >
-                  <option value="4092116031">All</option>
+                  <option value="4092116031">All Categories</option>
                   <option value="1389401031">Phone</option>
                   <option value="1375424031">Laptop</option>
                   <option value="1375458031">Tablet</option>
@@ -67,24 +66,71 @@ export default function Shop() {
                   <option value="1375419031">Keyboard</option>
                   <option value="1375392031">Desktops</option>
                 </select>
-                <div className="h-6 border-r mx-2"></div>
-              </div>
-              <input
-                type="text"
-                placeholder="Gaming Keyboard"
-                className="w-full pl-28 pr-10 py-2 appearance-none bg-transparent outline-none shadow-sm rounded-lg"
-                value={searchQuery}
-                onChange={handleSearchChange}
-              />
-              <div className="absolute inset-y-0 right-0 my-auto h-full flex items-center pr-3">
-                {searchQuery && (
-                  <button onClick={clearSearch} className="mr-2 text-black">
-                    <X size={18} />
+
+                <div className="absolute inset-y-0 left-[120px] flex items-center pointer-events-none">
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+
+                {/* Search Input */}
+                <input
+                  type="text"
+                  placeholder="Search for products like 'Gaming Keyboard'..."
+                  className="w-full pl-14 pr-12 py-2.5 text-sm bg-transparent outline-none placeholder-gray-400 text-gray-700 rounded-r-lg"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+
+                {/* Clear and Search Icons */}
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                  {searchQuery && (
+                    <button
+                      onClick={clearSearch}
+                      className="p-1 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                      aria-label="Clear search"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                  <button
+                    className="ml-1 p-1 text-gray-500 hover:text-slate-700 transition-colors duration-200"
+                    aria-label="Search"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   </button>
-                )}
-                <span className="text-black">
-                  <Search size={18} />
-                </span>
+                </div>
               </div>
             </div>
           </div>
@@ -97,7 +143,7 @@ export default function Shop() {
           <div className="space-y-8">
             <ProductShowcase
               categoryId={selectedCategory}
-              searchQuery={searchQuery}
+              // searchQuery={searchQuery}
             />
           </div>
         </div>

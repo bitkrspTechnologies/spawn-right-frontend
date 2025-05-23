@@ -219,7 +219,6 @@
 
 // export default Scoreboard;
 
-
 //=================================================================
 
 // import React, { useState } from "react";
@@ -233,7 +232,6 @@
 //   fp: number;       // Finish Points
 //   total: number;    // Total Points (PP + FP)
 // }
-
 
 //  const sampleData: Player[] = [
 //   {
@@ -294,7 +292,6 @@
 //   },
 // ];
 
-
 // const ITEMS_PER_PAGE = 6;
 
 // const Scoreboard = () => {
@@ -344,7 +341,7 @@
 //           value={searchTerm}
 //           onChange={(e) => setSearchTerm(e.target.value)}
 //         />
-        
+
 //       </div>
 
 //       {/* Table */}
@@ -361,7 +358,7 @@
 //           </div>
 //           <div>PP</div>
 //           <div>FP</div>
-         
+
 //           <div className={`${isMobile ? "col-span-2" : "col-span-2"}`}>Total</div>
 //         </div>
 
@@ -404,8 +401,6 @@
 
 // export default Scoreboard;
 
-
-
 //=================================================================
 
 import React, { useState } from "react";
@@ -417,9 +412,9 @@ import { fetchSingleMatchLeadboard } from "@/services/LiveMatches"; // Import yo
 interface TeamScore {
   rank: number;
   teamName: string;
-  pp: number;       // Placement Points
-  fp: number;       // Finish Points (kills)
-  total: number;    // Total Points
+  pp: number; // Placement Points
+  fp: number; // Finish Points (kills)
+  total: number; // Total Points
 }
 
 const ITEMS_PER_PAGE = 6;
@@ -430,19 +425,20 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Fetch match data using React Query and your service
-const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["matchLeaderboard", matchId],
     queryFn: () => fetchSingleMatchLeadboard(matchId),
   });
 
   // Transform API data to match the component's expected format
- const transformedData: TeamScore[] = data?.data.teams.map((team: any) => ({
-    rank: team.position,
-    teamName: team.team.name,
-    pp: team.placementPoints,
-    fp: team.kills,
-    total: team.totalPoints,
-  })) || [];
+  const transformedData: TeamScore[] =
+    data?.data.teams.map((team: any) => ({
+      rank: team.position,
+      teamName: team.team.name,
+      pp: team.placementPoints,
+      fp: team.kills,
+      total: team.totalPoints,
+    })) || [];
 
   const filteredData = transformedData.filter((team) =>
     team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -462,9 +458,12 @@ const { data, isLoading, error } = useQuery({
   };
 
   const rankStyles = (rank: number) => {
-    if (rank === 1) return "bg-yellow-400 text-white font-bold rounded-l-full pl-2";
-    if (rank === 2) return "bg-gray-300 text-black font-bold rounded-l-full pl-2";
-    if (rank === 3) return "bg-orange-500 text-white font-bold rounded-l-full pl-2";
+    if (rank === 1)
+      return "bg-yellow-400 text-white font-bold rounded-l-full pl-2";
+    if (rank === 2)
+      return "bg-gray-300 text-black font-bold rounded-l-full pl-2";
+    if (rank === 3)
+      return "bg-orange-500 text-white font-bold rounded-l-full pl-2";
     return "text-white pl-2";
   };
 
@@ -483,7 +482,9 @@ const { data, isLoading, error } = useQuery({
   return (
     <div className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent`}>
       {/* Search */}
-      <div className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start font-[roboto]`}>
+      <div
+        className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start font-[roboto]`}
+      >
         <input
           type="text"
           placeholder="Search a team by name..."
@@ -496,12 +497,18 @@ const { data, isLoading, error } = useQuery({
       {/* Table */}
       <div className="w-full mx-auto rounded-sm overflow-hidden">
         {/* Table Header */}
-        <div className={`grid ${isMobile ? "grid-cols-8" : "grid-cols-12"} py-3 text-xs uppercase text-center text-gray-300 bg-white/10 backdrop-blur-md mb-4`}>
+        <div
+          className={`grid ${isMobile ? "grid-cols-8" : "grid-cols-12"} py-3 text-xs uppercase text-center text-gray-300 bg-white/10 backdrop-blur-md mb-4`}
+        >
           <div>Rank</div>
-          <div className={`${isMobile ? "col-span-2" : "col-span-4"}`}>Team Name</div>
+          <div className={`${isMobile ? "col-span-2" : "col-span-4"}`}>
+            Team Name
+          </div>
           <div>PP</div>
           <div>FP</div>
-          <div className={`${isMobile ? "col-span-2" : "col-span-2"}`}>Total</div>
+          <div className={`${isMobile ? "col-span-2" : "col-span-2"}`}>
+            Total
+          </div>
         </div>
 
         {/* Table Rows */}
@@ -513,7 +520,9 @@ const { data, isLoading, error } = useQuery({
             <div className={rankStyles(team.rank)}>
               {team.rank <= 3 ? `${team.rank}st` : team.rank}
             </div>
-            <div className={`${isMobile ? "col-span-2 text-left pl-2 truncate" : "col-span-4"}`}>
+            <div
+              className={`${isMobile ? "col-span-2 text-left pl-2 truncate" : "col-span-4"}`}
+            >
               {team.teamName}
             </div>
             <div>{team.pp}</div>
@@ -531,7 +540,7 @@ const { data, isLoading, error } = useQuery({
           text="Show More"
           className="hover:scale-105 transition-transform px-6 py-2"
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage >= totalPages}
+          // disabled={currentPage >= totalPages}
         />
       </div>
     </div>

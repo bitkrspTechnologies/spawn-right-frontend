@@ -33,13 +33,11 @@ const ProductShowcase = ({ categoryId }) => {
     staleTime: 5000,
   });
 
-  // Detect when we've reached the last page
   useEffect(() => {
     if (productsInfo?.data?.data?.products) {
-      // If we get an empty array of products, we've reached the end
       if (productsInfo.data.data.products.length === 0 && page > 1) {
         setHasMore(false);
-        setTotalPages(page - 1); // Set total pages to the last valid page
+        setTotalPages(page - 1);
       }
     }
   }, [productsInfo, page]);
@@ -51,7 +49,6 @@ const ProductShowcase = ({ categoryId }) => {
     }
   };
 
-  // Generate visible page numbers
   const getVisiblePages = () => {
     const visiblePages = [];
     const maxVisiblePages = 5;
@@ -74,7 +71,6 @@ const ProductShowcase = ({ categoryId }) => {
         visiblePages.push(i);
       }
     }
-
     return visiblePages;
   };
 

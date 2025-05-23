@@ -9,23 +9,7 @@ import { ComparisonDrawer } from "../ComparisonDrawer/ComparisonDrawer";
 import Link from "next/link";
 import { toast } from "sonner";
 
-interface Product {
-  asin: string;
-  product_title: string;
-  brand: string;
-  product_price: string;
-  product_original_price?: string;
-  product_photo: string;
-  product_star_rating?: string;
-  product_num_ratings?: string;
-  product_url: string;
-}
-
-interface ProductCardProps {
-  product: Product;
-}
-
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleCompareClick = () => {

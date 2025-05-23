@@ -18,7 +18,6 @@ export default function Shop() {
   const productId = params?.id;
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -201,11 +200,10 @@ export default function Shop() {
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
-                        currentImageIndex === index
+                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${currentImageIndex === index
                           ? "bg-purple-600"
                           : "bg-white/50"
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>
@@ -218,14 +216,13 @@ export default function Shop() {
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-4 h-4 md:w-5 md:h-5 ${
-                            i <
-                            Math.floor(
-                              parseFloat(product.product_star_rating || "4.8")
-                            )
+                          className={`w-4 h-4 md:w-5 md:h-5 ${i <
+                              Math.floor(
+                                parseFloat(product.product_star_rating || "4.8")
+                              )
                               ? "fill-white"
                               : ""
-                          }`}
+                            }`}
                         />
                       ))}
                     </div>

@@ -9,8 +9,8 @@ import MatchCard from "@/components/common/MatchCardInclude";
 
 export default function TournamentMatchesPage() {
   const params = useParams();
-  const tournamentId = params.tournamentId as string;
-  const [activeTab, setActiveTab] = useState<"ongoing" | "upcoming" | "completed">("ongoing");
+  const tournamentId = params.tournamentId;
+  const [activeTab, setActiveTab] = useState("ongoing");
 
   const { data: matches, isLoading, isError, error } = useQuery({
     queryKey: ["tournamentMatches", tournamentId, activeTab],
@@ -25,14 +25,14 @@ export default function TournamentMatchesPage() {
   ];
 
   const filteredMatches = matches?.filter(match => {
-  if (activeTab === "ongoing") return match.status === "ongoing" || match.status === "live";
-  if (activeTab === "upcoming") return match.status === "upcoming";
-  if (activeTab === "completed") return match.status === "completed";
-  return true;
-}) || [];
+    if (activeTab === "ongoing") return match.status === "ongoing" || match.status === "live";
+    if (activeTab === "upcoming") return match.status === "upcoming";
+    if (activeTab === "completed") return match.status === "completed";
+    return true;
+  }) || [];
   // Transform API data to MatchCard props
   const transformedMatches = filteredMatches?.map(match => ({
-     matchId: match._id,
+    matchId: match._id,
     matchNumber: match.matchNumber,
     game: match.tournament.name,
     logo: match.tournament.logo,
@@ -69,7 +69,7 @@ export default function TournamentMatchesPage() {
           </div>
         ) : isError ? (
           <div className="text-red-500 text-center py-8">
-            Error loading matches: {(error as Error).message}
+            Error loading matches: {error.message}
           </div>
         ) : transformedMatches.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

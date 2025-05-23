@@ -206,64 +206,64 @@
 //   );
 
 //   return (
-    // <section
-    //   className={`w-full ${
-    //     variant === "carousel" ? "px-0 py-0" : "px-3 py-4"
-    //   }`}
-    // >
-    //   {/* Header */}
-    //   <div
-    //     className={`flex items-center gap-2 sm:gap-3 ${
-    //       variant === "carousel" ? "mb-2 px-2 sm:px-3" : "mb-4 sm:mb-6"
-    //     }`}
-    //   >
-    //     <span className="w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full"></span>
-    //     <h2
-    //       className={`text-base sm:text-2xl font-bold text-white`}
-    //     >
-    //       Live Matches
-    //     </h2>
-    //   </div>
+// <section
+//   className={`w-full ${
+//     variant === "carousel" ? "px-0 py-0" : "px-3 py-4"
+//   }`}
+// >
+//   {/* Header */}
+//   <div
+//     className={`flex items-center gap-2 sm:gap-3 ${
+//       variant === "carousel" ? "mb-2 px-2 sm:px-3" : "mb-4 sm:mb-6"
+//     }`}
+//   >
+//     <span className="w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full"></span>
+//     <h2
+//       className={`text-base sm:text-2xl font-bold text-white`}
+//     >
+//       Live Matches
+//     </h2>
+//   </div>
 
-    //   {/* Grid View */}
-    //   {variant === "grid" ? (
-    //     <div className="flex gap-3 sm:gap-6 overflow-x-auto px-2 sm:px-4 scrollbar-hide">
-    //       {matchesData.map((match, index) => (
-    //         <div
-    //           key={index}
-    //           className="flex-shrink-0 w-[90%] sm:w-[320px] max-w-xs"
-    //         >
-    //           {renderMatchCard(match, index)}
-    //         </div>
-    //       ))}
-    //     </div>
-    //   ) : (
-    //     // Carousel View
-    //     <Swiper
-    //       modules={[Pagination, Autoplay]}
-    //       spaceBetween={20}
-    //       slidesPerView={1}
-    //       centeredSlides
-    //       loop={true}
-    //       autoplay={{
-    //         delay: 3000,
-    //         disableOnInteraction: false,
-    //       }}
-    //       pagination={{ clickable: true }}
-    //       className="!pb-6 sm:!pb-8"
-    //     >
-    //       {matchesData.map((match, index) => (
-    //         <SwiperSlide key={index}>
-    //           <div className="flex justify-center px-2 sm:px-4">
-    //             <div className="w-full max-w-md">
-    //               {renderMatchCard(match, index)}
-    //             </div>
-    //           </div>
-    //         </SwiperSlide>
-    //       ))}
-    //     </Swiper>
-    //   )}
-    // </section>
+//   {/* Grid View */}
+//   {variant === "grid" ? (
+//     <div className="flex gap-3 sm:gap-6 overflow-x-auto px-2 sm:px-4 scrollbar-hide">
+//       {matchesData.map((match, index) => (
+//         <div
+//           key={index}
+//           className="flex-shrink-0 w-[90%] sm:w-[320px] max-w-xs"
+//         >
+//           {renderMatchCard(match, index)}
+//         </div>
+//       ))}
+//     </div>
+//   ) : (
+//     // Carousel View
+//     <Swiper
+//       modules={[Pagination, Autoplay]}
+//       spaceBetween={20}
+//       slidesPerView={1}
+//       centeredSlides
+//       loop={true}
+//       autoplay={{
+//         delay: 3000,
+//         disableOnInteraction: false,
+//       }}
+//       pagination={{ clickable: true }}
+//       className="!pb-6 sm:!pb-8"
+//     >
+//       {matchesData.map((match, index) => (
+//         <SwiperSlide key={index}>
+//           <div className="flex justify-center px-2 sm:px-4">
+//             <div className="w-full max-w-md">
+//               {renderMatchCard(match, index)}
+//             </div>
+//           </div>
+//         </SwiperSlide>
+//       ))}
+//     </Swiper>
+//   )}
+// </section>
 //   );
 // }
 
@@ -280,74 +280,70 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 
-export default function LiveMatches({ 
-  variant = "grid" 
-}: { 
-  variant?: "grid" | "carousel" 
-}) {
+export default function LiveMatches({ variant = "grid" }) {
   const router = useRouter();
   const { data, isLoading, error } = useQuery({
     queryKey: ['live-matches'],
     queryFn: () => fetchAll('ongoing'),
   });
 
-// Update the processMatches function in LiveMatches.tsx
-// const processMatches = (data: any): Match[] => {
-//   if (!data?.data) return [];
-  
-//   return data.data.map((match: any) => ({
-//     ...match,
-//     teams: (match.teams || [])
-//       .sort((a: any, b: any) => b.totalPoints - a.totalPoints)
-//       .slice(0, 3)
-//       .map((team: any) => ({
-//         name: team.team?.name || 'Unknown Team',
-//         score: team.totalPoints || 0,
-//         logo: team.team?.logo 
-//       })),
-//     // Update the game name usage in processMatches
-// game: getGameName(match.tournament?.name),
+  // Update the processMatches function in LiveMatches.tsx
+  // const processMatches = (data: any): Match[] => {
+  //   if (!data?.data) return [];
 
-//     logo: match.tournament?.logo || '/images/bgmi.svg',
-//   }));
-// };
+  //   return data.data.map((match: any) => ({
+  //     ...match,
+  //     teams: (match.teams || [])
+  //       .sort((a: any, b: any) => b.totalPoints - a.totalPoints)
+  //       .slice(0, 3)
+  //       .map((team: any) => ({
+  //         name: team.team?.name || 'Unknown Team',
+  //         score: team.totalPoints || 0,
+  //         logo: team.team?.logo 
+  //       })),
+  //     // Update the game name usage in processMatches
+  // game: getGameName(match.tournament?.name),
 
-const processMatches = (data: any): Match[] => {
+  //     logo: match.tournament?.logo || '/images/bgmi.svg',
+  //   }));
+  // };
+
+  const processMatches = (data) => {
     if (!data?.data) return [];
-    
-    return data.data.map((match: any) => ({
+
+    return data.data.map((match) => ({
       id: match._id, // Add match ID
       matchNumber: match.matchNumber,
       stage: match.stage,
       status: match.status,
       tournament: match.tournament,
       teams: (match.teams || [])
-        .sort((a: any, b: any) => b.totalPoints - a.totalPoints)
+        .sort((a, b) => b.totalPoints - a.totalPoints)
         .slice(0, 3)
-        .map((team: any) => ({
+        .map((team) => ({
           name: team.team?.name || 'Unknown Team',
           score: team.totalPoints || 0,
-          logo: team.team?.logo 
+          logo: team.team?.logo
         })),
       game: getGameName(match.tournament?.name),
       logo: match.tournament?.logo || '/images/bgmi.svg',
     }));
   };
 
-const getGameName = (tournamentName?: string | null): string => {
-  const normalized = (tournamentName || '').toLowerCase();
-  
-  if (normalized.includes('bgmi')) return 'BGMI';
-  if (normalized.includes('cod')) return 'COD';
-  if (normalized.includes('indus')) return 'INDUS';
-  return 'BGMI'; // Default value
-};
+  const getGameName = (tournamentName) => {
+    const normalized = (tournamentName || '').toLowerCase();
+
+    if (normalized.includes('bgmi')) return 'BGMI';
+    if (normalized.includes('cod')) return 'COD';
+    if (normalized.includes('indus')) return 'INDUS';
+    return 'BGMI'; // Default value
+  };
 
 
-  const renderMatchCard = (match: Match, index: number) => (
+  const renderMatchCard = (match, index) => (
     <MatchCard
       key={index}
-       matchId={match.id} 
+      matchId={match.id}
       matchNumber={`Match ${match.matchNumber}${match.stage ? ` - ${match.stage}` : ''}`}
       game={match.game}
       logo={match.logo}
@@ -402,16 +398,14 @@ const getGameName = (tournamentName?: string | null): string => {
     //   )}
     // </section>
 
-       <section
-      className={`w-full ${
-        variant === "carousel" ? "px-0 py-0" : "px-3 py-4"
-      }`}
+    <section
+      className={`w-full ${variant === "carousel" ? "px-0 py-0" : "px-3 py-4"
+        }`}
     >
       {/* Header */}
       <div
-        className={`flex items-center gap-2 sm:gap-3 ${
-          variant === "carousel" ? "mb-2 px-2 sm:px-3" : "mb-4 sm:mb-6"
-        }`}
+        className={`flex items-center gap-2 sm:gap-3 ${variant === "carousel" ? "mb-2 px-2 sm:px-3" : "mb-4 sm:mb-6"
+          }`}
       >
         <span className="w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full"></span>
         <h2
@@ -445,7 +439,7 @@ const getGameName = (tournamentName?: string | null): string => {
             delay: 3000,
             disableOnInteraction: false,
           }}
-          pagination={{ clickable: true}}
+          pagination={{ clickable: true }}
           className="!pb-6 sm:!pb-8"
         >
           {matches.map((match, index) => (
