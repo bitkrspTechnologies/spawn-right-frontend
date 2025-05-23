@@ -9,6 +9,10 @@ import Footer from "@/components/Footer/Footer";
 import { useParams } from "next/navigation";
 import ProductDetailSkeleton from "@/components/Skeleton/ProductDetailSkeleton";
 
+const apiConfig = {
+  apiUrl: process.env.NEXT_PUBLIC_API_URL
+};
+
 export default function Shop() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [product, setProduct] = useState(null);
@@ -23,7 +27,7 @@ export default function Shop() {
     const fetchProductData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5090/api/v1/products/get-single-shop-right-products/${productId}`
+          `${apiConfig.apiUrl}/api/v1/products/get-single-shop-right-products/${productId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch product");
@@ -201,8 +205,8 @@ export default function Shop() {
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
                       className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${currentImageIndex === index
-                          ? "bg-purple-600"
-                          : "bg-white/50"
+                        ? "bg-purple-600"
+                        : "bg-white/50"
                         }`}
                     />
                   ))}
@@ -217,11 +221,11 @@ export default function Shop() {
                         <Star
                           key={i}
                           className={`w-4 h-4 md:w-5 md:h-5 ${i <
-                              Math.floor(
-                                parseFloat(product.product_star_rating || "4.8")
-                              )
-                              ? "fill-white"
-                              : ""
+                            Math.floor(
+                              parseFloat(product.product_star_rating || "4.8")
+                            )
+                            ? "fill-white"
+                            : ""
                             }`}
                         />
                       ))}

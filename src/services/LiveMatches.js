@@ -1,5 +1,9 @@
+const apiConfig = {
+  apiUrl: process.env.NEXT_PUBLIC_API_URL
+};
+
 export async function fetchAll(status) {
-  const response = await fetch(`http://localhost:5090/api/v1/matches/get-all-matches/${status}`);
+  const response = await fetch(`${apiConfig.apiUrl}/api/v1/matches/get-all-matches/${status}`);
   if (!response.ok) {
     throw new Error('Failed to fetch Tournaments');
   }
@@ -7,7 +11,7 @@ export async function fetchAll(status) {
 }
 
 export async function fetchSingleMatchLeadboard(matchId) {
-  const response = await fetch(`http://localhost:5090/api/v1/matches/get-match/${matchId}`);
+  const response = await fetch(`${apiConfig.apiUrl}/api/v1/matches/get-match/${matchId}`);
   if (!response.ok) {
     throw new Error('Failed to fetch Match Leaderboard Data');
   }
@@ -17,7 +21,7 @@ export async function fetchSingleMatchLeadboard(matchId) {
 
 export const fetchTournamentMatches = async (tournamentId) => {
   const response = await fetch(
-    `http://localhost:5090/api/v1/matches/tournaments/${tournamentId}/matches`
+    `${apiConfig.apiUrl}/api/v1/matches/tournaments/${tournamentId}/matches`
   );
   if (!response.ok) {
     throw new Error('Failed to fetch Match Leaderboard Data');
