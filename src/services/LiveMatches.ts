@@ -1,0 +1,16 @@
+export async function fetchAll(status :'upcoming' | 'ongoing' | 'completed') {
+    const response = await fetch(`http://localhost:5090/api/v1/matches/get-all-matches/${status}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch Tournaments');
+    }
+    return response.json();
+}
+
+export async function fetchSingleMatchLeadboard(matchId : string | number) {
+    const response = await fetch(`http://localhost:5090/api/v1/matches/get-match/${matchId}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch Match Leaderboard Data');
+    }
+    return response.json();
+}
+

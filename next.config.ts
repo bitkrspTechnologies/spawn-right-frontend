@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'www.amazon.in',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.freepik.com',
       }
     ],
   },

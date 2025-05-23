@@ -109,9 +109,6 @@ export default function Home() {
     <>
       <Navbar />
       <div className="relative h-screen w-screen overflow-hidden">
-        <div
-          className={`pt-20 fixed top-0 z-30 w-full shadow-md px-4 py-3 transition-all duration-300`}
-        ></div>
 
         {/* Fixed Left Sidebar */}
         {!isMobile && (
@@ -128,7 +125,7 @@ export default function Home() {
         )}
 
         {/* Scrollable Main Content */}
-        <div className="h-full w-full pt-38 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide">
+        <div className="h-full w-full pt-20 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide">
           {/* Banner Section Starts */}
           <Banner />
           {/* Banner Section Ends */}
@@ -141,7 +138,7 @@ export default function Home() {
 
           {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
           <div className="flex flex-col sm:flex-row gap-3 min-h-[200px] mb-8 px-2">
-            <div className="w-full sm:w-1/2">
+            <div className={`${isMobile ? "mt-2":"mt-9"}  w-full sm:w-1/2`}>
               <AdSection />
             </div>
 
