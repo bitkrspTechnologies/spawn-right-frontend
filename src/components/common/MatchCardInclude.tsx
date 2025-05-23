@@ -146,15 +146,23 @@ import { MatchCardProps } from '@/lib/type';
 // MatchCard.tsx
 import Image from 'next/image';
 import { getValidLogoUrl } from '@/utils/urlValidator';
+import { useRouter } from 'next/navigation';
 
 
 export default function MatchCard({
+  matchId,
   matchNumber,
   game,
   logo,
   teams,
   result,
 }: MatchCardProps) {
+  const router = useRouter();
+
+    const handleLeaderboardClick = () => {
+    router.push(`/leaderboard/${matchId}`);
+  };
+
   return (
     <div className="font-[roboto] text-lg w-full rounded-xl border border-white/70 p-4 text-white shadow-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md backdrop-saturate-150">
       {/* Header */}
@@ -203,7 +211,12 @@ export default function MatchCard({
 
       {/* Leaderboard Button */}
       <div className="text-right mt-1">
-        <button className="text-white text-sm hover:none">Leader Board</button>
+          <button 
+          onClick={handleLeaderboardClick}
+          className="text-white text-sm hover:text-pink-400 transition-colors"
+        >
+          Leader Board
+        </button>
       </div>
     </div>
   );

@@ -275,6 +275,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import MatchCard from '@/components/common/MatchCardInclude';
 import { fetchAll } from '@/services/LiveMatches';
 import { Match } from '@/lib/type';
+import { useRouter } from 'next/navigation';
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -284,31 +285,54 @@ export default function LiveMatches({
 }: { 
   variant?: "grid" | "carousel" 
 }) {
+  const router = useRouter();
   const { data, isLoading, error } = useQuery({
     queryKey: ['live-matches'],
     queryFn: () => fetchAll('ongoing'),
   });
 
 // Update the processMatches function in LiveMatches.tsx
-const processMatches = (data: any): Match[] => {
-  if (!data?.data) return [];
+// const processMatches = (data: any): Match[] => {
+//   if (!data?.data) return [];
   
-  return data.data.map((match: any) => ({
-    ...match,
-    teams: (match.teams || [])
-      .sort((a: any, b: any) => b.totalPoints - a.totalPoints)
-      .slice(0, 3)
-      .map((team: any) => ({
-        name: team.team?.name || 'Unknown Team',
-        score: team.totalPoints || 0,
-        logo: team.team?.logo 
-      })),
-    // Update the game name usage in processMatches
-game: getGameName(match.tournament?.name),
+//   return data.data.map((match: any) => ({
+//     ...match,
+//     teams: (match.teams || [])
+//       .sort((a: any, b: any) => b.totalPoints - a.totalPoints)
+//       .slice(0, 3)
+//       .map((team: any) => ({
+//         name: team.team?.name || 'Unknown Team',
+//         score: team.totalPoints || 0,
+//         logo: team.team?.logo 
+//       })),
+//     // Update the game name usage in processMatches
+// game: getGameName(match.tournament?.name),
 
-    logo: match.tournament?.logo || '/images/bgmi.svg',
-  }));
-};
+//     logo: match.tournament?.logo || '/images/bgmi.svg',
+//   }));
+// };
+
+const processMatches = (data: any): Match[] => {
+    if (!data?.data) return [];
+    
+    return data.data.map((match: any) => ({
+      id: match._id, // Add match ID
+      matchNumber: match.matchNumber,
+      stage: match.stage,
+      status: match.status,
+      tournament: match.tournament,
+      teams: (match.teams || [])
+        .sort((a: any, b: any) => b.totalPoints - a.totalPoints)
+        .slice(0, 3)
+        .map((team: any) => ({
+          name: team.team?.name || 'Unknown Team',
+          score: team.totalPoints || 0,
+          logo: team.team?.logo 
+        })),
+      game: getGameName(match.tournament?.name),
+      logo: match.tournament?.logo || '/images/bgmi.svg',
+    }));
+  };
 
 const getGameName = (tournamentName?: string | null): string => {
   const normalized = (tournamentName || '').toLowerCase();
@@ -323,6 +347,7 @@ const getGameName = (tournamentName?: string | null): string => {
   const renderMatchCard = (match: Match, index: number) => (
     <MatchCard
       key={index}
+       matchId={match.id} 
       matchNumber={`Match ${match.matchNumber}${match.stage ? ` - ${match.stage}` : ''}`}
       game={match.game}
       logo={match.logo}

@@ -102,11 +102,11 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
   const handleLiveMatchesClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     // Navigate to the tournament's live matches page
-    router.push(`/tournaments/${tournament._id}/live`);
+    router.push(`/matches/tournaments/${tournament._id}/matches`);
   };
 
   const handleCardClick = () => {
-    router.push(`/tournaments/${tournament._id}`);
+    router.push(`/matches/tournaments/${tournament._id}/matches`);
   };
 
   return (

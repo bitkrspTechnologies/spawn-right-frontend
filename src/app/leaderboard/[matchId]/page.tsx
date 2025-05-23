@@ -216,13 +216,16 @@ import { useMediaQuery } from "react-responsive";
 import React from "react";
 import Scoreboard from "@/components/Leaderboard/Scoreboard";
 import LeaderboardLayout from "@/components/Leaderboard/LeaderboardLayout";
+import { useParams } from "next/navigation";
 
 export default function Leaderboard() {
+   const params = useParams();
+  const matchId = params.matchId as string;
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <LeaderboardLayout isMobile={isMobile}>
-      <Scoreboard matchId="682fa5d528e017b06c179742"/>
+      <Scoreboard matchId={matchId}/>
     </LeaderboardLayout>
   );
 }

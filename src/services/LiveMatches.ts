@@ -14,3 +14,13 @@ export async function fetchSingleMatchLeadboard(matchId : string | number) {
     return response.json();
 }
 
+
+export const fetchTournamentMatches = async (tournamentId: string) => {
+  const response =  await fetch(
+    `http://localhost:5090/api/v1/matches/tournaments/${tournamentId}/matches`
+  );
+  if (!response.ok) {
+        throw new Error('Failed to fetch Match Leaderboard Data');
+    }
+  return response.json();
+};

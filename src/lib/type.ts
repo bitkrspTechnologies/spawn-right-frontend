@@ -22,6 +22,7 @@ export interface Match {
 }
 
 export interface MatchCardProps {
+  matchId: string;
   matchNumber: string;
   game: string;
   logo: string;

@@ -233,6 +233,14 @@ import { useMediaQuery } from 'react-responsive';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllTournaments } from '../../services/Tournaments'; // Adjust path
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { getValidLogoUrl } from '@/utils/urlValidator';
+
+function formatStartDate(dateString: string) {
+    const date = new Date(dateString);
+    const month = date.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+    const day = date.getDate();
+    return `${month} ${day}`;
+}
 
 
 const upcomingMatches = [
@@ -311,6 +319,13 @@ function formatDateRange(start: string, end: string) {
 
 const UpcomingEventsSection = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
+
+    // Fetch upcoming matches
+    const { data: matches, isLoading: matchesLoading, error: matchesError } = useQuery({
+        queryKey: ['upcomingMatches'],
+        queryFn: () => fetchAllTournaments('upcoming'),
+    });
+
     const { data: tournaments, isLoading, error } = useQuery({
         queryKey: ['tournaments', 'upcoming'],
         queryFn: () => fetchAllTournaments('upcoming'),
@@ -331,36 +346,37 @@ const UpcomingEventsSection = () => {
                             "Who's Playing Next? See the Lineup — It’s Game Time!"
                         </p>
                     </div>
-                    <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
-                        {upcomingMatches.map((match, index) => (
-                            <div key={index} className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-2 mb-3">
-                                <div className="flex justify-between items-center mb-2">
-                                    <div className="flex items-center justify-between">
-
-                                        <div className="flex items-center text-xs gap-1">
-                                            <Image src={match.logo1} alt="team1" width={20} height={20} />
-                                            <span className="font-bold">{match.team1}</span>
-                                            <span className="mx-1 text-white/80 font-semibold">vs</span>
-                                            <Image src={match.logo2} alt="team2" width={20} height={20} />
-                                            <span>{match.team2}</span>
-                                        </div>
-
-                                        {/* Date */}
-                                        <div className='ml-12'>
+                    {matchesLoading ? (
+                        <p className="text-white text-center">Loading matches...</p>
+                    ) : matchesError ? (
+                        <p className="text-red-500 text-center">Error loading matches</p>
+                    ) : (
+                        <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
+                            {matches?.data?.map((match: any, index: number) => (
+                                <div key={index} className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-2 mb-3">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <div className="flex items-center justify-between w-full">
+                                            <div className="flex items-center text-xs gap-1">
+                                                <Image
+                                                    src={getValidLogoUrl(match.logo)}
+                                                    alt="tournament"
+                                                    width={20}
+                                                    height={20}
+                                                />
+                                                <span className="font-bold">{match.name}</span>
+                                                <span className="mx-1 text-white/80 font-semibold">
+                                                    Match {match.matchNumber}
+                                                </span>
+                                            </div>
                                             <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
-                                                {match.date}
+                                                {formatStartDate(match.start_date)}
                                             </span>
                                         </div>
                                     </div>
-
                                 </div>
-
-                                <p className="text-[10px] mt-1 font-semibold font-[roboto_serif]">
-                                    Arena of Valor International Championship 2024
-                                </p>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 {/* Tournaments */}
@@ -414,7 +430,7 @@ const UpcomingEventsSection = () => {
                     </p>
                 </div>
                 <div className="bg-[var(--card-bg-uc)] text-white rounded-2xl p-5 shadow-lg w-full">
-                    {upcomingMatches.map((match, index) => (
+                    {/* {upcomingMatches.map((match, index) => (
                         <div key={index} className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-2 mb-4">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                                 <div className="font-[roboto_serif] flex items-center gap-2">
@@ -435,7 +451,39 @@ const UpcomingEventsSection = () => {
                                 Arena of Valor International Championship 2024
                             </p>
                         </div>
-                    ))}
+                    ))} */}
+
+                    {matchesLoading ? (
+                        <p className="text-white text-center">Loading matches...</p>
+                    ) : matchesError ? (
+                        <p className="text-red-500 text-center">Error loading matches</p>
+                    ) : (
+                        <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
+                            {matches?.data?.map((match: any, index: number) => (
+                                <div key={index} className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-3.5 mb-3">
+                                    <div className="flex justify-between items-center mb-2 ">
+                                        <div className="flex items-center justify-between w-full">
+                                            <div className="flex items-center text-xs gap-1">
+                                                <Image
+                                                    src={getValidLogoUrl(match.logo)}
+                                                    alt="tournament"
+                                                    width={20}
+                                                    height={20}
+                                                />
+                                                <span className="font-bold">{match.name}</span>
+                                                <span className="mx-1 text-white/80 font-semibold">
+                                                    Match {match.matchNumber}
+                                                </span>
+                                            </div>
+                                            <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
+                                                {formatStartDate(match.start_date)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 
