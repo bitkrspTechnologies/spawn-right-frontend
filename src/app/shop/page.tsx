@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";

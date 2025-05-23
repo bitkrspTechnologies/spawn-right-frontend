@@ -5,7 +5,6 @@ import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 import { Check, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ProductReviews from "@/components/ShopRight/ProductReviews/ProductReviews";
 import Footer from "@/components/Footer/Footer";
 import { useParams } from "next/navigation";
 import ProductDetailSkeleton from "@/components/Skeleton/ProductDetailSkeleton";

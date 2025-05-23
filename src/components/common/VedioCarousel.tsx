@@ -89,7 +89,6 @@ import { EmblaOptionsType } from 'embla-carousel';
 import Carousel, {
   Slider,
   SliderContainer,
-  SliderDotButton,
   SliderNextButton,
   SliderPrevButton,
 } from "@/components/ui/Carousel";

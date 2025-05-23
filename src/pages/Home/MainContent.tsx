@@ -62,9 +62,7 @@
 
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Carousel from '@/components/common/Carousel';
 import AdSection from '@/components/common/AdSection';
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
-import { Search, X, ChevronDown, ChevronUp, Star } from "lucide-react";
+import { X, ChevronDown, ChevronUp, Star } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

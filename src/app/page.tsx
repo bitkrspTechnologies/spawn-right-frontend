@@ -76,28 +76,20 @@
     <ModeToggle /> */
 }
 
-import Image from "next/image";
-import { ModeToggle } from "@/components/ThemeProvider/ThemeToggler";
-import Button from "@/components/Button/Button";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Carousel from "@/components/common/Carousel";
 import AdSection from "@/components/common/AdSection";
 // import { GameCarousel } from "@/components/common/GameCarousel";
 import dynamic from "next/dynamic";
-import MatchCard from "@/components/common/MatchCardInclude";
 import Footer from "@/components/Footer/Footer";
 import LiveMatches from "@/components/LiveMatches/LiveMatches";
-import TournamentBracket from "@/components/FinishedMatch/FinishedMatch";
 import DefaultSlider from "@/components/common/VedioCarousel";
-import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
 import FinishedMatch from "@/components/FinishedMatch/FinishedMatch";
 import Navbar from "@/components/Navbar/Navbar";
-import Link from "next/link";
 import JoinBanner from "@/components/common/JoinBanner";
 import Banner from "@/components/common/Banner";
 import { useMediaQuery } from "react-responsive";
-import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowcase";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
 });
