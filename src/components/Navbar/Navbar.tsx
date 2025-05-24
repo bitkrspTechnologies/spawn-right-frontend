@@ -96,7 +96,7 @@ export default function Navbar() {
       />
 
       {/* Top Navbar */}
-      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <div className="backdrop-blur-sm bg-black/5 max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
         <Link href="/">
           <Image
             src="/images/Logos-03.svg"
@@ -165,7 +165,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Game Buttons
+      {/* Game Buttons */}
       <div className="pt-1 pb-3 w-full z-50 transition-all duration-500">
         <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto">
           {gameButtons.map(({ key, text, icon, hasData }) => (
@@ -180,7 +180,7 @@ export default function Navbar() {
             />
           ))}
         </div>
-      </div> */}
+      </div>
 
       {/* Mobile Sidebar */}
       <GameOnSidebar

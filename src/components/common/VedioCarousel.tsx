@@ -117,7 +117,7 @@ function DefaultSlider() {
   return (
     <div className="relative w-full sm:w-[90%] mx-auto rounded-2xl bg-white/10 backdrop-blur-md p-4 sm:p-6 mt-6 sm:mt-10 shadow-lg">
       <h2 className="text-center text-white text-2xl sm:text-3xl font-bold mb-4">
-        BGMI
+        Premiers
       </h2>
 
       <Carousel options={OPTIONS}>
@@ -133,7 +133,7 @@ function DefaultSlider() {
                   />
                 ) : (
                   <iframe
-                    src={video.src}
+                    src={`${video.src}?rel=0`}
                     className="w-full h-[200px] sm:h-[350px] rounded-xl"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

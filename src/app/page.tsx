@@ -90,6 +90,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import JoinBanner from "@/components/common/JoinBanner";
 import Banner from "@/components/common/Banner";
 import { useMediaQuery } from "react-responsive";
+import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
 });
@@ -116,36 +117,37 @@ export default function Home() {
         )}
 
         {/* Scrollable Main Content */}
-        <div className="h-full w-full pt-20 px-4 sm:px-[120px] overflow-y-auto scrollbar-hide">
-          {/* Banner Section Starts */}
-          <Banner />
-          {/* Banner Section Ends */}
+        <div className="h-full w-full pt-30 overflow-y-auto scrollbar-hide">
+          <div className="px-4 sm:px-[120px]">
+            {/* Banner Section Starts */}
+            <Banner />
+            {/* Banner Section Ends */}
 
-          {/* Hero Section Carousel Starts  */}
-          <div className="-mt-12 mb-8 px-2 sm:px-4 w-full max-w-[100vw]">
-            <Carousel />
-          </div>
-          {/* Hero Section Carousel Ends  */}
+            {/* Hero Section Carousel Starts  */}
+            <div className="-mt-12 mb-8 w-full max-w-[100vw]">
+              <Carousel />
+            </div>
+            {/* Hero Section Carousel Ends  */}
 
-          {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
-          <div className="flex flex-col sm:flex-row gap-3 min-h-[200px] mb-8 px-2">
-            <div className={`${isMobile ? "mt-2" : "mt-9"}  w-full sm:w-1/2`}>
-              <AdSection />
+            {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
+            <div className="flex flex-col sm:flex-row gap-3 min-h-[200px] mb-8">
+              <div className={`${isMobile ? "mt-2" : "mt-9"}  w-full sm:w-1/2`}>
+                <AdSection />
+              </div>
+
+              <div className="w-full sm:w-1/2">
+                <LiveMatches variant="carousel" />
+              </div>
+            </div>
+            {/* Ad Section Carousel  and Live Matches Carousel Ends  */}
+
+            <UpcomingEventsSection />
+            <div className="flex gap-5 min-h-[200px] mb-8">
+              <LiveMatches variant="grid" />
             </div>
 
-            <div className="w-full sm:w-1/2">
-              <LiveMatches variant="carousel" />
-            </div>
-          </div>
-          {/* Ad Section Carousel  and Live Matches Carousel Ends  */}
-
-          <UpcomingEventsSection />
-          <div className="flex gap-5 min-h-[200px] mb-8 px-4">
-            <LiveMatches variant="grid" />
-          </div>
-
-          <GameCarousel />
-          {/* <div className="m-4 mt-20">
+            <GameCarousel />
+            {/* <div className="m-4 mt-20">
             <h2 className="text-xl md:text-2xl font-bold text-center text-white">
               Shop Right
             </h2>
@@ -157,33 +159,51 @@ export default function Home() {
               </Link>
             </div>
           </div> */}
-          <DefaultSlider />
+            <DefaultSlider />
 
-          {/* <div className="ml-12 mt-10">
-            <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-              Finished Matches
-            </h2>
-            {false ? (
-              <FinishedMatch />
-            ) : (
-              <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div>
+            {isMobile && (
+              <div className="mt-6">
+              <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
+                Finished Matches
+              </h2>
+              {false ? (
+                <FinishedMatch />
+               ) : (
+                 <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div> 
+               )} 
+            </div>
             )}
-          </div> */}
 
-          {/* <div className="px-6 mt-10 text-center">
+            {/* <div className="ml-12 mt-10">
+              <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
+                Finished Matches
+              </h2>
+              {false ? (
+                <FinishedMatch />
+              ) : (
+                <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div>
+              )}
+            </div> */}
+
+            {/* <div className="mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
               We are trusted by
             </h2>
             <CustomersSectionDemo />
           </div> */}
 
-          <div className="my-30">
-            <JoinBanner />
-          </div>
+            <div className="my-10">
+              <JoinBanner />
+            </div>
 
-          <Footer />
+          </div>
+          <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
+            <Footer />
+          </div>
         </div>
+
       </div>
+
     </>
   );
 }

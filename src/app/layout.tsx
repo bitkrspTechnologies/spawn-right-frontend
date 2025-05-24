@@ -49,9 +49,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TopLoader />
-            <div className="glow-overlay top-[30%] left-[50%]"></div>
-            <div className="glow-overlay top-[80%] left-[20%]"></div>
-            <div className="glow-overlay bottom-[10%] right-[30%]"></div>
+            <div className="glow-overlay top-[30%] left-[50%] hidden lg:block"></div>
+            <div className="glow-overlay top-[80%] left-[20%] hidden lg:block"></div>
+            <div className="glow-overlay bottom-[10%] right-[30%] hidden lg:block"></div>
+
             <main className="flex-grow">{children}</main>
             <Toaster />
           </ThemeProvider>

@@ -78,19 +78,23 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
                     }
                 )}
             >
-                <div className="flex justify-between items-center m-7 mb-6">
+                <div className="flex justify-between gap-1 items-center m-5 mb-4">
                     <h2 className="text-pink-500 font-bold text-xl">GAME ON !!!!!!</h2>
                     <button onClick={onClose}>
                         <XMarkIcon className="h-6 w-6 text-white" />
                     </button>
                 </div>
 
-                {/* Navigation Links with Dropdown */}
-                <div className="flex flex-col h-70 mt-10 gap-4">
+                <div className="flex flex-col h-80 mt-10 gap-4">
                     {navLinks.map((link, index) => (
                         <div key={index}>
+                            {/* Button with pink/black gradient */}
                             <button
-                                className="w-full bg-[#2c2c2e] rounded-xl py-3 px-4 text-white flex justify-between items-center"
+                                className="w-full rounded-xl py-3 px-4 text-white flex justify-between items-center
+          bg-gradient-to-r from-[#1a1a1a] via-[#2c1a33] to-[#3c1a4a]
+          hover:from-[#2c1a33] hover:via-[#3c1a4a] hover:to-[#4c1a5a]
+          transition-all duration-300
+          border border-[#3c1a4a] shadow-lg"
                                 onClick={() => toggleDropdown(index)}
                             >
                                 <div className="flex items-center gap-3">
@@ -106,27 +110,61 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
 
                             {/* Dropdown Content */}
                             {dropdownOpen === index && (
-                                <div className="ml-6 mt-3 flex flex-col text-sm text-white">
-                                    {link.subLinks.map((sublink, subIdx) => (
-                                        <Link
-                                            key={subIdx}
-                                            href={link.href}
-                                            onClick={onClose}
-                                            className="hover:text-pink-400 mt-3 transition-colors"
-                                        >
-                                            <div className="flex items-center leading-tight">
-                                                {subIdx === link.subLinks.length - 1 ? (
-                                                    <ChevronRightIcon className="w-4 h-4 text-pink-400" />
-                                                ) : (
-                                                    <ChevronRightIcon className="w-4 h-4 text-pink-400" />
-                                                )}
-                                                <span className="ml-1 text-white">{sublink}</span>
-                                            </div>
-                                        </Link>
-                                    ))}
+                                <div className="relative mt-4 pl-20 pt-1.5">
+                                    {/* Curved Line with SVG - Pink version */}
+                                    <svg
+                                        className="absolute left-7 -top-3.5"
+                                        width="33"
+                                        height={link.subLinks.length * 48}
+                                        viewBox={`0 0 40 ${link.subLinks.length * 48}`}
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        {/* Main vertical line */}
+                                        <path
+                                            d={`M10 0 V${link.subLinks.length * 35}`}
+                                            stroke="#222831"  // Pink-400
+                                            strokeWidth="2"
+                                        />
+
+                                        {/* Curved branches */}
+                                        {link.subLinks.map((_, i) => {
+                                            const y = i * 48 + 5;
+                                            return (
+                                                <path
+                                                    key={i}
+                                                    d={`
+                    M10 ${y}
+                    C10 ${y + 30}, 50 ${y + 10}, 42 ${y + 21}
+                  `}
+                                                    stroke="#222831"
+                                                    strokeWidth="2"
+                                                    fill="none"
+                                                />
+                                            );
+                                        })}
+                                    </svg>
+
+                                    {/* Dropdown Links */}
+                                    <div className="flex flex-col gap-4 text-sm">
+                                        {link.subLinks.map((sublink, subIdx) => (
+
+                                            <Link
+                                                key={subIdx}
+                                                // href={link.href}
+                                                href={sublink === "BGMI" ? link.href : "/coming-soon"}
+                                                onClick={onClose}
+                                                className="inline-flex w-fit items-center gap-2 text-[#FFFFFF8F]
+    hover:text-pink-400 hover:bg-pink-500/20
+    pl-2 pr-2 rounded-md transition-all duration-200"
+
+                                            >
+                                                {sublink}
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
-
                         </div>
                     ))}
                 </div>

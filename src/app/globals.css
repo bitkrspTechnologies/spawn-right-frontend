@@ -223,3 +223,21 @@
   display: none;
   /* Hide default buttons if not needed */
 }
+
+
+.bended-line {
+    position: relative;
+    padding-left: 20px; /* Adjust padding as needed */
+}
+
+.bended-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 10px; /* Adjust width for the bend */
+    height: 2px; /* Adjust height for the bend */
+    background-color: #ff007f; /* Change color as needed */
+    border-radius: 5px; /* Make it rounded */
+    transform: translateY(-50%) rotate(45deg); /* Bend the line */
+}
