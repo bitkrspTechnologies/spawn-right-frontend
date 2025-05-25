@@ -85,7 +85,7 @@ export function ComparisonDrawer({
                     <ShadCnButton
                       variant="ghost"
                       size="icon"
-                      className="text-gray-400 hover:text-white h-8 w-8"
+                      className="text-gray-400 hover:text-white h-8 w-8 cursor-pointer"
                     >
                       <X className="h-3 w-3" />
                     </ShadCnButton>
@@ -96,10 +96,10 @@ export function ComparisonDrawer({
               <div className="flex justify-between w-full items-center mb-3">
                 <button
                   onClick={clearAll}
-                  className="text-purple-500 hover:text-purple-400 text-xs font-medium flex items-center"
+                  className="text-purple-500 hover:text-purple-400 text-xs font-medium flex items-center cursor-pointer"
                   disabled={selectedProducts.length === 0}
                 >
-                  <X className="h-3 w-3 mr-1" />
+                  <X className="h-3 w-3 mr-1 " />
                   CLEAR ALL
                 </button>
                 <p className="text-gray-400 text-xs">
@@ -118,12 +118,12 @@ export function ComparisonDrawer({
                 >
                   <button
                     onClick={() => removeProduct(product.asin)}
-                    className="absolute z-40 top-0 right-0 text-gray-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute z-40 top-0 right-0 text-gray-400  transition-opacity"
                   >
                     <ShadCnButton
-                      variant="ghost"
+                      variant="default"
                       size="icon"
-                      className="text-gray-400 hover:text-white h-8 w-8"
+                      className="text-white bg-black/70 hover:bg-black cursor-pointer h-8 w-8"
                     >
                       <X className="h-3 w-3" />
                     </ShadCnButton>

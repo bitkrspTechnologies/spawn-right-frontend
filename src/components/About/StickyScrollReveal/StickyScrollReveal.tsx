@@ -24,26 +24,26 @@ export const StickyScroll = ({
   const cardLength = content.length;
 
   // Auto-scroll logic
-  useEffect(() => {
-    const container = ref.current;
-    if (!container) return;
+  // useEffect(() => {
+  //   const container = ref.current;
+  //   if (!container) return;
 
-    const interval = setInterval(() => {
-      const nextCard = (activeCard + 1) % content.length;
-      setActiveCard(nextCard);
+  //   const interval = setInterval(() => {
+  //     const nextCard = (activeCard + 1) % content.length;
+  //     setActiveCard(nextCard);
 
-      // Calculate scroll position for the next card
-      const cardHeight = container.scrollHeight / content.length;
-      const scrollToPosition = nextCard * cardHeight;
+  //     // Calculate scroll position for the next card
+  //     const cardHeight = container.scrollHeight / content.length;
+  //     const scrollToPosition = nextCard * cardHeight;
 
-      container.scrollTo({
-        top: scrollToPosition,
-        behavior: "smooth",
-      });
-    }, 2000); // 2 seconds interval
+  //     container.scrollTo({
+  //       top: scrollToPosition,
+  //       behavior: "smooth",
+  //     });
+  //   }, 2000); // 2 seconds interval
 
-    return () => clearInterval(interval);
-  }, [activeCard, content.length]);
+  //   return () => clearInterval(interval);
+  // }, [activeCard, content.length]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const cardsBreakpoints = content.map((_, index) => index / cardLength);
@@ -81,11 +81,11 @@ export const StickyScroll = ({
 
   return (
     <motion.div
-      className="scrollbar-hide w-full relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-md"
+      className="scrollbar-hide w-full relative flex h-[20rem] justify-center space-x-10 overflow-y-auto rounded-md"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
-        <div className="max-w-5xl w-full">
+        <div className="max-w-6xl w-full mx-auto">
           {content.map((item, index) => (
             <div key={item.title + index} className="my-20">
               <motion.h2
@@ -117,7 +117,7 @@ export const StickyScroll = ({
       </div>
       <div
         className={cn(
-          "sticky top-10 hidden h-60 w-120 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-10 hidden h-60 w-120 overflow-hidden rounded-md lg:block",
           contentClassName
         )}
       >

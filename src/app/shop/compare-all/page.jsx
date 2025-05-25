@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 
 export default function CompareAll() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const [searchQuery, setSearchQuery] = useState("");
   const [expandedRows, setExpandedRows] = useState({});
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [comparisonData, setComparisonData] = useState([]);
@@ -26,23 +25,26 @@ export default function CompareAll() {
 
   const prepareComparisonData = (products) => {
     if (products.length === 0) return;
-    const firstProduct = products[0];
-    const allFields = Object.keys(firstProduct).filter(
-      (key) => !["product_photo", "product_url"].includes(key)
-    );
 
-    const data = allFields.map((field) => ({
-      feature: field
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, (l) => l.toUpperCase()),
-      key: field,
-      values: products.map((product) => product[field] || "--"),
-      highlighted: [
-        "product_price",
-        "product_star_rating",
-        "brand",
-        "product_title",
-      ].includes(field),
+    // Define the specific fields we want to compare
+    const comparisonFields = [
+      { key: "product_title", label: "Product Title" },
+      { key: "product_price", label: "Price" },
+      { key: "sales_volume", label: "Sales Volume" },
+      { key: "product_star_rating", label: "Star Rating" },
+      { key: "product_num_ratings", label: "Total Ratings" }
+    ];
+
+    const data = comparisonFields.map((field) => ({
+      feature: field.label,
+      key: field.key,
+      values: products.map((product) => {
+        // Format specific fields if needed
+        if (field.key === "product_star_rating") {
+          return product[field.key] ? `${product[field.key]} ★` : "--";
+        }
+        return product[field.key] || "--";
+      }),
     }));
 
     setComparisonData(data);
@@ -59,10 +61,6 @@ export default function CompareAll() {
     setSelectedProducts([]);
     setComparisonData([]);
     localStorage.removeItem("compareProducts");
-  };
-
-  const clearSearch = () => {
-    setSearchQuery("");
   };
 
   const toggleRow = (index) => {
@@ -97,10 +95,21 @@ export default function CompareAll() {
             />
           </div>
 
-          <div
-            className={`flex-1 overflow-y-auto px-4 pb-4 ${isMobile ? "" : "px-6"
-              }`}
-          >
+          <div className={`flex-1 overflow-y-auto px-4 pb-4 ${isMobile ? "" : "px-6"}`}>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-white">Product Comparison</h2>
+              {selectedProducts.length > 0 && (
+                <button
+                  onClick={clearAll}
+                  className="text-purple-500 hover:text-purple-400 text-xs font-medium flex items-center cursor-pointer"
+                  disabled={selectedProducts.length === 0}
+                >
+                  <X className="h-3 w-3 mr-1 " />
+                  CLEAR ALL
+                </button>
+              )}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {selectedProducts.map((product) => (
                 <div
@@ -165,10 +174,7 @@ export default function CompareAll() {
 
           {/* Comparison Table */}
           {selectedProducts.length > 0 && (
-            <div
-              className={`bg-white rounded-lg overflow-hidden ${isMobile ? "" : "mx-6"
-                }`}
-            >
+            <div className={`bg-white rounded-lg overflow-hidden ${isMobile ? "" : "mx-6"}`}>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -190,7 +196,7 @@ export default function CompareAll() {
                             key={`empty-th-${i}`}
                             className="px-4 py-3 text-left text-sm font-medium text-gray-700"
                           >
-                            --
+
                           </th>
                         )
                       )}
@@ -201,8 +207,7 @@ export default function CompareAll() {
                       <>
                         <tr
                           key={index}
-                          className={`${row.highlighted ? "bg-blue-50" : "bg-white"
-                            } cursor-pointer`}
+                          className="bg-blue-50 cursor-pointer hover:bg-blue-100"
                           onClick={() => isMobile && toggleRow(index)}
                         >
                           <td className="px-4 py-3 text-sm font-medium text-gray-900">
@@ -222,7 +227,7 @@ export default function CompareAll() {
                                 key={i}
                                 className="px-4 py-3 text-sm text-gray-700"
                               >
-                                {value || "--"}
+                                {value}
                               </td>
                             ))}
                           {isMobile &&
@@ -232,17 +237,16 @@ export default function CompareAll() {
                                 key={i}
                                 className="px-4 py-3 text-sm text-gray-700"
                               >
-                                ...
+
                               </td>
                             ))}
-                          {/* Fill remaining columns if less than 4 products */}
                           {Array.from({ length: 4 - row.values.length }).map(
                             (_, i) => (
                               <td
                                 key={`empty-td-${i}`}
                                 className="px-4 py-3 text-sm text-gray-700"
                               >
-                                --
+
                               </td>
                             )
                           )}
@@ -270,9 +274,16 @@ export default function CompareAll() {
               <h3 className="text-lg font-medium text-white mb-2">
                 No products selected for comparison
               </h3>
-              <p className="text-gray-400">
+              <p className="text-gray-400 mb-4">
                 Add products to compare from the product pages
               </p>
+              <Button
+                variant="outline"
+                className="text-white border-white cursor-pointer"
+                onClick={() => window.history.back()}
+              >
+                Go Back to Products
+              </Button>
             </div>
           )}
         </div>

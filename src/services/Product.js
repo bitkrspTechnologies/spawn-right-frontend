@@ -11,13 +11,14 @@ export async function fetchProducts(page, categoryId) {
 };
 
 export async function fetchSearchedProducts(page, search) {
-    const response = await fetch(`${apiConfig.apiUrl}/api/v1/products/get-searched-products/${search}/${page}`);
+    const response = await fetch(
+        `${apiConfig.apiUrl}/api/v1/products/get-searched-products?page=${page}&search=${search}`
+    );
     if (!response.ok) {
         throw new Error('Failed to fetch products');
     }
     return response.json();
 }
-
 // Function for individual product page
 export async function getSingleProduct(id) {
     const response = await fetch(`${apiConfig.apiUrl}/api/v1/products/get-single-shop-right-products/${id}`);

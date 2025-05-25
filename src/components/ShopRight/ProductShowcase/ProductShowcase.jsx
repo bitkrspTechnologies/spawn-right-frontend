@@ -82,14 +82,9 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
 
   if (isError) {
     return (
-      <div className="w-full max-w-6xl mx-auto p-4 text-center text-red-500">
-        Error: {error.message}
-        <button
-          onClick={() => setPage(1)}
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Retry
-        </button>
+      <div className="w-full max-w-6xl mx-auto p-4 text-center text-red-300">
+        {/* Error: {error.message} */}
+        UnExpected Error Occured....We While Back Again
       </div>
     );
   }

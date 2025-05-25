@@ -77,9 +77,9 @@ export default function About() {
       description:
         "To be the Cricbuzz for global esports. But cooler. Faster. Built by gamers.",
       content: (
-        <div className="flex h-full w-full items-center justify-center text-white">
+        <div className="flex h-full w-full items-center justify-center">
           <Image
-            src="/images/gamecarousel/Vision1.jpg"
+            src="/images/gamecarousel/Vision2.jpg"
             width={300}
             height={300}
             className="h-full w-full object-cover rounded-xl"
@@ -95,7 +95,7 @@ export default function About() {
       content: (
         <div className="flex h-full w-full items-center justify-center text-white">
           <Image
-            src="/images/gamecarousel/Vision1.jpg"
+            src="/images/gamecarousel/Vision3.jpg"
             width={300}
             height={300}
             className="h-full w-full object-cover rounded-xl"
@@ -111,7 +111,7 @@ export default function About() {
       content: (
         <div className="flex h-full w-full items-center justify-center text-white">
           <Image
-            src="/images/gamecarousel/Vision1.jpg"
+            src="/images/gamecarousel/Vision4.jpg"
             width={300}
             height={300}
             className="h-full w-full object-cover rounded-xl"

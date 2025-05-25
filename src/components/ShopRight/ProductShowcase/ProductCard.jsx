@@ -103,7 +103,7 @@ const ProductCard = ({ product }) => {
               >
                 BUY NOW
               </a>
-              <Button text="COMPARE" onClick={handleCompareClick} />
+              <Button text="COMPARE" onClick={handleCompareClick} className="cursor-pointer" />
             </div>
           </div>
         </div>

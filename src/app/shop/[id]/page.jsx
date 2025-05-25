@@ -93,8 +93,9 @@ export default function Shop() {
 
   if (isError) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-red-500">Error: {error.message}</p>
+      <div className="w-full max-w-6xl mx-auto p-4 text-center text-red-300 mt-10">
+        {/* Error: {error.message} */}
+        UnExpected Error Occured....We While Back Again
       </div>
     );
   }

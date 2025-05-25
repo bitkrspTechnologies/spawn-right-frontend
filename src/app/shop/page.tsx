@@ -16,7 +16,7 @@ export default function Shop() {
   useEffect(() => {
     const timerId = setTimeout(() => {
       setDebouncedSearchQuery(searchQuery);
-    }, 3000);
+    }, 1000);
 
     return () => {
       clearTimeout(timerId);
