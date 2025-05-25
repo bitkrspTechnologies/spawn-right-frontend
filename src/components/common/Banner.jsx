@@ -76,7 +76,7 @@ const Banner = () => {
 
   if (isMobile) {
     return (
-      <div className="relative w-full h-[100px] m-0 pt-0 flex items-center justify-center overflow-hidden">
+      <div className="relative mb-2 w-full h-[100px] m-0 pt-0 flex items-center justify-center overflow-hidden">
         <Image
           src="/images/MobileBanner.png"
           alt="Mobile Banner"
@@ -127,7 +127,7 @@ const Banner = () => {
   }
 
   return (
-    <div className="font-[roboto] relative w-full h-[150px] mt-4 px-4">
+    <div className="font-[roboto] relative w-full my-3">
       <Image
         src="/images/banner.svg"
         alt="Desktop Banner"
@@ -138,7 +138,7 @@ const Banner = () => {
       />
 
       {/* Desktop Text Overlay */}
-      <div className="absolute inset-0 flex flex-col  px-8">
+      <div className="absolute inset-0 flex flex-col px-8 lg:justify-center">
         {/* Main Title */}
         <div className="flex  gap-3 mb-3">
           {mainTextWords.map((word, index) => (

@@ -65,8 +65,8 @@ export default function Carousel() {
   if (isMobile) {
     // 🔹 Mobile Layout
     return (
-      <div className="w-full mt-15">
-        <div className="relative w-full h-[150px] overflow-hidden rounded-lg">
+      <div className="w-full">
+        <div className="relative w-full h-full overflow-hidden rounded-lg">
           {slides.map((slide, idx) => (
             <div
               key={idx}
@@ -115,7 +115,7 @@ export default function Carousel() {
   return (
     <div className="relative w-full">
       {/* 🔸 Image + Content Wrapper */}
-      <div className="relative h-34 overflow-hidden rounded-lg md:h-64">
+      <div className="relative h-34 overflow-hidden rounded-lg md:h-64 lg:h-90">
         {slides.map((slide, idx) => (
           <div
             key={idx}

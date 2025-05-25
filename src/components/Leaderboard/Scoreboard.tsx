@@ -403,6 +403,153 @@
 
 //=================================================================
 
+// import React, { useState } from "react";
+// import Button from "../Button/Button";
+// import { useMediaQuery } from "react-responsive";
+// import { useQuery } from "@tanstack/react-query";
+// import { fetchSingleMatchLeadboard } from "@/services/LiveMatches"; // Import your service
+
+// interface TeamScore {
+//   rank: number;
+//   teamName: string;
+//   pp: number; // Placement Points
+//   fp: number; // Finish Points (kills)
+//   total: number; // Total Points
+// }
+
+// const ITEMS_PER_PAGE = 6;
+
+// const Scoreboard = ({ matchId }: { matchId: string | number }) => {
+//   const isMobile = useMediaQuery({ maxWidth: 767 });
+//   const [currentPage, setCurrentPage] = useState<number>(1);
+//   const [searchTerm, setSearchTerm] = useState<string>("");
+
+//   // Fetch match data using React Query and your service
+//   const { data, isLoading, error } = useQuery({
+//     queryKey: ["matchLeaderboard", matchId],
+//     queryFn: () => fetchSingleMatchLeadboard(matchId),
+//   });
+
+//   // Transform API data to match the component's expected format
+//   const transformedData: TeamScore[] =
+//     data?.data.teams.map((team: any) => ({
+//       rank: team.position,
+//       teamName: team.team.name,
+//       pp: team.placementPoints,
+//       fp: team.kills,
+//       total: team.totalPoints,
+//     })) || [];
+
+//   const filteredData = transformedData.filter((team) =>
+//     team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+
+//   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+//   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+//   const paginatedData = filteredData.slice(
+//     startIndex,
+//     startIndex + ITEMS_PER_PAGE
+//   );
+
+//   const handlePageChange = (page: number) => {
+//     if (page >= 1 && page <= totalPages) {
+//       setCurrentPage(page);
+//     }
+//   };
+
+//   const rankStyles = (rank: number) => {
+//     if (rank === 1)
+//       return "bg-yellow-400 text-white font-bold rounded-l-full pl-2";
+//     if (rank === 2)
+//       return "bg-gray-300 text-black font-bold rounded-l-full pl-2";
+//     if (rank === 3)
+//       return "bg-orange-500 text-white font-bold rounded-l-full pl-2";
+//     return "text-white pl-2";
+//   };
+
+//   if (isLoading) {
+//     return <div className="text-white text-center py-8">Loading...</div>;
+//   }
+
+//   if (error) {
+//     return (
+//       <div className="text-white text-center py-8">
+//         Error: {(error as Error).message}
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent`}>
+//       {/* Search */}
+//       <div
+//         className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start font-[roboto]`}
+//       >
+//         <input
+//           type="text"
+//           placeholder="Search a team by name..."
+//           className="px-4 py-2 rounded-sm bg-[#1c1c3a] text-white placeholder-gray-400 border border-gray-600 w-full"
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//         />
+//       </div>
+
+//       {/* Table */}
+//       <div className="w-full mx-auto rounded-sm overflow-hidden">
+//         {/* Table Header */}
+//         <div
+//           className={`grid ${isMobile ? "grid-cols-8" : "grid-cols-12"} py-3 text-xs uppercase text-center text-gray-300 bg-white/10 backdrop-blur-md mb-4`}
+//         >
+//           <div>Rank</div>
+//           <div className={`${isMobile ? "col-span-2" : "col-span-4"}`}>
+//             Team Name
+//           </div>
+//           <div>PP</div>
+//           <div>FP</div>
+//           <div className={`${isMobile ? "col-span-2" : "col-span-2"}`}>
+//             Total
+//           </div>
+//         </div>
+
+//         {/* Table Rows */}
+//         {paginatedData.map((team) => (
+//           <div
+//             key={team.rank}
+//             className={`grid ${isMobile ? "grid-cols-8" : "grid-cols-12"} py-3 text-xs text-center text-gray-300 bg-white/10 backdrop-blur-md backdrop-saturate-150 mb-4`}
+//           >
+//             <div className={rankStyles(team.rank)}>
+//               {team.rank <= 3 ? `${team.rank}st` : team.rank}
+//             </div>
+//             <div
+//               className={`${isMobile ? "col-span-2 text-left pl-2 truncate" : "col-span-4"}`}
+//             >
+//               {team.teamName}
+//             </div>
+//             <div>{team.pp}</div>
+//             <div>{team.fp}</div>
+//             <div className={`${isMobile ? "col-span-2" : "col-span-2"}`}>
+//               {team.total}
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Pagination */}
+//       <div className="flex justify-center items-center mt-6">
+//         <Button
+//           text="Show More"
+//           className="hover:scale-105 transition-transform px-6 py-2"
+//           onClick={() => handlePageChange(currentPage + 1)}
+//           // disabled={currentPage >= totalPages}
+//         />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Scoreboard;
+//===================== Sohan =======================
+
 import React, { useState } from "react";
 import Button from "../Button/Button";
 import { useMediaQuery } from "react-responsive";
@@ -480,7 +627,7 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
   }
 
   return (
-    <div className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent`}>
+    <div className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent max-w-[1200px] w-full mx-auto`}>
       {/* Search */}
       <div
         className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start font-[roboto]`}
@@ -540,7 +687,7 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
           text="Show More"
           className="hover:scale-105 transition-transform px-6 py-2"
           onClick={() => handlePageChange(currentPage + 1)}
-          // disabled={currentPage >= totalPages}
+        // disabled={currentPage >= totalPages}
         />
       </div>
     </div>

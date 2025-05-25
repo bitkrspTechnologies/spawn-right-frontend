@@ -22,12 +22,12 @@ export default function Footer() {
 
         {/* social icons */}
         <div className="flex justify-between gap-4">
-          <FooterIcon Icon={FaLinkedin} />
-          <FooterIcon Icon={FaInstagram} />
-          <FooterIcon Icon={FaFacebookF} />
-          <FooterIcon Icon={FaXTwitter} />
-          <FooterIcon Icon={FaDiscord} />
-        </div>
+          <FooterIcon Icon={FaLinkedin} href="https://www.linkedin.com/company/spawnright/?originalSubdomain=in"/>
+          <FooterIcon Icon={FaInstagram}  href="https://www.instagram.com/spawnright.gg?igsh=MWR2MWxmenp5cWczZA%3D%3D"/>
+          <FooterIcon Icon={FaFacebookF} href=""/>
+          <FooterIcon Icon={FaXTwitter} href=""/>
+          <FooterIcon Icon={FaDiscord} href="https://discord.com/invite/E2nX9A22VN"/>
+        </div> 
 
         {/* nav links stacked */}
         <div className="font-[roboto] flex justify-between items-center gap-4 font-bold">
@@ -61,11 +61,11 @@ export default function Footer() {
             className="w-40 mb-4"
           />
           <div className="flex space-x-4 mb-4">
-            <FooterIcon Icon={FaLinkedin} />
-            <FooterIcon Icon={FaInstagram} />
-            <FooterIcon Icon={FaFacebookF} />
-            <FooterIcon Icon={FaXTwitter} />
-            <FooterIcon Icon={FaDiscord} />
+            <FooterIcon Icon={FaLinkedin} href="https://www.linkedin.com/company/spawnright/?originalSubdomain=in" />
+            <FooterIcon Icon={FaInstagram} href="https://www.instagram.com/spawnright.gg?igsh=MWR2MWxmenp5cWczZA%3D%3D"  />
+            <FooterIcon Icon={FaFacebookF} href="https://linkedin.com/company/spawnright" />
+            <FooterIcon Icon={FaXTwitter} href="https://linkedin.com/company/spawnright" />
+            <FooterIcon Icon={FaDiscord} href="https://linkedin.com/company/spawnright" />
           </div>
           <p className="text-xs max-w-sm text-gray-400">
             Spawn Right is not affiliated with any third-party game, or gaming
@@ -104,10 +104,21 @@ export default function Footer() {
   );
 }
 
-function FooterIcon({ Icon }: { Icon: React.ElementType }) {
+function FooterIcon({
+  Icon,
+  href,
+}: {
+  Icon: React.ElementType;
+  href: string;
+}) {
   return (
-    <div className="p-2 border border-white rounded-full hover:bg-white/10 transition">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-2 border border-white rounded-full hover:bg-white/10 transition cursor-pointer"
+    >
       <Icon className="w-8 h-4" />
-    </div>
+    </a>
   );
 }

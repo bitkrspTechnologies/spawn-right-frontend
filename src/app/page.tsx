@@ -103,35 +103,35 @@ export default function Home() {
       <Navbar />
       <div className="relative h-screen w-screen overflow-hidden">
         {/* Fixed Left Sidebar */}
-        {!isMobile && (
-          <div className="w-[100px] bg-gray-400 h-[calc(100vh-180px)] fixed top-45 left-5 z-10 p-4 ">
+      
+          <div className="hidden md:block w-[100px] bg-gray-400 h-[70vh] fixed top-40 left-5 z-10 p-4 ">
             {/* Sidebar content */}
           </div>
-        )}
+        
 
         {/* Fixed Right Sidebar */}
-        {!isMobile && (
-          <div className="w-[100px] bg-gray-400 h-[calc(100vh-180px)] fixed top-45 right-5 z-10 p-4 ">
+        
+          <div className="hidden md:block w-[100px] bg-gray-400 h-[70vh] fixed top-40 right-5 z-10 p-4 ">
             {/* Sidebar content */}
           </div>
-        )}
+        
 
         {/* Scrollable Main Content */}
         <div className="h-full w-full pt-30 overflow-y-auto scrollbar-hide">
-          <div className="px-4 sm:px-[120px]">
+          <div className="mx-2 sm:px-[120px]">
             {/* Banner Section Starts */}
             <Banner />
             {/* Banner Section Ends */}
 
             {/* Hero Section Carousel Starts  */}
-            <div className="-mt-12 mb-8 w-full max-w-[100vw]">
+            <div className="mb-8 px-1 w-full max-w-[100vw]">
               <Carousel />
             </div>
             {/* Hero Section Carousel Ends  */}
 
             {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
-            <div className="flex flex-col sm:flex-row gap-3 min-h-[200px] mb-8">
-              <div className={`${isMobile ? "mt-2" : "mt-9"}  w-full sm:w-1/2`}>
+            <div className="flex flex-col sm:flex-row gap-3 mx-2 min-h-[200px] mb-8">
+              <div className={`${isMobile ? "mt-2 hidden" : "mt-9"}  w-full sm:w-1/2`}>
                 <AdSection />
               </div>
 
@@ -159,31 +159,36 @@ export default function Home() {
               </Link>
             </div>
           </div> */}
+          <div className="w-full">
             <DefaultSlider />
 
-            {isMobile && (
+          </div>
+
+            {isMobile ? (
               <div className="mt-6">
-              <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-                Finished Matches
-              </h2>
-              {false ? (
-                <FinishedMatch />
-               ) : (
-                 <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div> 
-               )} 
-            </div>
+                <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
+                  Finished Matches
+                </h2>
+                {false ? (
+                  <FinishedMatch />
+                ) : (
+                  <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div>
+                )}
+              </div>
+            ) : (
+              <div className="ml-12 mt-10">
+                <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
+                  Finished Matches
+                </h2>
+                {false ? (
+                  <FinishedMatch />
+                ) : (
+                  <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div>
+                )}
+              </div>
             )}
 
-            {/* <div className="ml-12 mt-10">
-              <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-                Finished Matches
-              </h2>
-              {false ? (
-                <FinishedMatch />
-              ) : (
-                <div className="text-white text-sm opacity-70 mt-2">Coming soon...</div>
-              )}
-            </div> */}
+
 
             {/* <div className="mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
@@ -197,7 +202,7 @@ export default function Home() {
             </div>
 
           </div>
-          <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
+          <div className="w-screen relative z-40 left-1/2 right-1/2 -mx-[50vw]">
             <Footer />
           </div>
         </div>

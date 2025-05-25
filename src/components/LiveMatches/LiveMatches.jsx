@@ -278,9 +278,12 @@ import { Match } from '@/lib/type';
 import { useRouter } from 'next/navigation';
 import "swiper/css";
 import "swiper/css/pagination";
+import { useMediaQuery } from 'react-responsive';
 
 
 export default function LiveMatches({ variant = "grid" }) {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  
   const router = useRouter();
   const { data, isLoading, error } = useQuery({
     queryKey: ['live-matches'],
@@ -428,8 +431,8 @@ export default function LiveMatches({ variant = "grid" }) {
           ))}
         </div>
       ) : (
-        // Carousel View
-        <Swiper
+           // Carousel View
+           <Swiper
           modules={[Pagination, Autoplay]}
           spaceBetween={20}
           slidesPerView={1}
@@ -445,7 +448,7 @@ export default function LiveMatches({ variant = "grid" }) {
           {matches.map((match, index) => (
             <SwiperSlide key={index}>
               <div className="flex justify-center px-2 sm:px-4">
-                <div className="w-full max-w-md">
+                <div className="w-full">
                   {renderMatchCard(match, index)}
                 </div>
               </div>
