@@ -110,21 +110,21 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-9 text-sm">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--highlight)] focus-visible:ring-opacity-75 rounded-md px-2 py-1">
+              <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 rounded-md px-2 py-1">
                 Tournaments
                 <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
               </button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent
-              className="w-56 bg-[var(--background)] border border-[var(--highlight)] rounded-md shadow-lg overflow-hidden backdrop-blur-sm bg-opacity-95"
+              className="w-56 bg-[var(--background)] rounded-md shadow-lg overflow-hidden backdrop-blur-sm bg-opacity-95"
               sideOffset={8}
               align="start"
             >
               {gameButtons.map((game) => (
                 <DropdownMenuItem
                   key={game.key}
-                  className="px-4 py-2.5 hover:bg-[var(--highlight)]/20 focus:bg-[var(--highlight)]/30 focus:text-white cursor-pointer transition-colors text-sm font-medium text-[var(--highlight)] focus:outline-none first:rounded-t-md last:rounded-b-md"
+                  className="px-4 py-2.5 focus:bg-gray-700/80 focus:text-white cursor-pointer transition-colors text-sm font-medium text-[var(--highlight)] focus:outline-none first:rounded-t-md last:rounded-b-md"
                   onClick={() => handleGameButtonClick(game.key, game.hasData)}
                 >
                   <div className="flex items-center gap-3">
@@ -143,14 +143,14 @@ export default function Navbar() {
 
           <Link
             href="/leaderboard"
-            className="text-[var(--highlight)] hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-[var(--highlight)]/10"
+            className="text-[var(--highlight)] hover:text-white transition-colors font-medium px-2 py-1 rounded-md"
           >
             Leaderboard
           </Link>
           <Link href="/shop">
             <Button
               text="Shop Right"
-              className="hover:scale-105 transition-transform"
+              className="hover:scale-105 transition-transform cursor-pointer"
             />
           </Link>
         </div>
@@ -174,7 +174,7 @@ export default function Navbar() {
               text={text}
               icon={icon}
               fullWidth
-              className="flex justify-center items-center min-w-[100px]"
+              className="flex justify-center items-center min-w-[100px] cursor-pointer"
               selected={selectedBtn === key}
               onClick={() => handleGameButtonClick(key, hasData)}
             />

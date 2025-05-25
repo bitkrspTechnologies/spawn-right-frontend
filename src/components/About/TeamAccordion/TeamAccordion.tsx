@@ -14,13 +14,19 @@ const items = [
     id: "2",
     url: "/images/gamecarousel/Team2.jpeg",
     title: "SANJANA NAIR",
-    description: "CTO & Co-Founder",
+    description: "CMO & Co-Founder",
+  },
+  {
+    id: "3",
+    url: "/images/gamecarousel/Team3.jpeg",
+    title: "MIHIR KADAM",
+    description: "CTO",
   },
 ];
 
 function TeamAccordion() {
   return (
-    <div className="group flex max-md:flex-col justify-center gap-2 w-[50%] mx-auto mb-10 mt-3">
+    <div className="group flex max-md:flex-col justify-center gap-2 w-[100%] mx-auto mb-10 mt-3">
       {items.map((item) => (
         <article
           className="group/article relative w-full rounded-xl overflow-hidden md:group-hover:[&:not(:hover)]:w-[20%] md:group-focus-within:[&:not(:focus-within):not(:hover)]:w-[20%] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.15)] before:absolute before:inset-x-0 before:bottom-0 before:h-1/3 before:bg-gradient-to-t before:from-black/50 before:transition-opacity md:before:opacity-0 md:hover:before:opacity-100 focus-within:before:opacity-70 after:opacity-0 md:group-hover:[&:not(:hover)]:after:opacity-70 md:group-focus-within:[&:not(:focus-within):not(:hover)]:after:opacity-70 after:absolute after:inset-0 after:bg-white/30 after:backdrop-blur after:rounded-lg after:transition-all focus-within:ring focus-within:ring-indigo-300"

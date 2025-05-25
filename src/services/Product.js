@@ -18,11 +18,20 @@ export async function fetchSearchedProducts(page, search) {
     return response.json();
 }
 
-
-export async function fetchSingleProducts(id) {
+// Function for individual product page
+export async function getSingleProduct(id) {
     const response = await fetch(`${apiConfig.apiUrl}/api/v1/products/get-single-shop-right-products/${id}`);
     if (!response.ok) {
-        throw new Error('Failed to fetch products');
+        throw new Error('Failed to fetch product details');
+    }
+    return response.json();
+}
+
+// Function for shop page product list
+export async function getShopProducts(page, categoryId) {
+    const response = await fetch(`${apiConfig.apiUrl}/api/v1/products/get-all-shop-right-products/${categoryId}/${page}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch shop products');
     }
     return response.json();
 }

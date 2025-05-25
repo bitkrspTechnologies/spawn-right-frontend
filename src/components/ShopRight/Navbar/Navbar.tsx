@@ -47,8 +47,8 @@ export default function Navbar() {
             <Image
               src="/images/ShopRight.png"
               alt="Logo"
-              width={200}
-              height={200}
+              width={250}
+              height={250}
               className="hover:opacity-90 transition-opacity"
             />
           </Link>

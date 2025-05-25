@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 import Footer from "@/components/Footer/Footer";
 import { useParams } from "next/navigation";
 import ProductDetailSkeleton from "@/components/Skeleton/ProductDetailSkeleton";
+import { getSingleProduct } from "@/services/Product";
+import { useQuery } from "@tanstack/react-query";
 
 const apiConfig = {
   apiUrl: process.env.NEXT_PUBLIC_API_URL
@@ -15,36 +17,22 @@ const apiConfig = {
 
 export default function Shop() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const params = useParams();
   const productId = params?.id;
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  useEffect(() => {
-    const fetchProductData = async () => {
-      try {
-        const response = await fetch(
-          `${apiConfig.apiUrl}/api/v1/products/get-single-shop-right-products/${productId}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch product");
-        }
-        const infot = await response.json();
-        setProduct(infot.data.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (productId) {
-      fetchProductData();
-    }
-  }, [productId]);
+  const {
+    data: product,
+    isLoading,
+    isError,
+    error
+  } = useQuery({
+    queryKey: ['product', productId],
+    queryFn: () => getSingleProduct(productId).then(res => res.data.data),
+    enabled: !!productId,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 
   const nextImage = () => {
     if (!product?.product_photo) return;
@@ -53,8 +41,6 @@ export default function Shop() {
     );
   };
 
-  console.log("pro", product);
-
   const prevImage = () => {
     if (!product?.product_photo) return;
     setCurrentImageIndex((prevIndex) =>
@@ -62,29 +48,27 @@ export default function Shop() {
     );
   };
 
-  const productImages = product?.product_photos;
+  const productImages = product?.product_photos || [];
 
   const specifications = [
-    { label: "Colour", value: product?.product_information["Colour"] },
+    { label: "Colour", value: product?.product_information?.["Colour"] },
     {
       label: "Country of Origin",
-      value: product?.product_information["Country of Origin"],
+      value: product?.product_information?.["Country of Origin"],
     },
     {
       label: "Generic Name",
-      value: product?.product_information["Generic Name"],
+      value: product?.product_information?.["Generic Name"],
     },
     {
       label: "Item Weight",
-      value: product?.product_information["Item Weight"],
+      value: product?.product_information?.["Item Weight"],
     },
     {
       label: "Manufacturer",
-      value: product?.product_information["Manufacturer"],
+      value: product?.product_information?.["Manufacturer"],
     },
-  ];
-
-  const validSpecifications = specifications.filter((spec) => spec.value);
+  ].filter(spec => spec.value);
 
   const productDetails = [
     { label: "Brand", value: product?.product_details?.["Brand"] },
@@ -103,14 +87,14 @@ export default function Shop() {
     { label: "Model Name", value: product?.product_details?.["Model Name"] },
   ].filter((item) => item.value);
 
-  if (loading) {
+  if (isLoading) {
     return <ProductDetailSkeleton />;
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <p className="text-red-500">Error: {error}</p>
+        <p className="text-red-500">Error: {error.message}</p>
       </div>
     );
   }
@@ -292,7 +276,7 @@ export default function Shop() {
                 <div className="flex items-center justify-start my-8 md:my-16">
                   <div className="w-full max-w-2xl">
                     <ul className="space-y-3 md:space-y-6">
-                      {validSpecifications.map((spec, index) => (
+                      {specifications.map((spec, index) => (
                         <li key={index} className="flex items-center">
                           <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-pink-600 flex items-center justify-center mr-2 md:mr-4">
                             <Check className="h-3 w-3 md:h-4 md:w-4 text-white" />
@@ -350,21 +334,21 @@ export default function Shop() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="my-10 mb-24">
-            {product?.customers_say && (
-              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-4">
-                What Customers Say
-              </h3>
-            )}
+            <div className="my-10 mb-24">
+              {product?.customers_say && (
+                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-4">
+                  What Customers Say
+                </h3>
+              )}
 
-            {product?.customers_say && (
-              <div className="bg-gray-800/50 p-4 md:p-6 rounded-lg">
-                <p className="text-sm md:text-base italic">
-                  "{product.customers_say}"
-                </p>
-              </div>
-            )}
+              {product?.customers_say && (
+                <div className="bg-gray-800/50 p-4 md:p-6 rounded-lg">
+                  <p className="text-sm md:text-base italic">
+                    "{product.customers_say}"
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

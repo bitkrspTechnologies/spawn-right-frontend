@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ProductSkeleton } from "@/components/Skeleton/ProductSkeleton";
@@ -13,7 +12,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { fetchProducts, fetchSearchedProducts } from "@/services/Product";
+import { getShopProducts, fetchSearchedProducts } from "@/services/Product";
 
 const ProductShowcase = ({ categoryId, searchQuery }) => {
   const [page, setPage] = useState(1);
@@ -31,7 +30,7 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
     queryFn: () =>
       searchQuery
         ? fetchSearchedProducts(page, searchQuery)
-        : fetchProducts(page, categoryId),
+        : getShopProducts(page, categoryId),
     keepPreviousData: true,
     staleTime: 5000,
   });
@@ -45,7 +44,6 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
     }
   }, [productsInfo, page]);
 
-  // Reset to page 1 when search query or category changes
   useEffect(() => {
     setPage(1);
   }, [searchQuery, categoryId]);
@@ -97,9 +95,9 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
-      <div className="rounded-2xl bg-white/10 backdrop-blur-md px-8 py-5 mt-10 shadow-lg">
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+    <div className="w-full">
+      <div className="rounded-2xl bg-white/10 backdrop-blur-md p-6 shadow-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {productsInfo?.data?.data?.products?.map((product) => (
             <ProductCard
               key={`${product.asin}-${product.product_id}`}
@@ -115,7 +113,7 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
 
         {/* Pagination */}
         {!isLoading && productsInfo?.data?.data?.products?.length > 0 && (
-          <div className="mt-8">
+          <div className="mt-8 flex justify-center">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
@@ -125,7 +123,6 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
                       e.preventDefault();
                       handlePageChange(page - 1);
                     }}
-                  // isDisabled={page === 1}
                   />
                 </PaginationItem>
 
@@ -157,7 +154,6 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
                       e.preventDefault();
                       handlePageChange(page + 1);
                     }}
-                  // isDisabled={page === totalPages || !hasMore}
                   />
                 </PaginationItem>
               </PaginationContent>
@@ -168,7 +164,7 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
         {!isLoading &&
           !isFetching &&
           productsInfo?.data?.data?.products?.length === 0 && (
-            <div className="text-center py-6 text-gray-400">
+            <div className="text-center py-10 text-gray-500">
               {page === 1 ? "No products found" : "No more products available"}
             </div>
           )}

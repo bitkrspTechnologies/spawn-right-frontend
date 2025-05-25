@@ -74,7 +74,7 @@ export function ComparisonDrawer({
                     <Link href={"/shop/compare-all"}>
                       <Button
                         text="COMPARE ALL"
-                        className="text-sm px-3 py-1"
+                        className="text-sm px-3 py-1 cursor-pointer"
                         // disabled={selectedProducts.length < 2}
                         onClick={handleCompareAll}
                       />
