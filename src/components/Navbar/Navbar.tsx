@@ -17,14 +17,12 @@ import GameOnSidebar from "@/components/Sidebar/Sidebar";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState("");
   const router = useRouter();
   const pathname = usePathname();
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -160,15 +158,13 @@ export default function Navbar() {
         </div> */}
         <div className="hidden md:flex items-center space-x-9 text-sm">
           <div className="relative group">
-            <button
-              className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--highlight)] focus-visible:ring-opacity-75 rounded-md px-2 py-1"
-            >
+            <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--highlight)] focus-visible:ring-opacity-75 rounded-md px-2 py-1">
               Tournaments
               <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
             </button>
 
             {/* Dropdown container with improved z-index and explicit colors */}
-            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl overflow-hidden backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[1000]">
+            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl overflow-hidden backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               {gameButtons.map((game) => (
                 <div
                   key={game.key}
@@ -203,7 +199,6 @@ export default function Navbar() {
           </Link>
         </div>
 
-
         <div className="md:hidden">
           <button onClick={() => setSidebarOpen(true)}>
             <Bars3Icon className="h-7 w-7 text-white" />
@@ -230,7 +225,7 @@ export default function Navbar() {
 
       {/* Display My Pathname Temparory Basis  */}
       {pathname === "/" && (
-        <div className="pt-1 pb-3 w-full z-50 transition-all duration-500">
+        <div className="pt-1 pb-3 w-full z-20 transition-all duration-500">
           <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto">
             {gameButtons.map(({ key, text, icon, hasData }) => (
               <Button
@@ -246,7 +241,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-
 
       {/* Mobile Sidebar */}
       <GameOnSidebar

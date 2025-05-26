@@ -1,302 +1,321 @@
-// import React from "react";
-
-// interface Match {
-//   team1: string;
-//   team1Logo: string;
-//   team2: string;
-//   team2Logo: string;
-//   score: string;
-//   date: string;
-//   round: string;
-// }
-
-// interface Tournament {
-//   name: string;
-//   prize: string;
-//   teams: number;
-//   dateRange: string;
-//   matches: Match[];
-//   colorClass?: string;
-// }
-
-// const tournaments: Tournament[] = [
-//   {
-//     name: "OPEN 2025 Season 1",
-//     prize: "$400,000",
-//     teams: 16,
-//     dateRange: "APR 15-17",
-//     colorClass: "text-pink-400",
-//     matches: [
-//       {
-//         round: "GRAND FINAL",
-//         date: "MAR 30",
-//         team1: "Vitality",
-//         team1Logo: "🟡",
-//         team2: "MOUZ",
-//         team2Logo: "🔴",
-//         score: "3 - 2",
-//       },
-//       {
-//         round: "SEMI FINAL 2",
-//         date: "MAR 29",
-//         team1: "Vitality",
-//         team1Logo: "🟡",
-//         team2: "Spirit",
-//         team2Logo: "⚪",
-//         score: "2 - 1",
-//       },
-//       {
-//         round: "SEMI FINAL 1",
-//         date: "MAR 26",
-//         team1: "Eternal Fi...",
-//         team1Logo: "♾️",
-//         team2: "MOUZ",
-//         team2Logo: "🔴",
-//         score: "0 - 2",
-//       },
-//     ],
-//   },
-//   {
-//     name: "BOUNTY 2025 Season 1",
-//     prize: "$400,000",
-//     teams: 16,
-//     dateRange: "APR 15-17",
-//     colorClass: "text-blue-400",
-//     matches: [
-//       {
-//         round: "GRAND FINAL",
-//         date: "FEB 15",
-//         team1: "Vitality",
-//         team1Logo: "🟡",
-//         team2: "MOUZ",
-//         team2Logo: "🔴",
-//         score: "3 - 2",
-//       },
-//       {
-//         round: "SEMI FINAL 2",
-//         date: "FEB 18",
-//         team1: "Natus",
-//         team1Logo: "🟡",
-//         team2: "Spirit",
-//         team2Logo: "⚪",
-//         score: "2 - 1",
-//       },
-//       {
-//         round: "SEMI FINAL 1",
-//         date: "FEB 19",
-//         team1: "G2",
-//         team1Logo: "⚫",
-//         team2: "Eternal Fi...",
-//         team2Logo: "♾️",
-//         score: "0 - 2",
-//       },
-//     ],
-//   },
-// ];
-
-// const TournamentBracket: React.FC = () => {
-//   return (
-//     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
-//       {tournaments.map((tournament) => (
-//         <div
-//           key={tournament.name}
-//           className="rounded-md p-3 bg-white/10 backdrop-blur-sm text-white"
-//         >
-//           <div className="flex justify-between items-center mb-4">
-//             <div>
-//               <h2 className="text-lg font-bold">{tournament.name}</h2>
-//               <div className={`text-sm ${tournament.colorClass}`}>
-//                 {tournament.prize} &nbsp;&nbsp; | &nbsp;&nbsp;{" "}
-//                 {tournament.teams} TEAMS
-//               </div>
-//             </div>
-//             <div className="bg-white text-xs text-black px-2 py-1 rounded">
-//               {tournament.dateRange}
-//             </div>
-//           </div>
-
-//           {tournament.matches.map((match, index) => (
-//             <div key={index} className="mb-2">
-//               <div className="text-xs text-gray-400 mb-1">
-//                 {match.round} <span className="float-right">{match.date}</span>
-//               </div>
-//               <div className="bg-white/10 border border-white/20 backdrop-blur-md p-1 rounded grid grid-cols-3 items-center text-sm">
-//                 <div className="flex justify-end items-center gap-1 truncate">
-//                   <span>{match.team1}</span>
-//                   <span>{match.team1Logo}</span>
-//                 </div>
-//                 <div className="flex justify-center">
-//                   <div className="bg-[#051B46] px-2 py-2 rounded font-bold">
-//                     {match.score}
-//                   </div>
-//                 </div>
-//                 <div className="flex items-center gap-1 truncate">
-//                   <span>{match.team2Logo}</span>
-//                   <span>{match.team2}</span>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default TournamentBracket;
+"use client";
 
 import React from "react";
+import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAllTournaments } from "../../services/Tournaments";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { getValidLogoUrl } from "@/utils/urlValidator";
 
-interface Match {
-  team1: string;
-  team1Logo: string;
-  team2: string;
-  team2Logo: string;
-  score: string;
-  date: string;
-  round: string;
+// Add these skeleton components at the top of your file
+const MatchSkeleton = ({ isMobile = false }: { isMobile?: boolean }) => (
+  <div
+    className={`bg-white/10 backdrop-blur-md border rounded-md ${isMobile ? "p-2 mb-3" : "p-3.5 mb-3"}`}
+  >
+    <div className="flex justify-between items-center">
+      <div className="flex items-center gap-2 animate-pulse">
+        <div className="w-5 h-5 bg-gray-600 rounded-full"></div>
+        <div className="h-4 bg-gray-600 rounded w-32"></div>
+        <div className="h-3 bg-gray-600 rounded w-16"></div>
+      </div>
+      <div className="h-6 bg-gray-600 rounded w-16"></div>
+    </div>
+  </div>
+);
+
+const TournamentSkeleton = ({ isMobile = false }: { isMobile?: boolean }) => (
+  <div
+    className={`bg-white/10 backdrop-blur-md border ${isMobile ? "rounded-lg px-3 py-2 mb-2" : "rounded-sm p-3 mb-4"}`}
+  >
+    <div className="flex justify-between items-center gap-2 animate-pulse">
+      <div className="flex items-center gap-2">
+        <div className="w-6 h-6 bg-gray-600 rounded-full"></div>
+        <div className="h-4 bg-gray-600 rounded w-40"></div>
+      </div>
+      <div className="h-6 bg-gray-600 rounded w-20"></div>
+    </div>
+  </div>
+);
+
+function formatStartDate(dateString: string) {
+  const date = new Date(dateString);
+  const month = date.toLocaleString("en-US", { month: "short" }).toUpperCase();
+  const day = date.getDate();
+  return `${month} ${day}`;
 }
 
-interface Tournament {
-  name: string;
-  prize: string;
-  teams: number;
-  dateRange: string;
-  matches: Match[];
-  colorClass?: string;
-}
-
-const tournaments: Tournament[] = [
+const upcomingTournaments = [
   {
-    name: "OPEN 2025 Season 1",
-    prize: "$400,000",
-    teams: 16,
-    dateRange: "APR 15-17",
-    colorClass: "text-pink-400",
-    matches: [
-      {
-        round: "GRAND FINAL",
-        date: "MAR 30",
-        team1: "Vitality",
-        team1Logo: "🟡",
-        team2: "MOUZ",
-        team2Logo: "🔴",
-        score: "3 - 2",
-      },
-      {
-        round: "SEMI FINAL 2",
-        date: "MAR 29",
-        team1: "Vitality",
-        team1Logo: "🟡",
-        team2: "Spirit",
-        team2Logo: "⚪",
-        score: "2 - 1",
-      },
-      {
-        round: "SEMI FINAL 1",
-        date: "MAR 26",
-        team1: "Eternal Fi...",
-        team1Logo: "♾️",
-        team2: "MOUZ",
-        team2Logo: "🔴",
-        score: "0 - 2",
-      },
-    ],
+    name: "Savage Impact Championship 2024 female Finals",
+    logo: "/images/bgmi.svg",
+    gameLogo: "/images/bgmi.svg",
+    date: "APR 15–17",
   },
   {
-    name: "BOUNTY 2025 Season 1",
-    prize: "$400,000",
-    teams: 16,
-    dateRange: "APR 15-17",
-    colorClass: "text-blue-400",
-    matches: [
-      {
-        round: "GRAND FINAL",
-        date: "FEB 15",
-        team1: "Vitality",
-        team1Logo: "🟡",
-        team2: "MOUZ",
-        team2Logo: "🔴",
-        score: "3 - 2",
-      },
-      {
-        round: "SEMI FINAL 2",
-        date: "FEB 18",
-        team1: "Natus",
-        team1Logo: "🟡",
-        team2: "Spirit",
-        team2Logo: "⚪",
-        score: "2 - 1",
-      },
-      {
-        round: "SEMI FINAL 1",
-        date: "FEB 19",
-        team1: "G2",
-        team1Logo: "⚫",
-        team2: "Eternal Fi...",
-        team2Logo: "♾️",
-        score: "0 - 2",
-      },
-    ],
+    name: "Orion Tournament",
+    logo: "/images/cod.svg",
+    gameLogo: "/images/cod.svg",
+    date: "APR 15–17",
+  },
+  {
+    name: "Duel for the Dollars",
+    logo: "/images/cod.svg",
+    gameLogo: "/images/cod.svg",
+    date: "APR 15–17",
+  },
+  {
+    name: "Savage Impact Championship 2024 female Finals",
+    logo: "/images/cod.svg",
+    gameLogo: "/images/cod.svg",
+    date: "APR 15–17",
   },
 ];
 
-const TournamentBracket: React.FC = () => {
-  return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-      {tournaments.map((tournament) => (
-        <div
-          key={tournament.name}
-          className="rounded-md p-4 bg-white/10 backdrop-blur-sm text-white"
-        >
-          {/* Header */}
-          <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
-            <div>
-              <h2 className="text-base sm:text-lg font-bold">
-                {tournament.name}
-              </h2>
-              <div className={`text-xs sm:text-sm ${tournament.colorClass}`}>
-                {tournament.prize} &nbsp;|&nbsp; {tournament.teams} TEAMS
-              </div>
-            </div>
-            <div className="bg-white text-black text-xs px-2 py-1 rounded whitespace-nowrap">
-              {tournament.dateRange}
-            </div>
-          </div>
+function formatDateRange(start: string, end: string) {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
 
-          {/* Matches */}
-          {tournament.matches.map((match, index) => (
-            <div key={index} className="mb-3">
-              <div className="text-[11px] sm:text-xs text-gray-400 mb-1 flex justify-between">
-                <span>{match.round}</span>
-                <span>{match.date}</span>
-              </div>
-              <div className="bg-white/10 border border-white/20 backdrop-blur-md px-2 py-2 rounded grid grid-cols-3 items-center text-xs sm:text-sm gap-1">
-                {/* Team 1 */}
-                <div className="flex justify-end items-center gap-1 truncate">
-                  <span className="truncate max-w-[70px]">{match.team1}</span>
-                  <span>{match.team1Logo}</span>
-                </div>
+  const startMonth = startDate
+    .toLocaleString("en-US", { month: "short" })
+    .toUpperCase();
+  const startDay = startDate.getDate();
+  const endDay = endDate.getDate();
 
-                {/* Score */}
-                <div className="flex justify-center">
-                  <div className="bg-[#051B46] px-2 py-1 rounded font-bold text-xs sm:text-sm">
-                    {match.score}
+  return `${startMonth} ${startDay} – ${endDay}`;
+}
+
+const UpcomingEventsSection = () => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  // Fetch upcoming matches
+  const {
+    data: matches,
+    isLoading: matchesLoading,
+    error: matchesError,
+  } = useQuery({
+    queryKey: ["upcomingMatches"],
+    queryFn: () => fetchAllTournaments("completed"),
+  });
+
+  const {
+    data: tournaments,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["tournaments", "completed"],
+    queryFn: () => fetchAllTournaments("completed"),
+  });
+
+  console.log("matches", matches);
+  console.log("tournaments", tournaments);
+
+  if (error)
+    return (
+      <p className="text-red-500 text-center">Failed to load tournaments.</p>
+    );
+
+  // Mobile Layout
+  if (isMobile) {
+    return (
+      <div className="flex flex-col gap-8 px-0 py-2 text-white">
+        {/* Matches */}
+        <div className="">
+          {matchesLoading ? (
+            <>
+              <MatchSkeleton isMobile />
+              <MatchSkeleton isMobile />
+              <MatchSkeleton isMobile />
+            </>
+          ) : matchesError ? (
+            <p className="text-red-500 text-center">Error loading matches</p>
+          ) : (
+            matches?.data?.map((match: any, index: number) => (
+              <div
+                key={index}
+                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-2 mb-3"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center text-xs gap-1">
+                      <Image
+                        src={getValidLogoUrl(match.logo)}
+                        alt="tournament"
+                        width={20}
+                        height={20}
+                      />
+                      <span className="font-bold">{match.name}</span>
+                      <span className="mx-1 text-white/80 font-semibold">
+                        Match {match.matchNumber}
+                      </span>
+                    </div>
+                    <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
+                      {formatStartDate(match.start_date)}
+                    </span>
                   </div>
                 </div>
+              </div>
+            ))
+          )}
+        </div>
 
-                {/* Team 2 */}
-                <div className="flex items-center gap-1 truncate">
-                  <span>{match.team2Logo}</span>
-                  <span className="truncate max-w-[70px]">{match.team2}</span>
+        {/* Tournaments */}
+
+        <div className="">
+          {isLoading ? (
+            <>
+              <TournamentSkeleton isMobile />
+              <TournamentSkeleton isMobile />
+              <TournamentSkeleton isMobile />
+            </>
+          ) : (
+            upcomingTournaments.map((tournament, index) => (
+              <div
+                key={index}
+                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-lg px-3 py-2 mb-2"
+              >
+                <div className="flex justify-between items-start gap-2">
+                  <div className="flex items-center gap-2 text-xs flex-1 min-w-0">
+                    <Image
+                      src={tournament.logo}
+                      alt="Tournament"
+                      width={18}
+                      height={18}
+                    />
+                    <span className="font-medium break-words whitespace-normal">
+                      {tournament.name}
+                    </span>
+                  </div>
+                  <span className="bg-white text-black text-[10px] px-2 py-0.5 rounded-xs font-semibold whitespace-nowrap">
+                    {tournament.date}
+                  </span>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
-      ))}
+      </div>
+    );
+  }
+
+  // Desktop Layout
+  return (
+    <div className="font-bold flex flex-col lg:flex-row gap-8 justify-center items-start py-5 px-4">
+      {/* Left Section - Matches */}
+      <div className="flex flex-col flex-1 w-full">
+        <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
+          {matchesLoading ? (
+            <>
+              <MatchSkeleton />
+              <MatchSkeleton />
+              <MatchSkeleton />
+            </>
+          ) : matchesError ? (
+            <p className="text-red-500 text-center">Error loading matches</p>
+          ) : (
+            matches?.data?.map((match: any, index: number) => (
+              <div
+                key={index}
+                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-3.5 mb-3"
+              >
+                <div className="flex justify-between items-center mb-2 ">
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center text-xs gap-1">
+                      <Image
+                        src={getValidLogoUrl(match.logo)}
+                        alt="tournament"
+                        width={20}
+                        height={20}
+                      />
+                      <span className="font-bold">{match.name}</span>
+                      <span className="mx-1 text-white/80 font-semibold">
+                        Match {match.matchNumber}
+                      </span>
+                    </div>
+                    <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
+                      {formatStartDate(match.start_date)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
+      {/* Right Section - Tournaments */}
+      <div className="flex flex-col flex-1 w-full">
+        <div className="bg-[var(--card-bg-uc)] rounded-2xl p-5 shadow-lg w-full">
+          {isLoading ? (
+            <>
+              <TournamentSkeleton />
+              <TournamentSkeleton />
+              <TournamentSkeleton />
+            </>
+          ) : (
+            tournaments?.data?.map(
+              (
+                tournament: {
+                  logo: string | StaticImport;
+                  name: React.ReactNode;
+                  start_date: string;
+                  end_date: string;
+                },
+                index: React.Key
+              ) => (
+                <div
+                  key={index}
+                  className="font-[roboto_serif] bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-4"
+                >
+                  <div className="flex flex-col sm:flex-row justify-between gap-2">
+                    <div className="flex items-center text-md gap-2">
+                      {tournament.logo !== "NA" ? (
+                        <Image
+                          src={tournament.logo}
+                          alt={`${tournament.name} Logo`}
+                          width={30}
+                          height={30}
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
+                          <span className="text-xs">🏆</span>
+                        </div>
+                      )}
+                      <span className="font-medium text-md">
+                        {tournament.name}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 min-w-29">
+                      {tournament.logo !== "NA" ? (
+                        <Image
+                          src={tournament.logo}
+                          alt={`${tournament.name} Logo`}
+                          width={30}
+                          height={30}
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
+                          <span className="text-xs">🏆</span>
+                        </div>
+                      )}
+                      <span className="bg-white text-black text-xs px-2 py-1 rounded-sm font-semibold">
+                        {formatDateRange(
+                          tournament.start_date,
+                          tournament.end_date
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default TournamentBracket;
+export default UpcomingEventsSection;
