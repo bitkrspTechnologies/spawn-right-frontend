@@ -7,6 +7,7 @@ import classNames from "classnames";
 import React from "react";
 import InfoSidebar from "@/components/ShopRight/InfoSidebar/InfoSidebar";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import Button from "@/components/Button/Button";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -62,11 +63,11 @@ export default function Navbar() {
           >
             About
           </Link>
-          <Link
-            href="/"
-            className="text-[var(--highlight)] hover:text-white transition-colors duration-300 font-medium"
-          >
-            Spawn Right
+          <Link href="/">
+            <Button
+              text="Spawn Right"
+              className="hover:scale-105 transition-transform"
+            />
           </Link>
         </div>
 

@@ -8,7 +8,7 @@
 
 // interface LeaderboardLayoutProps {
 //   isMobile: boolean;
-//   children: React.ReactNode; 
+//   children: React.ReactNode;
 // }
 
 // const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({ isMobile, children }) => {
@@ -84,7 +84,10 @@ interface LeaderboardLayoutProps {
   children: React.ReactNode;
 }
 
-const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({ isMobile, children }) => {
+const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
+  isMobile,
+  children,
+}) => {
   return (
     <>
       <Navbar />
@@ -106,12 +109,11 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({ isMobile, childre
               </div>
 
               {/* Content Section */}
-              <div className=" gap-1 flex-wrap flex justify-center items-start">
+              <div className="flex gap-1 flex-wrap  justify-center items-start">
                 {/* Main Content */}
                 <div className="flex-1 min-w-[700px] max-w-[980px] w-full flex ">
                   {children}
                 </div>
-
 
                 {/* Side Ad */}
                 <div className="flex-2 min-w-[200px] max-w-[300px] w-full min-h-[300px]">
@@ -126,10 +128,12 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({ isMobile, childre
                 <div className="bg-[#1f1f2e] p-1 shadow-md border border-gray-800 text-white">
                   {/* Top bar with Advertisement and bottom border */}
                   <div className="flex justify-between items-center border-b border-gray-700 pb-1 mb-1">
-                    <p className="text-[8px] text-gray-300 tracking-widest">ADVERTISEMENT</p>
+                    <p className="text-[8px] text-gray-300 tracking-widest">
+                      ADVERTISEMENT
+                    </p>
                     <div className="mb-3">
                       <button className="font-[roboto] text-[10px] text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline">
-                        <span>Remove  Ads</span>
+                        <span>Remove Ads</span>
                         <Image
                           src="/images/icons/go-to-the-link.svg"
                           alt="Link"
@@ -144,15 +148,13 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({ isMobile, childre
 
                   <button className="font-[roboto] text-[10px] text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline">
                     <span>Remove All Ads</span>
-
                   </button>
                   {/* Short description */}
                   <p className="text-[9px] text-gray-400 font-normal">
-                    Say goodbye to ads, support our team, see exclusive sneak peeks, and get a shiny new Discord role.
+                    Say goodbye to ads, support our team, see exclusive sneak
+                    peeks, and get a shiny new Discord role.
                   </p>
                 </div>
-
-
 
                 {/* <GlobalLeaderboardCard /> */}
 
@@ -167,7 +169,6 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({ isMobile, childre
         </div>
       </div>
     </>
-
   );
 };
 
