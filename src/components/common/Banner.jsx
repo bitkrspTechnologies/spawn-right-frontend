@@ -56,11 +56,9 @@ const Banner = () => {
   const subTextWords = [
     "All",
     "BGMI,",
-    "Call",
-    "of",
-    "Duty",
+    "VALORANT",
     "&",
-    "Indus",
+    "CS GO",
     "Tournaments,",
     "Player",
     "rankings",

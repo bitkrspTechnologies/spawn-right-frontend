@@ -1,3 +1,256 @@
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+// import classNames from "classnames";
+// import Button from "../Button/Button";
+// import { useRouter } from "next/navigation";
+// import { Bars3Icon } from "@heroicons/react/24/outline";
+// import GameOnSidebar from "@/components/Sidebar/Sidebar";
+// // import {
+// //   DropdownMenu,
+// //   DropdownMenuContent,
+// //   DropdownMenuItem,
+// //   DropdownMenuTrigger,
+// // } from "@/components/ui/dropdown-menu";
+// import { ChevronDown } from "lucide-react";
+// import { usePathname } from "next/navigation";
+
+// export default function Navbar() {
+//   const [scrolled, setScrolled] = useState(false);
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+//   const [selectedBtn, setSelectedBtn] = useState("");
+//   const router = useRouter();
+//   const pathname = usePathname();
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setScrolled(window.scrollY > 10);
+//     };
+//     window.addEventListener("scroll", handleScroll);
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+//   const gameButtons = [
+//     {
+//       key: "bgmi",
+//       text: "BGMI",
+//       hasData: true,
+//       icon: (
+//         <Image src="/images/bgmi.svg" alt="BGMI Icon" width={25} height={25} />
+//       ),
+//     },
+//     {
+//       key: "valorant",
+//       text: "VALORANT",
+//       hasData: false,
+//       icon: (
+//         <Image
+//           src="/images/valorantLogo.png"
+//           alt="Valorant Icon"
+//           width={25}
+//           height={25}
+//         />
+//       ),
+//     },
+//     {
+//       key: "csgo",
+//       text: "CS GO",
+//       hasData: false,
+//       icon: (
+//         <Image
+//           src="/images/csgoLogo.png"
+//           alt="CS GO Icon"
+//           width={25}
+//           height={25}
+//         />
+//       ),
+//     },
+//   ];
+
+//   const handleGameButtonClick = (key: string, hasData: boolean) => {
+//     setSelectedBtn(key);
+//     if (hasData) {
+//       router.push("/tournaments");
+//     } else {
+//       router.push("/coming-soon");
+//     }
+//   };
+
+//   return (
+//     <header
+//       className={classNames(
+//         "fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out backdrop-blur-sm bg-black/5",
+//         {
+//           "shadow-lg": scrolled,
+//         }
+//       )}
+//     >
+//       <div
+//         className={classNames(
+//           "absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--highlight)] to-transparent",
+//           {
+//             "opacity-50": scrolled,
+//             "opacity-30": !scrolled,
+//           }
+//         )}
+//       />
+
+//       {/* Top Navbar */}
+//       <div className="backdrop-blur-sm bg-black/5 max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+//         <Link href="/">
+//           <Image
+//             src="/images/Logos-03.svg"
+//             alt="Logo"
+//             width={200}
+//             height={200}
+//             className="hover:opacity-90 transition-opacity"
+//           />
+//         </Link>
+
+//         {/* <div className="hidden md:flex items-center space-x-9 text-sm">
+//           <DropdownMenu>
+//             <DropdownMenuTrigger asChild>
+//               <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 rounded-md px-2 py-1">
+//                 Tournaments
+//                 <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+//               </button>
+//             </DropdownMenuTrigger>
+
+//             <DropdownMenuContent
+//               className="w-56 bg-[var(--background)] rounded-md shadow-lg overflow-hidden backdrop-blur-sm bg-opacity-95"
+//               sideOffset={8}
+//               align="start"
+//             >
+//               {gameButtons.map((game) => (
+//                 <DropdownMenuItem
+//                   key={game.key}
+//                   className="px-4 py-2.5 focus:bg-gray-700/80 focus:text-white cursor-pointer transition-colors text-sm font-medium text-[var(--highlight)] focus:outline-none first:rounded-t-md last:rounded-b-md"
+//                   onClick={() => handleGameButtonClick(game.key, game.hasData)}
+//                 >
+//                   <div className="flex items-center gap-3">
+//                     <div className="w-5 h-5 flex items-center justify-center">
+//                       {game.icon}
+//                     </div>
+//                     <span>{game.text}</span>
+//                     {game.hasData && (
+//                       <span className="ml-auto text-xs opacity-70">→</span>
+//                     )}
+//                   </div>
+//                 </DropdownMenuItem>
+//               ))}
+//             </DropdownMenuContent>
+//           </DropdownMenu>
+
+//           <Link
+//             href="/leaderboard"
+//             className="text-[var(--highlight)] hover:text-white transition-colors font-medium px-2 py-1 rounded-md"
+//           >
+//             Leaderboard
+//           </Link>
+//           <Link href="/shop">
+//             <Button
+//               text="Shop Right"
+//               className="hover:scale-105 transition-transform cursor-pointer"
+//             />
+//           </Link>
+//         </div> */}
+//         <div className="hidden md:flex items-center space-x-9 text-sm">
+//           <div className="relative group">
+//             <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--highlight)] focus-visible:ring-opacity-75 rounded-md px-2 py-1">
+//               Tournaments
+//               <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+//             </button>
+
+//             {/* Dropdown container with improved z-index and explicit colors */}
+//             <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl overflow-hidden backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+//               {gameButtons.map((game) => (
+//                 <div
+//                   key={game.key}
+//                   className="px-4 py-2.5 hover:bg-pink-500/20 focus:bg-pink-500/30 focus:text-white cursor-pointer transition-colors text-sm font-medium text-white"
+//                   onClick={() => handleGameButtonClick(game.key, game.hasData)}
+//                 >
+//                   <div className="flex items-center gap-3">
+//                     <div className="w-5 h-5 flex items-center justify-center">
+//                       {game.icon}
+//                     </div>
+//                     <span>{game.text}</span>
+//                     {game.hasData && (
+//                       <span className="ml-auto text-xs opacity-70">→</span>
+//                     )}
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           <Link
+//             href="/leaderboard"
+//             className="text-[var(--highlight)] hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-[var(--highlight)]/10"
+//           >
+//             Leaderboard
+//           </Link>
+//           <Link href="/shop">
+//             <Button
+//               text="Shop Right"
+//               className="hover:scale-105 transition-transform"
+//             />
+//           </Link>
+//         </div>
+
+//         <div className="md:hidden">
+//           <button onClick={() => setSidebarOpen(true)}>
+//             <Bars3Icon className="h-7 w-7 text-white" />
+//           </button>
+//         </div>
+//       </div>
+
+//       {/* Game Buttons */}
+//       {/* <div className="pt-1 pb-3 w-full z-50 transition-all duration-500">
+//         <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto">
+//           {gameButtons.map(({ key, text, icon, hasData }) => (
+//             <Button
+//               key={key}
+//               text={text}
+//               icon={icon}
+//               fullWidth
+//               className="flex justify-center items-center min-w-[100px] cursor-pointer"
+//               selected={selectedBtn === key}
+//               onClick={() => handleGameButtonClick(key, hasData)}
+//             />
+//           ))}
+//         </div>
+//       </div> */}
+
+//       {/* Display My Pathname Temparory Basis  */}
+//       {pathname === "/" && (
+//         <div className="pt-1 pb-3 w-full z-20 transition-all duration-500">
+//           <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto">
+//             {gameButtons.map(({ key, text, icon, hasData }) => (
+//               <Button
+//                 key={key}
+//                 text={text}
+//                 icon={icon}
+//                 fullWidth
+//                 className="flex justify-center items-center min-w-[100px] cursor-pointer"
+//                 selected={selectedBtn === key}
+//                 onClick={() => handleGameButtonClick(key, hasData)}
+//               />
+//             ))}
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Mobile Sidebar */}
+//       <GameOnSidebar
+//         visible={sidebarOpen}
+//         onClose={() => setSidebarOpen(false)}
+//       />
+//     </header>
+//   );
+// }
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -5,23 +258,15 @@ import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
 import Button from "../Button/Button";
-import { useRouter } from "next/navigation";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import GameOnSidebar from "@/components/Sidebar/Sidebar";
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import { ChevronDown } from "lucide-react";
+import GameOnSidebar from "@/components/Sidebar/Sidebar";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState("");
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -37,68 +282,41 @@ export default function Navbar() {
       key: "bgmi",
       text: "BGMI",
       hasData: true,
-      icon: (
-        <Image src="/images/bgmi.svg" alt="BGMI Icon" width={25} height={25} />
-      ),
+      icon: <Image src="/images/bgmi.svg" alt="BGMI Icon" width={25} height={25} />,
     },
     {
       key: "valorant",
       text: "VALORANT",
       hasData: false,
-      icon: (
-        <Image
-          src="/images/valorantLogo.png"
-          alt="Valorant Icon"
-          width={25}
-          height={25}
-        />
-      ),
+      icon: <Image src="/images/valorantLogo.png" alt="Valorant Icon" width={25} height={25} />,
     },
     {
       key: "csgo",
       text: "CS GO",
       hasData: false,
-      icon: (
-        <Image
-          src="/images/csgoLogo.png"
-          alt="CS GO Icon"
-          width={25}
-          height={25}
-        />
-      ),
+      icon: <Image src="/images/csgoLogo.png" alt="CS GO Icon" width={25} height={25} />,
     },
   ];
 
-  const handleGameButtonClick = (key: string, hasData: boolean) => {
-    setSelectedBtn(key);
-    if (hasData) {
-      router.push("/tournaments");
-    } else {
-      router.push("/coming-soon");
-    }
-  };
-
+  const getGameRoute = (hasData: boolean) =>
+    hasData ? "/tournaments" : "/coming-soon";
+  const getLeaderboardRought = (hasData : boolean) => hasData ? '/leaderboard' : "/coming-soon";
   return (
     <header
       className={classNames(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out backdrop-blur-sm bg-black/5",
-        {
-          "shadow-lg": scrolled,
-        }
+        "fixed top-0 left-0 w-full z-[100] transition-all duration-500 ease-in-out backdrop-blur-sm bg-black/5",
+        { "shadow-lg": scrolled }
       )}
     >
       <div
         className={classNames(
           "absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--highlight)] to-transparent",
-          {
-            "opacity-50": scrolled,
-            "opacity-30": !scrolled,
-          }
+          { "opacity-50": scrolled, "opacity-30": !scrolled }
         )}
       />
 
       {/* Top Navbar */}
-      <div className="backdrop-blur-sm bg-black/5 max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <div className="backdrop-blur-sm bg-black/5 max-w-7xl mx-auto px-6 py-3 flex justify-between items-center relative z-[100]">
         <Link href="/">
           <Image
             src="/images/Logos-03.svg"
@@ -109,88 +327,57 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* <div className="hidden md:flex items-center space-x-9 text-sm">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 rounded-md px-2 py-1">
-                Tournaments
-                <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-              </button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent
-              className="w-56 bg-[var(--background)] rounded-md shadow-lg overflow-hidden backdrop-blur-sm bg-opacity-95"
-              sideOffset={8}
-              align="start"
-            >
-              {gameButtons.map((game) => (
-                <DropdownMenuItem
-                  key={game.key}
-                  className="px-4 py-2.5 focus:bg-gray-700/80 focus:text-white cursor-pointer transition-colors text-sm font-medium text-[var(--highlight)] focus:outline-none first:rounded-t-md last:rounded-b-md"
-                  onClick={() => handleGameButtonClick(game.key, game.hasData)}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 flex items-center justify-center">
-                      {game.icon}
-                    </div>
-                    <span>{game.text}</span>
-                    {game.hasData && (
-                      <span className="ml-auto text-xs opacity-70">→</span>
-                    )}
-                  </div>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <Link
-            href="/leaderboard"
-            className="text-[var(--highlight)] hover:text-white transition-colors font-medium px-2 py-1 rounded-md"
-          >
-            Leaderboard
-          </Link>
-          <Link href="/shop">
-            <Button
-              text="Shop Right"
-              className="hover:scale-105 transition-transform cursor-pointer"
-            />
-          </Link>
-        </div> */}
         <div className="hidden md:flex items-center space-x-9 text-sm">
+          {/* Tournaments Dropdown */}
           <div className="relative group">
-            <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--highlight)] focus-visible:ring-opacity-75 rounded-md px-2 py-1">
+            <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none px-2 py-1">
               Tournaments
               <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
             </button>
 
-            {/* Dropdown container with improved z-index and explicit colors */}
-            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl overflow-hidden backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[200]">
               {gameButtons.map((game) => (
-                <div
+                <Link
                   key={game.key}
-                  className="px-4 py-2.5 hover:bg-pink-500/20 focus:bg-pink-500/30 focus:text-white cursor-pointer transition-colors text-sm font-medium text-white"
-                  onClick={() => handleGameButtonClick(game.key, game.hasData)}
+                  href={getGameRoute(game.hasData)}
+                  className="block px-4 py-2.5 hover:bg-pink-500/20 transition-colors text-sm font-medium text-white"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-5 h-5 flex items-center justify-center">
                       {game.icon}
                     </div>
                     <span>{game.text}</span>
-                    {game.hasData && (
-                      <span className="ml-auto text-xs opacity-70">→</span>
-                    )}
+                    {game.hasData && <span className="ml-auto text-xs opacity-70">→</span>}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
 
-          <Link
-            href="/leaderboard"
-            className="text-[var(--highlight)] hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-[var(--highlight)]/10"
-          >
-            Leaderboard
-          </Link>
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none px-2 py-1">
+              Leaderboard
+              <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+            </button>
+
+            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[200]">
+              {gameButtons.map((game) => (
+                <Link
+                  key={game.key}
+                  href={getLeaderboardRought(game.hasData)}
+                  className="block px-4 py-2.5 hover:bg-pink-500/20 transition-colors text-sm font-medium text-white"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 flex items-center justify-center">
+                      {game.icon}
+                    </div>
+                    <span>{game.text}</span>
+                    {game.hasData && <span className="ml-auto text-xs opacity-70">→</span>}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link href="/shop">
             <Button
               text="Shop Right"
@@ -200,32 +387,15 @@ export default function Navbar() {
         </div>
 
         <div className="md:hidden">
-          <button onClick={() => setSidebarOpen(true)}>
+          <button onClick={() => setSidebarOpen((prev) => !prev)}>
             <Bars3Icon className="h-7 w-7 text-white" />
           </button>
         </div>
       </div>
 
-      {/* Game Buttons */}
-      {/* <div className="pt-1 pb-3 w-full z-50 transition-all duration-500">
-        <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto">
-          {gameButtons.map(({ key, text, icon, hasData }) => (
-            <Button
-              key={key}
-              text={text}
-              icon={icon}
-              fullWidth
-              className="flex justify-center items-center min-w-[100px] cursor-pointer"
-              selected={selectedBtn === key}
-              onClick={() => handleGameButtonClick(key, hasData)}
-            />
-          ))}
-        </div>
-      </div> */}
-
-      {/* Display My Pathname Temparory Basis  */}
+      {/* Game Buttons on Homepage */}
       {pathname === "/" && (
-        <div className="pt-1 pb-3 w-full z-20 transition-all duration-500">
+        <div className="pt-1 pb-3 w-full transition-all duration-500 z-[50] relative">
           <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto">
             {gameButtons.map(({ key, text, icon, hasData }) => (
               <Button
@@ -235,7 +405,10 @@ export default function Navbar() {
                 fullWidth
                 className="flex justify-center items-center min-w-[100px] cursor-pointer"
                 selected={selectedBtn === key}
-                onClick={() => handleGameButtonClick(key, hasData)}
+                onClick={() => {
+                  setSelectedBtn(key);
+                  window.location.href = getGameRoute(hasData);
+                }}
               />
             ))}
           </div>

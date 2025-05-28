@@ -44,9 +44,17 @@ export default function Footer() {
         </div>
 
         {/* legal row */}
-        <div className="text-xs text-gray-400 space-y-4">
+        <div className="text-xs text-gray-400 space-y-4 mb-8">
           <div className="flex flex-col items-center gap-2">
             <p>© {new Date().getFullYear()} Spawn Right</p>
+             <a
+            href="https://www.tecnomi.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red-400 text-xs hover:text-yellow-400"
+          >
+            Designed & Developed by Tecnomi
+          </a>
             <div className="flex gap-4 font-bold text-white">
               <Link href="/terms-of-use">Terms of Use</Link>
               <Link href="/privacy-policy">Privacy Policy</Link>
@@ -112,7 +120,16 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto mt-10 flex justify-between text-sm border-t border-white/10 pt-6 text-gray-400">
-        <p>© {new Date().getFullYear()} Spawn Right</p>
+        <p>© {new Date().getFullYear()} Spawn Right |{" "}
+          <a
+            href="https://www.tecnomi.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red-400 text-sm hover:text-yellow-400"
+          >
+            Designed & Developed by Tecnomi
+          </a>
+        </p>
         <div className="flex space-x-6">
           <Link href="/terms-of-use" className="font-bold text-white">
             Terms of Use
