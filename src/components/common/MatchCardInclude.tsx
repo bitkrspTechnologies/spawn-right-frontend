@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { MatchCardProps } from '@/lib/type';
+import { MatchCardProps } from "@/lib/type";
 // import Image from 'next/image';
 
 // export default function MatchCard() {
@@ -22,10 +22,9 @@ import { MatchCardProps } from '@/lib/type';
 //   };
 
 //   return (
-//     <div className="font-[roboto] max-w-sm w-full rounded-xl border border-white/70 p-4 text-white shadow-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md backdrop-saturate-150">
+//     <div className=" max-w-sm w-full rounded-xl border border-white/70 p-4 text-white shadow-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md backdrop-saturate-150">
 
 //       <div>
-       
 
 //         <div className="flex justify-between items-center mb-4">
 //           <div className="flex items-center gap-4 text-sm text-gray-300">
@@ -69,7 +68,6 @@ import { MatchCardProps } from '@/lib/type';
 //   );
 // }
 
-
 // import Image from 'next/image';
 
 // interface Team {
@@ -96,7 +94,7 @@ import { MatchCardProps } from '@/lib/type';
 //   result,
 // }: MatchCardProps) {
 //   return (
-//     <div className="font-[roboto] w-full rounded-xl border border-white/70 p-4 text-white shadow-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md backdrop-saturate-150">
+//     <div className=" w-full rounded-xl border border-white/70 p-4 text-white shadow-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md backdrop-saturate-150">
 
 //       <div>
 //         {/* Header */}
@@ -142,12 +140,10 @@ import { MatchCardProps } from '@/lib/type';
 //   );
 // }
 
-
 // MatchCard.tsx
-import Image from 'next/image';
-import { getValidLogoUrl } from '@/utils/urlValidator';
-import { useRouter } from 'next/navigation';
-
+import Image from "next/image";
+import { getValidLogoUrl } from "@/utils/urlValidator";
+import { useRouter } from "next/navigation";
 
 export default function MatchCard({
   matchId,
@@ -159,12 +155,12 @@ export default function MatchCard({
 }: MatchCardProps) {
   const router = useRouter();
 
-    const handleLeaderboardClick = () => {
+  const handleLeaderboardClick = () => {
     router.push(`/leaderboard/${matchId}`);
   };
 
   return (
-    <div className="font-[roboto] text-lg w-full rounded-xl border border-white/70 p-4 text-white shadow-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md backdrop-saturate-150">
+    <div className=" text-lg w-full rounded-xl border border-white/70 p-4 text-white shadow-lg bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md backdrop-saturate-150">
       {/* Header */}
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-4 text-sm text-gray-300">
@@ -185,11 +181,11 @@ export default function MatchCard({
         {teams.map((team, index) => (
           <div key={index} className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <Image 
-                src={getValidLogoUrl(team.logo)} 
-                alt={`${team.name} Logo`} 
-                width={20} 
-                height={18} 
+              <Image
+                src={getValidLogoUrl(team.logo)}
+                alt={`${team.name} Logo`}
+                width={20}
+                height={18}
               />
               <span className="font-bold text-sm">{team.name}</span>
             </div>
@@ -211,7 +207,7 @@ export default function MatchCard({
 
       {/* Leaderboard Button */}
       <div className="text-right mt-1">
-          <button 
+        <button
           onClick={handleLeaderboardClick}
           className="text-white text-sm hover:text-pink-400 transition-colors"
         >

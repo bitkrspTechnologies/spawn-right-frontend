@@ -52,13 +52,13 @@ export default function Shop() {
           className={`pt-16 pb-20 ${isMobile ? "px-4" : "pr-[350px] pl-5"}`}
           style={{ height: "calc(100vh - 64px)" }}
         >
-          <div className={`w-full h-[100px] mt-4`}>
+          <div className="w-full h-[60px] md:h-[100px] mt-4">
             <Image
               src="/images/ShopRightBanner.png"
               alt="ShopRight Banner"
               width={1920}
               height={250}
-              className="object-cover rounded-xl w-full h-full"
+              className="object-fit rounded-xl w-full h-full"
               priority
             />
           </div>
@@ -69,7 +69,7 @@ export default function Shop() {
                 {/* Category Select - Full width on mobile, normal on larger screens */}
                 <div className="relative w-full sm:w-auto">
                   <select
-                    className="w-full pl-10 pr-8 py-2.5 text-sm bg-transparent font-medium text-gray-700 sm:border-r border-gray-200 appearance-none focus:outline-none focus:ring-0 cursor-pointer"
+                    className="w-full pl-5 pr-8 py-2.5 text-sm bg-transparent font-medium text-gray-700 sm:border-r border-gray-200 appearance-none focus:outline-none focus:ring-0 cursor-pointer"
                     value={selectedCategory}
                     onChange={handleCategoryChange}
                   >
@@ -105,7 +105,7 @@ export default function Shop() {
                   <input
                     type="text"
                     placeholder="Search for products like 'Gaming Keyboard'..."
-                    className="w-full pl-4 sm:pl-14 pr-12 py-2.5 text-sm bg-transparent outline-none placeholder-gray-400 text-gray-700 sm:rounded-r-lg"
+                    className="w-full pl-4 pr-12 py-2.5 text-sm bg-transparent outline-none placeholder-gray-400 text-gray-700 sm:rounded-r-lg"
                     value={searchQuery}
                     onChange={handleSearchChange}
                   />

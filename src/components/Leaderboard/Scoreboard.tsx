@@ -136,7 +136,7 @@
 //       <div
 //         className={`flex ${
 //           isMobile ? "flex-col" : "flex-wrap"
-//         } gap-3 mb-6 justify-start font-[roboto]`}
+//         } gap-3 mb-6 justify-start `}
 //       >
 //         <input
 //           type="text"
@@ -332,7 +332,7 @@
 //       <div
 //         className={`flex ${
 //           isMobile ? "flex-col" : "flex-wrap"
-//         } gap-3 mb-6 justify-start font-[roboto]`}
+//         } gap-3 mb-6 justify-start `}
 //       >
 //         <input
 //           type="text"
@@ -483,7 +483,7 @@
 //     <div className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent`}>
 //       {/* Search */}
 //       <div
-//         className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start font-[roboto]`}
+//         className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start `}
 //       >
 //         <input
 //           type="text"
@@ -627,10 +627,12 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
   }
 
   return (
-    <div className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent max-w-[1200px] w-full mx-auto`}>
+    <div
+      className={`p-4 ${isMobile ? "" : "p-6"} text-white bg-transparent max-w-[1200px] w-full mx-auto`}
+    >
       {/* Search */}
       <div
-        className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start font-[roboto]`}
+        className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 mb-6 justify-start `}
       >
         <input
           type="text"
@@ -687,7 +689,7 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
           text="Show More"
           className="hover:scale-105 transition-transform px-6 py-2"
           onClick={() => handlePageChange(currentPage + 1)}
-        // disabled={currentPage >= totalPages}
+          // disabled={currentPage >= totalPages}
         />
       </div>
     </div>

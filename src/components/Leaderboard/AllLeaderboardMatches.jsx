@@ -75,7 +75,7 @@ const AllLeaderboardMatches = () => {
 
   if (isError) {
     return (
-      <div className="min-h-screen text-white p-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+      <div className=" text-white p-4 sm:px-6 lg:px-8 ">
         <h1 className="text-2xl font-bold mb-4">Live Matches</h1>
         <div className="bg-red-900/50 border border-red-500 text-red-200 p-4 rounded-lg max-w-md text-center">
           <p className="font-medium">Error loading matches</p>
@@ -88,7 +88,7 @@ const AllLeaderboardMatches = () => {
   const matches = data?.data || [];
 
   return (
-    <div className="min-h-screen text-white p-4 sm:px-6 lg:px-8">
+    <div className=" text-white p-4 sm:px-6 lg:px-8">
       <h1 className="text-2xl font-bold mb-6">Live Matches</h1>
 
       {/* Desktop Table */}

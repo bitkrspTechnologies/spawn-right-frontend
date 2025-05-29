@@ -47,7 +47,7 @@
 //           {showRemoveBtn && (
 //             <a
 //               href="#"
-//               className="font-[roboto] text-xs text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline"
+//               className=" text-xs text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline"
 //             >
 //               <button>Remove Ads</button>
 //               <Image
@@ -62,12 +62,12 @@
 
 //         {/* Slide Content */}
 //         <div className="py-6 min-h-[100px] transition-all duration-500 ease-in-out">
-//           <div className="font-[roboto] mt-8">
+//           <div className=" mt-8">
 //             <button className="px-4 py-3 rounded-md border-2 bg-[radial-gradient(ellipse_at_center,_#56319F_0%,_#171233_70%,_#0a0615_100%)] text-white text-xs shadow-lg">
 //               {slides[activeSlide].title}
 //             </button>
 //           </div>
-//           <p className="font-[roboto] text-[var(--adtext)] font-normal text-sm">
+//           <p className=" text-[var(--adtext)] font-normal text-sm">
 //             {slides[activeSlide].description}
 //           </p>
 //         </div>
@@ -90,7 +90,6 @@
 //     </div>
 //   );
 // }
-
 
 // components/leadeboard/adforleaderboard
 
@@ -143,7 +142,7 @@ export default function AdForLeaderBoard({
           {showRemoveBtn && (
             <a
               href="#"
-              className="font-[roboto] text-xs text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline"
+              className=" text-xs text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline"
             >
               <button>Remove Ads</button>
               <Image
@@ -158,12 +157,12 @@ export default function AdForLeaderBoard({
 
         {/* Slide Content */}
         <div className="py-6 min-h-[100px] transition-all duration-500 ease-in-out">
-          <div className="font-[roboto] mt-8">
+          <div className=" mt-8">
             <button className="px-4 py-3 rounded-md border-2 bg-[radial-gradient(ellipse_at_center,_#56319F_0%,_#171233_70%,_#0a0615_100%)] text-white text-xs shadow-lg">
               {slides[activeSlide].title}
             </button>
           </div>
-          <p className="font-[roboto] text-[var(--adtext)] font-normal text-sm">
+          <p className=" text-[var(--adtext)] font-normal text-sm">
             {slides[activeSlide].description}
           </p>
         </div>

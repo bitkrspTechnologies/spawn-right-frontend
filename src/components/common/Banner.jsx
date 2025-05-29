@@ -1,55 +1,16 @@
-// import Image from "next/image";
-// import { useMediaQuery } from "react-responsive";
-
-// const Banner = () => {
-//   const isMobile = useMediaQuery({ maxWidth: 767 });
-
-// if (isMobile) {
-//   return (
-//     <div className="w-full h-[100px] m-0 p-0 flex items-center justify-center overflow-hidden">
-//       <Image
-//         src="/images/MobileBanner.png"
-//         alt="Mobile Banner"
-//         width={800}
-//         height={220}
-//         className="max-w-full max-h-full object-contain rounded-lg"
-//         priority
-//       />
-//     </div>
-//   );
-// }
-
-
-//   return (
-//     <div className="w-full h-[150px] mt-4 px-4">
-//       <Image
-//         src="/images/banner.svg"
-//         alt="Desktop Banner"
-//         width={1920}
-//         height={150}
-//         className="w-full object-cover rounded-xl"
-//         priority
-//       />
-//     </div>
-//   );
-// };
-
-// export default Banner;
-
 "use client"
 
 import Image from "next/image"
 import { useMediaQuery } from "react-responsive"
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 
 const Banner = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
-  const [isVisible, setIsVisible] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    // Trigger animation after component mounts
-    const timer = setTimeout(() => setIsVisible(true), 100)
-    return () => clearTimeout(timer)
+    setIsMounted(true)
   }, [])
 
   const mainTextWords = ["Track", "•", "Rank", "•", "Dominate"]
@@ -72,105 +33,113 @@ const Banner = () => {
     "place",
   ]
 
+  // Animation variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  }
+
+  const item = {
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100 } }
+  }
+
   if (isMobile) {
     return (
-      <div className="relative mb-2 w-full h-[100px] m-0 pt-0 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-[100px] m-0 p-0 flex items-center justify-center overflow-hidden">
         <Image
           src="/images/MobileBanner.png"
           alt="Mobile Banner"
-          width={800}
-          height={220}
-          className="max-w-full max-h-full object-contain rounded-lg"
+          fill
+          className="object-cover rounded-lg"
           priority
         />
 
         {/* Mobile Text Overlay */}
-        <div className="absolute inset-0 flex flex-col px-2 pt-2">
+        <motion.div
+          className="absolute inset-0 flex flex-col px-4 pt-3 justify-start"
+          variants={container}
+          initial="hidden"
+          animate={isMounted ? "show" : "hidden"}
+        >
           {/* Main Title */}
-          <div className="flex flex-wrap gap-1 mb-1">
+          <motion.div className="flex flex-wrap gap-x-2 mb-1">
             {mainTextWords.map((word, index) => (
-              <span
+              <motion.span
                 key={index}
-                className={`text-[#FF1ADF] font-bold text-sm transition-all duration-700 ease-out drop-shadow-lg ${
-                  isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform -translate-x-8"
-                }`}
-                style={{
-                  transitionDelay: `${index * 200}ms`,
-                }}
+                variants={item}
+                className="text-[#FF1ADF] font-bold text-sm drop-shadow-lg"
               >
                 {word}
-              </span>
+              </motion.span>
             ))}
-          </div>
+          </motion.div>
 
           {/* Subtitle */}
-          <div className="flex flex-wrap w-65 gap-1 text-xs">
+          <motion.div className="flex flex-wrap gap-x-1.5 gap-y-0.5 text-[10px]">
             {subTextWords.map((word, index) => (
-              <span
+              <motion.span
                 key={index}
-                className={`text-white-200 transition-all duration-700 ease-out drop-shadow-md ${
-                  isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform -translate-x-8"
-                }`}
-                style={{
-                  transitionDelay: `${mainTextWords.length * 200 + index * 100}ms`,
-                }}
+                variants={item}
+                className="text-gray-200 drop-shadow-md"
               >
                 {word}
-              </span>
+              </motion.span>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     )
   }
 
   return (
-    <div className="font-[roboto] relative w-full my-3">
+    <div className="relative w-full h-[100px] my-3">
       <Image
         src="/images/banner.svg"
         alt="Desktop Banner"
-        width={1920}
-        height={150}
-        className="w-full object-cover rounded-xl"
+        fill
+        className="object-contain rounded-xl"
         priority
       />
 
       {/* Desktop Text Overlay */}
-      <div className="absolute inset-0 flex flex-col px-8 lg:justify-center">
+      <motion.div
+        className="absolute inset-0 flex flex-col px-8 justify-center"
+        variants={container}
+        initial="hidden"
+        animate={isMounted ? "show" : "hidden"}
+      >
         {/* Main Title */}
-        <div className="flex  gap-3 mb-3">
+        <motion.div className="flex gap-3 mb-3 flex-wrap">
           {mainTextWords.map((word, index) => (
-            <span
+            <motion.span
               key={index}
-              className={`text-[#FF1ADF] font-normal text-sm lg:text-lg transition-all duration-700 ease-out drop-shadow-lg ${
-                isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform -translate-x-12"
-              }`}
-              style={{
-                transitionDelay: `${index * 200}ms`,
-              }}
+              variants={item}
+              className="text-[#FF1ADF] font-bold text-lg lg:text-xl drop-shadow-lg"
             >
               {word}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
 
         {/* Subtitle */}
-        <div className="flex flex-wrap gap-2 text-sm lg:text-lg max-w-4xl">
+        <motion.div className="flex flex-wrap gap-x-3 gap-y-1 text-xs lg:text-xs max-w-4xl">
           {subTextWords.map((word, index) => (
-            <span
+            <motion.span
               key={index}
-              className={`text-gray-200 transition-all duration-700 ease-out drop-shadow-md ${
-                isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform -translate-x-12"
-              }`}
-              style={{
-                transitionDelay: `${mainTextWords.length * 200 + index * 100}ms`,
-              }}
+              variants={item}
+              className="text-gray-200 drop-shadow-md"
             >
               {word}
-            </span>
+            </motion.span>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 }

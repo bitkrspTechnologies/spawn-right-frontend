@@ -36,7 +36,7 @@ export default function TournamentsTabs({ gameName = "all", }) {
     }) || [];
 
   return (
-    <div className="w-full mx-auto sm:px-4 lg:px-6">
+    <div className="w-full max-w-5xl mx-auto sm:px-4 lg:px-6">
       <div className="flex justify-between bg-[#2a2a2a] rounded-t-lg overflow-hidden">
         {tabs.map((tab, i) => (
           <button

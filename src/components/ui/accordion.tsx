@@ -101,8 +101,8 @@ export function AccordionItem({
       data-active={isActive || undefined}
       className={`rounded-lg overflow-hidden mb-2  ${
         isActive
-          ? "active border-2 dark:border-[#423769]  border-[#F2F2F2] dark:bg-[#0000] bg-[#0000]"
-          : "bg-transparent border-2 dark:hover:border-[#656fe2]"
+          ? "active border-2 border-[#423769]  bg-[#0000] "
+          : "bg-transparent border-2 hover:border-[#656fe2]"
       }
     `}
       data-value={value}
@@ -125,10 +125,8 @@ export function AccordionHeader({
   return (
     <motion.div
       data-active={isActive || undefined}
-      className={`group p-4 cursor-pointer transition-all font-semibold    dark:text-white text-white dark:hover:bg-[#1e2a78] hover:bg-[#F2F2F2] dark:hover:text-white hover:text-white flex justify-between items-center ${
-        isActive
-          ? "active  dark:bg-[#1e2a78] bg-[#F2F2F2] "
-          : "dark:bg-[#11112b] bg-white"
+      className={`group p-4 cursor-pointer transition-all font-semibold text-white hover:bg-[#1e2a78]  hover:text-white flex justify-between items-center ${
+        isActive ? "active  bg-[#1e2a78]" : "bg-[#11112b]"
       }
       `}
       onClick={() => onChangeIndex(value)}
@@ -164,7 +162,7 @@ export function AccordionPanel({
           animate={{ height: "auto", overflow: "hidden" }}
           exit={{ height: 0 }}
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-          className={cn("group dark:bg-black bg-black text-white", className)}
+          className={cn("group bg-black text-white", className)}
         >
           <motion.article
             initial={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
