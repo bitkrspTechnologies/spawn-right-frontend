@@ -51,7 +51,7 @@ export default function Footer() {
               href="https://www.tecnomi.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-red-400 text-xs hover:text-yellow-400"
+              className="text-xs "
             >
               Designed & Developed by Tecnomi
             </a>
@@ -126,7 +126,7 @@ export default function Footer() {
             href="https://www.tecnomi.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-red-400 text-sm hover:text-yellow-400"
+            className="text-sm"
           >
             Designed & Developed by Tecnomi
           </a>
