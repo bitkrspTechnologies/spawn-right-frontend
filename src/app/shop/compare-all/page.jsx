@@ -84,18 +84,7 @@ export default function CompareAll() {
           className={`pt-16 pb-20 ${isMobile ? "px-4" : "pr-[350px] pl-5"}`}
           style={{ height: "calc(100vh - 64px)", overflowY: "auto" }}
         >
-          <div className={`w-full h-[100px] mt-4 ${isMobile ? "" : "px-6"}`}>
-            <Image
-              src="/images/ShopRightBanner.png"
-              alt="ShopRight Banner"
-              width={1920}
-              height={250}
-              className="object-cover rounded-xl w-full h-full"
-              priority
-            />
-          </div>
-
-          <div className={`flex-1 overflow-y-auto px-4 pb-4 ${isMobile ? "" : "px-6"}`}>
+          <div className={`flex-1 mt-12 overflow-y-auto px-4 pb-4 ${isMobile ? "" : "px-6"}`}>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold text-white">Product Comparison</h2>
               {selectedProducts.length > 0 && (
