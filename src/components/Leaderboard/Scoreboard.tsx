@@ -564,7 +564,6 @@ interface TeamScore {
   total: number; // Total Points
 }
 
-const ITEMS_PER_PAGE = 6;
 
 const Scoreboard = ({ matchId }: { matchId: string | number }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -591,18 +590,7 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
     team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedData = filteredData.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
 
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
 
   const rankStyles = (rank: number) => {
     if (rank === 1)
@@ -661,7 +649,7 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
         </div>
 
         {/* Table Rows */}
-        {paginatedData.map((team) => (
+        {filteredData.map((team) => (
           <div
             key={team.rank}
             className={`grid ${isMobile ? "grid-cols-8" : "grid-cols-12"} py-3 text-xs text-center text-gray-300 bg-white/10 backdrop-blur-md backdrop-saturate-150 mb-4`}
@@ -683,15 +671,6 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
         ))}
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center items-center mt-6">
-        <Button
-          text="Show More"
-          className="hover:scale-105 transition-transform px-6 py-2"
-          onClick={() => handlePageChange(currentPage + 1)}
-          // disabled={currentPage >= totalPages}
-        />
-      </div>
     </div>
   );
 };

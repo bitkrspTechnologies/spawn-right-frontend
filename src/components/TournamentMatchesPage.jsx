@@ -31,18 +31,35 @@ export default function TournamentMatchesPage() {
     return true;
   }) || [];
   // Transform API data to MatchCard props
+  // const transformedMatches = filteredMatches?.map(match => ({
+  //   matchId: match._id,
+  //   matchNumber: match.matchNumber,
+  //   game: match.tournament.name,
+  //   logo: match.tournament.logo,
+  //   teams: match.teams.map(team => ({
+  //     name: team.team.name,
+  //     logo: team.team.logo,
+  //     score: team.totalPoints
+  //   })),
+  //   result: match.winner?.name || 'No winner yet'
+  // })) || [];
+
   const transformedMatches = filteredMatches?.map(match => ({
-    matchId: match._id,
-    matchNumber: match.matchNumber,
-    game: match.tournament.name,
-    logo: match.tournament.logo,
-    teams: match.teams.map(team => ({
+  matchId: match._id,
+  matchNumber: match.matchNumber,
+  game: match.tournament.name,
+  logo: match.tournament.logo,
+  teams: match.teams
+    .sort((a, b) => b.totalPoints - a.totalPoints) // sort by totalPoints descending
+    .slice(0, 3) // take top 3 teams
+    .map(team => ({
       name: team.team.name,
       logo: team.team.logo,
       score: team.totalPoints
     })),
-    result: match.winner?.name || 'No winner yet'
-  })) || [];
+  result: match.winner?.name || 'No winner yet'
+})) || [];
+
 
   return (
     <div className="w-full mx-auto sm:px-4 lg:px-6">
