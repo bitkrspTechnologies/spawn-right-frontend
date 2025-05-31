@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllTournaments } from "@/services/Tournaments";
 import TournamentSkeleton from "@/components/Skeleton/TournamentSkeleton";
 import { TournamentCard } from "@/components/common/TournamentCard";
-
+import { useSearchParams } from "next/navigation"; 
 
 export default function TournamentsTabs({ gameName = "all", }) {
-  const [activeTab, setActiveTab] = useState("ongoing");
+   const searchParams = useSearchParams(); // ✅ hook to get the current URL search params
+  const tabFromUrl = searchParams?.get("tab") || "ongoing";
+  const [activeTab, setActiveTab] = useState(tabFromUrl);
+
+    useEffect(() => {
+    setActiveTab(tabFromUrl);
+  }, [tabFromUrl]);
 
   const {
     data: tournaments,

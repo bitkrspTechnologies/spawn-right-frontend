@@ -96,7 +96,7 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
           {!isMobile ? (
             <>
               {/* Ad + Leaderboard Section */}
-              <div className="flex flex-wrap gap-4 justify-center items-stretch px-4 py-6">
+              {/* <div className="flex flex-wrap gap-4 justify-center items-stretch px-4 py-6">
                 <div className="flex-1 min-w-[300px] max-w-[550px]">
                   <GlobalLeaderboardCard />
                 </div>
@@ -106,7 +106,7 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
                 <div className="flex-1 min-w-[200px] max-w-[300px]">
                   <AdForLeaderBoard />
                 </div>
-              </div>
+              </div> */}
 
               {/* Content Section */}
               <div className="flex justify-center gap-1 flex-wrap w-full items-start mb-10">

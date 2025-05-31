@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAllTournaments } from "../../services/Tournaments";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { getValidLogoUrl } from "@/utils/urlValidator";
+import { fetchAll } from "@/services/LiveMatches";
+import { useRouter } from "next/navigation";
 
 // Add these skeleton components at the top of your file
 const MatchSkeleton = ({ isMobile = false }: { isMobile?: boolean }) => (
@@ -86,17 +88,34 @@ function formatDateRange(start: string, end: string) {
 }
 
 const UpcomingEventsSection = () => {
+  const router = useRouter()
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  // Fetch upcoming matches
+  /* Fetch Complete matches */
   const {
-    data: matches,
+    data: matchesData,
     isLoading: matchesLoading,
     error: matchesError,
   } = useQuery({
-    queryKey: ["upcomingMatches"],
-    queryFn: () => fetchAllTournaments("completed"),
+    queryKey: ["completedMatches"],
+    queryFn: () => fetchAll("completed"),
+    refetchInterval: 10000,
+    staleTime: 0,
   });
+
+  const handleCardClick = (matchId: string) => {
+    router.push(`/leaderboard/${matchId}`);
+  };
+
+  const matches = matchesData?.data || [];
+
+  // Ensure matches are sorted by date (newest first)
+  const latest4Matches = [...matches]
+    .sort((a, b) => new Date(b.completedAt || b.createdAt) - new Date(a.completedAt || a.createdAt))
+    .slice(0, 4);
+
+
+  /* End Fetch Complete matches */
 
   const {
     data: tournaments,
@@ -105,10 +124,11 @@ const UpcomingEventsSection = () => {
   } = useQuery({
     queryKey: ["tournaments", "completed"],
     queryFn: () => fetchAllTournaments("completed"),
+    refetchInterval: 10000,
   });
 
-  console.log("matches", matches);
-  console.log("tournaments", tournaments);
+  const latestTournaments = tournaments?.data?.slice(0, 4) || [];
+
 
   if (error)
     return (
@@ -130,11 +150,12 @@ const UpcomingEventsSection = () => {
           ) : matchesError ? (
             <p className="text-red-500 text-center">Error loading matches</p>
           ) : (
-            matches?.data?.map((match: any, index: number) => (
+            latest4Matches?.map((match: any, index: number) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-2 mb-3"
-              >
+                className="bg-white/10  cursor-pointer backdrop-blur-md border border-[var(--border-card)] rounded-md p-2 mb-3"
+                onClick={() => handleCardClick(match._id)}
+             >
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center text-xs gap-1">
@@ -150,7 +171,7 @@ const UpcomingEventsSection = () => {
                       </span>
                     </div>
                     <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
-                      {formatStartDate(match.start_date)}
+                      {formatStartDate(match.startTime)}
                     </span>
                   </div>
                 </div>
@@ -160,8 +181,10 @@ const UpcomingEventsSection = () => {
         </div>
 
         {/* Tournaments */}
-
-        <div className="">
+        <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
+          <span className="trophy-icon">🏆</span>Finished Tournaments
+        </h2>
+        <div className="-mt-5">
           {isLoading ? (
             <>
               <TournamentSkeleton isMobile />
@@ -169,25 +192,31 @@ const UpcomingEventsSection = () => {
               <TournamentSkeleton isMobile />
             </>
           ) : (
-            upcomingTournaments.map((tournament, index) => (
+
+            latestTournaments?.map((match: any, index: number) => (
+
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-lg px-3 py-2 mb-2"
+                className="bg-white/10 cursor-pointer backdrop-blur-md border border-[var(--border-card)] rounded-lg p-2 mb-3"
+                onClick={() => router.push("/tournaments?tab=completed")}
               >
-                <div className="flex justify-between items-start gap-2">
+                <div className="flex justify-between items-start gap-2 mb-2">
                   <div className="flex items-center gap-2 text-xs flex-1 min-w-0">
                     <Image
-                      src={tournament.logo}
+                      src={match.logo}
                       alt="Tournament"
                       width={18}
                       height={18}
                     />
                     <span className="font-medium break-words whitespace-normal">
-                      {tournament.name}
+                      {match.name}
                     </span>
                   </div>
                   <span className="bg-white text-black text-[10px] px-2 py-0.5 rounded-xs font-semibold whitespace-nowrap">
-                    {tournament.date}
+                    {formatDateRange(
+                      match.start_date,
+                      match.end_date
+                    )}
                   </span>
                 </div>
               </div>
@@ -213,10 +242,11 @@ const UpcomingEventsSection = () => {
           ) : matchesError ? (
             <p className="text-red-500 text-center">Error loading matches</p>
           ) : (
-            matches?.data?.map((match: any, index: number) => (
+            latest4Matches?.map((match: any, index: number) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-3.5 mb-3"
+                className="bg-white/10 cursor-pointer backdrop-blur-md border border-[var(--border-card)] rounded-md p-3.5 mb-2"
+                onClick={() => handleCardClick(match._id)}
               >
                 <div className="flex justify-between items-center mb-2 ">
                   <div className="flex items-center justify-between w-full">
@@ -233,7 +263,7 @@ const UpcomingEventsSection = () => {
                       </span>
                     </div>
                     <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
-                      {formatStartDate(match.start_date)}
+                      {formatStartDate(match.startTime)}
                     </span>
                   </div>
                 </div>
@@ -245,7 +275,7 @@ const UpcomingEventsSection = () => {
 
       {/* Right Section - Tournaments */}
       <div className="flex flex-col flex-1 w-full">
-        <div className="bg-[var(--card-bg-uc)] rounded-2xl p-5 shadow-lg w-full">
+        <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
           {isLoading ? (
             <>
               <TournamentSkeleton />
@@ -253,7 +283,7 @@ const UpcomingEventsSection = () => {
               <TournamentSkeleton />
             </>
           ) : (
-            tournaments?.data?.map(
+            latestTournaments?.map(
               (
                 tournament: {
                   logo: string | StaticImport;
@@ -265,13 +295,15 @@ const UpcomingEventsSection = () => {
               ) => (
                 <div
                   key={index}
-                  className="font-[roboto_serif] bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-4"
+                  className="font-[roboto_serif] cursor-pointer bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-2"
+                  onClick={() => router.push("/tournaments?tab=completed")}
+
                 >
                   <div className="flex flex-col sm:flex-row justify-between gap-2">
                     <div className="flex items-center text-md gap-2">
-                      {tournament.logo !== "NA" ? (
+                      {tournament.logo && tournament.logo.trim() !== "" && tournament.logo !== "NA" ? (
                         <Image
-                          src={tournament.logo}
+                          src={getValidLogoUrl(tournament.logo)}
                           alt={`${tournament.name} Logo`}
                           width={30}
                           height={30}
@@ -282,12 +314,13 @@ const UpcomingEventsSection = () => {
                           <span className="text-xs">🏆</span>
                         </div>
                       )}
+
                       <span className="font-medium text-md">
                         {tournament.name}
                       </span>
                     </div>
                     <div className="flex items-center gap-3 min-w-29">
-                      {tournament.logo !== "NA" ? (
+                      {tournament.logo && tournament.logo.trim() !== "" && tournament.logo !== "NA" ? (
                         <Image
                           src={tournament.logo}
                           alt={`${tournament.name} Logo`}
@@ -300,6 +333,7 @@ const UpcomingEventsSection = () => {
                           <span className="text-xs">🏆</span>
                         </div>
                       )}
+
                       <span className="bg-white text-black text-xs px-2 py-1 rounded-sm font-semibold">
                         {formatDateRange(
                           tournament.start_date,

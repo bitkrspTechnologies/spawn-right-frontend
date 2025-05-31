@@ -180,7 +180,7 @@ const UpcomingEventsSection = () => {
                 <TournamentSkeleton isMobile />
               </>
             ) : (
-              upcomingTournaments.map((tournament, index) => (
+              tournaments?.data?.map((tournament, index) => (
                 <div
                   key={index}
                   className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-lg px-3 py-2 mb-2"
@@ -198,7 +198,10 @@ const UpcomingEventsSection = () => {
                       </span>
                     </div>
                     <span className="bg-white text-black text-[10px] px-2 py-0.5 rounded-xs font-semibold whitespace-nowrap">
-                      {tournament.date}
+                       {formatDateRange(
+                          tournament.start_date,
+                          tournament.end_date
+                        )}
                     </span>
                   </div>
                 </div>
