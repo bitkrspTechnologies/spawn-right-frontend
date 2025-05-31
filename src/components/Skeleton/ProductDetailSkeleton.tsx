@@ -2,6 +2,7 @@
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { useMediaQuery } from "react-responsive";
 import Footer from "@/components/Footer/Footer";
+import AdForLeaderBoard from "../Leaderboard/AdForLeaderBoard";
 
 export default function ProductDetailSkeleton() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -12,8 +13,10 @@ export default function ProductDetailSkeleton() {
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         {!isMobile && (
           <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
-            <div className="bg-gray-700 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col animate-pulse"></div>
-            <div className="bg-gray-700 h-[calc(50%-.3rem)] rounded-lg p-4 flex flex-col animate-pulse"></div>
+            {/* <div className="bg-gray-700 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col animate-pulse"></div>
+            <div className="bg-gray-700 h-[calc(50%-.3rem)] rounded-lg p-4 flex flex-col animate-pulse"></div> */}
+            <AdForLeaderBoard />
+            <AdForLeaderBoard />
           </div>
         )}
         <div

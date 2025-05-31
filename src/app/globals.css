@@ -226,22 +226,66 @@
 
 
 .bended-line {
-    position: relative;
-    padding-left: 20px; /* Adjust padding as needed */
+  position: relative;
+  padding-left: 20px;
+  /* Adjust padding as needed */
 }
 
 .bended-line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 10px; /* Adjust width for the bend */
-    height: 2px; /* Adjust height for the bend */
-    background-color: #ff007f; /* Change color as needed */
-    border-radius: 5px; /* Make it rounded */
-    transform: translateY(-50%) rotate(45deg); /* Bend the line */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 10px;
+  /* Adjust width for the bend */
+  height: 2px;
+  /* Adjust height for the bend */
+  background-color: #ff007f;
+  /* Change color as needed */
+  border-radius: 5px;
+  /* Make it rounded */
+  transform: translateY(-50%) rotate(45deg);
+  /* Bend the line */
 }
 
 button {
   cursor: pointer;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-blink {
+  animation: blink 1.5s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+
+  75% {
+    transform: translateY(-3px) rotate(-3deg);
+  }
+}
+
+.trophy-icon {
+  display: inline-block;
+  animation: bounce 1.5s infinite ease-in-out;
+  transform-origin: center bottom;
 }

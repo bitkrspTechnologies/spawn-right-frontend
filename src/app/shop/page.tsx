@@ -5,6 +5,7 @@ import ProductShowcase from "@/components/ShopRight/ProductShowcase/ProductShowc
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { useMediaQuery } from "react-responsive";
+import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
 
 export default function Shop() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -44,8 +45,9 @@ export default function Shop() {
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         {!isMobile && (
           <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
-            <div className="bg-gray-400 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col"></div>
-            <div className="bg-gray-400 h-[calc(50%-.3rem)] rounded-lg p-4 flex flex-col"></div>
+            {/* <div className="bg-gray-400 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col"></div> */}
+            <AdForLeaderBoard />
+            <AdForLeaderBoard />
           </div>
         )}
         <div

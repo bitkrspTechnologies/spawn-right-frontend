@@ -36,7 +36,7 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
     },
     {
       title: "LEADERBOARD",
-      href: "/shop",
+      href: "/leaderboard",
       subLinks: ["BGMI", "Valorent", "COD"],
     },
   ];

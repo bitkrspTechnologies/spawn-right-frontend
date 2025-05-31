@@ -32,7 +32,7 @@ export default function Carousel() {
   //   },
   // ];
 
-    const slides = [
+  const slides = [
     {
       img: "/images/carousel/carousel-one.jpg",
       title: "BGMI",
@@ -48,7 +48,7 @@ export default function Carousel() {
       // link: "/tournaments",
     },
     {
-      img: "/images/carousel/carousel-three.jpg",
+      img: "/images/carousel/carousel-four.jpg",
       title: "COUNTER STRIKE GO",
       // date: "APR 21ST - 27TH",
       // info: "KNOW MORE",
@@ -75,14 +75,14 @@ export default function Carousel() {
               } duration-700 ease-in-out`}
             >
               {/* <a href={slide.link} target="_blank" rel="noopener noreferrer"> */}
-                <Image
-                  src={slide.img}
-                  alt={`Slide ${idx + 1}`}
-                  width={500}
-                  height={200}
-                  className="w-full h-full object-contain"
-                  priority
-                />
+              <Image
+                src={slide.img}
+                alt={`Slide ${idx + 1}`}
+                width={500}
+                height={200}
+                className="w-full h-full object-contain"
+                priority
+              />
               {/* </a> */}
               <div className="absolute z-20 left-3 bottom-4 w-[90%] text-white">
                 {/* <p className="bg-white text-black px-2 py-0.5 rounded-md text-[10px] font-bold inline-block tracking-wider">
@@ -124,14 +124,14 @@ export default function Carousel() {
             }`}
           >
             {/* <a href={slide.link} target="_blank" rel="noopener noreferrer"> */}
-              <Image
-                src={slide.img}
-                alt={`Slide ${idx + 1}`}
-                width={1920}
-                height={200}
-                objectFit="content"
-                className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              />
+            <Image
+              src={slide.img}
+              alt={`Slide ${idx + 1}`}
+              width={1920}
+              height={200}
+              objectFit="content"
+              className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            />
             {/* </a> */}
 
             {/* 🔹 Content that changes with slide */}

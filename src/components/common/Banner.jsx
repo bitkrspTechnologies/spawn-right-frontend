@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useMediaQuery } from "react-responsive"
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 const Banner = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 })
@@ -33,47 +33,88 @@ const Banner = () => {
     "place",
   ]
 
-  // Animation variants
+  // Animation variants for left entrance
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05
+        staggerChildren: 0.08,
+        delayChildren: 0.3
       }
     }
   }
 
   const item = {
-    hidden: { opacity: 0, x: -20 },
-    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100 } }
+    hidden: {
+      opacity: 0,
+      x: -50,
+      rotate: -5
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 12
+      }
+    }
   }
 
-  if (isMobile) {
-    return (
-      <div className="relative w-full h-[100px] m-0 p-0 flex items-center justify-center overflow-hidden">
+  const backgroundVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6
+      }
+    }
+  }
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial="hidden"
+        animate={isMounted ? "visible" : "hidden"}
+        variants={backgroundVariants}
+        className="relative w-full my-3 overflow-hidden rounded-xl"
+        style={{ height: isMobile ? '120px' : '150px' }}
+      >
+        {/* Background Image */}
         <Image
-          src="/images/MobileBanner.png"
-          alt="Mobile Banner"
+          src={isMobile ? "/images/MobileBanner.png" : "/images/banner.svg"}
+          alt="Banner"
           fill
-          className="object-cover rounded-lg"
+          className="object-contain"
           priority
         />
 
-        {/* Mobile Text Overlay */}
+        {/* Gradient overlay */}
+        <div className="absolute inset-0" />
+
+        {/* Text Content - Coming from left */}
         <motion.div
-          className="absolute inset-0 flex flex-col px-4 pt-3 justify-start"
+          className="absolute inset-0 flex flex-col justify-center px-6 sm:px-8"
           variants={container}
           initial="hidden"
           animate={isMounted ? "show" : "hidden"}
         >
           {/* Main Title */}
-          <motion.div className="flex flex-wrap gap-x-2 mb-1">
+          <motion.div className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 mb-2 sm:mb-3">
             {mainTextWords.map((word, index) => (
               <motion.span
                 key={index}
                 variants={item}
-                className="text-[#FF1ADF] font-bold text-sm drop-shadow-lg"
+                className={`text-[#FF1ADF] font-bold ${isMobile ? 'text-lg' : 'text-xl lg:text-2xl'
+                  } drop-shadow-lg`}
+                whileHover={{
+                  scale: 1.1,
+                  originX: 0,
+                  color: "#ff5aef"
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 {word}
               </motion.span>
@@ -81,66 +122,35 @@ const Banner = () => {
           </motion.div>
 
           {/* Subtitle */}
-          <motion.div className="flex flex-wrap gap-x-1.5 gap-y-0.5 text-[10px]">
+          <motion.div className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2.5 gap-y-0.5">
             {subTextWords.map((word, index) => (
               <motion.span
                 key={index}
                 variants={item}
-                className="text-gray-200 drop-shadow-md"
+                className={`text-gray-200 ${isMobile ? 'text-xs' : 'text-sm lg:text-base'
+                  } drop-shadow-md`}
+                // whileHover={{
+                //   scale: 1.05,
+                //   x: 3 // Slight push to right on hover
+                // }}
+                transition={{ type: "spring", stiffness: 400 }}
+                custom={index} // For custom delays
               >
                 {word}
               </motion.span>
             ))}
           </motion.div>
         </motion.div>
-      </div>
-    )
-  }
 
-  return (
-    <div className="relative w-full h-[100px] my-3">
-      <Image
-        src="/images/banner.svg"
-        alt="Desktop Banner"
-        fill
-        className="object-contain rounded-xl"
-        priority
-      />
-
-      {/* Desktop Text Overlay */}
-      <motion.div
-        className="absolute inset-0 flex flex-col px-8 justify-center"
-        variants={container}
-        initial="hidden"
-        animate={isMounted ? "show" : "hidden"}
-      >
-        {/* Main Title */}
-        <motion.div className="flex gap-3 mb-3 flex-wrap">
-          {mainTextWords.map((word, index) => (
-            <motion.span
-              key={index}
-              variants={item}
-              className="text-[#FF1ADF] font-bold text-lg lg:text-xl drop-shadow-lg"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </motion.div>
-
-        {/* Subtitle */}
-        <motion.div className="flex flex-wrap gap-x-3 gap-y-1 text-xs lg:text-xs max-w-4xl">
-          {subTextWords.map((word, index) => (
-            <motion.span
-              key={index}
-              variants={item}
-              className="text-gray-200 drop-shadow-md"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </motion.div>
+        {/* Animated left border - reinforces the left entrance */}
+        <motion.div
+          className="absolute top-0 left-0 w-1 h-full"
+          initial={{ scaleY: 0, originY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        />
       </motion.div>
-    </div>
+    </AnimatePresence>
   )
 }
 

@@ -104,15 +104,11 @@ export default function Home() {
       <div className="relative h-screen w-screen overflow-hidden">
         {/* Fixed Left Sidebar */}
 
-        <div className="hidden md:block w-[100px] bg-gray-400 h-[70vh] fixed top-40 left-5 z-10 p-4 ">
-          {/* Sidebar content */}
+        {/* <div className="hidden md:block w-[100px] bg-gray-400 h-[70vh] fixed top-40 left-5 z-10 p-4 ">
         </div>
-
-        {/* Fixed Right Sidebar */}
 
         <div className="hidden md:block w-[100px] bg-gray-400 h-[70vh] fixed top-40 right-5 z-10 p-4 ">
-          {/* Sidebar content */}
-        </div>
+        </div> */}
 
         {/* Scrollable Main Content */}
         <div className="h-full w-full pt-30 overflow-y-auto scrollbar-hide">
@@ -128,7 +124,7 @@ export default function Home() {
             {/* Hero Section Carousel Ends  */}
 
             {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
-            <div className="flex flex-col sm:flex-row gap-3 mx-2 min-h-[200px] mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 mx-2 min-h-[200px] pt-5 pb-16">
               <div
                 className={`${isMobile ? "mt-2 hidden" : "mt-9"}  w-full sm:w-1/2`}
               >
@@ -146,7 +142,9 @@ export default function Home() {
               <LiveMatches variant="grid" />
             </div>
 
-            <GameCarousel />
+            <div className="pb-10">
+              <GameCarousel />
+            </div>
             {/* <div className="m-4 mt-20">
             <h2 className="text-xl md:text-2xl font-bold text-center text-white">
               Shop Right
@@ -163,21 +161,21 @@ export default function Home() {
               <DefaultSlider />
             </div>
 
-            {/* {isMobile ? (
+            {isMobile ? (
               <div className="mt-6">
                 <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-                  Finished Matches
+                  <span className="trophy-icon">🏆</span>Finished Matches
                 </h2>
                 <FinishedMatch />
               </div>
             ) : (
               <div className="ml-12 mt-10">
                 <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-                  Finished Matches
+                  <span className="trophy-icon">🏆</span> Finished Matches
                 </h2>
                 <FinishedMatch />
               </div>
-            )} */}
+            )}
 
             {/* <div className="mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">

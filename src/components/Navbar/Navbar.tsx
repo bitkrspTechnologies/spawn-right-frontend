@@ -282,25 +282,42 @@ export default function Navbar() {
       key: "bgmi",
       text: "BGMI",
       hasData: true,
-      icon: <Image src="/images/bgmi.svg" alt="BGMI Icon" width={25} height={25} />,
+      icon: (
+        <Image src="/images/bgmi.svg" alt="BGMI Icon" width={25} height={25} />
+      ),
     },
     {
       key: "valorant",
       text: "VALORANT",
       hasData: false,
-      icon: <Image src="/images/valorantLogo.png" alt="Valorant Icon" width={25} height={25} />,
+      icon: (
+        <Image
+          src="/images/valorantLogo.png"
+          alt="Valorant Icon"
+          width={25}
+          height={25}
+        />
+      ),
     },
     {
       key: "csgo",
       text: "CS GO",
       hasData: false,
-      icon: <Image src="/images/csgoLogo.png" alt="CS GO Icon" width={25} height={25} />,
+      icon: (
+        <Image
+          src="/images/csgoLogo.png"
+          alt="CS GO Icon"
+          width={25}
+          height={25}
+        />
+      ),
     },
   ];
 
   const getGameRoute = (hasData: boolean) =>
     hasData ? "/tournaments" : "/coming-soon";
-  const getLeaderboardRought = (hasData : boolean) => hasData ? '/leaderboard' : "/coming-soon";
+  const getLeaderboardRought = (hasData: boolean) =>
+    hasData ? "/leaderboard" : "/coming-soon";
   return (
     <header
       className={classNames(
@@ -335,19 +352,25 @@ export default function Navbar() {
               <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
             </button>
 
-            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[200]">
+            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500/30 rounded-lg shadow-xl backdrop-blur-lg bg-opacity-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[200] transform group-hover:translate-y-1">
               {gameButtons.map((game) => (
                 <Link
                   key={game.key}
                   href={getGameRoute(game.hasData)}
-                  className="block px-4 py-2.5 hover:bg-pink-500/20 transition-colors text-sm font-medium text-white"
+                  className="block px-4 py-3 hover:bg-pink-500/10 transition-all duration-200 text-sm font-medium text-white/90 hover:text-white border-b border-white/5 last:border-b-0"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 flex items-center justify-center">
+                    <div className="w-5 h-5 flex items-center justify-center text-pink-400">
                       {game.icon}
                     </div>
-                    <span>{game.text}</span>
-                    {game.hasData && <span className="ml-auto text-xs opacity-70">→</span>}
+                    <span className="text-white/90 group-hover:text-white transition-colors">
+                      {game.text}
+                    </span>
+                    {game.hasData && (
+                      <span className="ml-auto text-xs opacity-70 group-hover:opacity-100 transition-opacity">
+                        →
+                      </span>
+                    )}
                   </div>
                 </Link>
               ))}
@@ -360,19 +383,25 @@ export default function Navbar() {
               <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
             </button>
 
-            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500 rounded-md shadow-xl backdrop-blur-sm bg-opacity-95 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[200]">
+            <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500/30 rounded-lg shadow-xl backdrop-blur-lg bg-opacity-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[200] transform group-hover:translate-y-1">
               {gameButtons.map((game) => (
                 <Link
                   key={game.key}
                   href={getLeaderboardRought(game.hasData)}
-                  className="block px-4 py-2.5 hover:bg-pink-500/20 transition-colors text-sm font-medium text-white"
+                  className="block px-4 py-3 hover:bg-pink-500/10 transition-all duration-200 text-sm font-medium text-white/90 hover:text-white border-b border-white/5 last:border-b-0"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 flex items-center justify-center">
+                    <div className="w-5 h-5 flex items-center justify-center text-pink-400">
                       {game.icon}
                     </div>
-                    <span>{game.text}</span>
-                    {game.hasData && <span className="ml-auto text-xs opacity-70">→</span>}
+                    <span className="text-white/90 group-hover:text-white transition-colors">
+                      {game.text}
+                    </span>
+                    {game.hasData && (
+                      <span className="ml-auto text-xs opacity-70 group-hover:opacity-100 transition-opacity">
+                        →
+                      </span>
+                    )}
                   </div>
                 </Link>
               ))}

@@ -92,11 +92,11 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
     <>
       <Navbar />
       <div className="relative h-screen w-full overflow-hidden">
-        <div className="h-full pt-15 overflow-y-auto scrollbar-hide">
+        <div className="h-full pt-15 overflow-y-auto scrollbar-hide ">
           {!isMobile ? (
             <>
               {/* Ad + Leaderboard Section */}
-              {/* <div className="flex flex-wrap gap-4 justify-center items-stretch px-4 py-6">
+              <div className="flex flex-wrap gap-4 justify-center items-stretch px-4 py-6">
                 <div className="flex-1 min-w-[300px] max-w-[550px]">
                   <GlobalLeaderboardCard />
                 </div>
@@ -106,10 +106,10 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
                 <div className="flex-1 min-w-[200px] max-w-[300px]">
                   <AdForLeaderBoard />
                 </div>
-              </div> */}
+              </div>
 
               {/* Content Section */}
-              <div className="flex gap-1 flex-wrap  items-start">
+              <div className="flex justify-center gap-1 flex-wrap w-full items-start mb-10">
                 {/* Main Content */}
                 <div className="flex-1 min-w-[700px] max-w-[980px] w-full flex ">
                   {children}
@@ -117,20 +117,19 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
 
                 {/* Side Ad */}
                 <div className="flex flex-col mt-5 sticky top-2 self-start">
-                <div className=" min-w-[200px] max-w-[300px] w-full min-h-[300px]">
-                  <AdForLeaderBoard />
+                  <div className=" min-w-[200px] max-w-[300px] w-full min-h-[300px]">
+                    <AdForLeaderBoard />
+                  </div>
+                  <div className="min-w-[200px] max-w-[300px]">
+                    <AdForLeaderBoard />
+                  </div>
                 </div>
-                   <div className="min-w-[200px] max-w-[300px]">
-                  <AdForLeaderBoard />
-                </div>
-                </div>
-                 
               </div>
             </>
           ) : (
             <>
               {/* Mobile Layout */}
-              <div className="px-1 py-4 flex flex-col gap-6">
+              <div className="px-1 py-4 flex flex-col gap-6 mb-10">
                 <div className="bg-[#1f1f2e] p-1 shadow-md border border-gray-800 text-white">
                   {/* Top bar with Advertisement and bottom border */}
                   <div className="flex justify-between items-center border-b border-gray-700 pb-1 mb-1">

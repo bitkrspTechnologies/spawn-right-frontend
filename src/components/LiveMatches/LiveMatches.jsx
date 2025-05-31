@@ -87,7 +87,7 @@ export default function LiveMatches({ variant = "grid" }) {
   if (error) return (
     <section className="w-full px-3 py-4">
       <div className="flex items-center gap-3 mb-6">
-        <span className="w-5 h-5 bg-red-500 rounded-full"></span>
+        <span className="w-5 h-5 bg-red-500 rounded-full animate-blink"></span>
         <h2 className="text-3xl font-bold text-white">Live Matches</h2>
       </div>
       <div className="text-center p-8 text-red-500">Error loading matches</div>
@@ -100,7 +100,7 @@ export default function LiveMatches({ variant = "grid" }) {
     <section className={`w-full ${variant === "carousel" ? "px-0 py-0" : "px-3 py-4"}`}>
       {/* Header */}
       <div className={`flex items-center gap-2 sm:gap-3 ${variant === "carousel" ? "mb-2 px-2 sm:px-3" : "mb-4 sm:mb-6"}`}>
-        <span className="w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full"></span>
+        <span className="w-5 h-5 bg-red-500 rounded-full animate-blink"></span>
         <h2 className="text-base sm:text-2xl font-bold text-white">Live Matches</h2>
       </div>
 
