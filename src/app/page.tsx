@@ -90,7 +90,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import JoinBanner from "@/components/common/JoinBanner";
 import Banner from "@/components/common/Banner";
 import { useMediaQuery } from "react-responsive";
-import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
+// import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
 });

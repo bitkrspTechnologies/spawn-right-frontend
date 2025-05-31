@@ -2,12 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { Roboto_Serif } from "next/font/google";
-
-const robotoSerif = Roboto_Serif({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 const upcomingMatches = [
   {
