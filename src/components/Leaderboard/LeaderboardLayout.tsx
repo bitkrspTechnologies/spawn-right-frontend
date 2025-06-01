@@ -73,7 +73,7 @@
 // components/Leaderboard/LeaderboardLayout.tsx
 
 import React from "react";
-import GlobalLeaderboardCard from "@/components/Leaderboard/GlobalLeaderboardCard";
+// import GlobalLeaderboardCard from "@/components/Leaderboard/GlobalLeaderboardCard";
 import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";

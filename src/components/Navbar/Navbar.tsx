@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
 import Button from "../Button/Button";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { ChevronDown } from "lucide-react";
 import GameOnSidebar from "@/components/Sidebar/Sidebar";
@@ -15,7 +15,6 @@ export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedBtn, setSelectedBtn] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
