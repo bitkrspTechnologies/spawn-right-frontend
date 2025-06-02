@@ -19,7 +19,7 @@ const Banner = () => {
     "BGMI,",
     "VALORANT",
     "&",
-    "CS GO",
+    "CS:GO",
     "Tournaments,",
     "Player",
     "rankings",
@@ -96,21 +96,20 @@ const Banner = () => {
 
         {/* Text Content - Coming from left */}
         <motion.div
-          className="absolute inset-0 flex flex-col justify-center px-6 sm:px-8"
+          className="absolute inset-0 flex flex-col justify-center px-4 sm:px-8"
           variants={container}
           initial="hidden"
           animate={isMounted ? "show" : "hidden"}
         >
           {/* Main Title */}
-          <motion.div className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 mb-2 sm:mb-3">
+          <motion.div className="flex flex-wrap items-center gap-x-1 sm:gap-x-3 mb-1 sm:mb-3">
             {mainTextWords.map((word, index) => (
               <motion.span
                 key={index}
                 variants={item}
                 data-glitch={word}
-                className={`glitch font-bold ${isMobile ? 'text-lg' : 'text-xl lg:text-2xl'
+                className={`glitch font-bold ${isMobile ? 'text-sm sm:text-base' : 'text-xl lg:text-2xl'
                   } drop-shadow-lg`}
-
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {word}
@@ -119,19 +118,15 @@ const Banner = () => {
           </motion.div>
 
           {/* Subtitle */}
-          <motion.div className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-2.5 gap-y-0.5">
+          <motion.div className="flex flex-wrap items-center gap-x-1 sm:gap-x-2 gap-y-0">
             {subTextWords.map((word, index) => (
               <motion.span
                 key={index}
                 variants={item}
-                className={`text-gray-200 ${isMobile ? 'text-xs' : 'text-sm lg:text-base'
+                className={`text-gray-200 ${isMobile ? 'text-[10px] sm:text-xs' : 'text-sm lg:text-base'
                   } drop-shadow-md`}
-                // whileHover={{
-                //   scale: 1.05,
-                //   x: 3 // Slight push to right on hover
-                // }}
                 transition={{ type: "spring", stiffness: 400 }}
-                custom={index} // For custom delays
+                custom={index}
               >
                 {word}
               </motion.span>
@@ -139,7 +134,7 @@ const Banner = () => {
           </motion.div>
         </motion.div>
 
-        {/* Animated left border - reinforces the left entrance */}
+        {/* Animated left border */}
         <motion.div
           className="absolute top-0 left-0 w-1 h-full"
           initial={{ scaleY: 0, originY: 0 }}

@@ -318,7 +318,6 @@ button {
   transform-origin: center bottom;
 }
 
-/* From Uiverse.io by andrew-demchenk0 */
 .glitch {
   position: relative;
   font-size: 25px;
@@ -375,5 +374,15 @@ button {
 
   to {
     transform: translate(0);
+  }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .glitch {
+    font-size: 18px;
+    /* Smaller font size for mobile */
+    letter-spacing: 3px;
+    /* Slightly reduced letter spacing */
   }
 }
