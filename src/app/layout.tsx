@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import TopLoader from "@/components/TopLoader/TopLoader";
 import ReactQueryProvider from "./providers";
 import { Toaster } from "@/components/ui/sonner";
+import { Suspense } from "react";
+import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
 
 const audiowide = Audiowide({
   weight: "400",
@@ -53,7 +55,17 @@ export default function RootLayout({
             <div className="glow-overlay top-[80%] left-[20%] hidden lg:block"></div>
             <div className="glow-overlay bottom-[10%] right-[30%] hidden lg:block"></div>
 
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow">
+              <Suspense
+                fallback={
+                  <div className="flex justify-center items-center mt-10">
+                    <SuspenseLoader />
+                  </div>
+                }
+              >
+                {children}
+              </Suspense>
+            </main>
             <Toaster />
           </ThemeProvider>
         </ReactQueryProvider>

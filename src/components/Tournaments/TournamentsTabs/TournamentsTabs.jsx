@@ -3,14 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAllTournaments } from "@/services/Tournaments";
 import TournamentSkeleton from "@/components/Skeleton/TournamentSkeleton";
 import { TournamentCard } from "@/components/common/TournamentCard";
-import { useSearchParams } from "next/navigation"; 
+import { useSearchParams } from "next/navigation";
 
 export default function TournamentsTabs({ gameName = "all", }) {
-   const searchParams = useSearchParams(); // ✅ hook to get the current URL search params
+  const searchParams = useSearchParams(); // ✅ hook to get the current URL search params
   const tabFromUrl = searchParams?.get("tab") || "ongoing";
   const [activeTab, setActiveTab] = useState(tabFromUrl);
 
-    useEffect(() => {
+  useEffect(() => {
     setActiveTab(tabFromUrl);
   }, [tabFromUrl]);
 
@@ -42,7 +42,7 @@ export default function TournamentsTabs({ gameName = "all", }) {
     }) || [];
 
   return (
-    <div className="w-full max-w-5xl mx-auto sm:px-4 lg:px-6">
+    <div className="w-full max-w-5xl mx-auto sm:px-4 lg:px-6 mt-10">
       <div className="flex justify-between bg-[#2a2a2a] rounded-t-lg overflow-hidden">
         {tabs.map((tab, i) => (
           <button
@@ -61,8 +61,8 @@ export default function TournamentsTabs({ gameName = "all", }) {
 
       <div className="mt-6">
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[...Array(2)].map((_, i) => (
               <TournamentSkeleton key={i} />
             ))}
           </div>

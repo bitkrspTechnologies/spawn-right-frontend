@@ -107,13 +107,10 @@ const Banner = () => {
               <motion.span
                 key={index}
                 variants={item}
-                className={`text-[#FF1ADF] font-bold ${isMobile ? 'text-lg' : 'text-xl lg:text-2xl'
+                data-glitch={word}
+                className={`glitch font-bold ${isMobile ? 'text-lg' : 'text-xl lg:text-2xl'
                   } drop-shadow-lg`}
-                whileHover={{
-                  scale: 1.1,
-                  originX: 0,
-                  color: "#ff5aef"
-                }}
+
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {word}

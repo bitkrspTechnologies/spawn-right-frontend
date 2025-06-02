@@ -90,6 +90,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import JoinBanner from "@/components/common/JoinBanner";
 import Banner from "@/components/common/Banner";
 import { useMediaQuery } from "react-responsive";
+// import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
 // import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
   ssr: false,
@@ -116,13 +117,11 @@ export default function Home() {
             {/* Banner Section Starts */}
             <Banner />
             {/* Banner Section Ends */}
-
             {/* Hero Section Carousel Starts  */}
             <div className="mb-8 px-1 w-full max-w-[100vw]">
               <Carousel />
             </div>
             {/* Hero Section Carousel Ends  */}
-
             {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
             <div className="flex flex-col sm:flex-row gap-3 mx-2 min-h-[200px] pt-5 pb-16">
               <div
@@ -136,12 +135,10 @@ export default function Home() {
               </div>
             </div>
             {/* Ad Section Carousel  and Live Matches Carousel Ends  */}
-
             <UpcomingEventsSection />
             <div className="flex gap-5 min-h-[200px] mb-8">
               <LiveMatches variant="grid" />
             </div>
-
             <div className="pb-10">
               <GameCarousel />
             </div>
@@ -160,7 +157,6 @@ export default function Home() {
             <div className="w-full">
               <DefaultSlider />
             </div>
-
             {isMobile ? (
               <div className="mt-6">
                 <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
@@ -170,20 +166,15 @@ export default function Home() {
               </div>
             ) : (
               <div className="ml-12 mt-10">
-                <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-                  <span className="trophy-icon">🏆</span> Finished Matches
-                </h2>
                 <FinishedMatch />
               </div>
             )}
-
             {/* <div className="mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
               We are trusted by
             </h2>
             <CustomersSectionDemo />
           </div> */}
-
             <div className="my-10">
               <JoinBanner />
             </div>

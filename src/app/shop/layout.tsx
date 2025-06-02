@@ -1,5 +1,7 @@
+import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
 import type { Metadata } from "next";
 import { Audiowide } from "next/font/google";
+import { Suspense } from "react";
 
 const audiowide = Audiowide({
   weight: "400",
@@ -22,7 +24,15 @@ export default function ShopLayout({
       <div className="glow-overlay top-[30%] left-[50%] hidden lg:block"></div>
       <div className="glow-overlay top-[80%] left-[20%] hidden lg:block"></div>
       <div className="glow-overlay bottom-[10%] right-[30%] hidden lg:block"></div>
-      <main className="flex-grow">{children}</main>
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center mt-26">
+            <SuspenseLoader />
+          </div>
+        }
+      >
+        {children}
+      </Suspense>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 const TournamentSkeleton = () => (
-  <div className="max-w-sm w-full rounded-xl border border-white/20 p-4 bg-gradient-to-br from-white/5 to-white/[0.02] animate-pulse">
+  <div className="max-w-md w-full rounded-xl border border-white/20 p-4 bg-gradient-to-br from-white/5 to-white/[0.02] animate-pulse">
     <div className="flex justify-between items-center mb-4">
       <div className="flex items-center gap-4">
         <div className="h-4 w-16 bg-gray-700 rounded"></div>

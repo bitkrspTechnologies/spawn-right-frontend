@@ -93,7 +93,7 @@ export default function Navbar() {
       />
 
       {/* Top Navbar */}
-      <div className="backdrop-blur-sm bg-black/5 max-w-7xl mx-auto px-6 py-3 flex justify-between items-center h-[80px]">
+      <div className="backdrop-blur-sm bg-black/5 max-w-7xl mx-auto px-6 py-3 flex justify-between items-center h-[80px] relative z-[100]">
         <Link href="/">
           <Image
             src="/images/Logos-03.svg"

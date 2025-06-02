@@ -10,7 +10,7 @@ const AllLeaderboardMatches = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen text-white p-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen text-white p-4 sm:px-6 lg:px-8 pt-5">
         <h1 className="text-2xl font-bold mb-6">Live Matches</h1>
 
         {/* Desktop Skeleton */}
@@ -88,13 +88,13 @@ const AllLeaderboardMatches = () => {
   const matches = data?.data || [];
 
   return (
-    <div className=" text-white p-4 sm:px-6 lg:px-8">
+    <div className=" text-white p-4 sm:px-6 lg:px-8 mt-5">
       <h1 className="text-2xl font-bold mb-6">Live Matches</h1>
 
       {/* Desktop Table */}
       <div className="hidden lg:block space-y-2">
         {/* Header */}
-        <div className="grid grid-cols-12 gap-4 px-4 py-3 bg-gray-800 rounded-lg text-gray-300 font-medium text-sm">
+        <div className="grid grid-cols-12 gap-4 px-4 py-3 bg-white/5 p-5 cursor-pointer hover:bg-white/10 transition-all border border-white/10 hover:border-white/20 backdrop-blur-sm rounded-lg text-gray-300 font-medium text-sm">
           <div className="col-span-1">Match</div>
           <div className="col-span-3">Tournament</div>
           <div className="col-span-1 text-center">Stage</div>
@@ -109,7 +109,7 @@ const AllLeaderboardMatches = () => {
           <Link
             href={`/leaderboard/${match._id}`}
             key={match._id}
-            className="grid grid-cols-12 gap-4 items-center px-4 py-3 bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors"
+            className="grid grid-cols-12 gap-4 items-center px-4 py-3 bg-white/5 rounded-xl p-5 cursor-pointer hover:bg-white/10 transition-all border border-white/10 hover:border-white/20 backdrop-blur-sm  hover:bg-gray-750"
           >
             <div className="col-span-1 font-medium">{match.matchNumber}</div>
             <div className="col-span-3 truncate">
@@ -159,7 +159,7 @@ const AllLeaderboardMatches = () => {
         {matches.map((match) => (
           <div
             key={match._id}
-            className="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition-colors"
+            className="bg-white/5 p-5 cursor-pointer hover:bg-white/10 transition-all border border-white/10 hover:border-white/20 backdrop-blur-sm rounded-lg hover:bg-gray-750 "
           >
             <Link href={`/leaderboard/${match._id}`}>
               <div className="flex justify-between items-start mb-3">

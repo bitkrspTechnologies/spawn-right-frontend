@@ -199,7 +199,7 @@ export default function AdCarousel() {
             href="#"
             className={` inline-flex items-center space-x-1 hover:underline font-medium ${
               isMobile ? "text-[10px]" : "text-xs"
-            } text-[#F2BF43]`}
+            } text-[oklch(0.627 0.265 303.9)]`}
           >
             <span>Remove Ads</span>
             <Image
@@ -239,7 +239,7 @@ export default function AdCarousel() {
             key={index}
             onClick={() => setActiveSlide(index)}
             className={`h-2 w-2 rounded-full cursor-pointer transition-all ${
-              activeSlide === index ? "bg-yellow-400" : "bg-gray-500"
+              activeSlide === index ? "bg-purple-400" : "bg-gray-500"
             }`}
           />
         ))}

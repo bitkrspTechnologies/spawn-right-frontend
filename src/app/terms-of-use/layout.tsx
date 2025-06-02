@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Audiowide } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import TopLoader from "@/components/TopLoader/TopLoader";
+import { Suspense } from "react";
+import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
 
 const audiowide = Audiowide({
   weight: "400",
@@ -47,7 +49,15 @@ export default function TermsOfUseLayout({
         <div className="glow-overlay top-[30%] left-[50%]" />
         <div className="glow-overlay top-[80%] left-[20%]" />
         <div className="glow-overlay bottom-[10%] right-[30%]" />
-        <main className="flex-grow">{children}</main>
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center mt-26">
+              <SuspenseLoader />
+            </div>
+          }
+        >
+          {children}
+        </Suspense>
       </div>
     </ThemeProvider>
   );

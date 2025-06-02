@@ -67,7 +67,7 @@ const UpcomingEventsSection = () => {
     isLoading: matchesLoading,
     error: matchesError,
   } = useQuery({
-    queryKey: ["upcomingMatches"],
+    queryKey: ["matches", "upcoming"],
     queryFn: () => fetchAllTournaments("upcoming"),
   });
 
@@ -171,10 +171,10 @@ const UpcomingEventsSection = () => {
                       </span>
                     </div>
                     <span className="bg-white text-black text-[10px] px-2 py-0.5 rounded-xs font-semibold whitespace-nowrap">
-                       {formatDateRange(
-                          tournament.start_date,
-                          tournament.end_date
-                        )}
+                      {formatDateRange(
+                        tournament.start_date,
+                        tournament.end_date
+                      )}
                     </span>
                   </div>
                 </div>

@@ -129,7 +129,7 @@ export default function Shop() {
             <div className="w-full max-w-6xl mx-auto rounded-lg shadow-md overflow-hidden">
               {product.product_original_price && (
                 <div className="p-2 md:p-4 bg-black text-white text-center my-4 md:my-8">
-                  <h1 className="text-sm md:text-xl font-bold uppercase">
+                  <h1 className="glitch text-sm md:text-xl font-bold uppercase" data-glitch="Grab the Offer Now!! Get the Maximum Discount" >
                     Grab the Offer Now!!{"  "}
                     {product.discount_percentage || "Get the Maximum Discount"}
                   </h1>

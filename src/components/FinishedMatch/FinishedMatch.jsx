@@ -129,7 +129,7 @@ const UpcomingEventsSection = () => {
                 key={index}
                 className="bg-white/10  cursor-pointer backdrop-blur-md border border-[var(--border-card)] rounded-md p-2 mb-3"
                 onClick={() => handleCardClick(match._id)}
-             >
+              >
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center text-xs gap-1">
@@ -206,6 +206,9 @@ const UpcomingEventsSection = () => {
     <div className="font-bold flex flex-col lg:flex-row gap-8 justify-center items-start py-5 px-4">
       {/* Left Section - Matches */}
       <div className="flex flex-col flex-1 w-full">
+        <h2 className="text-xl md:text-2xl font-normal text-white mb-5">
+          <span className="trophy-icon">🏆</span> Finished Matches
+        </h2>
         <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
           {matchesLoading ? (
             <>
@@ -249,6 +252,9 @@ const UpcomingEventsSection = () => {
 
       {/* Right Section - Tournaments */}
       <div className="flex flex-col flex-1 w-full">
+        <h2 className="text-xl md:text-2xl font-normal text-white mb-5">
+          <span className="trophy-icon">🏆</span>Finished Tournaments
+        </h2>
         <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
           {isLoading ? (
             <>

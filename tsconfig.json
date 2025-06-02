@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/shop/[id]/page.jsx", "src/app/shop/compare-all/page.jsx", "src/components/Leaderboard/DummyComponent.jsx", "src/components/ShopRight/ProductShowcase/ProductCard.jsx", "src/components/LiveMatches/LiveMatches.jsx", "src/components/ShopRight/ProductShowcase/ProductShowcase.jsx", "src/components/TournamentMatchesPage.jsx", "src/components/Tournaments/TournamentsTabs/TournamentsTabs.jsx", "src/services/LiveMatches.js", "src/services/Product.js", "src/services/Tournaments.js", "src/components/Leaderboard/AllLeaderboardMatches.jsx", "src/components/FinishedMatch/FinishedMatch.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/shop/[id]/page.jsx", "src/app/shop/compare-all/page.jsx", "src/components/Leaderboard/DummyComponent.jsx", "src/components/ShopRight/ProductShowcase/ProductCard.jsx", "src/components/LiveMatches/LiveMatches.jsx", "src/components/ShopRight/ProductShowcase/ProductShowcase.jsx", "src/components/TournamentMatchesPage.jsx", "src/components/Tournaments/TournamentsTabs/TournamentsTabs.jsx", "src/services/LiveMatches.js", "src/services/Product.js", "src/services/Tournaments.js", "src/components/Leaderboard/AllLeaderboardMatches.jsx", "src/components/FinishedMatch/FinishedMatch.tsx", "src/components/common/MatchCardInclude.jsx"],
   "exclude": ["node_modules"]
 }
