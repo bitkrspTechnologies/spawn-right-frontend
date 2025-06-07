@@ -84,17 +84,11 @@ export default function Footer() {
               Icon={FaInstagram}
               href="https://www.instagram.com/spawnright.gg?igsh=MWR2MWxmenp5cWczZA%3D%3D"
             />
-            <FooterIcon
-              Icon={FaFacebookF}
-              href="https://linkedin.com/company/spawnright"
-            />
-            <FooterIcon
-              Icon={FaXTwitter}
-              href="https://linkedin.com/company/spawnright"
-            />
+            <FooterIcon Icon={FaFacebookF} href="/" />
+            <FooterIcon Icon={FaXTwitter} href="/" />
             <FooterIcon
               Icon={FaDiscord}
-              href="https://linkedin.com/company/spawnright"
+              href="https://discord.com/invite/E2nX9A22VN"
             />
           </div>
           <p className="text-xs max-w-sm text-gray-400">

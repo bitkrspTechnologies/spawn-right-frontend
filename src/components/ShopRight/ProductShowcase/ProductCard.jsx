@@ -8,32 +8,84 @@ import Button from "../../Button/Button";
 import { ComparisonDrawer } from "../ComparisonDrawer/ComparisonDrawer";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { getSingleProduct } from "@/services/Product";
 
 const ProductCard = ({ product }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const handleCompareClick = () => {
-    const existingProducts = JSON.parse(
-      localStorage.getItem("compareProducts") || "[]"
-    );
-    const isAlreadyAdded = existingProducts.some(
-      (p) => p.asin === product.asin
-    );
+  const {
+    data: fullProduct,
+    isFetching,
+    refetch
+  } = useQuery({
+    queryKey: ['product', product.asin],
+    queryFn: () => getSingleProduct(product.asin),
+    enabled: false,
+    staleTime: 1000 * 60 * 5,
+    retry: 2,
+    onError: () => {
+      toast.error("Failed to fetch product details");
+    }
+  });
 
-    if (!isAlreadyAdded) {
-      if (existingProducts.length < 4) {
-        const updatedProducts = [...existingProducts, product];
-        localStorage.setItem(
-          "compareProducts",
-          JSON.stringify(updatedProducts)
-        );
+  const handleCompareClick = async () => {
+    try {
+      const { data } = await refetch();
+      if (!data) throw new Error("No product data");
+      const productToAdd = data?.data?.data;
+
+      const existingProducts = JSON.parse(
+        localStorage.getItem("compareProducts") || "[]"
+      );
+      const isAlreadyAdded = existingProducts.some(
+        (p) => p.asin === productToAdd?.asin
+      );
+
+      const hasExistingProducts = existingProducts.length > 0;
+      const productCategory = productToAdd.category.id;
+
+      console.log("productCategory", productCategory);
+      const allSameCategory = hasExistingProducts
+        ? existingProducts.every(p => p.category.id === productCategory)
+        : true;
+
+      if (isAlreadyAdded) {
+        toast.info("Product already in comparison");
         setIsDrawerOpen(true);
-      } else {
+        return;
+      }
+
+      if (!allSameCategory) {
+        toast.error("You can only compare products from the same category");
+        return;
+      }
+
+      if (existingProducts.length >= 4) {
         toast.error("You can compare maximum 4 products at a time");
         setIsDrawerOpen(true);
+        return;
       }
-    } else {
-      setIsDrawerOpen(true);
+
+      if (!isAlreadyAdded) {
+        if (existingProducts.length < 4) {
+          const updatedProducts = [...existingProducts, productToAdd];
+          localStorage.setItem(
+            "compareProducts",
+            JSON.stringify(updatedProducts)
+          );
+          setIsDrawerOpen(true);
+        } else {
+          toast.error("You can compare maximum 4 products at a time");
+          setIsDrawerOpen(true);
+        }
+      } else {
+        toast.info("Product already in comparison");
+        setIsDrawerOpen(true);
+      }
+    } catch (error) {
+      console.error("Error in comparison:", error);
+      toast.error("Failed to add product for comparison");
     }
   };
 
@@ -92,7 +144,7 @@ const ProductCard = ({ product }) => {
 
             <div className="grid grid-cols-2 gap-2 mt-4">
               <a
-                href={product?.product_url}
+                href={product?.product_url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -103,7 +155,12 @@ const ProductCard = ({ product }) => {
               >
                 BUY NOW
               </a>
-              <Button text="COMPARE" onClick={handleCompareClick} className="cursor-pointer" />
+              <Button
+                text={isFetching ? "ADDING..." : "COMPARE"}
+                onClick={handleCompareClick}
+                className="cursor-pointer"
+                disabled={isFetching}
+              />
             </div>
           </div>
         </div>

@@ -377,12 +377,9 @@ button {
   }
 }
 
-/* Media query for mobile devices */
 @media (max-width: 768px) {
   .glitch {
     font-size: 18px;
-    /* Smaller font size for mobile */
     letter-spacing: 3px;
-    /* Slightly reduced letter spacing */
   }
 }

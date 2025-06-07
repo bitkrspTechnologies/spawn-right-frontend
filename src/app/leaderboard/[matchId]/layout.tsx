@@ -36,7 +36,7 @@
 //   return (
 //     <html lang="en" suppressHydrationWarning>
 //       <body
-//         className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
+//         className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relativee min-h-screenn text-white`}
 //       >
 //         <ThemeProvider
 //           attribute="class"
@@ -81,7 +81,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Leaderboard - Gaming Platform",
-  description: "Your ultimate gaming platform for matches, tournaments, and more",
+  description:
+    "Your ultimate gaming platform for matches, tournaments, and more",
 };
 
 export default function LeaderboardLayout({
@@ -90,9 +91,16 @@ export default function LeaderboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <TopLoader />
-      <div className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}>
+      <div
+        className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relativee min-h-screenn text-white`}
+      >
         <div className="glow-overlay top-[30%] left-[50%]" />
         <div className="glow-overlay top-[80%] left-[20%]" />
         <div className="glow-overlay bottom-[10%] right-[30%]" />

@@ -13,6 +13,8 @@ import { Button as ShadCnButton } from "@/components/ui/button";
 import Button from "@/components/Button/Button";
 import Image from "next/image";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 
 interface Product {
   asin: string;
@@ -22,6 +24,7 @@ interface Product {
   product_photo: string;
   product_star_rating?: string;
   product_num_ratings?: string;
+  [key: string]: any;
 }
 
 interface ComparisonDrawerProps {
@@ -34,13 +37,22 @@ export function ComparisonDrawer({
   onOpenChange,
 }: ComparisonDrawerProps) {
   const [selectedProducts, setSelectedProducts] = React.useState<Product[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (open) {
-      const products = JSON.parse(
-        localStorage.getItem("compareProducts") || "[]"
-      );
-      setSelectedProducts(products);
+      setIsLoading(true);
+      try {
+        const products = JSON.parse(
+          localStorage.getItem("compareProducts") || "[]"
+        );
+        setSelectedProducts(products);
+      } catch (error) {
+        console.error("Error loading comparison products:", error);
+        toast.error("Failed to load comparison products");
+      } finally {
+        setIsLoading(false);
+      }
     }
   }, [open]);
 
@@ -53,10 +65,7 @@ export function ComparisonDrawer({
   const clearAll = () => {
     setSelectedProducts([]);
     localStorage.removeItem("compareProducts");
-  };
-
-  const handleCompareAll = () => {
-    console.log("Comparing products:", selectedProducts);
+    toast.success("Comparison cleared");
   };
 
   return (
@@ -70,13 +79,11 @@ export function ComparisonDrawer({
                   Product Comparison
                 </DrawerTitle>
                 <div className="flex items-center gap-2">
-                  {selectedProducts.length > 0 && (
+                  {selectedProducts.length > 1 && (
                     <Link href={"/shop/compare-all"}>
                       <Button
                         text="COMPARE ALL"
                         className="text-sm px-3 py-1 cursor-pointer"
-                        // disabled={selectedProducts.length < 2}
-                        onClick={handleCompareAll}
                       />
                     </Link>
                   )}
@@ -96,10 +103,10 @@ export function ComparisonDrawer({
               <div className="flex justify-between w-full items-center mb-3">
                 <button
                   onClick={clearAll}
-                  className="text-purple-500 hover:text-purple-400 text-xs font-medium flex items-center cursor-pointer"
+                  className="text-purple-500 hover:text-purple-400 text-xs font-medium flex items-center cursor-pointer disabled:opacity-50"
                   disabled={selectedProducts.length === 0}
                 >
-                  <X className="h-3 w-3 mr-1 " />
+                  <X className="h-3 w-3 mr-1" />
                   CLEAR ALL
                 </button>
                 <p className="text-gray-400 text-xs">
@@ -110,66 +117,84 @@ export function ComparisonDrawer({
           </div>
 
           <div className="flex-1 overflow-y-auto px-4 pb-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {selectedProducts.map((product) => (
-                <div
-                  key={product.asin}
-                  className="bg-gray-900 rounded-lg p-3 h-full flex flex-col relative group"
-                >
-                  <button
-                    onClick={() => removeProduct(product.asin)}
-                    className="absolute z-40 top-0 right-0 text-gray-400  transition-opacity"
+            {isLoading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div
+                    key={`skeleton-${i}`}
+                    className="bg-gray-900 rounded-lg p-3 h-full flex flex-col"
                   >
-                    <ShadCnButton
-                      variant="default"
-                      size="icon"
-                      className="text-white bg-black/70 hover:bg-black cursor-pointer h-8 w-8"
-                    >
-                      <X className="h-3 w-3" />
-                    </ShadCnButton>
-                  </button>
-                  <div className="h-32 w-full bg-gray-700 rounded mb-2 flex-shrink-0 relative overflow-hidden">
-                    <Image
-                      src={product.product_photo}
-                      alt={product.product_title}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                    <Skeleton className="h-32 w-full bg-gray-700 rounded mb-2" />
+                    <Skeleton className="h-4 w-3/4 bg-gray-700 mb-2" />
+                    <Skeleton className="h-3 w-1/2 bg-gray-700 mb-1" />
+                    <Skeleton className="h-4 w-1/3 bg-gray-700 mt-2" />
                   </div>
-                  <div className="flex-grow">
-                    <h4 className="font-medium text-sm line-clamp-2">
-                      {product.product_title}
-                    </h4>
-                    <p className="text-gray-400 text-xs mt-1">
-                      {product.brand}
-                    </p>
-                    <div className="mt-2 font-bold text-sm">
-                      {product.product_price}
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                {selectedProducts.map((product) => (
+                  <div
+                    key={product.asin}
+                    className="bg-gray-900 rounded-lg p-3 h-full flex flex-col relative group"
+                  >
+                    <button
+                      onClick={() => removeProduct(product.asin)}
+                      className="absolute z-40 top-0 right-0 text-gray-400 transition-opacity"
+                    >
+                      <ShadCnButton
+                        variant="default"
+                        size="icon"
+                        className="text-white bg-black/70 hover:bg-black cursor-pointer h-8 w-8"
+                      >
+                        <X className="h-3 w-3" />
+                      </ShadCnButton>
+                    </button>
+                    <div className="h-32 w-full bg-gray-700 rounded mb-2 flex-shrink-0 relative overflow-hidden">
+                      <Image
+                        src={product.product_photo}
+                        alt={product.product_title}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
                     </div>
-                    <div className="flex items-center mt-1">
-                      <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
-                      <span className="text-xs text-gray-300">
-                        {product.product_star_rating || "N/A"} (
-                        {product.product_num_ratings || "0"})
+                    <div className="flex-grow">
+                      <h4 className="font-medium text-sm line-clamp-2">
+                        {product.product_title}
+                      </h4>
+                      <p className="text-gray-400 text-xs mt-1">
+                        {product.brand}
+                      </p>
+                      <div className="mt-2 font-bold text-sm">
+                        {product.product_price}
+                      </div>
+                      <div className="flex items-center mt-1">
+                        <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
+                        <span className="text-xs text-gray-300">
+                          {product.product_star_rating || "N/A"} (
+                          {product.product_num_ratings || "0"})
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {Array.from({ length: 4 - selectedProducts.length }).map(
+                  (_, i) => (
+                    <div
+                      key={`empty-${i}`}
+                      className="bg-gray-800/50 border-2 border-dashed border-gray-600 rounded-lg p-3 flex flex-col items-center justify-center min-h-[200px] hover:bg-gray-800/70 transition-colors cursor-pointer"
+                      onClick={() => onOpenChange(false)}
+                    >
+                      <span className="text-gray-500 text-xs">
+                        + Add Product
                       </span>
                     </div>
-                  </div>
-                </div>
-              ))}
-
-              {Array.from({ length: 4 - selectedProducts.length }).map(
-                (_, i) => (
-                  <div
-                    key={`empty-${i}`}
-                    className="bg-gray-800/50 border-2 border-dashed border-gray-600 rounded-lg p-3 flex flex-col items-center justify-center min-h-[200px] hover:bg-gray-800/70 transition-colors cursor-pointer"
-                    onClick={() => onOpenChange(false)}
-                  >
-                    <span className="text-gray-500 text-xs">+ Add Product</span>
-                  </div>
-                )
-              )}
-            </div>
+                  )
+                )}
+              </div>
+            )}
           </div>
         </div>
       </DrawerContent>

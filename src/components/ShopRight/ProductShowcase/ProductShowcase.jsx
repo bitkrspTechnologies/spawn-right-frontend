@@ -83,8 +83,7 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
   if (isError) {
     return (
       <div className="w-full max-w-6xl mx-auto p-4 text-center text-red-300">
-        {/* Error: {error.message} */}
-        UnExpected Error Occured....We While Back Again
+        UnExpected Error Occurred....We While Back Again
       </div>
     );
   }

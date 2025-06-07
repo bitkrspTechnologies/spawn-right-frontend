@@ -28,3 +28,15 @@ export const fetchTournamentMatches = async (tournamentId) => {
   }
   return response.json();
 };
+
+export const fetchLiveStreams = async () => {
+  const response = await fetch(
+    `${apiConfig.apiUrl}/api/v1/liveshow/get-all-liveshow`
+  );
+  if (!response.ok) {
+    throw new Error('Failed to fetch Match Leaderboard Data');
+  }
+  return response.json();
+};
+
+

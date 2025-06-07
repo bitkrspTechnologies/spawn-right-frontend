@@ -83,13 +83,14 @@ import AdSection from "@/components/common/AdSection";
 import dynamic from "next/dynamic";
 import Footer from "@/components/Footer/Footer";
 import LiveMatches from "@/components/LiveMatches/LiveMatches";
-import DefaultSlider from "@/components/common/VedioCarousel";
+// import DefaultSlider from "@/components/common/VedioCarousel";
 import UpcomingEventsSection from "@/components/UpcomingMatches/UpcomingMatches";
 import FinishedMatch from "@/components/FinishedMatch/FinishedMatch";
 import Navbar from "@/components/Navbar/Navbar";
 import JoinBanner from "@/components/common/JoinBanner";
 import Banner from "@/components/common/Banner";
 import { useMediaQuery } from "react-responsive";
+import DefaultSlider from "@/components/common/VedioCarousel";
 // import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
 // import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
 const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {

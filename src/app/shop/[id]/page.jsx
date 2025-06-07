@@ -11,10 +11,7 @@ import ProductDetailSkeleton from "@/components/Skeleton/ProductDetailSkeleton";
 import { getSingleProduct } from "@/services/Product";
 import { useQuery } from "@tanstack/react-query";
 import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
-
-const apiConfig = {
-  apiUrl: process.env.NEXT_PUBLIC_API_URL
-};
+import Button from "@/components/Button/Button";
 
 export default function Shop() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -32,7 +29,7 @@ export default function Shop() {
     queryKey: ['product', productId],
     queryFn: () => getSingleProduct(productId).then(res => res.data.data),
     enabled: !!productId,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5,
   });
 
   const nextImage = () => {
@@ -51,42 +48,142 @@ export default function Shop() {
 
   const productImages = product?.product_photos || [];
 
-  const specifications = [
-    { label: "Colour", value: product?.product_information?.["Colour"] },
-    {
-      label: "Country of Origin",
-      value: product?.product_information?.["Country of Origin"],
-    },
-    {
-      label: "Generic Name",
-      value: product?.product_information?.["Generic Name"],
-    },
-    {
-      label: "Item Weight",
-      value: product?.product_information?.["Item Weight"],
-    },
-    {
-      label: "Manufacturer",
-      value: product?.product_information?.["Manufacturer"],
-    },
-  ].filter(spec => spec.value);
+  const getCommonSpecifications = () => {
+    const commonSpecs = [
+      { label: "Brand", value: product?.product_details?.["Brand"] },
+      { label: "Colour", value: product?.product_information?.["Colour"] },
+      {
+        label: "Country of Origin",
+        value: product?.product_information?.["Country of Origin"],
+      },
+      {
+        label: "Item Weight",
+        value: product?.product_information?.["Item Weight"],
+      },
+      {
+        label: "Manufacturer",
+        value: product?.product_information?.["Manufacturer"],
+      },
+    ].filter(spec => spec.value);
 
-  const productDetails = [
-    { label: "Brand", value: product?.product_details?.["Brand"] },
-    {
-      label: "Compatible Devices",
-      value: product?.product_details?.["Compatible Devices"],
-    },
-    {
-      label: "Connectivity Technology",
-      value: product?.product_details?.["Connectivity Technology"],
-    },
-    {
-      label: "Controller Type",
-      value: product?.product_details?.["Controller Type"],
-    },
-    { label: "Model Name", value: product?.product_details?.["Model Name"] },
-  ].filter((item) => item.value);
+    return commonSpecs;
+  };
+
+  const getProductSpecificSpecifications = () => {
+    if (!product?.category?.name) return [];
+
+    const category = product.category.name.toLowerCase();
+
+    if (category.includes('phone') || category.includes('smartphone')) {
+      return [
+        { label: "Operating System", value: product?.product_details?.["Operating System"] },
+        { label: "RAM", value: product?.product_details?.["RAM Memory Installed Size"] },
+        { label: "Storage", value: product?.product_information?.["Memory Storage Capacity"] },
+        { label: "Battery", value: product?.product_information?.["Battery Power Rating"] },
+        { label: "Screen Size", value: product?.product_information?.["Display Size"] },
+      ].filter(spec => spec.value);
+    }
+
+    if (category.includes('keyboard')) {
+      return [
+        { label: "Keyboard Type", value: product?.product_details?.["Keyboard Type"] },
+        { label: "Connectivity", value: product?.product_details?.["Connectivity Technology"] },
+        { label: "Layout", value: product?.product_details?.["Keyboard Layout"] },
+        { label: "Backlit", value: product?.product_details?.["Backlit"] },
+      ].filter(spec => spec.value);
+    }
+
+    if (category.includes('mouse')) {
+      return [
+        { label: "Tracking Method", value: product?.product_details?.["Tracking Method"] },
+        { label: "Movement Detection", value: product?.product_details?.["Movement Detection"] },
+        { label: "Buttons", value: product?.product_details?.["Number of Buttons"] },
+        { label: "Hand Orientation", value: product?.product_details?.["Hand Orientation"] },
+      ].filter(spec => spec.value);
+    }
+
+    // Default case for other categories
+    return Object.entries(product?.product_details || {})
+      .filter(([key]) => !['Brand'].includes(key))
+      .slice(0, 5)
+      .map(([key, value]) => ({ label: key, value }));
+  };
+
+  const specifications = [
+    ...getCommonSpecifications(),
+    ...getProductSpecificSpecifications()
+  ];
+
+  const renderProductSpecificFeatures = () => {
+    if (!product?.category?.name) return null;
+
+    const category = product.category.name.toLowerCase();
+
+    if (category.includes('phone') || category.includes('smartphone')) {
+      return (
+        <div className="mt-6">
+          <h4 className="text-md font-semibold mb-3">Phone Features</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { label: "Camera", value: product?.product_information?.["Camera"] || "Not specified" },
+              { label: "Processor", value: product?.product_details?.["CPU Model"] || "Not specified" },
+              { label: "SIM Type", value: product?.product_information?.["SIM Type"] || "Not specified" },
+              { label: "Water Resistance", value: product?.product_information?.["Water Resistance"] || "Not specified" },
+            ].map((feature, index) => (
+              <div key={index} className="bg-gray-800/50 p-3 rounded">
+                <p className="text-sm text-gray-400">{feature.label}</p>
+                <p className="font-medium">{feature.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (category.includes('keyboard')) {
+      return (
+        <div className="mt-6">
+          <h4 className="text-md font-semibold mb-3">Keyboard Features</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { label: "Switch Type", value: product?.product_details?.["Switch Type"] || "Not specified" },
+              { label: "Key Rollover", value: product?.product_details?.["Key Rollover"] || "Not specified" },
+              { label: "Wrist Rest", value: product?.product_details?.["Wrist Rest"] ? "Yes" : "No" },
+              { label: "Cable Length", value: product?.product_information?.["Cable Length"] || "Not specified" },
+            ].map((feature, index) => (
+              <div key={index} className="bg-gray-800/50 p-3 rounded">
+                <p className="text-sm text-gray-400">{feature.label}</p>
+                <p className="font-medium">{feature.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (category.includes('mouse')) {
+      return (
+        <div className="mt-6">
+          <h4 className="text-md font-semibold mb-3">Mouse Features</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { label: "DPI", value: product?.product_details?.["DPI"] || "Not specified" },
+              { label: "Polling Rate", value: product?.product_details?.["Polling Rate"] || "Not specified" },
+              { label: "Weight", value: product?.product_information?.["Item Weight"] || "Not specified" },
+              { label: "Ergonomic", value: product?.product_details?.["Ergonomic"] ? "Yes" : "No" },
+            ].map((feature, index) => (
+              <div key={index} className="bg-gray-800/50 p-3 rounded">
+                <p className="text-sm text-gray-400">{feature.label}</p>
+                <p className="font-medium">{feature.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   if (isLoading) {
     return <ProductDetailSkeleton />;
@@ -95,7 +192,6 @@ export default function Shop() {
   if (isError) {
     return (
       <div className="w-full max-w-6xl mx-auto p-4 text-center text-red-300 mt-10">
-        {/* Error: {error.message} */}
         UnExpected Error Occured....We While Back Again
       </div>
     );
@@ -115,8 +211,6 @@ export default function Shop() {
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         {!isMobile && (
           <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
-            {/* <div className="bg-gray-400 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col"></div>
-            <div className="bg-gray-400 h-[calc(50%-.3rem)] rounded-lg p-4 flex flex-col"></div> */}
             <AdForLeaderBoard />
             <AdForLeaderBoard />
           </div>
@@ -258,15 +352,17 @@ export default function Shop() {
                     className={cn(
                       "py-3 md:py-5 px-3 md:px-5 text-xs border-2 font-medium rounded-sm text-center w-full",
                       "border-[#4D32AA] text-[#FF1ADF]",
-                      "hover:border-[#9D0A88] transition-all"
+                      "hover:border-[#d3a6cc] transition-all"
                     )}
                   >
                     BUY NOW
                   </a>
+
+                  <Button text="COMPARE" />
                 </div>
 
                 <div className="space-y-2 md:space-y-3 mt-10">
-                  {productDetails.map((detail, index) => (
+                  {specifications.slice(0, 5).map((detail, index) => (
                     <div key={index} className="flex flex-col sm:flex-row">
                       <p className="text-gray-500 font-semibold w-32 text-sm md:text-base">
                         {detail.label}
@@ -277,6 +373,7 @@ export default function Shop() {
                     </div>
                   ))}
                 </div>
+
                 <div className="flex items-center justify-start my-8 md:my-16">
                   <div className="w-full max-w-2xl">
                     <ul className="space-y-3 md:space-y-6">
@@ -294,8 +391,30 @@ export default function Shop() {
                         </li>
                       ))}
                     </ul>
+
+                    {renderProductSpecificFeatures()}
+
+                    {product?.sales_volume && (
+                      <div className="mt-6 bg-green-900/30 p-4 rounded-lg">
+                        <p className="font-medium text-green-400">
+                          {product.sales_volume}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
+
+                {/* {product?.delivery && (
+                  <div className="my-4 p-4 bg-gray-800/50 rounded-lg">
+                    <h4 className="text-md font-semibold mb-2">Delivery Information</h4>
+                    <p>{product.delivery}</p>
+                    {product?.primary_delivery_time && (
+                      <p className="mt-2 text-purple-400">
+                        Estimated delivery: {product.primary_delivery_time}
+                      </p>
+                    )}
+                  </div>
+                )} */}
 
                 <div className="my-6 md:my-8">
                   <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-4">
@@ -336,6 +455,39 @@ export default function Shop() {
                     )}
                   </ul>
                 </div>
+
+                {/* {product?.category_path?.length > 0 && (
+                  <div className="text-sm text-gray-400 mt-4">
+                    <span>Category: </span>
+                    {product.category_path.map((cat, index) => (
+                      <span key={cat.id}>
+                        {index > 0 && ' > '}
+                        <a href={cat.link} className="hover:text-purple-400">
+                          {cat.name}
+                        </a>
+                      </span>
+                    ))}
+                  </div>
+                )} */}
+
+                {product?.all_product_variations && Object.keys(product.all_product_variations).length > 0 && (
+                  <div className="mt-6">
+                    <h4 className="text-md font-semibold mb-3">Available Variants</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {Object.entries(product.all_product_variations).map(([asin, variant]) => (
+                        <div key={asin} className="bg-gray-800/50 p-3 rounded-lg">
+                          <p className="text-sm">
+                            {Object.entries(variant).map(([key, value]) => (
+                              <span key={key} className="block capitalize">
+                                {key}: <span className="font-medium">{value}</span>
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="my-8">
                 {product?.customers_say && (
@@ -353,7 +505,6 @@ export default function Shop() {
                 )}
               </div>
             </div>
-
           </div>
         </div>
       </div>
