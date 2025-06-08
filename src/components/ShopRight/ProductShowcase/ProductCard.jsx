@@ -58,6 +58,7 @@ const ProductCard = ({ product }) => {
 
       if (!allSameCategory) {
         toast.error("You can only compare products from the same category");
+        setIsDrawerOpen(true);
         return;
       }
 

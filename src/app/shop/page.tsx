@@ -6,12 +6,15 @@ import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { useMediaQuery } from "react-responsive";
 import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
+import { ComparisonDrawer } from "@/components/ShopRight/ComparisonDrawer/ComparisonDrawer";
 
 export default function Shop() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("4092116031");
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [compareCount, setCompareCount] = useState(0);
 
   // Debounce effect
   useEffect(() => {
@@ -23,6 +26,28 @@ export default function Shop() {
       clearTimeout(timerId);
     };
   }, [searchQuery]);
+
+  // Update compare count when drawer opens or when local storage changes
+  useEffect(() => {
+    const updateCompareCount = () => {
+      try {
+        const products = JSON.parse(
+          localStorage.getItem("compareProducts") || "[]"
+        );
+        setCompareCount(products.length);
+      } catch (error) {
+        console.error("Error reading comparison products:", error);
+      }
+    };
+
+    updateCompareCount();
+    const handleStorageChange = () => {
+      updateCompareCount();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [isDrawerOpen]);
 
   const clearSearch = () => {
     setSearchQuery("");
@@ -45,7 +70,6 @@ export default function Shop() {
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         {!isMobile && (
           <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
-            {/* <div className="bg-gray-400 h-[calc(50%-1rem)] rounded-lg p-4 flex flex-col"></div> */}
             <AdForLeaderBoard />
             <AdForLeaderBoard />
           </div>
@@ -169,8 +193,65 @@ export default function Shop() {
             />
           </div>
         </div>
+
+        <button
+          onClick={() => setIsDrawerOpen(true)}
+          className="fixed bottom-4 right-4 md:right-[calc(350px+1rem)] z-50 flex items-center justify-center bg-[#FF1ADF] hover:bg-[#f516d7] text-white rounded-full shadow-lg transition-all duration-300"
+          style={{
+            width: isMobile ? "56px" : "auto",
+            height: "56px",
+            padding: isMobile ? "0" : "0 24px",
+          }}
+        >
+          {isMobile ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="lucide lucide-expand-icon lucide-expand"
+            >
+              <path d="m15 15 6 6" />
+              <path d="m15 9 6-6" />
+              <path d="M21 16v5h-5" />
+              <path d="M21 8V3h-5" />
+              <path d="M3 16v5h5" />
+              <path d="m3 21 6-6" />
+              <path d="M3 8V3h5" />
+              <path d="M9 9 3 3" />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="lucide lucide-expand-icon lucide-expand"
+            >
+              <path d="m15 15 6 6" />
+              <path d="m15 9 6-6" />
+              <path d="M21 16v5h-5" />
+              <path d="M21 8V3h-5" />
+              <path d="M3 16v5h5" />
+              <path d="m3 21 6-6" />
+              <path d="M3 8V3h5" />
+              <path d="M9 9 3 3" />
+            </svg>
+          )}
+        </button>
       </div>
       <Footer />
+      <ComparisonDrawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen} />
     </>
   );
 }

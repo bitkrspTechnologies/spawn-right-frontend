@@ -125,8 +125,8 @@ export default function About() {
   return (
     <>
       <Navbar />
-      <div className="relativee min-h-screenn w-full text-white overflow-y-auto scrollbar-hide ">
-        <main className="pt-24 pb-20 h-[calc(100vh-64px)]">
+      <div className="relative min-h-screen w-full text-white overflow-y-auto scrollbar-hide ">
+        <main className="pt-24 h-[calc(100vh-64px)]">
           {/* Hero Section */}
           <motion.section
             initial="hidden"

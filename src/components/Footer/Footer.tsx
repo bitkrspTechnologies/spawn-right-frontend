@@ -28,8 +28,8 @@ export default function Footer() {
             Icon={FaInstagram}
             href="https://www.instagram.com/spawnright.gg?igsh=MWR2MWxmenp5cWczZA%3D%3D"
           />
-          <FooterIcon Icon={FaFacebookF} href="" />
-          <FooterIcon Icon={FaXTwitter} href="" />
+          {/* <FooterIcon Icon={FaFacebookF} href="" />
+          <FooterIcon Icon={FaXTwitter} href="" /> */}
           <FooterIcon
             Icon={FaDiscord}
             href="https://discord.com/invite/E2nX9A22VN"
@@ -84,8 +84,8 @@ export default function Footer() {
               Icon={FaInstagram}
               href="https://www.instagram.com/spawnright.gg?igsh=MWR2MWxmenp5cWczZA%3D%3D"
             />
-            <FooterIcon Icon={FaFacebookF} href="/" />
-            <FooterIcon Icon={FaXTwitter} href="/" />
+            {/* <FooterIcon Icon={FaFacebookF} href="/" />
+            <FooterIcon Icon={FaXTwitter} href="/" /> */}
             <FooterIcon
               Icon={FaDiscord}
               href="https://discord.com/invite/E2nX9A22VN"

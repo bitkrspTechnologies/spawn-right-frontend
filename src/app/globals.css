@@ -383,3 +383,22 @@ button {
     letter-spacing: 3px;
   }
 }
+
+.comparison-sticky-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  transition: all 0.3s ease;
+}
+
+.comparison-sticky-button:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 767px) {
+  .comparison-sticky-button {
+    right: 15px;
+    bottom: 15px;
+  }
+}
