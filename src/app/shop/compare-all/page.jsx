@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
-import { X, ChevronDown, ChevronUp, Star, Battery, Camera, Cpu, HardDrive, Smartphone, Package, Truck, CreditCard, Shield, Award, Clock, Zap, Volume2, Mouse, Keyboard, Headphones, Monitor } from "lucide-react";
+import { X, ChevronDown, ChevronUp, Star, Battery, Camera, Cpu, HardDrive, Smartphone, Package, Truck, CreditCard, Shield, Award, Clock, Zap, Volume2, Mouse, Keyboard, Headphones, Monitor, MessageSquare } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -30,6 +30,7 @@ const iconMap = {
   'sensor': <Mouse className="h-4 w-4 mr-2" />,
   'buttons': <Mouse className="h-4 w-4 mr-2" />,
   'weight': <Package className="h-4 w-4 mr-2" />,
+  'customers': <MessageSquare className="h-4 w-4 mr-2" />,
 };
 
 const getProductType = (product) => {
@@ -230,21 +231,18 @@ const getComparisonSections = (products) => {
     ]
   };
 
-  const commonEndSections = [
-    {
-      title: "About Product",
-      icon: <Smartphone className="h-4 w-4 mr-2" />,
-      fields: products[0].about_product?.map((_, index) => ({
-        key: `about_product.${index}`,
-        label: `Feature ${index + 1}`
-      })) || []
-    }
-  ];
+  const customerSaysSection = {
+    title: "Customer Says",
+    icon: <MessageSquare className="h-4 w-4 mr-2" />,
+    fields: [
+      { key: "customers_say", label: "Customer Feedback" }
+    ]
+  };
 
   return [
     ...commonSections,
     ...(typeSpecificSections[productType] || typeSpecificSections.other),
-    ...commonEndSections
+    customerSaysSection
   ];
 };
 
@@ -282,7 +280,7 @@ export default function CompareAll() {
           }
 
           if (field.key === "product_star_rating") {
-            return value ? `${value} ★` : "--";
+            return value ? `${value} ★` : null;
           }
           if (field.key === "is_prime") {
             return value ? "Yes" : "No";
@@ -291,12 +289,16 @@ export default function CompareAll() {
             return value ? "Yes" : "No";
           }
           if (Array.isArray(value)) {
-            return value.join(', ');
+            return value.length > 0 ? value.join(', ') : null;
           }
-          return value || "--";
+          return value || null;
         })
       }))
-    }));
+        // Filter out fields where all values are null or empty
+        .filter(field => field.values.some(val => val !== null && val !== ""))
+    }))
+      // Filter out sections that have no fields with data
+      .filter(section => section.data.length > 0);
 
     setComparisonSections(formattedSections);
   };
@@ -322,6 +324,14 @@ export default function CompareAll() {
   const MobileComparisonView = () => {
     const currentSection = comparisonSections.find(section => section.title === activeSection) || comparisonSections[0];
 
+    if (!currentSection) {
+      return (
+        <div className="text-center py-10">
+          <p className="text-gray-400">No comparison data available for this section</p>
+        </div>
+      );
+    }
+
     return (
       <div className="space-y-4">
         {/* Section selector */}
@@ -334,7 +344,7 @@ export default function CompareAll() {
                 "flex-shrink-0 px-3 py-2 text-sm font-medium rounded-md mr-2",
                 activeSection === section.title
                   ? "bg-purple-600 text-white"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  : "bg-black text-gray-300 hover:bg-gray-700"
               )}
             >
               {section.title}
@@ -347,7 +357,7 @@ export default function CompareAll() {
           <div className="flex overflow-x-auto pb-4 scrollbar-hide">
             {selectedProducts.map((product) => (
               <div key={product.asin} className="flex-shrink-0 w-48 mr-4 relative">
-                <div className="bg-gray-800 rounded-lg p-3 h-full">
+                <div className="bg-black rounded-lg p-3 h-full">
                   <button
                     onClick={() => removeProduct(product.asin)}
                     className="absolute top-1 right-1 text-gray-400 hover:text-white z-10"
@@ -393,14 +403,14 @@ export default function CompareAll() {
         </div>
 
         {/* Comparison table */}
-        {currentSection && (
-          <div className="bg-gray-900 rounded-lg overflow-hidden">
+        {currentSection && currentSection.data.length > 0 ? (
+          <div className="bg-black/60 rounded-lg overflow-hidden">
             {currentSection.data.map((row, rowIndex) => (
               <div
                 key={rowIndex}
                 className={cn(
                   "p-3 border-b border-gray-800",
-                  rowIndex % 2 === 0 ? "bg-gray-900" : "bg-gray-800"
+                  rowIndex % 2 === 0 ? "bg-black/60" : "bg-black"
                 )}
               >
                 <div className="text-xs font-medium text-gray-400 mb-1">
@@ -410,7 +420,7 @@ export default function CompareAll() {
                   {row.values.map((value, i) => (
                     <div key={i} className="flex-shrink-0 w-48 pr-4">
                       <div className="text-sm text-white">
-                        {value}
+                        {value || "--"}
                       </div>
                     </div>
                   ))}
@@ -418,87 +428,103 @@ export default function CompareAll() {
               </div>
             ))}
           </div>
+        ) : (
+          <div className="text-center py-10 bg-black/60 rounded-lg">
+            <p className="text-gray-400">No comparison data available for this section</p>
+          </div>
         )}
       </div>
     );
   };
 
   // Desktop view - Comparison table
-  const DesktopComparisonView = () => (
-    <div className="bg-white rounded-lg overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="w-1/4 px-4 py-3 text-left text-sm font-medium text-gray-700">
-                Features
-              </th>
-              {selectedProducts.map((product, index) => (
-                <th key={index} className="px-4 py-3 text-left text-sm font-medium text-gray-700">
-                  <div className="flex items-center space-x-2">
-                    <div className="h-10 w-10 bg-gray-200 rounded flex-shrink-0 relative">
-                      <Image
-                        src={product.product_photo}
-                        alt={product.product_title}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                    <span>Product {index + 1}</span>
-                  </div>
+  const DesktopComparisonView = () => {
+    if (comparisonSections.length === 0) {
+      return (
+        <div className="text-center py-10 bg-black/60 rounded-lg">
+          <p className="text-gray-400">No comparison data available</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="bg-black/60 rounded-lg overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-black">
+                <th className="w-1/4 px-4 py-3 text-left text-sm font-medium text-gray-300">
+                  Features
                 </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {comparisonSections.map((section, sectionIndex) => (
-              <>
-                <tr key={`section-${sectionIndex}`} className="bg-gray-50">
-                  <td colSpan={selectedProducts.length + 1} className="px-4 py-2">
-                    <div className="flex items-center font-medium text-gray-800">
-                      {section.icon}
-                      {section.title}
-                    </div>
-                  </td>
-                </tr>
-                {section.data.map((row, rowIndex) => (
-                  <tr key={rowIndex} className="hover:bg-blue-50">
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                      <div className="flex items-center">
-                        {iconMap[row.label.toLowerCase().split(' ')[0]] || <span className="w-4 h-4 mr-2"></span>}
-                        {row.label}
+                {selectedProducts.map((product, index) => (
+                  <th key={index} className="px-4 py-3 text-left text-sm font-medium text-gray-300">
+                    <div className="flex items-center space-x-2">
+                      <div className="h-10 w-10 bg-gray-700 rounded flex-shrink-0 relative">
+                        <Image
+                          src={product.product_photo}
+                          alt={product.product_title}
+                          fill
+                          className="object-contain"
+                        />
                       </div>
-                    </td>
-                    {row.values.map((value, i) => (
-                      <td key={i} className="px-4 py-3 text-sm text-gray-700">
-                        {value}
-                      </td>
-                    ))}
-                  </tr>
+                      <span className="text-white">Product {index + 1}</span>
+                    </div>
+                  </th>
                 ))}
-              </>
-            ))}
-          </tbody>
-        </table>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-800">
+              {comparisonSections.map((section, sectionIndex) => (
+                section.data.length > 0 && (
+                  <>
+                    <tr key={`section-${sectionIndex}`} className="bg-black">
+                      <td colSpan={selectedProducts.length + 1} className="px-4 py-2">
+                        <div className="flex items-center font-medium text-white">
+                          {section.icon}
+                          {section.title}
+                        </div>
+                      </td>
+                    </tr>
+                    {section.data.map((row, rowIndex) => (
+                      <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-black/60" : "bg-black"}>
+                        <td className="px-4 py-3 text-sm font-medium text-gray-300">
+                          <div className="flex items-center">
+                            {iconMap[row.label.toLowerCase().split(' ')[0]] || <span className="w-4 h-4 mr-2"></span>}
+                            {row.label}
+                          </div>
+                        </td>
+                        {row.values.map((value, i) => (
+                          <td key={i} className="px-4 py-3 text-sm text-white">
+                            {value || "--"}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </>
+                )
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <>
       <Navbar />
-      <div className="relative w-full h-full overflow-y-auto scrollbar-hide">
+      <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         {!isMobile && (
-          <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
+          <div className="fixed mt-10 right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 z-10">
             <AdForLeaderBoard />
             <AdForLeaderBoard />
           </div>
         )}
         <div
-          className={`pt-16 ${isMobile ? "" : "pr-[350px] pl-5"}`}
-          style={{ height: "calc(100vh - 64px)", overflowY: "auto" }}
+          className={`py-16 ${isMobile ? "" : "pr-[350px]"}`}
+          style={{ height: "calc(100vh - 64px)" }}
         >
-          <div className={`flex-1 mt-12 mb-5 overflow-y-auto ${isMobile ? "" : ""}`}>
+          <div className={`flex-1 mt-12 mb-5 p-5 overflow-y-auto ${isMobile ? "" : ""}`}>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold text-white">Product Comparison</h2>
               {selectedProducts.length > 0 && (
@@ -541,6 +567,7 @@ export default function CompareAll() {
         </div>
 
       </div>
+
     </>
   );
 }

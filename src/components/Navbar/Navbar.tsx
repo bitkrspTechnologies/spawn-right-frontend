@@ -186,7 +186,7 @@ export default function Navbar() {
       {/* Game Buttons on Homepage */}
       {pathname === "/" && (
         <div className="pt-1 pb-3 w-full transition-all duration-500 z-[50] relative">
-          <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto">
+          <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto scrollbar-hide">
             {gameButtons.map(({ key, text, icon, hasData }) => (
               <Button
                 key={key}

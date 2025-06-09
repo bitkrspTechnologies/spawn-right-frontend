@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         {/* legal row */}
-        <div className="text-xs text-gray-400 space-y-4 mb-8">
+        <div className="text-xs text-gray-400 space-y-4 mb-20">
           <div className="flex flex-col items-center gap-2">
             <p>© {new Date().getFullYear()} Spawn Right</p>
             <a

@@ -210,17 +210,17 @@ export default function Shop() {
       <Navbar />
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         {!isMobile && (
-          <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
+          <div className="fixed mt-10 right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 z-10">
             <AdForLeaderBoard />
             <AdForLeaderBoard />
           </div>
         )}
         <div
-          className={`pt-16 pb-20 ${isMobile ? "px-4" : "pr-[350px] pl-5"}`}
+          className={`py-16 ${isMobile ? "" : "pr-[350px]"}`}
           style={{ height: "calc(100vh - 64px)" }}
         >
-          <div className="space-y-8">
-            <div className="w-full max-w-6xl mx-auto rounded-lg shadow-md overflow-hidden">
+          <div className="space-y-8 px-5">
+            <div className="w-full max-w-6xl mx-auto overflow-hidden">
               {product.product_original_price && (
                 <div className="p-2 md:p-4 bg-black text-white text-center my-4 md:my-8">
                   <h1 className="glitch text-sm md:text-xl font-bold uppercase" data-glitch="Grab the Offer Now!! Get the Maximum Discount" >
@@ -358,7 +358,7 @@ export default function Shop() {
                     BUY NOW
                   </a>
 
-                  <Button text="COMPARE" />
+                  {/* <Button text="COMPARE" /> */}
                 </div>
 
                 <div className="space-y-2 md:space-y-3 mt-10">
@@ -506,6 +506,7 @@ export default function Shop() {
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       </div>
     </>

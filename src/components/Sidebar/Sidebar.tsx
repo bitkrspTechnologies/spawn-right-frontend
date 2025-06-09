@@ -89,7 +89,7 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
           </button>
         </div>
 
-        <div className="flex flex-col h-80 mt-10 gap-4">
+        <div className="flex flex-col h-80 mt-5 gap-4">
           {navLinks.map((link, index) => (
             <div key={index}>
               {/* Button with pink/black gradient */}
@@ -172,7 +172,7 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
         </div>
 
         {/* Sidebar Footer Promo */}
-        <div className="mt-auto">
+        <div className="mt-5">
           <div className="bg-[#141414] rounded-2xl p-4 text-center text-white shadow-md">
             <h3 className="font-bold text-lg mb-2">LEVEL UP</h3>
             <p className="text-sm mb-3">GEAR COMPARISON FOR YOUR GAME PICKS</p>

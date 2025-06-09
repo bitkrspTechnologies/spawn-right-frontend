@@ -85,6 +85,8 @@ const UpcomingEventsSection = () => {
       <p className="text-red-500 text-center">Failed to load tournaments.</p>
     );
 
+  console.log("matches", matches);
+
   // Mobile Layout
   if (isMobile) {
     return (
@@ -161,10 +163,10 @@ const UpcomingEventsSection = () => {
                   <div className="flex justify-between items-start gap-2">
                     <div className="flex items-center gap-2 text-xs flex-1 min-w-0">
                       <Image
-                        src={tournament.logo}
-                        alt="Tournament"
-                        width={18}
-                        height={18}
+                        src={getValidLogoUrl(tournament.logo)}
+                        alt={`${tournament.name} Logo`}
+                        width={30}
+                        height={30}
                       />
                       <span className="font-medium break-words whitespace-normal">
                         {tournament.name}
@@ -197,7 +199,7 @@ const UpcomingEventsSection = () => {
             "Who's Playing Next? See the Lineup — It's Game Time!"
           </p>
         </div>
-        <div className="bg-[var(--card-bg-uc)] rounded-xl p-2 shadow-lg">
+        <div className="bg-[var(--card-bg-uc)] rounded-2xl p-5 shadow-lg w-full">
           {matchesLoading ? (
             <>
               <MatchSkeleton />
@@ -210,23 +212,30 @@ const UpcomingEventsSection = () => {
             matches?.data?.map((match, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-3.5 mb-3"
+                className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-4"
               >
-                <div className="flex justify-between items-center mb-2 ">
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center text-xs gap-1">
+                <div className="flex flex-col sm:flex-row justify-between gap-2 items-center">
+                  <div className="flex justify-center items-center text-md gap-2">
+                    {match.logo !== "NA" ? (
                       <Image
                         src={getValidLogoUrl(match.logo)}
                         alt="tournament"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
+                        className="flex justify-center items-center"
                       />
-                      <span className="font-bold">{match.name}</span>
-                      <span className="mx-1 text-white/80 font-semibold">
-                        Match {match.matchNumber}
-                      </span>
-                    </div>
-                    <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
+                        <span className="text-xs">🏆</span>
+                      </div>
+                    )}
+                    <span className="font-medium text-md">
+                      {match.name}
+                    </span>
+                  </div>
+                  <div className="flex justify-center items-center gap-3 min-w-29">
+
+                    <span className="bg-white text-black text-xs px-2 py-1 rounded-sm font-semibold">
                       {formatStartDate(match.start_date)}
                     </span>
                   </div>
@@ -271,7 +280,7 @@ const UpcomingEventsSection = () => {
                     <div className="flex items-center text-md gap-2">
                       {tournament.logo !== "NA" ? (
                         <Image
-                          src={tournament.logo}
+                          src={getValidLogoUrl(tournament.logo)}
                           alt={`${tournament.name} Logo`}
                           width={30}
                           height={30}
@@ -289,7 +298,7 @@ const UpcomingEventsSection = () => {
                     <div className="flex items-center gap-3 min-w-29">
                       {tournament.logo !== "NA" ? (
                         <Image
-                          src={tournament.logo}
+                          src={getValidLogoUrl(tournament.logo)}
                           alt={`${tournament.name} Logo`}
                           width={30}
                           height={30}

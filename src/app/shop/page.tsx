@@ -69,13 +69,13 @@ export default function Shop() {
       <Navbar />
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
         {!isMobile && (
-          <div className="fixed right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 p-4 z-10">
+          <div className="fixed mt-10 right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 z-10">
             <AdForLeaderBoard />
             <AdForLeaderBoard />
           </div>
         )}
         <div
-          className={`pt-16 pb-20 ${isMobile ? "px-4" : "pr-[350px] pl-5"}`}
+          className={`py-16 ${isMobile ? "" : "pr-[350px]"}`}
           style={{ height: "calc(100vh - 64px)" }}
         >
           <div className="w-full h-[60px] md:h-[100px] mt-4">
@@ -186,21 +186,22 @@ export default function Shop() {
             so you always choose gear that levels up your game.
           </div>
 
-          <div className={`space-y-8 ${isMobile ? "" : "px-4"}`}>
+          <div className={`space-y-8 mb-10 ${isMobile ? "" : "px-4"}`}>
             <ProductShowcase
               categoryId={selectedCategory}
               searchQuery={debouncedSearchQuery}
             />
           </div>
+          <Footer />
         </div>
 
         <button
           onClick={() => setIsDrawerOpen(true)}
-          className="fixed bottom-4 right-4 md:right-[calc(350px+1rem)] z-50 flex items-center justify-center bg-[#FF1ADF] hover:bg-[#f516d7] text-white rounded-full shadow-lg transition-all duration-300"
+          className="fixed bottom-4 right-4 md:right-[calc(350px+1rem)] z-50 flex items-center justify-center bg-[#FF1ADF] hover:bg-[#f516d7] text-white rounded-full shadow-lg transition-all duration-300 cursor-pointer"
           style={{
-            width: isMobile ? "56px" : "auto",
+            width: "56px",
             height: "56px",
-            padding: isMobile ? "0" : "0 24px",
+            // padding: isMobile ? "0" : "0 24px",
           }}
         >
           {isMobile ? (
@@ -209,6 +210,7 @@ export default function Shop() {
               viewBox="0 0 32 32"
               width="2em"
               height="2em"
+              className="cursor-pointer"
             >
               <path
                 fill="currentColor"
@@ -221,6 +223,7 @@ export default function Shop() {
               viewBox="0 0 32 32"
               width="2em"
               height="2em"
+              className="cursor-pointer"
             >
               <path
                 fill="currentColor"
@@ -230,7 +233,6 @@ export default function Shop() {
           )}
         </button>
       </div>
-      <Footer />
       <ComparisonDrawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen} />
     </>
   );
