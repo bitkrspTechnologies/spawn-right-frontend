@@ -93,7 +93,7 @@ const UpcomingEventsSection = () => {
         <div>
           <div className="text-center mb-4">
             <h2 className="text-xl font-normal">Upcoming Matches</h2>
-            <p className="text-sm font-semibold text-white/80 font-[roboto_serif]">
+            <p className="text-sm font-semibold text-white/80">
               "Who's Playing Next? See the Lineup — It's Game Time!"
             </p>
           </div>
@@ -141,7 +141,7 @@ const UpcomingEventsSection = () => {
         <div>
           <div className="text-center mb-4">
             <h2 className="text-xl font-normal">Upcoming Tournaments</h2>
-            <p className="text-sm font-semibold text-white/80 font-[roboto_serif]">
+            <p className="text-sm font-semibold text-white/80">
               "Ready to Compete or Just Watch the Best?"
             </p>
           </div>
@@ -193,7 +193,7 @@ const UpcomingEventsSection = () => {
       <div className="flex flex-col flex-1 w-full">
         <div className="text-white mb-6 text-center">
           <h2 className="text-2xl font-normal">Upcoming Matches</h2>
-          <p className="font-[roboto_serif] text-md font-semibold text-white/80">
+          <p className="text-md font-semibold text-white/80">
             "Who's Playing Next? See the Lineup — It's Game Time!"
           </p>
         </div>
@@ -246,7 +246,7 @@ const UpcomingEventsSection = () => {
       <div className="flex flex-col flex-1 w-full">
         <div className="text-white mb-6 text-center">
           <h2 className="text-2xl font-normal">Upcoming Tournaments</h2>
-          <p className="font-[roboto_serif] text-md font-semibold text-white/80">
+          <p className="text-md font-semibold text-white/80">
             "Ready to Compete or Just Watch the Best?"
           </p>
         </div>
@@ -265,7 +265,7 @@ const UpcomingEventsSection = () => {
               ) => (
                 <div
                   key={index}
-                  className="font-[roboto_serif] bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-4"
+                  className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-4"
                 >
                   <div className="flex flex-col sm:flex-row justify-between gap-2">
                     <div className="flex items-center text-md gap-2">

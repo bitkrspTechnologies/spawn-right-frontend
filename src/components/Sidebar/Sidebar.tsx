@@ -72,9 +72,9 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
 
       <div
         className={classNames(
-          "fixed top-0 right-0 h-(500px) w-72 max-w-full mt-16",
+          "fixed top-0 right-0 h-(500px) w-72 max-w-full mt-10",
           "bg-gradient-to-b from-[#0e0e0e] to-[#1a1a1a]",
-          "z-50 shadow-2xl rounded-l-3xl p-6",
+          "z-70 shadow-2xl rounded-l-3xl p-6",
           "transition-transform duration-300 ease-in-out flex flex-col",
           {
             "translate-x-0": visible,
@@ -82,7 +82,7 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
           }
         )}
       >
-        <div className="flex justify-between gap-1 items-center m-5 mb-4">
+        <div className="flex justify-between gap-1 items-center mx-5 mt-5">
           <h2 className="text-pink-500 font-bold text-xl">GAME ON !!!!!!</h2>
           <button onClick={onClose}>
             <XMarkIcon className="h-6 w-6 text-white" />
@@ -172,7 +172,7 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
         </div>
 
         {/* Sidebar Footer Promo */}
-        <div className="mt-auto pt-10">
+        <div className="mt-auto">
           <div className="bg-[#141414] rounded-2xl p-4 text-center text-white shadow-md">
             <h3 className="font-bold text-lg mb-2">LEVEL UP</h3>
             <p className="text-sm mb-3">GEAR COMPARISON FOR YOUR GAME PICKS</p>

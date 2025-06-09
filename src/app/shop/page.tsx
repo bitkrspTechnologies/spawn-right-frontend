@@ -206,46 +206,26 @@ export default function Shop() {
           {isMobile ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              className="lucide lucide-expand-icon lucide-expand"
+              viewBox="0 0 32 32"
+              width="2em"
+              height="2em"
             >
-              <path d="m15 15 6 6" />
-              <path d="m15 9 6-6" />
-              <path d="M21 16v5h-5" />
-              <path d="M21 8V3h-5" />
-              <path d="M3 16v5h5" />
-              <path d="m3 21 6-6" />
-              <path d="M3 8V3h5" />
-              <path d="M9 9 3 3" />
+              <path
+                fill="currentColor"
+                d="M28 6H18V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h10v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2M4 15h6.17l-2.58 2.59L9 19l5-5l-5-5l-1.41 1.41L10.17 13H4V4h12v20H4Zm12 13v-2a2 2 0 0 0 2-2V8h10v9h-6.17l2.58-2.59L23 13l-5 5l5 5l1.41-1.41L21.83 19H28v9Z"
+              ></path>
             </svg>
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              className="lucide lucide-expand-icon lucide-expand"
+              viewBox="0 0 32 32"
+              width="2em"
+              height="2em"
             >
-              <path d="m15 15 6 6" />
-              <path d="m15 9 6-6" />
-              <path d="M21 16v5h-5" />
-              <path d="M21 8V3h-5" />
-              <path d="M3 16v5h5" />
-              <path d="m3 21 6-6" />
-              <path d="M3 8V3h5" />
-              <path d="M9 9 3 3" />
+              <path
+                fill="currentColor"
+                d="M28 6H18V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h10v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2M4 15h6.17l-2.58 2.59L9 19l5-5l-5-5l-1.41 1.41L10.17 13H4V4h12v20H4Zm12 13v-2a2 2 0 0 0 2-2V8h10v9h-6.17l2.58-2.59L23 13l-5 5l5 5l1.41-1.41L21.83 19H28v9Z"
+              ></path>
             </svg>
           )}
         </button>

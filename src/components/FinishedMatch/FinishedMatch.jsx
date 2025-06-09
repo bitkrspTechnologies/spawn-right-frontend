@@ -270,7 +270,7 @@ const UpcomingEventsSection = () => {
               ) => (
                 <div
                   key={index}
-                  className="font-[roboto_serif] cursor-pointer bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-2"
+                  className="cursor-pointer bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-sm p-3 mb-2"
                   onClick={() => router.push("/tournaments?tab=completed")}
 
                 >

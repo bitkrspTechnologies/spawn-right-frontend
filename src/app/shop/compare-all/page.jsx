@@ -537,7 +537,7 @@ export default function CompareAll() {
               </div>
             )}
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </div>
 
       </div>

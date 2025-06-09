@@ -180,7 +180,7 @@ const InfoSidebar: React.FC<InfoSidebarProps> = ({ visible, onClose }) => {
 
       <div
         className={classNames(
-          "fixed top-0 right-0 h-(500px) w-72 max-w-full mt-16",
+          "fixed top-0 right-0 h-(500px) w-72 max-w-full mt-10",
           "bg-gradient-to-b from-[#0e0e0e] to-[#1a1a1a]",
           "z-50 shadow-2xl rounded-l-3xl p-6",
           "transition-transform duration-300 ease-in-out flex flex-col",
@@ -190,14 +190,14 @@ const InfoSidebar: React.FC<InfoSidebarProps> = ({ visible, onClose }) => {
           }
         )}
       >
-        <div className="flex justify-between gap-1 items-center m-5 mb-4">
+        <div className="flex justify-between gap-1 items-center mx-5 mt-5">
           <h2 className="text-pink-500 font-bold text-xl">SHOP NOW !!!!!!</h2>
           <button onClick={onClose}>
             <XMarkIcon className="h-6 w-6 text-white" />
           </button>
         </div>
 
-        <div className="flex flex-col h-80 mt-10 gap-4">
+        <div className="flex flex-col h-36 mt-10 gap-4">
           {navLinks.map((link, index) => (
             <Link key={index} href={link.href}>
               <button
