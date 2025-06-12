@@ -69,7 +69,7 @@ const UpcomingEventsSection = () => {
   return (
     <div className=" flex flex-col lg:flex-row gap-8 justify-center  items-start py-10 px-4">
       {/* Matches Section */}
-      <div className="bg-[#141324] text-white rounded-2xl p-6 shadow-lg max-w-xl w-full min-h-[500px]">
+      <div className="bg-[#141324] text-white rounded-2xl p-5 shadow-lg max-w-xl w-full min-h-[500px]">
         <h2 className="text-2xl font-bold mb-2">Upcoming Matches</h2>
 
         {upcomingMatches.map((match, index) => (
