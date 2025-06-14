@@ -29,7 +29,7 @@ const ProductShowcase = ({ categoryId, searchQuery }) => {
     queryKey: ["shop-right-products", page, categoryId, searchQuery],
     queryFn: () =>
       searchQuery
-        ? fetchSearchedProducts(page, searchQuery)
+        ? fetchSearchedProducts(page, searchQuery, categoryId)
         : getShopProducts(page, categoryId),
     keepPreviousData: true,
     staleTime: 5000,

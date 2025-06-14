@@ -12,7 +12,7 @@ export default function Shop() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("4092116031");
+  const [selectedCategory, setSelectedCategory] = useState("14142561031");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [compareCount, setCompareCount] = useState(0);
 
@@ -91,25 +91,63 @@ export default function Shop() {
 
           <div className={`w-full my-5 ${isMobile ? "px-2" : "px-4"}`}>
             <div className="relative">
-              <div className="relative flex flex-col sm:flex-row items-center bg-white rounded-lg shadow-sm border border-gray-200 hover:border-slate-400 focus-within:border-slate-600 focus-within:ring-1 focus-within:ring-slate-600 transition-all duration-200">
-                {/* Category Select - Full width on mobile, normal on larger screens */}
+              <div className="relative flex flex-col sm:flex-row items-center bg-gray-800 rounded-lg shadow-sm border transition-all duration-200">
                 <div className="relative w-full sm:w-auto">
                   <select
-                    className="w-full pl-5 pr-8 py-2.5 text-sm bg-transparent font-medium text-gray-700 sm:border-r border-gray-200 appearance-none focus:outline-none focus:ring-0 cursor-pointer"
+                    className="w-full pl-10 lg:pl-4 md:pl-5 pr-14 py-2.5 text-sm font-medium text-gray-200 sm:border-r border-gray-700 appearance-none focus:outline-none focus:ring-0 cursor-pointer"
                     value={selectedCategory}
                     onChange={handleCategoryChange}
                   >
-                    <option value="4092116031">All Categories</option>
-                    <option value="1389401031">Phone</option>
-                    <option value="1375424031">Laptop</option>
-                    <option value="1375458031">Tablet</option>
-                    <option value="1375420031">Mouse</option>
-                    <option value="1388921031">Headphones</option>
-                    <option value="1375419031">Keyboard</option>
-                    <option value="1375392031">Desktops</option>
+                    <option
+                      value="14142561031"
+                      className="bg-gray-700 color-white"
+                    >
+                      All Categories
+                    </option>
+                    <option
+                      value="1389401031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Phone
+                    </option>
+                    <option
+                      value="1375424031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Laptop
+                    </option>
+                    <option
+                      value="1375458031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Tablet
+                    </option>
+                    <option
+                      value="1375420031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Mouse
+                    </option>
+                    <option
+                      value="1388921031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Headphones
+                    </option>
+                    <option
+                      value="1375419031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Keyboard
+                    </option>
+                    <option
+                      value="1375392031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Desktops
+                    </option>
                   </select>
 
-                  {/* Category dropdown icon - positioned differently on mobile */}
                   <div className="absolute inset-y-0 left-3 sm:left-[120px] flex items-center pointer-events-none">
                     <svg
                       className="h-5 w-5 text-gray-400"
@@ -126,12 +164,11 @@ export default function Shop() {
                   </div>
                 </div>
 
-                {/* Search Input - Full width on mobile */}
                 <div className="relative w-full">
                   <input
                     type="text"
                     placeholder="Search for products like 'Gaming Keyboard'..."
-                    className="w-full pl-4 pr-12 py-2.5 text-sm bg-transparent outline-none placeholder-gray-400 text-gray-700 sm:rounded-r-lg"
+                    className="w-full pl-4 pr-12 py-2.5 text-sm bg-black/70 outline-none placeholder-gray-500 text-gray-200 sm:rounded-r-lg"
                     value={searchQuery}
                     onChange={handleSearchChange}
                   />
@@ -141,7 +178,7 @@ export default function Shop() {
                     {searchQuery && (
                       <button
                         onClick={clearSearch}
-                        className="p-1 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                        className="p-1 text-gray-400 transition-colors duration-200"
                         aria-label="Clear search"
                       >
                         <svg
@@ -159,7 +196,7 @@ export default function Shop() {
                       </button>
                     )}
                     <button
-                      className="ml-1 p-1 text-gray-500 hover:text-slate-700 transition-colors duration-200"
+                      className="ml-1 p-1 text-gray-400 transition-colors duration-200"
                       aria-label="Search"
                     >
                       <svg

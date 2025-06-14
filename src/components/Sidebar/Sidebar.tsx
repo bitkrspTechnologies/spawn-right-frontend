@@ -72,7 +72,7 @@ const GameOnSidebar: React.FC<GameOnSidebarProps> = ({ visible, onClose }) => {
 
       <div
         className={classNames(
-          "fixed top-0 right-0 h-(500px) w-72 max-w-full mt-10",
+          "fixed top-0 right-0 h-(500px) w-72 max-w-full mt-14",
           "bg-gradient-to-b from-[#0e0e0e] to-[#1a1a1a]",
           "z-70 shadow-2xl rounded-l-3xl p-6",
           "transition-transform duration-300 ease-in-out flex flex-col",
