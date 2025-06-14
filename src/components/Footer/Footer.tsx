@@ -2,8 +2,8 @@
 import {
   FaLinkedin,
   FaInstagram,
-  FaFacebookF,
-  FaXTwitter,
+  // FaFacebookF,
+  // FaXTwitter,
   FaDiscord,
 } from "react-icons/fa6";
 import Link from "next/link";
