@@ -7,6 +7,7 @@ import ReactQueryProvider from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 import { Suspense } from "react";
 import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
+import Script from "next/script";
 
 const audiowide = Audiowide({
   weight: "400",
@@ -40,6 +41,39 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script id="hide-address-bar" strategy="afterInteractive">
+          {`
+            // Function to hide address bar
+            function hideAddressBar() {
+              if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+              } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
+              }
+              
+              // Scroll to top
+              window.scrollTo(0, 1);
+            }
+
+            // Hide address bar on page load
+            window.addEventListener('load', function() {
+              hideAddressBar();
+            });
+
+            // Hide address bar on scroll
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+              const st = window.pageYOffset || document.documentElement.scrollTop;
+              if (st > lastScrollTop) {
+                // Scrolling down
+                hideAddressBar();
+              }
+              lastScrollTop = st <= 0 ? 0 : st;
+            }, false);
+          `}
+        </Script>
+      </head>
       <body
         className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
       >

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, createAffiliateLink } from "@/lib/utils";
 import Button from "../../Button/Button";
 import { ComparisonDrawer } from "../ComparisonDrawer/ComparisonDrawer";
 import Link from "next/link";
@@ -145,7 +145,7 @@ const ProductCard = ({ product }) => {
 
             <div className="grid grid-cols-2 gap-2 mt-4">
               <a
-                href={product?.product_url || "#"}
+                href={createAffiliateLink(product?.product_url || "#")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(

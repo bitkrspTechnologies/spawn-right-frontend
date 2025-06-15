@@ -6,7 +6,7 @@ import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { X, ChevronDown, ChevronUp, Star, Battery, Camera, Cpu, HardDrive, Smartphone, Package, Truck, CreditCard, Shield, Award, Clock, Zap, Volume2, Mouse, Keyboard, Headphones, Monitor, MessageSquare } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, createAffiliateLink } from "@/lib/utils";
 import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
 
 const iconMap = {
@@ -385,7 +385,7 @@ export default function CompareAll() {
                     {product.product_price}
                   </div>
                   <a
-                    href={product.product_url}
+                    href={createAffiliateLink(product.product_url)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(

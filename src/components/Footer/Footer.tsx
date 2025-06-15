@@ -59,6 +59,9 @@ export default function Footer() {
               <Link href="/terms-of-use">Terms of Use</Link>
               <Link href="/privacy-policy">Privacy Policy</Link>
             </div>
+            <p className="text-xs text-gray-400 mt-2">
+            |  As an Amazon Associate, we earn from qualifying purchases.
+            </p>
           </div>
         </div>
       </footer>
@@ -113,19 +116,24 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-10 flex justify-between text-sm border-t border-white/10 pt-6 text-gray-400">
-        <p>
-          © {new Date().getFullYear()} Spawn Right |{" "}
-          <a
-            href="https://www.tecnomi.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm"
-          >
-            Designed & Developed by Tecnomi
-          </a>
-        </p>
-        <div className="flex space-x-6">
+      <div className="max-w-7xl mx-auto mt-10 flex flex-col md:flex-row justify-between text-sm border-t border-white/10 pt-6 text-gray-400">
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+          <p>
+            © {new Date().getFullYear()} Spawn Right |{" "}
+            <a
+              href="https://www.tecnomi.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm"
+            >
+              Designed & Developed by Tecnomi
+            </a>
+          </p>
+          <p className="text-sm">
+            As an Amazon Associate, we earn from qualifying purchases.
+          </p>
+        </div>
+        <div className="flex space-x-6 mt-4 md:mt-0">
           <Link href="/terms-of-use" className="font-bold text-white">
             Terms of Use
           </Link>

@@ -4,7 +4,7 @@ import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 import { Check, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, createAffiliateLink } from "@/lib/utils";
 import Footer from "@/components/Footer/Footer";
 import { useParams } from "next/navigation";
 import ProductDetailSkeleton from "@/components/Skeleton/ProductDetailSkeleton";
@@ -347,7 +347,7 @@ export default function Shop() {
 
                 <div className="grid grid-cols-2 gap-2 mt-2 md:mt-4">
                   <a
-                    href={product?.product_url}
+                    href={createAffiliateLink(product?.product_url)}
                     target="_blank"
                     className={cn(
                       "py-3 md:py-5 px-3 md:px-5 text-xs border-2 font-medium rounded-sm text-center w-full",
