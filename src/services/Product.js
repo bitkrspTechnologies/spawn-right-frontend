@@ -12,7 +12,7 @@ export async function fetchProducts(page, categoryId) {
 
 export async function fetchSearchedProducts(page, search, categoryId) {
     const response = await fetch(
-        `${apiConfig.apiUrl}/api/v1/products/get-searched-products?page=${page}&search=${search}&categoryId=${categoryId}`
+        `${apiConfig.apiUrl}/api/v1/products/get-searched-products?page=${page}&search=${search}`
     );
     if (!response.ok) {
         throw new Error('Failed to fetch products');

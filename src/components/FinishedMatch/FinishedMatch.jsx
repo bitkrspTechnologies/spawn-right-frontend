@@ -140,7 +140,7 @@ const UpcomingEventsSection = () => {
                         height={20}
                       />
                       <span className="font-bold">{match.name}</span>
-                      <span className="mx-1 text-white/80 font-semibold">
+                      <span className="font-medium ">
                         Match {match.matchNumber}
                       </span>
                     </div>
@@ -227,17 +227,21 @@ const UpcomingEventsSection = () => {
               >
                 <div className="flex justify-between items-center mb-2 ">
                   <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center text-xs gap-1">
+                    <div className="flex items-center text-xs gap-1 ">
                       <Image
                         src={getValidLogoUrl(match.logo)}
                         alt="tournament"
                         width={20}
                         height={20}
                       />
-                      <span className="font-bold">{match.name}</span>
-                      <span className="mx-1 text-white/80 font-semibold">
+                      <span className="font-medium text-[15px]">
+                        {match.name}
+                      </span>
+
+                      <span className="font-medium text-[15px]">
                         Match {match.matchNumber}
                       </span>
+
                     </div>
                     <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
                       {formatStartDate(match.startTime)}

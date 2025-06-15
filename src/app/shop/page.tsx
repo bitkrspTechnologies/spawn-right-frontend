@@ -91,10 +91,10 @@ export default function Shop() {
 
           <div className={`w-full my-5 ${isMobile ? "px-2" : "px-4"}`}>
             <div className="relative">
-              <div className="relative flex flex-col sm:flex-row items-center bg-gray-800 rounded-lg shadow-sm border transition-all duration-200">
-                <div className="relative w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-stretch bg-black/70 rounded-lg shadow-sm border border-gray-700 transition-all duration-200 overflow-hidden">
+                <div className="relative sm:w-[180px] flex-shrink-0">
                   <select
-                    className="w-full pl-10 lg:pl-4 md:pl-5 pr-14 py-2.5 text-sm font-medium text-gray-200 sm:border-r border-gray-700 appearance-none focus:outline-none focus:ring-0 cursor-pointer"
+                    className="w-full h-full pl-3 pr-6 py-2.5 text-sm font-medium text-gray-200 bg-gray-800 appearance-none focus:outline-none focus:ring-0 cursor-pointer truncate"
                     value={selectedCategory}
                     onChange={handleCategoryChange}
                   >
@@ -108,19 +108,31 @@ export default function Shop() {
                       value="1389401031"
                       className="bg-gray-700 color-white"
                     >
-                      Phone
+                      Mobile Phones
                     </option>
                     <option
                       value="1375424031"
                       className="bg-gray-700 color-white"
                     >
-                      Laptop
+                      Laptops
                     </option>
                     <option
                       value="1375458031"
                       className="bg-gray-700 color-white"
                     >
-                      Tablet
+                      Tablets
+                    </option>
+                    <option
+                      value="1388921031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Headphones & Earphones
+                    </option>
+                    <option
+                      value="1375419031"
+                      className="bg-gray-700 color-white"
+                    >
+                      Keyboards
                     </option>
                     <option
                       value="1375420031"
@@ -129,17 +141,12 @@ export default function Shop() {
                       Mouse
                     </option>
                     <option
-                      value="1388921031"
+                      value="4092115031"
                       className="bg-gray-700 color-white"
                     >
-                      Headphones
+                      Controllers
                     </option>
-                    <option
-                      value="1375419031"
-                      className="bg-gray-700 color-white"
-                    >
-                      Keyboard
-                    </option>
+
                     <option
                       value="1375392031"
                       className="bg-gray-700 color-white"
@@ -148,37 +155,35 @@ export default function Shop() {
                     </option>
                   </select>
 
-                  <div className="absolute inset-y-0 left-3 sm:left-[120px] flex items-center pointer-events-none">
+                  <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
                     <svg
-                      className="h-5 w-5 text-gray-400"
+                      className="h-4 w-4 text-gray-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
                       <path
                         fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                         clipRule="evenodd"
                       />
                     </svg>
                   </div>
                 </div>
 
-                <div className="relative w-full">
+                <div className="relative flex-grow">
                   <input
                     type="text"
                     placeholder="Search for products like 'Gaming Keyboard'..."
-                    className="w-full pl-4 pr-12 py-2.5 text-sm bg-black/70 outline-none placeholder-gray-500 text-gray-200 sm:rounded-r-lg"
+                    className="w-full h-full pl-4 pr-12 py-2.5 text-sm bg-black/70 outline-none placeholder-gray-500 text-gray-200 focus:bg-black/80 transition-colors duration-200"
                     value={searchQuery}
                     onChange={handleSearchChange}
                   />
-
-                  {/* Search and Clear buttons */}
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 space-x-1">
                     {searchQuery && (
                       <button
                         onClick={clearSearch}
-                        className="p-1 text-gray-400 transition-colors duration-200"
+                        className="p-1 text-gray-400 hover:text-gray-200 transition-colors duration-200"
                         aria-label="Clear search"
                       >
                         <svg
@@ -196,7 +201,7 @@ export default function Shop() {
                       </button>
                     )}
                     <button
-                      className="ml-1 p-1 text-gray-400 transition-colors duration-200"
+                      className="p-1 text-gray-400 hover:text-gray-200 transition-colors duration-200"
                       aria-label="Search"
                     >
                       <svg
