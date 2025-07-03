@@ -1,12 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import { useMediaQuery } from "react-responsive"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 const Banner = () => {
-  const isMobile = useMediaQuery({ maxWidth: 767 })
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -80,11 +78,11 @@ const Banner = () => {
         animate={isMounted ? "visible" : "hidden"}
         variants={backgroundVariants}
         className="relative w-full my-3 overflow-hidden rounded-xl"
-        style={{ height: isMobile ? '120px' : '150px' }}
+        style={{ height: '150px' }}
       >
         {/* Background Image */}
         <Image
-          src={isMobile ? "/images/MobileBanner.png" : "/images/banner.svg"}
+          src="/images/banner.svg"
           alt="Banner"
           fill
           className="object-contain"
@@ -108,8 +106,7 @@ const Banner = () => {
                 key={index}
                 variants={item}
                 data-glitch={word}
-                className={`glitch font-bold ${isMobile ? 'text-sm sm:text-base' : 'text-xl lg:text-2xl'
-                  } drop-shadow-lg`}
+                className={`glitch font-bold text-xl lg:text-2xl drop-shadow-lg`}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {word}
@@ -123,8 +120,7 @@ const Banner = () => {
               <motion.span
                 key={index}
                 variants={item}
-                className={`text-gray-200 ${isMobile ? 'text-[10px] sm:text-xs' : 'text-sm lg:text-base'
-                  } drop-shadow-md`}
+                className={`text-gray-200 text-sm lg:text-base drop-shadow-md`}
                 transition={{ type: "spring", stiffness: 400 }}
                 custom={index}
               >

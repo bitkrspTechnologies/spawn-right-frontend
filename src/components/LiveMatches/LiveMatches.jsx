@@ -6,10 +6,8 @@ import { fetchAll } from '@/services/LiveMatches';
 import { useRouter } from 'next/navigation';
 import "swiper/css";
 import "swiper/css/pagination";
-import { useMediaQuery } from 'react-responsive';
 
 export default function LiveMatches({ variant = "grid" }) {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
   const router = useRouter();
 
   const { data, isLoading, error } = useQuery({

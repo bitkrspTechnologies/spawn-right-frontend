@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Audiowide } from "next/font/google";
+import { Inter, Audiowide, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import TopLoader from "@/components/TopLoader/TopLoader";
-import ReactQueryProvider from "./providers";
-import { Toaster } from "@/components/ui/sonner";
-import { Suspense } from "react";
-import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
-import Script from "next/script";
+import ReactQueryProvider from "@/app/providers";
 
+const inter = Inter({ subsets: ["latin"] });
 const audiowide = Audiowide({
   weight: "400",
   subsets: ["latin"],
@@ -29,78 +26,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SpawnRight - Gaming Platform",
-  description:
-    "Your ultimate gaming platform for matches, tournaments, and more",
+  title: "Spawn Right",
+  description: "Spawn Right - Your Ultimate Gaming Companion",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <Script id="hide-address-bar" strategy="afterInteractive">
-          {`
-            // Function to hide address bar
-            function hideAddressBar() {
-              if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-              } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen();
-              }
-              
-              // Scroll to top
-              window.scrollTo(0, 1);
-            }
-
-            // Hide address bar on page load
-            window.addEventListener('load', function() {
-              hideAddressBar();
-            });
-
-            // Hide address bar on scroll
-            let lastScrollTop = 0;
-            window.addEventListener('scroll', function() {
-              const st = window.pageYOffset || document.documentElement.scrollTop;
-              if (st > lastScrollTop) {
-                // Scrolling down
-                hideAddressBar();
-              }
-              lastScrollTop = st <= 0 ? 0 : st;
-            }, false);
-          `}
-        </Script>
-      </head>
-      <body
-        className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}
-      >
+      <body className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
             <TopLoader />
-            <div className="glow-overlay top-[30%] left-[50%] hidden lg:block"></div>
-            <div className="glow-overlay top-[80%] left-[20%] hidden lg:block"></div>
-            <div className="glow-overlay bottom-[10%] right-[30%] hidden lg:block"></div>
-
-            <main className="flex-grow">
-              <Suspense
-                fallback={
-                  <div className="flex justify-center items-center mt-10">
-                    <SuspenseLoader />
-                  </div>
-                }
-              >
-                {children}
-              </Suspense>
-            </main>
-            <Toaster />
+            <div className={`${audiowide.className} ${geistSans.variable} ${geistMono.variable} antialiased bg-gaming-glow relative min-h-screen text-white`}>
+              <div className="glow-overlay top-[30%] left-[50%]" />
+              <div className="glow-overlay top-[80%] left-[20%]" />
+              <div className="glow-overlay bottom-[10%] right-[30%]" />
+              <main className="flex-grow">{children}</main>
+            </div>
           </ThemeProvider>
         </ReactQueryProvider>
       </body>

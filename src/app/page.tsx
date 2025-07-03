@@ -89,7 +89,6 @@ import FinishedMatch from "@/components/FinishedMatch/FinishedMatch";
 import Navbar from "@/components/Navbar/Navbar";
 import JoinBanner from "@/components/common/JoinBanner";
 import Banner from "@/components/common/Banner";
-import { useMediaQuery } from "react-responsive";
 import DefaultSlider from "@/components/common/VedioCarousel";
 // import SuspenseLoader from "@/components/SuspenseLoader/SuspenseLoader";
 // import { CustomersSectionDemo } from "@/components/TrustedBy/TrustedBy";
@@ -98,7 +97,6 @@ const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
 });
 
 export default function Home() {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <>
@@ -126,7 +124,7 @@ export default function Home() {
             {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
             <div className="flex flex-col sm:flex-row gap-3 mx-2 min-h-[200px] pt-5 pb-16">
               <div
-                className={`${isMobile ? "mt-2 hidden" : "mt-9"}  w-full sm:w-1/2`}
+                className="mt-9 w-full sm:w-1/2"
               >
                 <AdSection />
               </div>
@@ -158,18 +156,9 @@ export default function Home() {
             <div className="w-full">
               <DefaultSlider />
             </div>
-            {isMobile ? (
-              <div className="mt-6">
-                <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-                  <span className="trophy-icon">🏆</span>Finished Matches
-                </h2>
-                <FinishedMatch />
-              </div>
-            ) : (
-              <div className="ml-12 mt-10">
-                <FinishedMatch />
-              </div>
-            )}
+            <div className="ml-12 mt-10">
+              <FinishedMatch />
+            </div>
             {/* <div className="mt-10 text-center">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
               We are trusted by

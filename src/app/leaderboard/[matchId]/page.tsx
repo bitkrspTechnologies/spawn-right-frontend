@@ -1,6 +1,5 @@
 "use client";
 
-import { useMediaQuery } from "react-responsive";
 import React from "react";
 import Scoreboard from "@/components/Leaderboard/Scoreboard";
 import LeaderboardLayout from "@/components/Leaderboard/LeaderboardLayout";
@@ -8,7 +7,6 @@ import { useParams } from "next/navigation";
 
 export default function Leaderboard() {
   const params = useParams();
-  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const matchId = params?.matchId
     ? Array.isArray(params.matchId)
@@ -21,7 +19,7 @@ export default function Leaderboard() {
   }
 
   return (
-    <LeaderboardLayout isMobile={isMobile}>
+    <LeaderboardLayout isMobile={false}>
       <Scoreboard matchId={matchId} />
     </LeaderboardLayout>
   );

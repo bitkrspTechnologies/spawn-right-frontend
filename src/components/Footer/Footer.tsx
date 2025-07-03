@@ -7,66 +7,8 @@ import {
   FaDiscord,
 } from "react-icons/fa6";
 import Link from "next/link";
-import { useMediaQuery } from "react-responsive";
 
 export default function Footer() {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-
-  if (isMobile) {
-    return (
-      <footer className="bg-black px-6 py-8 text-white space-y-8">
-        {/* logo */}
-        <img src="/images/Logos-03.svg" alt="Spawn Right" className="w-[70%]" />
-
-        {/* social icons */}
-        <div className="flex justify-between gap-4">
-          <FooterIcon
-            Icon={FaLinkedin}
-            href="https://www.linkedin.com/company/spawnright/?originalSubdomain=in"
-          />
-          <FooterIcon
-            Icon={FaInstagram}
-            href="https://www.instagram.com/spawnright.gg?igsh=MWR2MWxmenp5cWczZA%3D%3D"
-          />
-          {/* <FooterIcon Icon={FaFacebookF} href="" />
-          <FooterIcon Icon={FaXTwitter} href="" /> */}
-          <FooterIcon
-            Icon={FaDiscord}
-            href="https://discord.com/invite/E2nX9A22VN"
-          />
-        </div>
-
-        {/* nav links stacked */}
-        <div className=" flex justify-between items-center gap-4 font-bold">
-          <Link href="/advertise">Advertise</Link>
-          <Link href="/about">About Us</Link>
-          <Link href="/careers">Careers</Link>
-        </div>
-
-        {/* legal row */}
-        <div className="text-xs text-gray-400 space-y-4 mb-20">
-          <div className="flex flex-col items-center gap-2">
-            <p>© {new Date().getFullYear()} Spawn Right</p>
-            <a
-              href="https://www.tecnomi.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs "
-            >
-              Designed & Developed by Tecnomi
-            </a>
-            <div className="flex gap-4 font-bold text-white">
-              <Link href="/terms-of-use">Terms of Use</Link>
-              <Link href="/privacy-policy">Privacy Policy</Link>
-            </div>
-            <p className="text-xs text-gray-400 mt-2">
-            |  As an Amazon Associate, we earn from qualifying purchases.
-            </p>
-          </div>
-        </div>
-      </footer>
-    );
-  }
 
   return (
     <footer className="bg-black text-white px-6 py-10">

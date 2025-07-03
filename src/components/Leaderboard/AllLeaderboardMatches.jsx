@@ -5,13 +5,13 @@ import Link from "next/link";
 const AllLeaderboardMatches = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["live-matches"],
-    queryFn: () => fetchAll("ongoing"),
+    queryFn: () => fetchAll("completed"),
   });
 
   if (isLoading) {
     return (
       <div className="min-h-screen text-white p-4 sm:px-6 lg:px-8 pt-5">
-        <h1 className="text-2xl font-bold mb-6">Live Matches</h1>
+        <h1 className="text-2xl font-bold mb-6">Match Results</h1>
 
         {/* Desktop Skeleton */}
         <div className="hidden lg:block space-y-3">
@@ -76,7 +76,7 @@ const AllLeaderboardMatches = () => {
   if (isError) {
     return (
       <div className=" text-white p-4 sm:px-6 lg:px-8 ">
-        <h1 className="text-2xl font-bold mb-4">Live Matches</h1>
+        <h1 className="text-2xl font-bold mb-4">Match Results</h1>
         <div className="bg-red-900/50 border border-red-500 text-red-200 p-4 rounded-lg max-w-md text-center">
           <p className="font-medium">Error loading matches</p>
           <p className="text-sm mt-1">{error.message}</p>
@@ -89,7 +89,7 @@ const AllLeaderboardMatches = () => {
 
   return (
     <div className=" text-white p-4 sm:px-6 lg:px-8 mt-5">
-      <h1 className="text-2xl font-bold mb-6">Live Matches</h1>
+      <h1 className="text-2xl font-bold mb-6">Match Results</h1>
 
       {/* Desktop Table */}
       <div className="hidden lg:block space-y-2">
@@ -113,35 +113,35 @@ const AllLeaderboardMatches = () => {
           >
             <div className="col-span-1 font-medium">{match.matchNumber}</div>
             <div className="col-span-3 truncate">
-              <p className="font-medium">{match.tournament.name}</p>
+              <p className="font-medium">{match.tournament?.name || 'Unknown Tournament'}</p>
               <p className="text-gray-400 text-sm">
-                {match.tournament.organizer}
+                {match.tournament?.organizer || 'Unknown Organizer'}
               </p>
             </div>
-            <div className="col-span-1 text-center text-sm">{match.stage}</div>
+            <div className="col-span-1 text-center text-sm">{match.stage || 'N/A'}</div>
             <div className="col-span-1 text-center font-medium">
-              {match.map}
+              {match.map || 'N/A'}
             </div>
             <div className="col-span-2 text-center">
-              <p>{new Date(match.date).toLocaleDateString()}</p>
+              <p>{match.date ? new Date(match.date).toLocaleDateString() : 'N/A'}</p>
               <p className="text-gray-400 text-sm">
-                {new Date(match.startTime).toLocaleTimeString([], {
+                {match.startTime ? new Date(match.startTime).toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
-                })}
+                }) : 'N/A'}
               </p>
             </div>
             <div className="col-span-1 text-center">
               <span className="bg-gray-700 px-2 py-1 rounded-full text-sm">
-                {match.teams.length}
+                {match.teams?.length || 0}
               </span>
             </div>
             <div className="col-span-3 text-center">
               {match.winner ? (
                 <span className="bg-green-900/50 px-3 py-1 rounded-full text-sm font-medium">
                   {
-                    match.teams.find((t) => t.team._id === match.winner)?.team
-                      .name
+                    match.teams?.find((t) => t.team?._id === match.winner)?.team
+                      ?.name || 'Unknown Team'
                   }
                 </span>
               ) : (
@@ -167,35 +167,35 @@ const AllLeaderboardMatches = () => {
                   <h3 className="font-bold text-lg">
                     Match #{match.matchNumber}
                   </h3>
-                  <p className="text-gray-400 text-sm">{match.tournament.name}</p>
+                  <p className="text-gray-400 text-sm">{match.tournament?.name || 'Unknown Tournament'}</p>
                 </div>
                 <span className="bg-gray-700 px-2 py-1 rounded-full text-xs">
-                  {match.teams.length} teams
+                  {match.teams?.length || 0} teams
                 </span>
               </div>
 
               <div className="grid grid-cols-2 gap-4 mb-3">
                 <div>
                   <p className="text-gray-400 text-sm">Stage</p>
-                  <p className="font-medium">{match.stage}</p>
+                  <p className="font-medium">{match.stage || 'N/A'}</p>
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Map</p>
-                  <p className="font-medium">{match.map}</p>
+                  <p className="font-medium">{match.map || 'N/A'}</p>
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Date</p>
                   <p className="font-medium">
-                    {new Date(match.date).toLocaleDateString()}
+                    {match.date ? new Date(match.date).toLocaleDateString() : 'N/A'}
                   </p>
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Time</p>
                   <p className="font-medium">
-                    {new Date(match.startTime).toLocaleTimeString([], {
+                    {match.startTime ? new Date(match.startTime).toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
-                    })}
+                    }) : 'N/A'}
                   </p>
                 </div>
               </div>
@@ -205,8 +205,8 @@ const AllLeaderboardMatches = () => {
                 {match.winner ? (
                   <p className="font-medium text-green-400">
                     {
-                      match.teams.find((t) => t.team._id === match.winner)?.team
-                        .name
+                      match.teams?.find((t) => t.team?._id === match.winner)?.team
+                        ?.name || 'Unknown Team'
                     }
                   </p>
                 ) : (

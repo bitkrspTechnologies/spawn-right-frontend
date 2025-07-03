@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
 import { X, ChevronDown, ChevronUp, Star, Battery, Camera, Cpu, HardDrive, Smartphone, Package, Truck, CreditCard, Shield, Award, Clock, Zap, Volume2, Mouse, Keyboard, Headphones, Monitor, MessageSquare } from "lucide-react";
-import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
 import { cn, createAffiliateLink } from "@/lib/utils";
 import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
@@ -247,7 +246,6 @@ const getComparisonSections = (products) => {
 };
 
 export default function CompareAll() {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
   const [expandedSections, setExpandedSections] = useState({});
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [comparisonSections, setComparisonSections] = useState([]);
@@ -514,17 +512,15 @@ export default function CompareAll() {
     <>
       <Navbar />
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
-        {!isMobile && (
-          <div className="fixed mt-10 right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 z-10">
-            <AdForLeaderBoard />
-            <AdForLeaderBoard />
-          </div>
-        )}
+        <div className="fixed mt-10 right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 z-10">
+          <AdForLeaderBoard />
+          <AdForLeaderBoard />
+        </div>
         <div
-          className={`py-16 ${isMobile ? "" : "pr-[350px]"}`}
+          className="py-16 pr-[350px]"
           style={{ height: "calc(100vh - 64px)" }}
         >
-          <div className={`flex-1 mt-12 mb-5 p-5 overflow-y-auto ${isMobile ? "" : ""}`}>
+          <div className="flex-1 mt-12 mb-5 p-5 overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold text-white">Product Comparison</h2>
               {selectedProducts.length > 0 && (
@@ -540,13 +536,9 @@ export default function CompareAll() {
             </div>
 
             {selectedProducts.length > 0 ? (
-              isMobile ? (
-                <MobileComparisonView />
-              ) : (
-                <DesktopComparisonView />
-              )
+              <DesktopComparisonView />
             ) : (
-              <div className={`text-center py-10 ${isMobile ? "" : "px-6"}`}>
+              <div className="text-center py-10 px-6">
                 <h3 className="text-lg font-medium text-white mb-2">
                   No products selected for comparison
                 </h3>

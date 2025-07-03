@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/ShopRight/Navbar/Navbar";
-import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 import { Check, Star } from "lucide-react";
 import { cn, createAffiliateLink } from "@/lib/utils";
@@ -17,8 +16,6 @@ export default function Shop() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const params = useParams();
   const productId = params?.id;
-
-  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const {
     data: product,
@@ -209,14 +206,12 @@ export default function Shop() {
     <>
       <Navbar />
       <div className="relative w-full min-h-screen overflow-y-auto scrollbar-hide">
-        {!isMobile && (
-          <div className="fixed mt-10 right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 z-10">
-            <AdForLeaderBoard />
-            <AdForLeaderBoard />
-          </div>
-        )}
+        <div className="fixed mt-10 right-0 top-16 bottom-0 w-[350px] flex flex-col gap-4 z-10">
+          <AdForLeaderBoard />
+          <AdForLeaderBoard />
+        </div>
         <div
-          className={`py-16 ${isMobile ? "" : "pr-[350px]"}`}
+          className="py-16 pr-[350px]"
           style={{ height: "calc(100vh - 64px)" }}
         >
           <div className="space-y-8 px-5">

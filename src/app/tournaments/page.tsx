@@ -142,16 +142,13 @@
 
 "use client";
 
-import { useMediaQuery } from "react-responsive";
 import React from "react";
 import TournamentsTabs from "@/components/Tournaments/TournamentsTabs/TournamentsTabs";
 import LeaderboardLayout from "@/components/Leaderboard/LeaderboardLayout";
 
 export default function Tournaments() {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-
   return (
-    <LeaderboardLayout isMobile={isMobile}>
+    <LeaderboardLayout isMobile={false}>
       <TournamentsTabs />
     </LeaderboardLayout>
   );

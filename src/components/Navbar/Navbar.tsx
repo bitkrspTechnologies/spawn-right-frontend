@@ -77,9 +77,15 @@ export default function Navbar() {
         }
       )}
       style={{
-        minHeight: "80px", // Set a fixed minimum height
-        opacity: isLoaded ? 1 : 0, // Hide until loaded
-        transform: isLoaded ? "translateY(0)" : "translateY(-10px)", // Smooth entrance
+        minHeight: "80px",
+        opacity: isLoaded ? 1 : 0,
+        transform: isLoaded ? "translateY(0)" : "translateY(-10px)",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        willChange: "transform"
       }}
     >
       <div

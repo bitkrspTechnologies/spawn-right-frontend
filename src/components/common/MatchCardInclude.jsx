@@ -40,19 +40,19 @@ export default function MatchCard({
           <div key={index} className="flex justify-between items-center h-8">
             <div className="flex items-center gap-2">
               <Image
-                src={getValidLogoUrl(team.logo)}
-                alt={`${team.name} Logo`}
+                src={getValidLogoUrl(team?.logo)}
+                alt={`${team?.name || 'Unknown Team'} Logo`}
                 width={20}
                 height={20}
                 className="w-5 h-5 object-contain"
               />
-              <span className="font-bold text-sm line-clamp-1 max-w-[120px]">{team.name}</span>
+              <span className="font-bold text-sm line-clamp-1 max-w-[120px]">{team?.name || 'Unknown Team'}</span>
             </div>
-            <span className="font-semibold text-sm">{team.score}</span>
+            <span className="font-semibold text-sm">{team?.score || 0}</span>
           </div>
         ))}
         {/* Fill remaining slots with empty divs to maintain consistent height */}
-        {Array.from({ length: Math.max(0, 3 - teams.length) }).map((_, index) => (
+        {Array.from({ length: Math.max(0, 3 - (teams?.length || 0)) }).map((_, index) => (
           <div key={`empty-${index}`} className="h-8" aria-hidden="true"></div>
         ))}
       </div>

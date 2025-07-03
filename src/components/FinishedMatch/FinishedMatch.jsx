@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { useMediaQuery } from "react-responsive";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllTournaments } from "../../services/Tournaments";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
@@ -11,9 +10,9 @@ import { fetchAll } from "@/services/LiveMatches";
 import { useRouter } from "next/navigation";
 
 // Add these skeleton components at the top of your file
-const MatchSkeleton = ({ isMobile = false }) => (
+const MatchSkeleton = () => (
   <div
-    className={`bg-white/10 backdrop-blur-md border rounded-md ${isMobile ? "p-2 mb-3" : "p-3.5 mb-3"}`}
+    className="bg-white/10 backdrop-blur-md border rounded-md p-3.5 mb-3"
   >
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2 animate-pulse">
@@ -26,9 +25,9 @@ const MatchSkeleton = ({ isMobile = false }) => (
   </div>
 );
 
-const TournamentSkeleton = ({ isMobile = false }) => (
+const TournamentSkeleton = () => (
   <div
-    className={`bg-white/10 backdrop-blur-md border ${isMobile ? "rounded-lg px-3 py-2 mb-2" : "rounded-sm p-3 mb-4"}`}
+    className="bg-white/10 backdrop-blur-md border rounded-sm p-3 mb-4"
   >
     <div className="flex justify-between items-center gap-2 animate-pulse">
       <div className="flex items-center gap-2">
@@ -63,7 +62,6 @@ function formatDateRange(start, end) {
 
 const UpcomingEventsSection = () => {
   const router = useRouter()
-  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   /* Fetch Complete matches */
   const {
@@ -109,99 +107,7 @@ const UpcomingEventsSection = () => {
       <p className="text-red-500 text-center">Failed to load tournaments.</p>
     );
 
-  // Mobile Layout
-  if (isMobile) {
-    return (
-      <div className="flex flex-col gap-8 px-0 py-2 text-white">
-        {/* Matches */}
-        <div className="">
-          {matchesLoading ? (
-            <>
-              <MatchSkeleton isMobile />
-              <MatchSkeleton isMobile />
-              <MatchSkeleton isMobile />
-            </>
-          ) : matchesError ? (
-            <p className="text-red-500 text-center">Error loading matches</p>
-          ) : (
-            latest4Matches?.map((match, index) => (
-              <div
-                key={index}
-                className="bg-white/10  cursor-pointer backdrop-blur-md border border-[var(--border-card)] rounded-md p-2 mb-3"
-                onClick={() => handleCardClick(match._id)}
-              >
-                <div className="flex justify-between items-center mb-2">
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center text-xs gap-1">
-                      <Image
-                        src={getValidLogoUrl(match.logo)}
-                        alt="tournament"
-                        width={20}
-                        height={20}
-                      />
-                      <span className="font-bold">{match.name}</span>
-                      <span className="font-medium ">
-                        Match {match.matchNumber}
-                      </span>
-                    </div>
-                    <span className="bg-white text-black text-xs px-3 py-0.5 rounded-xs font-semibold">
-                      {formatStartDate(match.startTime)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
 
-        {/* Tournaments */}
-        <h2 className="text-xl md:text-2xl font-normal text-white mb-2">
-          <span className="trophy-icon">🏆</span>Finished Tournaments
-        </h2>
-        <div className="-mt-5">
-          {isLoading ? (
-            <>
-              <TournamentSkeleton isMobile />
-              <TournamentSkeleton isMobile />
-              <TournamentSkeleton isMobile />
-            </>
-          ) : (
-
-            latestTournaments?.map((match, index) => (
-
-              <div
-                key={index}
-                className="bg-white/10 cursor-pointer backdrop-blur-md border border-[var(--border-card)] rounded-lg p-2 mb-3"
-                onClick={() => router.push("/tournaments?tab=completed")}
-              >
-                <div className="flex justify-between items-start gap-2 mb-2">
-                  <div className="flex items-center gap-2 text-xs flex-1 min-w-0">
-                    <Image
-                      src={match.logo}
-                      alt="Tournament"
-                      width={18}
-                      height={18}
-                    />
-                    <span className="font-medium break-words whitespace-normal">
-                      {match.name}
-                    </span>
-                  </div>
-                  <span className="bg-white text-black text-[10px] px-2 py-0.5 rounded-xs font-semibold whitespace-nowrap">
-                    {formatDateRange(
-                      match.start_date,
-                      match.end_date
-                    )}
-                  </span>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // Desktop Layout
   return (
     <div className="font-bold flex flex-col lg:flex-row gap-8 justify-center items-start py-5 px-4">
       {/* Left Section - Matches */}

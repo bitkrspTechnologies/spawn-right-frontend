@@ -3,7 +3,11 @@ const apiConfig = {
 };
 
 export async function fetchAll(status) {
-  const response = await fetch(`${apiConfig.apiUrl}/api/v1/matches/get-all-matches/${status}`);
+  let url = `${apiConfig.apiUrl}/api/v1/matches`;
+  if (status) {
+    url = `${apiConfig.apiUrl}/api/v1/matches/get-all-matches/${status}`;
+  }
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Failed to fetch Tournaments');
   }

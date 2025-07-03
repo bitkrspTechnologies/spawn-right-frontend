@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer/Footer";
-import { useMediaQuery } from "react-responsive";
 import { StickyScroll } from "@/components/About/StickyScrollReveal/StickyScrollReveal";
 import TeamAccordion from "@/components/About/TeamAccordion/TeamAccordion";
 import Navbar from "@/components/Navbar/Navbar";
@@ -48,12 +47,6 @@ const scaleUp = {
 };
 
 export default function About() {
-  const [isMobile, setIsMobile] = useState(false);
-  const mobileQuery = useMediaQuery({ maxWidth: 767 });
-
-  useEffect(() => {
-    setIsMobile(mobileQuery);
-  }, [mobileQuery]);
 
   const content = [
     {
@@ -172,7 +165,6 @@ export default function About() {
               <motion.div
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: true, margin: "-100px" }}
                 variants={slideInFromLeft}
                 className="md:w-1/2 w-full"
               >
@@ -226,26 +218,23 @@ export default function About() {
                 </p>
               </motion.div>
 
-              {!isMobile && (
-                <motion.div
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  variants={slideInFromRight}
-                  className="md:w-1/2 w-full"
-                >
-                  <div className="relative aspect-video rounded-xl overflow-hidden border border-gray-700 shadow-lg shadow-purple-500/10">
-                    <Image
-                      src="/images/gamecarousel/missonImage.png"
-                      alt="Mission Illustration"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      priority={false}
-                    />
-                  </div>
-                </motion.div>
-              )}
+              <motion.div
+                initial="hidden"
+                whileInView="show"
+                variants={slideInFromRight}
+                className="md:w-1/2 w-full"
+              >
+                <div className="relative aspect-video rounded-xl overflow-hidden border border-gray-700 shadow-lg shadow-purple-500/10">
+                  <Image
+                    src="/images/gamecarousel/missonImage.png"
+                    alt="Mission Illustration"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={false}
+                  />
+                </div>
+              </motion.div>
             </div>
           </section>
 
@@ -254,7 +243,6 @@ export default function About() {
             <motion.div
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
               variants={fadeIn}
               className="text-center"
             >
@@ -293,7 +281,6 @@ export default function About() {
             <motion.div
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
               variants={fadeIn}
             >
               <h2 className="text-3xl font-bold mb-12 text-center bg-clip-text  text-white">
@@ -313,7 +300,6 @@ export default function About() {
                     variants={scaleUp}
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, margin: "-50px" }}
                     className="bg-black/50 p-6 rounded-xl border border-gray-800 hover:border-purple-500/30 transition-all"
                   >
                     <div className="flex items-center mb-4">
@@ -339,7 +325,6 @@ export default function About() {
             <motion.div
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
               variants={fadeIn}
             >
               <h2 className="text-3xl font-bold mb-12 text-center bg-clip-text text-white">
@@ -358,7 +343,6 @@ export default function About() {
             <motion.div
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
               variants={fadeIn}
               className="bg-black/50 flex flex-col justify-center items-center p-12 rounded-2xl border border-gray-800"
             >

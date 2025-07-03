@@ -1,4 +1,3 @@
-
 'use client'
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -10,75 +9,31 @@ import MatchCard from "@/components/common/MatchCardInclude";
 export default function TournamentMatchesPage() {
   const params = useParams();
   const tournamentId = params.tournamentId;
-  const [activeTab, setActiveTab] = useState("ongoing");
 
   const { data: matches, isLoading, isError, error } = useQuery({
-    queryKey: ["tournamentMatches", tournamentId, activeTab],
-    queryFn: () => fetchTournamentMatches(tournamentId, activeTab),
+    queryKey: ["tournamentMatches", tournamentId],
+    queryFn: () => fetchTournamentMatches(tournamentId),
     enabled: !!tournamentId
   });
 
-  // const tabs = [
-  //   { key: "ongoing", label: "Live" },
-  //   { key: "upcoming", label: "Upcoming" },
-  //   { key: "completed", label: "Past" },
-  // ];
-
-  const filteredMatches = matches?.filter(match => {
-    if (activeTab === "ongoing") return match.status === "ongoing" || match.status === "live";
-    if (activeTab === "upcoming") return match.status === "upcoming";
-    if (activeTab === "completed") return match.status === "completed";
-    return true;
-  }) || [];
-  // Transform API data to MatchCard props
-  // const transformedMatches = filteredMatches?.map(match => ({
-  //   matchId: match._id,
-  //   matchNumber: match.matchNumber,
-  //   game: match.tournament.name,
-  //   logo: match.tournament.logo,
-  //   teams: match.teams.map(team => ({
-  //     name: team.team.name,
-  //     logo: team.team.logo,
-  //     score: team.totalPoints
-  //   })),
-  //   result: match.winner?.name || 'No winner yet'
-  // })) || [];
-
-  const transformedMatches = filteredMatches?.map(match => ({
+  const transformedMatches = matches?.map(match => ({
     matchId: match._id,
     matchNumber: match.matchNumber,
-    game: match.tournament.name,
-    logo: match.tournament.logo,
-    teams: match.teams
-      .sort((a, b) => b.totalPoints - a.totalPoints) // sort by totalPoints descending
+    game: match.tournament?.name || 'Unknown Tournament',
+    logo: match.tournament?.logo || '/images/bgmi.svg',
+    teams: (match.teams || [])
+      .sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)) // sort by totalPoints descending
       .slice(0, 3) // take top 3 teams
       .map(team => ({
-        name: team.team.name,
-        logo: team.team.logo,
-        score: team.totalPoints
+        name: team.team?.name || 'Unknown Team',
+        logo: team.team?.logo || '/images/default-team.svg',
+        score: team.totalPoints || 0
       })),
     result: match.winner?.name || 'No winner yet'
   })) || [];
 
-
   return (
     <div className="w-full mx-auto sm:px-4 lg:px-6 mt-10">
-      {/* <div className="flex justify-between bg-[#2a2a2a] rounded-t-lg overflow-hidden">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 text-center py-3 text-sm font-medium transition-colors
-              ${activeTab === tab.key
-                ? 'text-pink-500 border-b-2 border-pink-500'
-                : 'text-gray-300 hover:text-gray-100'
-              }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div> */}
-
       <div className="mt-4">
         <h1 className="text-2xl font-bold mb-6">
           Match details
@@ -102,7 +57,7 @@ export default function TournamentMatchesPage() {
           </div>
         ) : (
           <div className="text-center py-8 text-gray-400">
-            No {activeTab} matches found for this tournament
+            No matches found for this tournament
           </div>
         )}
       </div>

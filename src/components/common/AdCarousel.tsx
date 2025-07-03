@@ -69,7 +69,6 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
 
 const adSlides = [
   {
@@ -91,7 +90,6 @@ const adSlides = [
 
 export default function AdCarousel() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -100,44 +98,7 @@ export default function AdCarousel() {
     return () => clearInterval(interval);
   }, []);
 
-  // if(isMobile){
-  //   return(
-  //     <div className="flex flex-col items-center">
-  //     {/* Ad Card for Mobile */}
-  //     <div className="bg-[#1f1f2e] w-full h-[180px] p-2 shadow-md border border-gray-800 text-white overflow-hidden rounded-lg">
-  //       <div className="flex justify-between items-center border-b border-gray-600 pb-2">
-  //         <p className=" text-xs text-gray-300 font-medium tracking-widest">ADVERTISEMENT</p>
-  //         <a
-  //           href="#"
-  //           className=" text-xs text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline"
-  //         >
-  //           <span>Remove Ads</span>
-  //           <Image src="/images/icons/go-to-the-link.svg" alt="Link" width={12} height={12} />
-  //         </a>
-  //       </div>
-  //       <div className="py-6 min-h-[100px] transition-all duration-500 ease-in-out">
-  //         <h3 className=" font-bold text-lg mb-2 truncate">
-  //           {adSlides[activeSlide].title}
-  //         </h3>
-  //         <p className=" text-[var(--adtext)] font-normal text-sm line-clamp-2">
-  //           {adSlides[activeSlide].description}
-  //         </p>
-  //       </div>
-  //     </div>
-  //     <div className="flex justify-center space-x-2 mt-3">
-  //       {adSlides.map((_, index) => (
-  //         <span
-  //           key={index}
-  //           onClick={() => setActiveSlide(index)}
-  //           className={`h-2 w-2 rounded-full cursor-pointer transition-all ${
-  //             activeSlide === index ? 'bg-yellow-400' : 'bg-gray-500'
-  //           }`}
-  //         />
-  //       ))}
-  //     </div>
-  //   </div>
-  //   )
-  // }
+
 
   return (
     // <div className="flex flex-col items-center">
@@ -182,24 +143,18 @@ export default function AdCarousel() {
     <div className="flex flex-col items-center">
       {/* Ad Card */}
       <div
-        className={`bg-[#1f1f2e] w-full ${
-          isMobile ? "h-[170px] rounded-sm" : "h-[250px] rounded-lg"
-        } p-4 shadow-md border border-gray-800 text-white overflow-hidden`}
+        className="bg-[#1f1f2e] w-full h-[250px] rounded-lg p-4 shadow-md border border-gray-800 text-white overflow-hidden"
       >
         {/* Header */}
         <div className="flex justify-between items-center border-b border-gray-600 pb-2">
           <p
-            className={` tracking-widest ${
-              isMobile ? "text-[10px]" : "text-xs"
-            } text-gray-300 font-medium`}
+            className="tracking-widest text-xs text-gray-300 font-medium"
           >
             ADVERTISEMENT
           </p>
           <a
             href="#"
-            className={` inline-flex items-center space-x-1 hover:underline font-medium ${
-              isMobile ? "text-[10px]" : "text-xs"
-            } text-[oklch(0.627 0.265 303.9)]`}
+            className="inline-flex items-center space-x-1 hover:underline font-medium text-xs text-[oklch(0.627 0.265 303.9)]"
           >
             <span>Remove Ads</span>
             <Image
@@ -213,19 +168,15 @@ export default function AdCarousel() {
 
         {/* Slide Content */}
         <div
-          className={`transition-all duration-500 ease-in-out ${isMobile ? "py-3" : "py-6"} min-h-[60px]`}
+          className="transition-all duration-500 ease-in-out py-6 min-h-[60px]"
         >
           <h3
-            className={` font-bold mb-1 truncate ${
-              isMobile ? "text-sm" : "text-lg"
-            }`}
+            className="font-bold mb-1 truncate text-lg"
           >
             {adSlides[activeSlide].title}
           </h3>
           <p
-            className={` text-[var(--adtext)] font-normal line-clamp-2 ${
-              isMobile ? "text-xs" : "text-sm"
-            }`}
+            className="text-[var(--adtext)] font-normal line-clamp-2 text-sm"
           >
             {adSlides[activeSlide].description}
           </p>
