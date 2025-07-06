@@ -219,7 +219,7 @@ const AllLeaderboardMatches = () => {
       </div>
 
       {matches.length === 0 && (
-        <div className="bg-gray-800 rounded-lg p-8 text-center">
+        <div className="rounded-lg p-8 text-center flex justify-center items-center">
           <p className="text-gray-400">No ongoing matches found</p>
         </div>
       )}

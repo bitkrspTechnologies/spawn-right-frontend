@@ -99,6 +99,8 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
   const router = useRouter();
   const isLive = tournament.status === 'ongoing';
 
+    console.log("torr",tournament);
+
   const handleLiveMatchesClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     // Navigate to the tournament's live matches page
@@ -120,7 +122,7 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
             {tournament.name}
           </h3>
           <p className="text-pink-300 font-medium text-sm">
-            ₹{tournament.prize_pool?.toLocaleString('en-IN') || '0'} Prize Pool
+            {tournament.prize_pool?.toLocaleString('en-IN') || '0'} Prize Pool
           </p>
         </div>
         <div className="w-12 h-12 rounded-lg bg-white/10 p-2 flex items-center justify-center">
@@ -129,7 +131,7 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
             alt="Tournament Logo"
             width={40}
             height={40}
-            className="object-contain"
+            className="object-cover"
           />
         </div>
       </div>
@@ -155,20 +157,6 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
           className="mt-4 w-full bg-pink-600/30 hover:bg-pink-600/40 text-pink-100 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-center"
         >
           Go to Live Matches
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-4 w-4 ml-2 animate-pulse" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M15.536 8.464a5 5 0 010 7.072M12 18.364a7 7 0 010-12.728M8.464 15.536a5 5 0 010-7.072" 
-            />
-          </svg>
         </button>
       )}
     </div>

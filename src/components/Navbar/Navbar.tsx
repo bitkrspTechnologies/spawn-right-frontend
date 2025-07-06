@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
 import Button from "../Button/Button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { ChevronDown } from "lucide-react";
 import GameOnSidebar from "@/components/Sidebar/Sidebar";
@@ -16,13 +16,13 @@ export default function Navbar() {
   const [selectedBtn, setSelectedBtn] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
-    // Set loaded state after initial render
     setIsLoaded(true);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -31,7 +31,6 @@ export default function Navbar() {
     {
       key: "bgmi",
       text: "BGMI",
-      hasData: true,
       icon: (
         <Image src="/images/bgmi.svg" alt="BGMI Icon" width={25} height={25} />
       ),
@@ -39,7 +38,6 @@ export default function Navbar() {
     {
       key: "valorant",
       text: "VALORANT",
-      hasData: false,
       icon: (
         <Image
           src="/images/valorantLogo.png"
@@ -51,8 +49,7 @@ export default function Navbar() {
     },
     {
       key: "csgo",
-      text: "CS GO",
-      hasData: false,
+      text: "CSGO",
       icon: (
         <Image
           src="/images/csgoLogo.png"
@@ -64,10 +61,16 @@ export default function Navbar() {
     },
   ];
 
-  const getGameRoute = (hasData: boolean) =>
-    hasData ? "/tournaments" : "/coming-soon";
-  const getLeaderboardRought = (hasData: boolean) =>
-    hasData ? "/leaderboard" : "/coming-soon";
+  const getGameRoute = (gameKey: string, gameName: string) =>
+    `/tournaments?game=${encodeURIComponent(gameKey)}&name=${encodeURIComponent(
+      gameName
+    )}`;
+
+  const getLeaderboardRoute = (gameKey: string, gameName: string) =>
+    `/leaderboard?game=${encodeURIComponent(
+      gameKey
+    )}&name=${encodeURIComponent(gameName)}`;
+
   return (
     <header
       className={classNames(
@@ -80,12 +83,6 @@ export default function Navbar() {
         minHeight: "80px",
         opacity: isLoaded ? 1 : 0,
         transform: isLoaded ? "translateY(0)" : "translateY(-10px)",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        willChange: "transform"
       }}
     >
       <div
@@ -98,7 +95,6 @@ export default function Navbar() {
         )}
       />
 
-      {/* Top Navbar */}
       <div className="backdrop-blur-sm bg-black/5 max-w-7xl mx-auto px-6 py-3 flex justify-between items-center h-[80px] relative z-[100]">
         <Link href="/">
           <Image
@@ -107,12 +103,11 @@ export default function Navbar() {
             width={200}
             height={200}
             className="hover:opacity-90 transition-opacity"
-            priority // Add priority to load image first
+            priority
           />
         </Link>
 
         <div className="hidden md:flex items-center space-x-9 text-sm">
-          {/* Tournaments Dropdown */}
           <div className="relative group">
             <button className="flex items-center gap-1 text-[var(--highlight)] hover:text-white transition-colors font-medium focus:outline-none px-2 py-1">
               Tournaments
@@ -121,10 +116,10 @@ export default function Navbar() {
 
             <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500/30 rounded-lg shadow-xl backdrop-blur-lg bg-opacity-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[200] transform group-hover:translate-y-1">
               {gameButtons.map((game) => (
-                <Link
+                <button
                   key={game.key}
-                  href={getGameRoute(game.hasData)}
-                  className="block px-4 py-3 hover:bg-pink-500/10 transition-all duration-200 text-sm font-medium text-white/90 hover:text-white border-b border-white/5 last:border-b-0"
+                  onClick={() => router.push(getGameRoute(game.key, game.text))}
+                  className="w-full text-left block px-4 py-3 hover:bg-pink-500/10 transition-all duration-200 text-sm font-medium text-white/90 hover:text-white border-b border-white/5 last:border-b-0"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-5 h-5 flex items-center justify-center text-pink-400">
@@ -133,13 +128,11 @@ export default function Navbar() {
                     <span className="text-white/90 group-hover:text-white transition-colors">
                       {game.text}
                     </span>
-                    {game.hasData && (
-                      <span className="ml-auto text-xs opacity-70 group-hover:opacity-100 transition-opacity">
-                        →
-                      </span>
-                    )}
+                    <span className="ml-auto text-xs opacity-70 group-hover:opacity-100 transition-opacity">
+                      →
+                    </span>
                   </div>
-                </Link>
+                </button>
               ))}
             </div>
           </div>
@@ -152,10 +145,12 @@ export default function Navbar() {
 
             <div className="absolute top-full left-0 w-56 bg-[#1a1a2e] border border-pink-500/30 rounded-lg shadow-xl backdrop-blur-lg bg-opacity-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[200] transform group-hover:translate-y-1">
               {gameButtons.map((game) => (
-                <Link
+                <button
                   key={game.key}
-                  href={getLeaderboardRought(game.hasData)}
-                  className="block px-4 py-3 hover:bg-pink-500/10 transition-all duration-200 text-sm font-medium text-white/90 hover:text-white border-b border-white/5 last:border-b-0"
+                  onClick={() =>
+                    router.push(getLeaderboardRoute(game.key, game.text))
+                  }
+                  className="w-full text-left block px-4 py-3 hover:bg-pink-500/10 transition-all duration-200 text-sm font-medium text-white/90 hover:text-white border-b border-white/5 last:border-b-0"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-5 h-5 flex items-center justify-center text-pink-400">
@@ -164,13 +159,11 @@ export default function Navbar() {
                     <span className="text-white/90 group-hover:text-white transition-colors">
                       {game.text}
                     </span>
-                    {game.hasData && (
-                      <span className="ml-auto text-xs opacity-70 group-hover:opacity-100 transition-opacity">
-                        →
-                      </span>
-                    )}
+                    <span className="ml-auto text-xs opacity-70 group-hover:opacity-100 transition-opacity">
+                      →
+                    </span>
                   </div>
-                </Link>
+                </button>
               ))}
             </div>
           </div>
@@ -183,17 +176,19 @@ export default function Navbar() {
         </div>
 
         <div className="md:hidden">
-          <button onClick={() => setSidebarOpen((prev) => !prev)}>
+          <button
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Open sidebar"
+          >
             <Bars3Icon className="h-7 w-7 text-white" />
           </button>
         </div>
       </div>
 
-      {/* Game Buttons on Homepage */}
       {pathname === "/" && (
         <div className="pt-1 pb-3 w-full transition-all duration-500 z-[50] relative">
           <div className="flex gap-3 max-w-7xl mx-auto px-6 overflow-x-auto scrollbar-hide">
-            {gameButtons.map(({ key, text, icon, hasData }) => (
+            {gameButtons.map(({ key, text, icon }) => (
               <Button
                 key={key}
                 text={text}
@@ -203,7 +198,7 @@ export default function Navbar() {
                 selected={selectedBtn === key}
                 onClick={() => {
                   setSelectedBtn(key);
-                  window.location.href = getGameRoute(hasData);
+                  router.push(getGameRoute(key, text));
                 }}
               />
             ))}
@@ -211,7 +206,6 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Mobile Sidebar */}
       <GameOnSidebar
         visible={sidebarOpen}
         onClose={() => setSidebarOpen(false)}

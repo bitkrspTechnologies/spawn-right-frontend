@@ -95,7 +95,7 @@ const UpcomingEventsSection = () => {
     error,
   } = useQuery({
     queryKey: ["tournaments", "completed"],
-    queryFn: () => fetchAllTournaments("completed"),
+    queryFn: () => fetchAllTournaments("completed", "bgmi"),
     refetchInterval: 10000,
   });
 

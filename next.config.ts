@@ -18,11 +18,16 @@ const nextConfig: NextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.abiosgaming.com',
+      },
     ],
   },
   env: {
-    NEXT_PUBLIC_API_URL: 'https://api.spawnright.gg',
+    // NEXT_PUBLIC_API_URL: 'https://api.spawnright.gg',
+    NEXT_PUBLIC_API_URL: 'http://localhost:5090',
   },
 };
 

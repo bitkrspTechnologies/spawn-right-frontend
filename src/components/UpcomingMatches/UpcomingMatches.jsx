@@ -76,7 +76,7 @@ const UpcomingEventsSection = () => {
     error,
   } = useQuery({
     queryKey: ["tournaments", "upcoming"],
-    queryFn: () => fetchAllTournaments("upcoming"),
+    queryFn: () => fetchAllTournaments("upcoming","bgmi"),
   });
 
   if (error)

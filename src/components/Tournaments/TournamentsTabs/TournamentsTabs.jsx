@@ -5,9 +5,11 @@ import TournamentSkeleton from "@/components/Skeleton/TournamentSkeleton";
 import { TournamentCard } from "@/components/common/TournamentCard";
 import { useSearchParams } from "next/navigation";
 
-export default function TournamentsTabs({ gameName = "all", }) {
+export default function TournamentsTabs() {
   const searchParams = useSearchParams(); // ✅ hook to get the current URL search params
   const tabFromUrl = searchParams?.get("tab") || "ongoing";
+  const gameKey = searchParams.get("game");  
+  const gameName = searchParams.get("name");
   const [activeTab, setActiveTab] = useState(tabFromUrl);
 
   useEffect(() => {
@@ -20,8 +22,8 @@ export default function TournamentsTabs({ gameName = "all", }) {
     isError,
     error,
   } = useQuery({
-    queryKey: ["tournaments", activeTab, gameName],
-    queryFn: () => fetchAllTournaments(activeTab),
+    queryKey: ["tournaments", activeTab, gameKey],
+    queryFn: () => fetchAllTournaments(activeTab, gameKey),
   });
 
   const tabs = [
@@ -33,11 +35,7 @@ export default function TournamentsTabs({ gameName = "all", }) {
   // Filter tournaments based on game name (when available)
   const filteredTournaments =
     tournaments?.data?.filter((tournament) => {
-      // When gameName is 'all', show all tournaments
-      if (gameName === "all") return true;
-
-      // Future-proof filtering when game data is available
-      // Replace 'game' with the actual field name from your API
+      
       return tournament.game?.toLowerCase() === gameName.toLowerCase();
     }) || [];
 
@@ -72,8 +70,8 @@ export default function TournamentsTabs({ gameName = "all", }) {
           </div>
         ) : filteredTournaments.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredTournaments.map((tournament) => (
-              <TournamentCard key={tournament._id} tournament={tournament} />
+            {filteredTournaments.map((tournament,i) => (
+              <TournamentCard key={i} tournament={tournament} />
             ))}
           </div>
         ) : (
