@@ -26,8 +26,8 @@ const nextConfig: NextConfig = {
     ],
   },
   env: {
-    // NEXT_PUBLIC_API_URL: 'https://api.spawnright.gg',
-    NEXT_PUBLIC_API_URL: 'http://localhost:5090',
+    NEXT_PUBLIC_API_URL: 'https://api.spawnright.gg',
+    // NEXT_PUBLIC_API_URL: 'http://localhost:5090',
   },
 };
 

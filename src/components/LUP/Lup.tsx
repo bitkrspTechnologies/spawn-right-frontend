@@ -12,7 +12,7 @@ export default function Lup() {
   ];
 
   return (
-    <div className="flex justify-between bg-[#2a2a2a]  overflow-hidden">
+    <div className="flex justify-between bg-white/10  overflow-hidden">
       {tabs.map(tab => (
         <button
           key={tab.key}

@@ -95,16 +95,19 @@ import { useRouter } from "next/navigation";
 import { CalendarDays } from "lucide-react";
 import { getValidLogoUrl } from "@/utils/urlValidator";
 
-export const TournamentCard = ({ tournament }: { tournament: any }) => {
+export const TournamentCard = ({ tournament, gameKey }: { tournament: any, gameKey: String }) => {
   const router = useRouter();
   const isLive = tournament.status === 'ongoing';
 
-    console.log("torr",tournament);
+  console.log("torr", tournament);
 
   const handleLiveMatchesClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     // Navigate to the tournament's live matches page
-    router.push(`/matches/tournaments/${tournament._id}/matches`);
+
+    gameKey === "bgmi" ?
+      router.push(`/matches/tournaments/${tournament._id}/matches`) :
+      router.push(`/series/${tournament.id}?game=${(gameKey)}`);
   };
 
   const handleCardClick = () => {
@@ -112,9 +115,9 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
   };
 
   return (
-    <div 
-      className="group bg-white/5 rounded-xl p-5 cursor-pointer hover:bg-white/10 transition-all border border-white/10 hover:border-white/20 backdrop-blur-sm"
+    <div
       onClick={handleCardClick}
+      className="group bg-white/5 rounded-xl p-5 cursor-pointer hover:bg-white/10 transition-all border border-white/10 hover:border-white/20 backdrop-blur-sm"
     >
       <div className="flex items-start justify-between mb-4">
         <div className="w-3/4">
@@ -126,8 +129,8 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
           </p>
         </div>
         <div className="w-12 h-12 rounded-lg bg-white/10 p-2 flex items-center justify-center">
-          <Image 
-            src={getValidLogoUrl(tournament.logo) || "/images/default-tournament.svg"} 
+          <Image
+            src={getValidLogoUrl(tournament.logo) || "/images/default-tournament.svg"}
             alt="Tournament Logo"
             width={40}
             height={40}
@@ -152,11 +155,11 @@ export const TournamentCard = ({ tournament }: { tournament: any }) => {
       </div>
 
       {isLive && (
-        <button 
+        <button
           onClick={handleLiveMatchesClick}
           className="mt-4 w-full bg-pink-600/30 hover:bg-pink-600/40 text-pink-100 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-center"
         >
-          Go to Live Matches
+          {gameKey === "bgmi" ? "Go to Live Matches" : "Go to Live Series"}
         </button>
       )}
     </div>

@@ -41,7 +41,7 @@ export default function TournamentsTabs() {
 
   return (
     <div className="w-full max-w-5xl mx-auto sm:px-4 lg:px-6 mt-10">
-      <div className="flex justify-between bg-[#2a2a2a] rounded-t-lg overflow-hidden">
+      <div className="flex justify-between bg-white/10 rounded-t-lg overflow-hidden">
         {tabs.map((tab, i) => (
           <button
             key={i}
@@ -71,7 +71,7 @@ export default function TournamentsTabs() {
         ) : filteredTournaments.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {filteredTournaments.map((tournament,i) => (
-              <TournamentCard key={i} tournament={tournament} />
+              <TournamentCard key={i} tournament={tournament} gameKey={gameKey}/>
             ))}
           </div>
         ) : (

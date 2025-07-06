@@ -11,7 +11,7 @@ import { Plus } from "lucide-react";
 const TermsAndConditions = () => {
   return (
     <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8 mt-16">
-      <div className="bg-black/50 rounded-xl shadow-md p-6 md:p-8 min-h-[70vh] overflow-y-auto">
+      <div className="bg-white/5 rounded-xl shadow-md p-6 md:p-8 min-h-[70vh] overflow-y-auto">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-white">Terms of Use</h1>
           <p className="mt-2 text-gray-400">Effective May 15, 2025</p>

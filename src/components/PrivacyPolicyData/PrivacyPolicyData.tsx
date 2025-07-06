@@ -140,7 +140,7 @@ const PrivacyPolicyData = () => {
     <div className="min-h-screen flex flex-col font-sans text-white">
       {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto bg-black/50 rounded-xl shadow-md overflow-hidden p-6 md:p-8">
+        <div className="max-w-4xl mx-auto bg-white/5 rounded-xl shadow-md overflow-hidden p-6 md:p-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2">Privacy Policy</h2>
             <p className="text-gray-300">

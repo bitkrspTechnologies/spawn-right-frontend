@@ -239,7 +239,7 @@ export default function About() {
           </section>
 
           {/* Founding Story Section */}
-          <section className="py-20 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto bg-black/50 rounded-2xl my-12">
+          <section className="py-20 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto bg-white/5 rounded-2xl my-12">
             <motion.div
               initial="hidden"
               whileInView="show"
@@ -300,7 +300,7 @@ export default function About() {
                     variants={scaleUp}
                     initial="hidden"
                     whileInView="show"
-                    className="bg-black/50 p-6 rounded-xl border border-gray-800 hover:border-purple-500/30 transition-all"
+                    className="bg-white/5 p-6 rounded-xl border border-gray-800 hover:border-purple-500/30 transition-all"
                   >
                     <div className="flex items-center mb-4">
                       <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
@@ -344,7 +344,7 @@ export default function About() {
               initial="hidden"
               whileInView="show"
               variants={fadeIn}
-              className="bg-black/50 flex flex-col justify-center items-center p-12 rounded-2xl border border-gray-800"
+              className="bg-white/5 flex flex-col justify-center items-center p-12 rounded-2xl border border-gray-800"
             >
               <h2 className="text-3xl font-bold mb-6 bg-clip-text  text-white">
                 Join the Revolution

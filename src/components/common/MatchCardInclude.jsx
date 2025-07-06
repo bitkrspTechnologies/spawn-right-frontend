@@ -69,7 +69,7 @@ export default function MatchCard({
           onClick={handleLeaderboardClick}
           className="text-white text-sm hover:text-pink-400 transition-colors"
         >
-          Leader Board
+          Leaderboard
         </button>
       </div>
     </div>

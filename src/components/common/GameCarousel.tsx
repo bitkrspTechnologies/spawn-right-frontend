@@ -56,7 +56,7 @@
 //         {/* Left Arrow */}
 //         <button
 //           onClick={prev}
-//           className="absolute left-0 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+//           className="absolute left-0 z-10 bg-white/5 hover:bg-black/70 text-white p-2 rounded-full"
 //         >
 //           <ChevronLeft size={24} />
 //         </button>
@@ -95,7 +95,7 @@
 //         {/* Right Arrow */}
 //         <button
 //           onClick={next}
-//           className="absolute right-0 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+//           className="absolute right-0 z-10 bg-white/5 hover:bg-black/70 text-white p-2 rounded-full"
 //         >
 //           <ChevronRight size={24} />
 //         </button>
@@ -167,7 +167,7 @@ const GameCarousel = () => {
         {/* Left Arrow */}
         <button
           onClick={prev}
-          className="absolute left-2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+          className="absolute left-2 z-10 bg-white/5 hover:bg-black/70 text-white p-2 rounded-full"
         >
           <ChevronLeft size={24} />
         </button>
@@ -206,7 +206,7 @@ const GameCarousel = () => {
         {/* Right Arrow */}
         <button
           onClick={next}
-          className="absolute right-2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+          className="absolute right-2 z-10 bg-white/5 hover:bg-black/70 text-white p-2 rounded-full"
         >
           <ChevronRight size={24} />
         </button>
