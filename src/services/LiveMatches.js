@@ -43,4 +43,20 @@ export const fetchLiveStreams = async () => {
   return response.json();
 };
 
+export const getSeriesMatchesbyId = async (ids) => {
+  const response = await fetch(
+    `${apiConfig.apiUrl}/api/v1/matches/get-all-matches-by-series`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ids: ids })
+    }
+  );
+  if (!response.ok) {
+    throw new Error('Failed to fetch Match Leaderboard Data');
+  }
+  return response.json();
+};
 

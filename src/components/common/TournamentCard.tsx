@@ -106,12 +106,14 @@ export const TournamentCard = ({ tournament, gameKey }: { tournament: any, gameK
     // Navigate to the tournament's live matches page
 
     gameKey === "bgmi" ?
-      router.push(`/matches/tournaments/${tournament._id}/matches`) :
+      router.push(`/matches/tournaments/${tournament._id}/matches?game=${(gameKey)}`) :
       router.push(`/series/${tournament.id}?game=${(gameKey)}`);
   };
 
   const handleCardClick = () => {
-    router.push(`/matches/tournaments/${tournament._id}/matches`);
+    if (gameKey === "bgmi") {
+      router.push(`/matches/tournaments/${tournament._id}/matches`);
+    }
   };
 
   return (
