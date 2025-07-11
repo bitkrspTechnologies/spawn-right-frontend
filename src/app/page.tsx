@@ -134,7 +134,7 @@ export default function Home() {
               </div>
             </div>
             {/* Ad Section Carousel  and Live Matches Carousel Ends  */}
-            <UpcomingEventsSection />
+            <UpcomingEventsSection limitMatches={true} />
             <div className="flex gap-5 min-h-[200px] mb-8">
               <LiveMatches variant="grid" />
             </div>
@@ -156,7 +156,7 @@ export default function Home() {
             <div className="w-full">
               <DefaultSlider />
             </div>
-            <div className="ml-12 mt-10">
+            <div className="mt-10">
               <FinishedMatch />
             </div>
             {/* <div className="mt-10 text-center">

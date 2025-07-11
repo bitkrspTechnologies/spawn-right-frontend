@@ -116,7 +116,7 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
         <input
           type="text"
           placeholder="Search a team by name..."
-          className="px-4 py-2 rounded-sm bg-[#1c1c3a] text-white placeholder-gray-400 border border-gray-600 w-full focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+          className="px-4 py-2 rounded-sm bg-white/5 text-white placeholder-gray-400 border border-gray-600 w-full focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
@@ -201,7 +201,7 @@ const Scoreboard = ({ matchId }: { matchId: string | number }) => {
             text="Show More"
             onClick={handleShowMore}
             className="hover:scale-105 transition-transform px-6 py-2"
-            // disabled={isLoadingData}
+          // disabled={isLoadingData}
           />
         </div>
       )}

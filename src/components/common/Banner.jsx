@@ -78,19 +78,16 @@ const Banner = () => {
         animate={isMounted ? "visible" : "hidden"}
         variants={backgroundVariants}
         className="relative w-full my-3 overflow-hidden rounded-xl"
-        style={{ height: '150px' }}
+        style={{ height: 'clamp(120px, 30vw, 180px)' }} // Responsive height
       >
         {/* Background Image */}
         <Image
           src="/images/banner.svg"
           alt="Banner"
           fill
-          className="object-contain"
+          className="object-cover md:object-contain"
           priority
         />
-
-        {/* Gradient overlay */}
-        <div className="absolute inset-0" />
 
         {/* Text Content - Coming from left */}
         <motion.div
@@ -106,7 +103,7 @@ const Banner = () => {
                 key={index}
                 variants={item}
                 data-glitch={word}
-                className={`glitch font-bold text-xl lg:text-2xl drop-shadow-lg`}
+                className={`glitch font-bold text-lg sm:text-xl lg:text-2xl drop-shadow-lg`} // Responsive font size
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {word}
@@ -114,13 +111,16 @@ const Banner = () => {
             ))}
           </motion.div>
 
-          {/* Subtitle */}
+          {/* Subtitle - adjusted for mobile */}
           <motion.div className="flex flex-wrap items-center gap-x-1 sm:gap-x-2 gap-y-0">
             {subTextWords.map((word, index) => (
               <motion.span
                 key={index}
                 variants={item}
-                className={`text-gray-200 text-sm lg:text-base drop-shadow-md`}
+                className={`text-gray-200 text-xs sm:text-sm lg:text-base drop-shadow-md ${
+                  // Hide some words on very small screens to prevent overflow
+                  index > 8 && 'hidden xs:inline-block'
+                }`}
                 transition={{ type: "spring", stiffness: 400 }}
                 custom={index}
               >

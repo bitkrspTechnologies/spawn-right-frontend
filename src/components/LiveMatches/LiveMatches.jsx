@@ -170,4 +170,4 @@ export default function LiveMatches({ variant = "grid" }) {
       )}
     </section>
   );
-}
+} 

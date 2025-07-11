@@ -1,79 +1,4 @@
-// // components/Leaderboard/LeaderboardLayout.tsx
-
-// import React from "react";
-// import GlobalLeaderboardCard from "@/components/Leaderboard/GlobalLeaderboardCard";
-// import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
-// import Navbar from "@/components/Navbar/Navbar";
-// import Footer from "@/components/Footer/Footer";
-
-// interface LeaderboardLayoutProps {
-//   isMobile: boolean;
-//   children: React.ReactNode;
-// }
-
-// const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({ isMobile, children }) => {
-//   return (
-//     <>
-//       <Navbar />
-//       <div className="relative h-screen w-full overflow-hidden">
-//         <div className="h-full pt-32 overflow-y-auto scrollbar-hide">
-//           {!isMobile ? (
-//             <>
-//               {/* Ad + Leaderboard Section */}
-//               <div className="flex gap-4 justify-center items-stretch px-4 py-6">
-//                 <div className="flex-1 min-w-[300px] max-w-[400px]">
-//                   <GlobalLeaderboardCard />
-//                 </div>
-//                 <div className="flex-1 min-w-[300px] max-w-[400px]">
-//                   <AdForLeaderBoard />
-//                 </div>
-//                 <div className="flex-1 min-w-[300px] max-w-[400px]">
-//                   <AdForLeaderBoard />
-//                 </div>
-//               </div>
-
-//               {/* Content Section */}
-//               <div className="flex gap-2 px-2 py-4 justify-center items-start ">
-//                 <div className="flex-1 flex flex-col gap-3">
-//                   {children}
-//                 </div>
-
-//                 {/* Side Ad */}
-//                 <div className="flex-1 mt-10 min-w-[300px] max-w-[400px]">
-//                   <AdForLeaderBoard />
-//                 </div>
-//               </div>
-//             </>
-//           ) : (
-//             <div className="px-4">
-//               <GlobalLeaderboardCard />
-//               <div className="mt-4">
-//                 <AdForLeaderBoard />
-//               </div>
-//               <div className="mt-4">
-//                 <AdForLeaderBoard />
-//               </div>
-//               <div className="mt-6">
-//                 {children}
-//               </div>
-//               <div className="mt-4">
-//                 <AdForLeaderBoard />
-//               </div>
-//             </div>
-//           )}
-//           <Footer />
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default LeaderboardLayout;
-
-// components/Leaderboard/LeaderboardLayout.tsx
-
 import React from "react";
-// import GlobalLeaderboardCard from "@/components/Leaderboard/GlobalLeaderboardCard";
 import AdForLeaderBoard from "@/components/Leaderboard/AdForLeaderBoard";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -91,33 +16,20 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
   return (
     <>
       <Navbar />
-      <div className="relative h-screen w-full overflow-hidden">
-        <div className="h-full pt-15 overflow-y-auto scrollbar-hide ">
+      <div className="relative w-full overflow-hidden min-h-screen">
+        <div className="pt-16 overflow-y-auto scrollbar-hide">
           {!isMobile ? (
             <>
-              {/* Ad + Leaderboard Section */}
-              {/* <div className="flex flex-wrap gap-4 justify-center items-stretch px-4 py-6">
-                <div className="flex-1 min-w-[300px] max-w-[550px]">
-                  <GlobalLeaderboardCard />
-                </div>
-                <div className="flex-1 min-w-[200px] max-w-[400px]">
-                  <AdForLeaderBoard />
-                </div>
-                <div className="flex-1 min-w-[200px] max-w-[300px]">
-                  <AdForLeaderBoard />
-                </div>
-              </div> */}
-
-              {/* Content Section */}
-              <div className="flex justify-center gap-1 flex-wrap w-full items-start mb-10">
+              {/* Desktop Layout */}
+              <div className="flex justify-center gap-4 flex-wrap w-full items-start mb-10 px-4">
                 {/* Main Content */}
-                <div className="flex-1 min-w-[700px] max-w-[980px] w-full flex ">
+                <div className="flex-1 min-w-[700px] max-w-[980px] w-full flex">
                   {children}
                 </div>
 
                 {/* Side Ad */}
-                <div className="flex flex-col mt-5 sticky top-2 self-start">
-                  <div className=" min-w-[200px] max-w-[300px] w-full min-h-[300px]">
+                <div className="flex flex-col mt-5 sticky top-2 self-start gap-4">
+                  <div className="min-w-[200px] max-w-[300px] w-full min-h-[300px]">
                     <AdForLeaderBoard />
                   </div>
                   <div className="min-w-[200px] max-w-[300px]">
@@ -129,44 +41,54 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
           ) : (
             <>
               {/* Mobile Layout */}
-              <div className="px-1 py-4 flex flex-col gap-6 mb-10">
-                <div className="bg-[#1f1f2e] p-1 shadow-md border border-gray-800 text-white">
-                  {/* Top bar with Advertisement and bottom border */}
-                  <div className="flex justify-between items-center border-b border-gray-700 pb-1 mb-1">
-                    <p className="text-[8px] text-gray-300 tracking-widest">
+              <div className="px-2 py-4 flex flex-col gap-4 mb-10">
+                {/* Ad Header Section */}
+                <div className="bg-[#1f1f2e] p-2 rounded-md shadow-md border border-gray-800 text-white">
+                  <div className="flex justify-between items-center border-b border-gray-700 pb-2 mb-2">
+                    <p className="text-xs text-gray-300 tracking-widest">
                       ADVERTISEMENT
                     </p>
-                    <div className="mb-3">
-                      <button className="font-[roboto] text-[10px] text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline">
-                        <span>Remove Ads</span>
-                        <Image
-                          src="/images/icons/go-to-the-link.svg"
-                          alt="Link"
-                          width={12}
-                          height={12}
-                        />
-                      </button>
-                    </div>
+                    <button className="font-[roboto] text-xs text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline">
+                      <span>Remove Ads</span>
+                      <Image
+                        src="/images/icons/go-to-the-link.svg"
+                        alt="Link"
+                        width={12}
+                        height={12}
+                        className="ml-1"
+                      />
+                    </button>
                   </div>
 
                   {/* Remove All Ads Section */}
-
-                  <button className="font-[roboto] text-[10px] text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline">
-                    <span>Remove All Ads</span>
-                  </button>
-                  {/* Short description */}
-                  <p className="text-[9px] text-gray-400 font-normal">
-                    Say goodbye to ads, support our team, see exclusive sneak
-                    peeks, and get a shiny new Discord role.
-                  </p>
+                  <div className="flex flex-col">
+                    <button className="font-[roboto] text-xs text-[#F2BF43] font-medium inline-flex items-center space-x-1 hover:underline mb-1">
+                      <span>Remove All Ads</span>
+                    </button>
+                    <p className="text-xs text-gray-400 font-normal">
+                      Say goodbye to ads, support our team, see exclusive sneak
+                      peeks, and get a shiny new Discord role.
+                    </p>
+                  </div>
                 </div>
 
-                {/* <GlobalLeaderboardCard /> */}
-
-                {/* Single Small Ad for Mobile */}
+                {/* Ads for Mobile */}
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="w-full h-48">
+                    <AdForLeaderBoard />
+                  </div>
+                  <div className="w-full h-48">
+                    <AdForLeaderBoard />
+                  </div>
+                </div>
 
                 {/* Main Content */}
-                <div>{children}</div>
+                <div className="mt-2">{children}</div>
+
+                {/* Bottom Ad */}
+                <div className="w-full h-48 mt-4">
+                  <AdForLeaderBoard />
+                </div>
               </div>
             </>
           )}

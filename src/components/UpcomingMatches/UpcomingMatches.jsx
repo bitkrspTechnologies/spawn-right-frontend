@@ -58,7 +58,7 @@ function formatDateRange(start, end) {
   return `${startMonth} ${startDay} – ${endDay}`;
 }
 
-const UpcomingEventsSection = () => {
+const UpcomingEventsSection = ({ limitMatches = false }) => {
 
   // Fetch upcoming matches
   const {
@@ -108,7 +108,7 @@ const UpcomingEventsSection = () => {
           ) : matchesError ? (
             <p className="text-red-500 text-center">Error loading matches</p>
           ) : (
-            matches?.data?.map((match, index) => (
+            (limitMatches ? matches?.data?.slice(0, 5) : matches?.data)?.map((match, index) => (
               <div
                 key={index}
                 className="bg-white/10 backdrop-blur-md border border-[var(--border-card)] rounded-md p-4 my-2"
