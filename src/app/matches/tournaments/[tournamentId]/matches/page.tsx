@@ -74,10 +74,12 @@
 import React from "react";
 import LeaderboardLayout from "@/components/Leaderboard/LeaderboardLayout";
 import TournamentMatchesPage from "../../../../../components/TournamentMatchesPage";
+import { useMediaQuery } from "react-responsive";
 
 export default function Matchs() {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   return (
-    <LeaderboardLayout isMobile={false}>
+    <LeaderboardLayout isMobile={isMobile}>
       <TournamentMatchesPage />
     </LeaderboardLayout>
   );

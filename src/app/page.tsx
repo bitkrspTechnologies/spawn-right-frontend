@@ -97,7 +97,6 @@ const GameCarousel = dynamic(() => import("@/components/common/GameCarousel"), {
 });
 
 export default function Home() {
-
   return (
     <>
       <Navbar />
@@ -123,9 +122,7 @@ export default function Home() {
             {/* Hero Section Carousel Ends  */}
             {/* Ad Section Carousel  and Live Matches Carousel Starts  */}
             <div className="flex flex-col sm:flex-row gap-3 mx-2 min-h-[200px] pt-5 pb-16">
-              <div
-                className="mt-9 w-full sm:w-1/2"
-              >
+              <div className="mt-9 w-full sm:w-1/2">
                 <AdSection />
               </div>
 

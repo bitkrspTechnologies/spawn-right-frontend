@@ -71,24 +71,8 @@ const LeaderboardLayout: React.FC<LeaderboardLayoutProps> = ({
                     </p>
                   </div>
                 </div>
-
-                {/* Ads for Mobile */}
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="w-full h-48">
-                    <AdForLeaderBoard />
-                  </div>
-                  <div className="w-full h-48">
-                    <AdForLeaderBoard />
-                  </div>
-                </div>
-
                 {/* Main Content */}
                 <div className="mt-2">{children}</div>
-
-                {/* Bottom Ad */}
-                <div className="w-full h-48 mt-4">
-                  <AdForLeaderBoard />
-                </div>
               </div>
             </>
           )}

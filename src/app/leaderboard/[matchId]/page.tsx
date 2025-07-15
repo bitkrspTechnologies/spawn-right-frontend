@@ -4,10 +4,11 @@ import React from "react";
 import Scoreboard from "@/components/Leaderboard/Scoreboard";
 import LeaderboardLayout from "@/components/Leaderboard/LeaderboardLayout";
 import { useParams } from "next/navigation";
+import { useMediaQuery } from "react-responsive";
 
 export default function Leaderboard() {
   const params = useParams();
-
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const matchId = params?.matchId
     ? Array.isArray(params.matchId)
       ? params.matchId[0]
@@ -19,7 +20,7 @@ export default function Leaderboard() {
   }
 
   return (
-    <LeaderboardLayout isMobile={false}>
+    <LeaderboardLayout isMobile={isMobile}>
       <Scoreboard matchId={matchId} />
     </LeaderboardLayout>
   );

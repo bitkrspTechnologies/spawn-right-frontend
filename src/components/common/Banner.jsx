@@ -85,7 +85,7 @@ const Banner = () => {
           src="/images/banner.svg"
           alt="Banner"
           fill
-          className="object-cover md:object-contain"
+          className="object-cover sm:object-contain"
           priority
         />
 
@@ -103,7 +103,7 @@ const Banner = () => {
                 key={index}
                 variants={item}
                 data-glitch={word}
-                className={`glitch font-bold text-lg sm:text-xl lg:text-2xl drop-shadow-lg`} // Responsive font size
+                className={`glitch font-bold text-xl mb-2 sm:text-xl lg:text-2xl drop-shadow-lg`} // Responsive font size
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {word}
@@ -120,7 +120,7 @@ const Banner = () => {
                 className={`text-gray-200 text-xs sm:text-sm lg:text-base drop-shadow-md ${
                   // Hide some words on very small screens to prevent overflow
                   index > 8 && 'hidden xs:inline-block'
-                }`}
+                  }`}
                 transition={{ type: "spring", stiffness: 400 }}
                 custom={index}
               >
